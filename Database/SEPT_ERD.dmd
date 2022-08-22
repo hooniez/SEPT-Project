@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="SEPT_ERD" id="B03CD764-B408-0192-2F2D-1F60F7E8981C" version="3.5">
+<createdBy>lachl</createdBy>
+<createdTime>2022-08-16 11:08:33 UTC</createdTime>
+<ownerDesignName>SEPT_ERD</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>B03CD764-B408-0192-2F2D-1F60F7E8981C</designId>
+</OSDM_Design>
