@@ -27,6 +27,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -49,7 +54,7 @@
                     </goals>
                     <configuration>
                     <sources>
-                        <source>Backend\SEPT_Backend\src</source>
+                        <source>Backend/SEPT_Backend/src</source>
                     </sources>
                     </configuration>
                 </execution>
