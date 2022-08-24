@@ -7,9 +7,9 @@ on:
   push:
     branches: 
     - Develop
-    - 'backend/**'
+    - '**backend**'
     paths:
-      - 'backend/**'
+      - '[Bb]ackend/**'
   pull_request:
     branches: [ "Develop" ]
 
