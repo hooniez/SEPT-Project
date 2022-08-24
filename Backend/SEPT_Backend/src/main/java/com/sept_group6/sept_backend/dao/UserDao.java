@@ -16,6 +16,7 @@ public class UserDAO {
 
     public void addUser(User user) {
         users.addUser(user);
+        numberOfUsers++;
     }
 
     public Integer getNumOfUsers() {
