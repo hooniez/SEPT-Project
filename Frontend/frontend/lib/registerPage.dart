@@ -5,18 +5,13 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<RegisterPage> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
   @override
