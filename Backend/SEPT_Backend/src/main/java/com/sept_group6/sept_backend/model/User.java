@@ -6,7 +6,18 @@ public class User {
 
     }
 
-    public User(Integer uid, String firstName, String middleName, String lastName, String email, String DOB, String password, String mobileNumber, String healthinformation, String medicalHistory) {
+    private Integer uid;
+    private String firstName;
+    private String middleName;
+    private String lastName;
+    private String email;
+    private String DOB;
+    private String password;
+    private String mobileNumber;
+    private String healthInformation;
+    private String medicalHistory;
+
+    public User(Integer uid, String firstName, String middleName, String lastName, String email, String DOB, String password, String mobileNumber, String healthInformation, String medicalHistory) {
         super();
         this.uid = uid;
         this.firstName = firstName;
@@ -16,12 +27,11 @@ public class User {
         this.DOB = DOB;
         this.password = password;
         this.mobileNumber = mobileNumber;
-        this.healthinformation = healthinformation;
+        this.healthInformation = healthInformation;
         this.medicalHistory = medicalHistory;
     }
 
-    private Integer uid;
-    private String firstName;
+
 
     public Integer getUid() {
         return uid;
@@ -63,12 +73,12 @@ public class User {
         this.mobileNumber = mobileNumber;
     }
 
-    public String getHealthinformation() {
-        return healthinformation;
+    public String gethealthInformation() {
+        return healthInformation;
     }
 
-    public void setHealthinformation(String healthinformation) {
-        this.healthinformation = healthinformation;
+    public void sethealthInformation(String healthInformation) {
+        this.healthInformation = healthInformation;
     }
 
     public String getMedicalHistory() {
@@ -79,14 +89,7 @@ public class User {
         this.medicalHistory = medicalHistory;
     }
 
-    private String middleName;
-    private String lastName;
-    private String email;
-    private String DOB;
-    private String password;
-    private String mobileNumber;
-    private String healthinformation;
-    private String medicalHistory;
+
 
 
 
@@ -94,7 +97,7 @@ public class User {
         return uid;
     }
 
-    public void setId(Integer id) {
+    public void setId(Integer uid) {
         this.uid = uid;
     }
 
