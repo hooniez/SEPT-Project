@@ -3,6 +3,7 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _formKey = GlobalKey<FormState>();
-
+  TextEditingController nameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,7 +26,7 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-          title: const Text("Online Health Register"),
+          title: const Text("My Neighbourhood Doctors Register"),
         ),
         body: Center(
           child: Container(
@@ -38,57 +39,78 @@ class _MyAppState extends State<MyApp> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          'Register',
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 223, 28, 93),
-                              fontSize: 15.0),
-                        ),
                         const Padding(
-                          padding: EdgeInsets.only(top: 50.0),
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Register',
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                                fontSize: 50.0),
+                          ),
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: "Full Name",
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            controller: nameController,
+                            decoration: InputDecoration(
+                              labelText: "Full Name",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                             ),
                           ),
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: "Date of Birth",
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: "Date of Birth",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                             ),
                           ),
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: "Email",
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: "Email",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                             ),
                           ),
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: "Phone Number",
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: "Phone Number",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                             ),
                           ),
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: "Date of Birth",
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: "Date of Birth",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                             ),
                           ),
                         ),
@@ -101,31 +123,43 @@ class _MyAppState extends State<MyApp> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TextFormField(
-                          maxLines: 6,
-                          decoration: InputDecoration(
-                            labelText: "Medical History",
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8, 85, 8, 8),
+                          child: TextFormField(
+                            maxLines: 6,
+                            decoration: InputDecoration(
+                              labelText: "Medical History",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                             ),
                           ),
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: "Password",
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: "Password",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                             ),
                           ),
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: "Confirm Password",
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: "Confirm Password",
+                              fillColor: Colors.white,
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                             ),
                           ),
                         ),
@@ -137,9 +171,13 @@ class _MyAppState extends State<MyApp> {
                               primary: Colors.red, // background
                               onPrimary: Colors.white, // foreground
                             ),
-                            child: const Text('Register'),
+                            child: const Text(
+                              'Register',
+                              style: TextStyle(color: Colors.white),
+                            ),
                             onPressed: () {
-                              print('Hello');
+                              String enteredText = nameController.text;
+                              print(enteredText);
                             },
                           ),
                         ),
@@ -150,7 +188,7 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             padding: const EdgeInsets.all(15),
-            color: Colors.blue,
+            color: Color.fromARGB(255, 125, 125, 125),
             width: 1000,
             height: 700,
           ),
