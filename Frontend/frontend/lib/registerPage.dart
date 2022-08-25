@@ -66,7 +66,7 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            controller: firstNameController,
+                            controller: lastNameController,
                             decoration: InputDecoration(
                               labelText: "Second Name",
                               filled: true,
@@ -80,6 +80,7 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
+                            controller: dOBController,
                             decoration: InputDecoration(
                               labelText: "Date of Birth",
                               filled: true,
@@ -93,6 +94,7 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
+                            controller: emailController,
                             decoration: InputDecoration(
                               labelText: "Email",
                               filled: true,
@@ -106,21 +108,9 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
+                            controller: mobileNumController,
                             decoration: InputDecoration(
                               labelText: "Mobile Number",
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              labelText: "Date of Birth",
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
@@ -142,6 +132,7 @@ class _MyAppState extends State<RegisterPage> {
                           padding: const EdgeInsets.fromLTRB(8, 85, 8, 8),
                           child: TextFormField(
                             maxLines: 6,
+                            controller: medHisController,
                             decoration: InputDecoration(
                               labelText: "Medical History",
                               filled: true,
@@ -155,6 +146,7 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
+                            controller: passwordController,
                             decoration: InputDecoration(
                               labelText: "Password",
                               filled: true,
@@ -168,6 +160,7 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
+                            controller: passwordConfirmController,
                             decoration: InputDecoration(
                               labelText: "Confirm Password",
                               fillColor: Colors.white,
@@ -191,16 +184,21 @@ class _MyAppState extends State<RegisterPage> {
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () {
-                              Future res = createPatient(
-                                firstNameController.text,
-                                lastNameController.text,
-                                emailController.text,
-                                dOBController.text,
-                                passwordController.text,
-                                mobileNumController.text,
-                                medHisController.text,
-                              );
-                              print(res);
+                              if (passwordConfirmController.text ==
+                                  passwordController.text) {
+                                Future res = createPatient(
+                                  firstNameController.text,
+                                  lastNameController.text,
+                                  emailController.text,
+                                  dOBController.text,
+                                  passwordController.text,
+                                  mobileNumController.text,
+                                  medHisController.text,
+                                );
+                                print(res);
+                              } else {
+                                print("passwords don't match");
+                              }
                             },
                           ),
                         ),
@@ -230,7 +228,7 @@ Future<http.Response> createPatient(
     String mobileNumber,
     String medicalHistory) {
   return http.put(
-    Uri.parse('placeholder'),
+    Uri.parse('localhost:8080'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
