@@ -43,9 +43,8 @@ class _MyAppState extends State<MyApp> {
                           padding: EdgeInsets.all(8.0),
                           child: Text(
                             'Register',
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                                fontSize: 50.0),
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 50.0),
                           ),
                         ),
                         Padding(
@@ -188,7 +187,7 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             padding: const EdgeInsets.all(15),
-            color: Color.fromARGB(255, 125, 125, 125),
+            color: Color.fromARGB(255, 78, 78, 78),
             width: 1000,
             height: 700,
           ),
