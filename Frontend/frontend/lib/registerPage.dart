@@ -5,10 +5,6 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-void main() {
-  runApp(MyApp());
-}
-
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 

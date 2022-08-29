@@ -1,6 +1,11 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'patientProfile.dart';
+
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -13,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const FirstPage(title: 'FirstPage'),
+      home: const PatientProfile(),
     );
   }
 }
