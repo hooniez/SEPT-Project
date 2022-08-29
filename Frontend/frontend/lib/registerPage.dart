@@ -66,7 +66,7 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            controller: lastNameController,
+                            controller: firstNameController,
                             decoration: InputDecoration(
                               labelText: "Second Name",
                               filled: true,
@@ -80,7 +80,6 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            controller: dOBController,
                             decoration: InputDecoration(
                               labelText: "Date of Birth",
                               filled: true,
@@ -94,7 +93,6 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            controller: emailController,
                             decoration: InputDecoration(
                               labelText: "Email",
                               filled: true,
@@ -108,7 +106,6 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            controller: mobileNumController,
                             decoration: InputDecoration(
                               labelText: "Mobile Number",
                               filled: true,
@@ -145,7 +142,6 @@ class _MyAppState extends State<RegisterPage> {
                           padding: const EdgeInsets.fromLTRB(8, 85, 8, 8),
                           child: TextFormField(
                             maxLines: 6,
-                            controller: medHisController,
                             decoration: InputDecoration(
                               labelText: "Medical History",
                               filled: true,
@@ -159,7 +155,6 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            controller: passwordController,
                             decoration: InputDecoration(
                               labelText: "Password",
                               filled: true,
@@ -173,7 +168,6 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            controller: passwordConfirmController,
                             decoration: InputDecoration(
                               labelText: "Confirm Password",
                               fillColor: Colors.white,
@@ -197,22 +191,7 @@ class _MyAppState extends State<RegisterPage> {
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () {
-                              if (passwordConfirmController.text ==
-                                  passwordController.text) {
-                                Future res = createPatient(
-                                  firstNameController.text,
-                                  lastNameController.text,
-                                  emailController.text,
-                                  dOBController.text,
-                                  passwordController.text,
-                                  mobileNumController.text,
-                                  medHisController.text,
-                                );
-                                print(res);
-                              } else {
-                                print("passwords don't match");
-                              }
-
+                              print("*******************");
                               Future res = createPatient(
                                 firstNameController.text,
                                 lastNameController.text,
@@ -243,6 +222,30 @@ class _MyAppState extends State<RegisterPage> {
   }
 }
 
+// postTest(String firstName,
+//     String lastName,
+//     String email,
+//     String dOB,
+//     String password,
+//     String mobileNumber,
+//     String medicalHistory) async {
+//     const uri = 'localhost:8080/signup';
+
+//     http.Response response = await http.post(
+//         Uri.parse(uri), headers: <String, String>{ },
+//         body: jsonEncode(<String, String>{
+//       'FirstName': firstName,
+//       'LastName': lastName,
+//       'Email': email,
+//       'DOB': dOB,
+//       'Password': password,
+//       'MobileNumber': mobileNumber,
+//       'MedicalHistory': medicalHistory,
+//     }),);
+
+//     print(response.body);
+//   }
+
 Future<http.Response> createPatient(
     String firstName,
     String lastName,
@@ -250,9 +253,9 @@ Future<http.Response> createPatient(
     String dOB,
     String password,
     String mobileNumber,
-    String medicalHistory) {
-  return http.put(
-    Uri.parse('localhost:8080'),
+    String medicalHistory) async {
+  return await http.put(
+    Uri.parse('http://localhost:8080/signup'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
