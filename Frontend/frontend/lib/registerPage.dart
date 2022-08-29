@@ -119,6 +119,19 @@ class _MyAppState extends State<RegisterPage> {
                             ),
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: "Date of Birth",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -199,6 +212,17 @@ class _MyAppState extends State<RegisterPage> {
                               } else {
                                 print("passwords don't match");
                               }
+
+                              Future res = createPatient(
+                                firstNameController.text,
+                                lastNameController.text,
+                                emailController.text,
+                                dOBController.text,
+                                passwordController.text,
+                                mobileNumController.text,
+                                medHisController.text,
+                              );
+                              print(res);
                             },
                           ),
                         ),
