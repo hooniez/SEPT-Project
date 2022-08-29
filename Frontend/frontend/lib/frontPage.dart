@@ -12,8 +12,6 @@ class FrontPage extends StatefulWidget {
 }
 
 class _MyAppState extends State<FrontPage> {
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
