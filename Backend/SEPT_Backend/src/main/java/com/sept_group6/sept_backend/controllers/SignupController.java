@@ -36,7 +36,7 @@ public class SignupController {
     // return new Users();
     // }
 
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = "http://localhost:8080/signup")
     @PostMapping(path = "", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Object> addUser(
             @RequestHeader(name = "X-COM-PERSIST", required = false) String headerPersist,
