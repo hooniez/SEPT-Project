@@ -7,9 +7,10 @@ on:
   push:
     branches: 
     - Develop
-    - 'backend/**'
+    - '**backend**'
+    -  ${GITHUB_REF##*/}
     paths:
-      - 'backend/**'
+      - '[Bb]ackend/**'
   pull_request:
     branches: [ "Develop" ]
 
