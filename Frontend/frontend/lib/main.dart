@@ -1,6 +1,6 @@
 import 'dart:html';
 
-import 'package:frontend/frontPage';
+import 'frontPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const FirstPage(title: 'FirstPage'),
+      home: const frontPage(),
     );
   }
 }
