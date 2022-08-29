@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.sept_group6.sept_backend.dao.UserDAO;
 import com.sept_group6.sept_backend.model.Users;
@@ -35,6 +36,7 @@ public class SignupController {
     // return new Users();
     // }
 
+    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping(path = "", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Object> addUser(
             @RequestHeader(name = "X-COM-PERSIST", required = false) String headerPersist,
