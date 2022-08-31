@@ -13,7 +13,14 @@ class PatientProfile extends StatefulWidget {
 
 class _MyAppState extends State<PatientProfile> {
   final _formKey = GlobalKey<FormState>();
+  Map<String, double> editButtonDetails = {
+    'width': 60.0,
+    'height': 25.0,
+    'fontSize': 12
+  };
 
+  double itemTitleFontSize = 16;
+  double itemFontSize = 18;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,25 +50,42 @@ class _MyAppState extends State<PatientProfile> {
                         Expanded(
                           child: Row(
                             children: [
-                              const Padding(
+                              Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Text(
-                                  'First Name',
+                                  'First Name:',
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 28.0),
+                                      color: Colors.white,
+                                      fontSize: itemTitleFontSize),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Billy',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: itemFontSize),
                                 ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(16.0),
                                 child: SizedBox(
-                                  width: 300.0, // <-- match_parent
-                                  height: 50.0, // <-- match-parent
+                                  width: editButtonDetails[
+                                      'width'], // <-- match_parent
+                                  height: editButtonDetails[
+                                      'height'], // <-- match-parent
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       primary: Colors.red, // background
                                       onPrimary: Colors.white, // foreground
                                     ),
-                                    child: const Text('Edit'),
+                                    child: Text(
+                                      'Edit',
+                                      style: TextStyle(
+                                          fontSize:
+                                              editButtonDetails['fontSize']),
+                                    ),
                                     onPressed: () {
                                       print('Edit');
                                     },
@@ -74,25 +98,42 @@ class _MyAppState extends State<PatientProfile> {
                         Expanded(
                           child: Row(
                             children: [
-                              const Padding(
+                              Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Last Name',
+                                  'Last Name:',
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 28.0),
+                                      color: Colors.white,
+                                      fontSize: itemTitleFontSize),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Billerson',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: itemFontSize),
                                 ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(16.0),
                                 child: SizedBox(
-                                  width: 300.0, // <-- match_parent
-                                  height: 50.0, // <-- match-parent
+                                  width: editButtonDetails[
+                                      'width'], // <-- match_parent
+                                  height: editButtonDetails[
+                                      'height'], // <-- match-parent
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       primary: Colors.red, // background
                                       onPrimary: Colors.white, // foreground
                                     ),
-                                    child: const Text('Edit'),
+                                    child: Text(
+                                      'Edit',
+                                      style: TextStyle(
+                                          fontSize:
+                                              editButtonDetails['fontSize']),
+                                    ),
                                     onPressed: () {
                                       print('Edit');
                                     },
@@ -105,25 +146,42 @@ class _MyAppState extends State<PatientProfile> {
                         Expanded(
                           child: Row(
                             children: [
-                              const Padding(
+                              Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Email',
+                                  'Email:',
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 28.0),
+                                      color: Colors.white,
+                                      fontSize: itemTitleFontSize),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'billybillerson@billmail.com.au',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: itemFontSize),
                                 ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(16.0),
                                 child: SizedBox(
-                                  width: 300.0, // <-- match_parent
-                                  height: 50.0, // <-- match-parent
+                                  width: editButtonDetails[
+                                      'width'], // <-- match_parent
+                                  height: editButtonDetails[
+                                      'height'], // <-- match-parent
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       primary: Colors.red, // background
                                       onPrimary: Colors.white, // foreground
                                     ),
-                                    child: const Text('Edit'),
+                                    child: Text(
+                                      'Edit',
+                                      style: TextStyle(
+                                          fontSize:
+                                              editButtonDetails['fontSize']),
+                                    ),
                                     onPressed: () {
                                       print('Edit');
                                     },
@@ -133,52 +191,159 @@ class _MyAppState extends State<PatientProfile> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              labelText: "Email",
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Date Of Birth:',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: itemTitleFontSize),
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              labelText: "Date Of Birth",
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  '12/12/1212',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: itemFontSize),
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: SizedBox(
-                            width: 300.0, // <-- match_parent
-                            height: 50.0, // <-- match-parent
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.red, // background
-                                onPrimary: Colors.white, // foreground
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: SizedBox(
+                                  width: editButtonDetails[
+                                      'width'], // <-- match_parent
+                                  height: editButtonDetails[
+                                      'height'], // <-- match-parent
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.red, // background
+                                      onPrimary: Colors.white, // foreground
+                                    ),
+                                    child: Text(
+                                      'Edit',
+                                      style: TextStyle(
+                                          fontSize:
+                                              editButtonDetails['fontSize']),
+                                    ),
+                                    onPressed: () {
+                                      print('Edit');
+                                    },
+                                  ),
+                                ),
                               ),
-                              child: const Text('Login'),
-                              onPressed: () {
-                                print('Hello');
-                              },
-                            ),
+                            ],
                           ),
                         ),
                       ],
                     ),
                   ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Mobile Number:',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: itemTitleFontSize),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  '121212121212',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: itemFontSize),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: SizedBox(
+                                  width: editButtonDetails[
+                                      'width'], // <-- match_parent
+                                  height: editButtonDetails[
+                                      'height'], // <-- match-parent
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.red, // background
+                                      onPrimary: Colors.white, // foreground
+                                    ),
+                                    child: Text(
+                                      'Edit',
+                                      style: TextStyle(
+                                          fontSize:
+                                              editButtonDetails['fontSize']),
+                                    ),
+                                    onPressed: () {
+                                      print('Edit');
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Medical History:',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: itemTitleFontSize),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Need to increase size of this box',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: itemFontSize),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: SizedBox(
+                                  width: editButtonDetails[
+                                      'width'], // <-- match_parent
+                                  height: editButtonDetails[
+                                      'height'], // <-- match-parent
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.red, // background
+                                      onPrimary: Colors.white, // foreground
+                                    ),
+                                    child: Text(
+                                      'Edit',
+                                      style: TextStyle(
+                                          fontSize:
+                                              editButtonDetails['fontSize']),
+                                    ),
+                                    onPressed: () {
+                                      print('Edit');
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
@@ -201,3 +366,6 @@ class _MyAppState extends State<PatientProfile> {
       // 'Password': password,
       // 'MobileNumber': mobileNumber,
       // 'MedicalHistory': medicalHistory,
+
+
+
