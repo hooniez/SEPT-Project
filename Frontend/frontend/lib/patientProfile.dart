@@ -19,6 +19,47 @@ class _MyAppState extends State<PatientProfile> {
     'fontSize': 12
   };
 
+  Map<String, TextEditingController> textControllers = {
+    'firstname': TextEditingController(text: "Billy"),
+    'lastname': TextEditingController(text: "Billinson"),
+    'email': TextEditingController(text: "BillinsonBilly@bill.com.au"),
+    'dob': TextEditingController(text: "12/12/1212"),
+    'mobile': TextEditingController(text: "0121212121212"),
+    'medhist':
+        TextEditingController(text: "Something bad happpened to me some time")
+  };
+
+  String buttonTextEdit = 'Edit';
+  String buttonTextSave = 'Save';
+  Map<String, String> buttonText = {
+    'firstname': 'Edit',
+    'lastname': 'Edit',
+    'email': 'Edit',
+    'dob': 'Edit',
+    'mobile': 'Edit',
+    'medhist': 'Edit'
+  };
+
+  Map<String, bool> enabledFlags = {
+    'firstname': false,
+    'lastname': false,
+    'email': false,
+    'dob': false,
+    'mobile': false,
+    'medhist': false
+  };
+
+  MaterialColor textBoxSelectedColor = Colors.lightGreen;
+  MaterialColor textBoxNotSelectedColor = Colors.grey;
+  Map<String, MaterialColor> textBoxBackgrounds = {
+    'firstname': Colors.grey,
+    'lastname': Colors.grey,
+    'email': Colors.grey,
+    'dob': Colors.grey,
+    'mobile': Colors.grey,
+    'medhist': Colors.grey
+  };
+
   double itemTitleFontSize = 16;
   double itemFontSize = 18;
   @override
@@ -51,7 +92,7 @@ class _MyAppState extends State<PatientProfile> {
                           child: Row(
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(4.0),
                                 child: Text(
                                   'First Name:',
                                   style: TextStyle(
@@ -60,12 +101,14 @@ class _MyAppState extends State<PatientProfile> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Billy',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: itemFontSize),
+                                padding: const EdgeInsets.all(4.0),
+                                child: Container(
+                                  width: 200,
+                                  color: textBoxBackgrounds['firstname'],
+                                  child: TextField(
+                                    controller: textControllers['firstname'],
+                                    enabled: enabledFlags['firstname'],
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -81,13 +124,27 @@ class _MyAppState extends State<PatientProfile> {
                                       onPrimary: Colors.white, // foreground
                                     ),
                                     child: Text(
-                                      'Edit',
+                                      buttonText['firstname']!,
                                       style: TextStyle(
                                           fontSize:
                                               editButtonDetails['fontSize']),
                                     ),
                                     onPressed: () {
-                                      print('Edit');
+                                      setState(() {
+                                        enabledFlags['firstname'] =
+                                            !(enabledFlags['firstname']!);
+                                        if (enabledFlags['firstname'] == true) {
+                                          buttonText['firstname'] =
+                                              buttonTextSave;
+                                          textBoxBackgrounds['firstname'] =
+                                              textBoxSelectedColor;
+                                        } else {
+                                          buttonText['firstname'] =
+                                              buttonTextEdit;
+                                          textBoxBackgrounds['firstname'] =
+                                              textBoxNotSelectedColor;
+                                        }
+                                      });
                                     },
                                   ),
                                 ),
@@ -99,7 +156,7 @@ class _MyAppState extends State<PatientProfile> {
                           child: Row(
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: EdgeInsets.all(4.0),
                                 child: Text(
                                   'Last Name:',
                                   style: TextStyle(
@@ -108,12 +165,14 @@ class _MyAppState extends State<PatientProfile> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Billerson',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: itemFontSize),
+                                padding: const EdgeInsets.all(4.0),
+                                child: Container(
+                                  width: 200,
+                                  color: textBoxBackgrounds['lastname'],
+                                  child: TextField(
+                                    controller: textControllers['lastname'],
+                                    enabled: enabledFlags['lastname'],
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -129,13 +188,27 @@ class _MyAppState extends State<PatientProfile> {
                                       onPrimary: Colors.white, // foreground
                                     ),
                                     child: Text(
-                                      'Edit',
+                                      buttonText['lastname']!,
                                       style: TextStyle(
                                           fontSize:
                                               editButtonDetails['fontSize']),
                                     ),
                                     onPressed: () {
-                                      print('Edit');
+                                      setState(() {
+                                        enabledFlags['lastname'] =
+                                            !(enabledFlags['lastname']!);
+                                        if (enabledFlags['lastname'] == true) {
+                                          buttonText['lastname'] =
+                                              buttonTextSave;
+                                          textBoxBackgrounds['lastname'] =
+                                              textBoxSelectedColor;
+                                        } else {
+                                          buttonText['lastname'] =
+                                              buttonTextEdit;
+                                          textBoxBackgrounds['lastname'] =
+                                              textBoxNotSelectedColor;
+                                        }
+                                      });
                                     },
                                   ),
                                 ),
@@ -147,7 +220,7 @@ class _MyAppState extends State<PatientProfile> {
                           child: Row(
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: EdgeInsets.all(4.0),
                                 child: Text(
                                   'Email:',
                                   style: TextStyle(
@@ -156,12 +229,14 @@ class _MyAppState extends State<PatientProfile> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(
-                                  'billybillerson@billmail.com.au',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: itemFontSize),
+                                padding: const EdgeInsets.all(4.0),
+                                child: Container(
+                                  width: 200,
+                                  color: textBoxBackgrounds['email'],
+                                  child: TextField(
+                                    controller: textControllers['email'],
+                                    enabled: enabledFlags['email'],
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -177,13 +252,25 @@ class _MyAppState extends State<PatientProfile> {
                                       onPrimary: Colors.white, // foreground
                                     ),
                                     child: Text(
-                                      'Edit',
+                                      buttonText['email']!,
                                       style: TextStyle(
                                           fontSize:
                                               editButtonDetails['fontSize']),
                                     ),
                                     onPressed: () {
-                                      print('Edit');
+                                      setState(() {
+                                        enabledFlags['email'] =
+                                            !(enabledFlags['email']!);
+                                        if (enabledFlags['email'] == true) {
+                                          buttonText['email'] = buttonTextSave;
+                                          textBoxBackgrounds['email'] =
+                                              textBoxSelectedColor;
+                                        } else {
+                                          buttonText['email'] = buttonTextEdit;
+                                          textBoxBackgrounds['email'] =
+                                              textBoxNotSelectedColor;
+                                        }
+                                      });
                                     },
                                   ),
                                 ),
@@ -195,7 +282,7 @@ class _MyAppState extends State<PatientProfile> {
                           child: Row(
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: EdgeInsets.all(4.0),
                                 child: Text(
                                   'Date Of Birth:',
                                   style: TextStyle(
@@ -204,12 +291,14 @@ class _MyAppState extends State<PatientProfile> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(
-                                  '12/12/1212',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: itemFontSize),
+                                padding: const EdgeInsets.all(4.0),
+                                child: Container(
+                                  width: 200,
+                                  color: textBoxBackgrounds['dob'],
+                                  child: TextField(
+                                    controller: textControllers['dob'],
+                                    enabled: enabledFlags['dob'],
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -225,13 +314,26 @@ class _MyAppState extends State<PatientProfile> {
                                       onPrimary: Colors.white, // foreground
                                     ),
                                     child: Text(
-                                      'Edit',
+                                      buttonText['dob']!,
                                       style: TextStyle(
                                           fontSize:
                                               editButtonDetails['fontSize']),
                                     ),
                                     onPressed: () {
-                                      print('Edit');
+                                      setState(() {
+                                        enabledFlags['dob'] =
+                                            !(enabledFlags['dob']!);
+                                        if (enabledFlags['dob'] == true) {
+                                          buttonText['dob'] = buttonTextSave;
+                                          textBoxBackgrounds['dob'] =
+                                              textBoxSelectedColor;
+                                        } else {
+                                          buttonText['dob'] = buttonTextEdit;
+                                          textBoxBackgrounds['dob'] =
+                                              textBoxNotSelectedColor;
+                                        }
+                                        if (enabledFlags['dob'] == true) {}
+                                      });
                                     },
                                   ),
                                 ),
@@ -249,7 +351,7 @@ class _MyAppState extends State<PatientProfile> {
                           child: Row(
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(4.0),
                                 child: Text(
                                   'Mobile Number:',
                                   style: TextStyle(
@@ -258,12 +360,14 @@ class _MyAppState extends State<PatientProfile> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(
-                                  '121212121212',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: itemFontSize),
+                                padding: const EdgeInsets.all(4.0),
+                                child: Container(
+                                  width: 200,
+                                  color: textBoxBackgrounds['mobile'],
+                                  child: TextField(
+                                    controller: textControllers['mobile'],
+                                    enabled: enabledFlags['mobile'],
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -279,13 +383,25 @@ class _MyAppState extends State<PatientProfile> {
                                       onPrimary: Colors.white, // foreground
                                     ),
                                     child: Text(
-                                      'Edit',
+                                      buttonText['mobile']!,
                                       style: TextStyle(
                                           fontSize:
                                               editButtonDetails['fontSize']),
                                     ),
                                     onPressed: () {
-                                      print('Edit');
+                                      setState(() {
+                                        enabledFlags['mobile'] =
+                                            !(enabledFlags['mobile']!);
+                                        if (enabledFlags['mobile'] == true) {
+                                          buttonText['mobile'] = buttonTextSave;
+                                          textBoxBackgrounds['mobile'] =
+                                              textBoxSelectedColor;
+                                        } else {
+                                          buttonText['mobile'] = buttonTextEdit;
+                                          textBoxBackgrounds['mobile'] =
+                                              textBoxNotSelectedColor;
+                                        }
+                                      });
                                     },
                                   ),
                                 ),
@@ -294,10 +410,11 @@ class _MyAppState extends State<PatientProfile> {
                           ),
                         ),
                         Expanded(
-                          child: Row(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(4.0),
                                 child: Text(
                                   'Medical History:',
                                   style: TextStyle(
@@ -306,12 +423,15 @@ class _MyAppState extends State<PatientProfile> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Need to increase size of this box',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: itemFontSize),
+                                padding: const EdgeInsets.all(4.0),
+                                child: Container(
+                                  width: 200,
+                                  color: textBoxBackgrounds['medhist'],
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: TextField(
+                                    controller: textControllers['medhist'],
+                                    enabled: enabledFlags['medhist'],
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -327,13 +447,27 @@ class _MyAppState extends State<PatientProfile> {
                                       onPrimary: Colors.white, // foreground
                                     ),
                                     child: Text(
-                                      'Edit',
+                                      buttonText['medhist']!,
                                       style: TextStyle(
                                           fontSize:
                                               editButtonDetails['fontSize']),
                                     ),
                                     onPressed: () {
-                                      print('Edit');
+                                      setState(() {
+                                        enabledFlags['medhist'] =
+                                            !(enabledFlags['medhist']!);
+                                        if (enabledFlags['medhist'] == true) {
+                                          buttonText['medhist'] =
+                                              buttonTextSave;
+                                          textBoxBackgrounds['medhist'] =
+                                              textBoxSelectedColor;
+                                        } else {
+                                          buttonText['medhist'] =
+                                              buttonTextEdit;
+                                          textBoxBackgrounds['medhist'] =
+                                              textBoxNotSelectedColor;
+                                        }
+                                      });
                                     },
                                   ),
                                 ),
@@ -348,7 +482,7 @@ class _MyAppState extends State<PatientProfile> {
               ),
             ),
             padding: const EdgeInsets.all(15),
-            color: Color.fromARGB(255, 113, 113, 113),
+            color: Colors.grey,
             width: 1000,
             height: 500,
           ),
@@ -367,5 +501,27 @@ class _MyAppState extends State<PatientProfile> {
       // 'MobileNumber': mobileNumber,
       // 'MedicalHistory': medicalHistory,
 
+// TextEditingController _controller =
+//       TextEditingController(text: "Festive Leave");
+//   bool _isEnable = false;
+// //These are initialize at the top
 
 
+// Row(
+//             children: <Widget>[
+//               Container(
+//                 width: 100,
+//                 child: TextField(
+//                   controller: _controller,
+//                   enabled: _isEnable,
+//                 ),
+//               ),
+//               IconButton(
+//                   icon: Icon(Icons.edit),
+//                   onPressed: () {
+                    // setState(() {
+                    //   _isEnable = true;
+                    // });
+//                   })
+//             ],
+//           ),
