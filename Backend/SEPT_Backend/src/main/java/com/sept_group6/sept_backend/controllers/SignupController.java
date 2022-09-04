@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,35 +30,36 @@ public class SignupController {
     @Autowired
     private UserDAO userDao;
 
-    /* not need for signup at the moment */
+    // /* not need for signup at the moment */
     // @GetMapping(path = "", produces = "application/json")
     // public Users getUsers() {
+    // logger.info("signup - get");
     // return new Users();
     // }
 
-    @CrossOrigin(origins = "http://localhost:8080/signup")
-    @PostMapping(path = "", consumes = "application/json", produces = "application/json")
+    @PutMapping(path = "", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Object> addUser(
             @RequestHeader(name = "X-COM-PERSIST", required = false) String headerPersist,
             @RequestHeader(name = "X-COM-LOCATION", required = false, defaultValue = "AUS") String headerLocation,
             @RequestBody User user)
             throws Exception {
-        logger.info("signup");
+        logger.info("signup - put");
         // Generate resource id
         Integer id = userDao.getNumOfUsers() + 1;
+        logger.info(id);
         user.setId(id);
 
         // add resource
         userDao.addUser(user);
         logger.info(userDao.getNumOfUsers());
 
-        // Create resource location
+        // create resource location
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(user.getId())
                 .toUri();
 
-        // Send location in response
+        // // Send location in response
         return ResponseEntity.created(location).build();
     }
 }

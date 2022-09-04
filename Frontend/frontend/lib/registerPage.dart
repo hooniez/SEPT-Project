@@ -260,13 +260,13 @@ Future<http.Response> createPatient(
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(<String, String>{
-      'FirstName': firstName,
-      'LastName': lastName,
-      'Email': email,
+      'firstName': firstName,
+      'lastName': lastName,
+      'email': email,
       'DOB': dOB,
-      'Password': password,
-      'MobileNumber': mobileNumber,
-      'MedicalHistory': medicalHistory,
+      'password': password,
+      'mobileNumber': mobileNumber,
+      'medicalHistory': medicalHistory,
     }),
   );
 }

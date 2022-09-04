@@ -17,9 +17,9 @@ public class User {
     private String healthInformation;
     private String medicalHistory;
 
-    public User(Integer uid, String firstName, String middleName, String lastName, String email, String DOB, String password, String mobileNumber, String healthInformation, String medicalHistory) {
+    public User(String firstName, String middleName, String lastName, String email, String DOB, String password,
+            String mobileNumber, String healthInformation, String medicalHistory) {
         super();
-        this.uid = uid;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -30,8 +30,6 @@ public class User {
         this.healthInformation = healthInformation;
         this.medicalHistory = medicalHistory;
     }
-
-
 
     public Integer getUid() {
         return uid;
@@ -88,10 +86,6 @@ public class User {
     public void setMedicalHistory(String medicalHistory) {
         this.medicalHistory = medicalHistory;
     }
-
-
-
-
 
     public Integer getId() {
         return uid;
