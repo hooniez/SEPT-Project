@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,8 +36,7 @@ public class SignupController {
     // return new Users();
     // }
 
-    @CrossOrigin(origins = "http://localhost:8080")
-    @PostMapping(path = "", consumes = "application/json", produces = "application/json")
+    @PutMapping(path = "", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Object> addUser(
             @RequestHeader(name = "X-COM-PERSIST", required = false) String headerPersist,
             @RequestHeader(name = "X-COM-LOCATION", required = false, defaultValue = "AUS") String headerLocation,
