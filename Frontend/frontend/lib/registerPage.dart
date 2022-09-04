@@ -191,6 +191,7 @@ class _MyAppState extends State<RegisterPage> {
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () {
+                              print("*******************");
                               Future res = createPatient(
                                 firstNameController.text,
                                 lastNameController.text,
@@ -221,6 +222,30 @@ class _MyAppState extends State<RegisterPage> {
   }
 }
 
+// postTest(String firstName,
+//     String lastName,
+//     String email,
+//     String dOB,
+//     String password,
+//     String mobileNumber,
+//     String medicalHistory) async {
+//     const uri = 'localhost:8080/signup';
+
+//     http.Response response = await http.post(
+//         Uri.parse(uri), headers: <String, String>{ },
+//         body: jsonEncode(<String, String>{
+//       'FirstName': firstName,
+//       'LastName': lastName,
+//       'Email': email,
+//       'DOB': dOB,
+//       'Password': password,
+//       'MobileNumber': mobileNumber,
+//       'MedicalHistory': medicalHistory,
+//     }),);
+
+//     print(response.body);
+//   }
+
 Future<http.Response> createPatient(
     String firstName,
     String lastName,
@@ -228,9 +253,9 @@ Future<http.Response> createPatient(
     String dOB,
     String password,
     String mobileNumber,
-    String medicalHistory) {
-  return http.put(
-    Uri.parse('placeholder'),
+    String medicalHistory) async {
+  return await http.put(
+    Uri.parse('http://localhost:8080/signup'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
