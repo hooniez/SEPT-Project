@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/SEPT-Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SEPT-Project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Login/LoginFront/login/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/Login/LoginFront/login/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Login/LoginFront/login/linux/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/Login/LoginFront/login/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Login/LoginFront/login/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Login/LoginFront/login/linux/flutter/generated_plugins.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Login/LoginFront/login/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Login/LoginFront/login/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Login/LoginFront/login/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/Login/LoginFront/login/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Login/LoginFront/login/windows/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/Login/LoginFront/login/windows/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Login/LoginFront/login/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Login/LoginFront/login/windows/flutter/generated_plugins.cmake" afterDir="false" />
-    </list>
+    <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="update fields in user class according to the database design" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,7 +13,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="login" />
+        <entry key="$PROJECT_DIR$" value="test_merge" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -27,21 +21,37 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="2DhQhqmuRU73ek2m4tMKV5vymoI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "last_opened_file_path": "C:/Users/clams/Documents/2022/Second_Year/Semester2/SEPT/Assignment_Main/SEPT-Project"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/clams/Documents/2022/Second_Year/Semester2/SEPT/Assignment_Main/SEPT-Project&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration name="SeptBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="SEPT_Backend" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.sept_backend.SeptBackendApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
