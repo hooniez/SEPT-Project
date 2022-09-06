@@ -42,20 +42,19 @@ public class SignupController {
                         @RequestHeader(name = "X-COM-LOCATION", required = false, defaultValue = "AUS") String headerLocation,
                         @RequestBody Patient newPatient)
                         throws Exception {
-                logger.info("signup - put");
+                logger.info("signup");
                 // Generate resource id
-                Integer id = userDao.getNumOfUsers() + 1;
-                logger.info(id);
-                user.setId(id);
+                // Integer id = userDao.getNumOfUsers() + 1;
+                // user.setId(id);
 
                 // add resource
-                userDao.addUser(user);
-                logger.info(userDao.getNumOfUsers());
+                Patient patient = patientRepository.save(newPatient);
+                logger.info(patientRepository.findAll());
 
-                // create resource location
+                // Create resource location
                 URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                                 .path("/{id}")
-                                .buildAndExpand(user.getId())
+                                .buildAndExpand(patient.getid())
                                 .toUri();
 
                 // // Send location in response
