@@ -9,6 +9,16 @@ public class Doctor {
     private String password;
     private String mobilenumber;
 
+    public Doctor(Integer id, String email, String firstname, String middlename, String lastname, String password, String mobilenumber) {
+        this.id = id;
+        this.email = email;
+        this.firstname = firstname;
+        this.middlename = middlename;
+        this.lastname = lastname;
+        this.password = password;
+        this.mobilenumber = mobilenumber;
+    }
+
 
     public Integer getid() {
         return id;

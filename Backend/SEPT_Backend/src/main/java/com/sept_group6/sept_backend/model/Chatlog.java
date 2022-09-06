@@ -29,7 +29,6 @@ public class Chatlog {
         return messagehistory;
     }
 
-
     public void setid (Integer id) {
         this.id = id;
     }
