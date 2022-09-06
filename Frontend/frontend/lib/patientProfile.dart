@@ -1,8 +1,10 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'dart:html';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class PatientProfile extends StatefulWidget {
   const PatientProfile({Key? key}) : super(key: key);
@@ -490,6 +492,19 @@ class _MyAppState extends State<PatientProfile> {
       ),
     );
   }
+}
+
+Future<String> getPatientData() async {
+  final url = Uri.parse('localhost:8080/patients/patient1');
+  http.Response response =
+      await http.get(url, headers: {'Accept': 'application/json'});
+
+  if (response.statusCode == 200) {
+    final parsed = json.decode(response.body);
+    print(parsed);
+    return parsed;
+  }
+  return response.statusCode.toString();
 }
 
 
