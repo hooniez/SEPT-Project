@@ -13,14 +13,29 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String email;
-    private String firstname;
-    private String middlename;
-    private String lastname;
+    private String firstName;
+    private String middleName;
+    private String lastName;
     private LocalDate dob;
     private String password;
-    private String mobilenumber;
-    private String healthinformation;
-    private String medicalhistory;
+    private String mobileNumber;
+    private String healthInformation;
+    private String medicalHistory;
+
+    public Patient(Integer id, String email, String firstName, String middleName, String lastName,
+        LocalDate dob, String password, String mobileNumber, String healthInformation, String medicalHistory) {
+        
+        this.id = id;
+        this.email = email;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.password = password;
+        this.mobileNumber = mobileNumber;
+        this.healthInformation = healthInformation;
+        this.medicalHistory = medicalHistory;
+    }
 
     public Integer getid() {
         return id;
@@ -30,16 +45,16 @@ public class Patient {
         return email;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getMiddlename() {
-        return middlename;
+    public String getMiddleName() {
+        return middleName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
     public LocalDate getDob() {
@@ -50,19 +65,19 @@ public class Patient {
         return password;
     }
 
-    public String getMobilenumber() {
-        return mobilenumber;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public String getHealthinformation() {
-        return healthinformation;
+    public String getHealthInformation() {
+        return healthInformation;
     }
 
-    public String getMedicalhistory() {
-        return medicalhistory;
+    public String getmedicalHistory() {
+        return medicalHistory;
     }
 
-    public void setid(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -70,16 +85,16 @@ public class Patient {
         this.email = email;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setMiddlename(String middlename) {
-        this.middlename = middlename;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setDob(LocalDate dob) {
@@ -90,15 +105,15 @@ public class Patient {
         this.password = password;
     }
 
-    public void setMobilenumber(String mobilenumber) {
-        this.mobilenumber = mobilenumber;
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
-    public void setHealthinformation(String healthinformation) {
-        this.healthinformation = healthinformation;
+    public void setHealthInformation(String healthInformation) {
+        this.healthInformation = healthInformation;
     }
 
-    public void setMedicalhistory(String medicalhistory) {
-        this.medicalhistory = medicalhistory;
+    public void setmedicalHistory(String medicalHistory) {
+        this.medicalHistory = medicalHistory;
     }
 }
