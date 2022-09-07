@@ -4,6 +4,13 @@
             "type": "java",
             "name": "Launch SeptBackendApplication",
             "request": "launch",
+            "mainClass": "com.sept_group6.sept_backend.SeptBackendApplication",
+            "projectName": "SEPT_Backend"
+        },
+        {
+            "type": "java",
+            "name": "Launch SeptBackendApplication",
+            "request": "launch",
             "mainClass": "com.example.sept_backend.SeptBackendApplication",
             "projectName": "SEPT_Backend"
         },

@@ -1,20 +1,26 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'dart:html';
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<RegisterPage> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController nameController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController dOBController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController mobileNumController = TextEditingController();
+  TextEditingController medHisController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordConfirmController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,9 +52,23 @@ class _MyAppState extends State<MyApp> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            controller: nameController,
+                            controller: firstNameController,
                             decoration: InputDecoration(
-                              labelText: "Full Name",
+                              labelText: "First Name",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            controller: firstNameController,
+                            decoration: InputDecoration(
+                              labelText: "Second Name",
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
@@ -87,7 +107,7 @@ class _MyAppState extends State<MyApp> {
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
                             decoration: InputDecoration(
-                              labelText: "Phone Number",
+                              labelText: "Mobile Number",
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
@@ -171,8 +191,17 @@ class _MyAppState extends State<MyApp> {
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () {
-                              String enteredText = nameController.text;
-                              print(enteredText);
+                              print("*******************");
+                              Future res = createPatient(
+                                firstNameController.text,
+                                lastNameController.text,
+                                emailController.text,
+                                dOBController.text,
+                                passwordController.text,
+                                mobileNumController.text,
+                                medHisController.text,
+                              );
+                              print(res);
                             },
                           ),
                         ),
@@ -191,4 +220,53 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
+}
+
+// postTest(String firstName,
+//     String lastName,
+//     String email,
+//     String dOB,
+//     String password,
+//     String mobileNumber,
+//     String medicalHistory) async {
+//     const uri = 'localhost:8080/signup';
+
+//     http.Response response = await http.post(
+//         Uri.parse(uri), headers: <String, String>{ },
+//         body: jsonEncode(<String, String>{
+//       'FirstName': firstName,
+//       'LastName': lastName,
+//       'Email': email,
+//       'DOB': dOB,
+//       'Password': password,
+//       'MobileNumber': mobileNumber,
+//       'MedicalHistory': medicalHistory,
+//     }),);
+
+//     print(response.body);
+//   }
+
+Future<http.Response> createPatient(
+    String firstName,
+    String lastName,
+    String email,
+    String dOB,
+    String password,
+    String mobileNumber,
+    String medicalHistory) async {
+  return await http.put(
+    Uri.parse('http://localhost:8080/signup'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'FirstName': firstName,
+      'LastName': lastName,
+      'Email': email,
+      'DOB': dOB,
+      'Password': password,
+      'MobileNumber': mobileNumber,
+      'MedicalHistory': medicalHistory,
+    }),
+  );
 }
