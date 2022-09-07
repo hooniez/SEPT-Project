@@ -45,7 +45,8 @@ class _ManageUsersState extends State<ManageUsers> {
                   mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   ...widget.users.entries.map((entry) {
-                    return UserListing(entry.key, entry.value, _removeUser,
+                    return UserListing(entry.key, widget.userType, entry.value,
+                        _removeUser,
                         _editUser);
                   }).toList()
                 ]
