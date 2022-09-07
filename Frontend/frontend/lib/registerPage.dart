@@ -14,6 +14,7 @@ class RegisterPage extends StatefulWidget {
 class _MyAppState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController firstNameController = TextEditingController();
+  TextEditingController middleNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController dOBController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -68,7 +69,21 @@ class _MyAppState extends State<RegisterPage> {
                           child: TextFormField(
                             controller: firstNameController,
                             decoration: InputDecoration(
-                              labelText: "Second Name",
+                              labelText: "Middle Name",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            controller: firstNameController,
+                            decoration: InputDecoration(
+                              labelText: "Last Name",
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
@@ -108,19 +123,6 @@ class _MyAppState extends State<RegisterPage> {
                           child: TextFormField(
                             decoration: InputDecoration(
                               labelText: "Mobile Number",
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              labelText: "Date of Birth",
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
@@ -194,6 +196,7 @@ class _MyAppState extends State<RegisterPage> {
                               print("*******************");
                               Future res = createPatient(
                                 firstNameController.text,
+                                middleNameController.text,
                                 lastNameController.text,
                                 emailController.text,
                                 dOBController.text,
@@ -248,6 +251,7 @@ class _MyAppState extends State<RegisterPage> {
 
 Future<http.Response> createPatient(
     String firstName,
+    String middleName,
     String lastName,
     String email,
     String dOB,
@@ -261,6 +265,7 @@ Future<http.Response> createPatient(
     },
     body: jsonEncode(<String, String>{
       'FirstName': firstName,
+      'MiddleName': middleName,
       'LastName': lastName,
       'Email': email,
       'DOB': dOB,
