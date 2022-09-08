@@ -66,7 +66,7 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            controller: firstNameController,
+                            controller: lastNameController,
                             decoration: InputDecoration(
                               labelText: "Second Name",
                               filled: true,
@@ -80,6 +80,7 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
+                            controller: dOBController,
                             decoration: InputDecoration(
                               labelText: "Date of Birth",
                               filled: true,
@@ -93,6 +94,7 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
+                            controller: emailController,
                             decoration: InputDecoration(
                               labelText: "Email",
                               filled: true,
@@ -106,6 +108,7 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
+                            controller: mobileNumController,
                             decoration: InputDecoration(
                               labelText: "Mobile Number",
                               filled: true,
@@ -141,6 +144,7 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8, 85, 8, 8),
                           child: TextFormField(
+                            controller: medHisController,
                             maxLines: 6,
                             decoration: InputDecoration(
                               labelText: "Medical History",
@@ -155,6 +159,7 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
+                            controller: passwordController,
                             decoration: InputDecoration(
                               labelText: "Password",
                               filled: true,
@@ -168,6 +173,7 @@ class _MyAppState extends State<RegisterPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
+                            controller: passwordConfirmController,
                             decoration: InputDecoration(
                               labelText: "Confirm Password",
                               fillColor: Colors.white,
