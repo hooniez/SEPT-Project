@@ -267,7 +267,7 @@ Future<http.Response> createPatient(
     String password,
     String mobileNumber,
     String medicalHistory) async {
-  var uri = Uri.https('localhost:8080', 'signup');
+  var uri = Uri.http('localhost:8080', 'signup');
 
   return await http.put(
     //Uri.parse('http://localhost:8080/signup'),
