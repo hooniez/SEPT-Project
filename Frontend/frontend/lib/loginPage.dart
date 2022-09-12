@@ -1,21 +1,15 @@
-// ignore_for_file: sort_child_properties_last
-
-import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'dart:html';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class Login extends StatefulWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<Login> createState() => _LoginState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
 
   @override
