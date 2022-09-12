@@ -13,28 +13,28 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String email;
-    private String firstName;
-    private String middleName;
-    private String lastName;
+    private String firstname;
+    private String middlename;
+    private String lastname;
     private LocalDate dob;
     private String password;
-    private String mobileNumber;
-    private String healthInformation;
-    private String medicalHistory;
+    private String mobilenumber;
+    private String healthinformation;
+    private String medicalhistory;
 
-    public Patient(Integer id, String email, String firstName, String middleName, String lastName,
+    public Patient(Integer id, String email, String firstNameBigLol, String middleName, String lastName,
         LocalDate dob, String password, String mobileNumber, String healthInformation, String medicalHistory) {
-        
+
         this.id = id;
         this.email = email;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
+        this.firstname = firstNameBigLol;
+        this.middlename = middleName;
+        this.lastname = lastName;
         this.dob = dob;
         this.password = password;
-        this.mobileNumber = mobileNumber;
-        this.healthInformation = healthInformation;
-        this.medicalHistory = medicalHistory;
+        this.mobilenumber = mobileNumber;
+        this.healthinformation = healthInformation;
+        this.medicalhistory = medicalHistory;
     }
 
     public Integer getid() {
@@ -46,15 +46,15 @@ public class Patient {
     }
 
     public String getFirstName() {
-        return firstName;
+        return firstname;
     }
 
     public String getMiddleName() {
-        return middleName;
+        return middlename;
     }
 
     public String getLastName() {
-        return lastName;
+        return lastname;
     }
 
     public LocalDate getDob() {
@@ -66,15 +66,15 @@ public class Patient {
     }
 
     public String getMobileNumber() {
-        return mobileNumber;
+        return mobilenumber;
     }
 
     public String getHealthInformation() {
-        return healthInformation;
+        return healthinformation;
     }
 
     public String getmedicalHistory() {
-        return medicalHistory;
+        return medicalhistory;
     }
 
     public void setId(Integer id) {
@@ -86,15 +86,15 @@ public class Patient {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstname = firstName;
     }
 
     public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+        this.middlename = middleName;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastname = lastName;
     }
 
     public void setDob(LocalDate dob) {
@@ -106,14 +106,19 @@ public class Patient {
     }
 
     public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+        this.mobilenumber = mobileNumber;
     }
 
     public void setHealthInformation(String healthInformation) {
-        this.healthInformation = healthInformation;
+        this.healthinformation = healthInformation;
     }
 
     public void setmedicalHistory(String medicalHistory) {
-        this.medicalHistory = medicalHistory;
+        this.medicalhistory = medicalHistory;
     }
+
+    public String toString() {
+        return "id= " + id + "email= " + email + "firstName= " + firstname + "middleName= " + middlename + "lastName= " + lastname + "dob= " + dob + "password= " + password + "mobileNumber= " + mobilenumber + "healthInformation= " + healthinformation + "medicalHistory= " + medicalhistory;
+    }
+
 }

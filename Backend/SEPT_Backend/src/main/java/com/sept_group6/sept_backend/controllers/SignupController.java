@@ -42,12 +42,13 @@ public class SignupController {
             @RequestBody Patient newPatient)
             throws Exception {
         logger.info("signup");
-        // Generate resource id
-        // Integer id = userDao.getNumOfUsers() + 1;
-        // user.setId(id);
+//         Generate resource id
+//         Integer id = userDao.getNumOfUsers() + 1;
+//         user.setId(id);
 
         // add resource
         Patient patient = patientRepository.save(newPatient);
+        System.out.println(newPatient.toString());
         logger.info(patientRepository.findAll());
 
         // Create resource location
