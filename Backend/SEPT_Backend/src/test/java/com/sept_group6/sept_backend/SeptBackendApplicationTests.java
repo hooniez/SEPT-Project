@@ -3,7 +3,7 @@ package com.sept_group6.sept_backend;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(classes = SeptBackendApplicationTests.class)
 class SeptBackendApplicationTests {
 
     @Test
