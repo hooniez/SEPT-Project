@@ -3,7 +3,6 @@ import 'dart:html';
 import 'frontPage.dart';
 import 'package:flutter/material.dart';
 import 'patientProfile.dart';
-import 'registerPage.dart';
 
 void main() {
   runApp(MyApp());
