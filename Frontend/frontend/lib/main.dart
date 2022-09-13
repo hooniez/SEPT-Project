@@ -1,10 +1,11 @@
-import 'dart:html';
+// import 'dart:html';
 import 'loginPage.dart';
 
 import 'package:flutter/material.dart';
 
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
