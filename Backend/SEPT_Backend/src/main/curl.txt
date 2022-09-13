@@ -1,2 +1,0 @@
-// curl to add user
-curl -X POST localhost:8080/signup/ -H "Content-type:application/json" -d "{\"firstname\": \"Samwise Gamgee\", \"lastname\": \"gardener\"}"

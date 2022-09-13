@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: const PatientProfile(),
-      home: const RegisterPage(),
+      home: const PatientProfile(),
     );
   }
 }
