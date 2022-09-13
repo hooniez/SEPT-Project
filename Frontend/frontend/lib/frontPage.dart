@@ -1,6 +1,6 @@
 // ignore_for_file: sort_child_properties_last
 
-// import 'dart:html';
+import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
@@ -47,9 +47,9 @@ class _MyAppState extends State<FrontPage> {
                       child: const Text('Login'),
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return const Login();
+                          return const LoginPage(title: 'Login Page');
                         }));
-                        },
+                      },
                     ),
                   ),
                 ),
@@ -66,7 +66,7 @@ class _MyAppState extends State<FrontPage> {
                       child: const Text('Register'),
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return const Login();
+                          return const RegisterPage(title: 'Login Page');
                         }));
                       },
                     ),
