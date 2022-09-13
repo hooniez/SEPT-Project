@@ -66,7 +66,7 @@ class _MyAppState extends State<FrontPage> {
                       child: const Text('Register'),
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return const LoginPage(title: 'Login Page');
+                          return const RegisterPage(title: 'Login Page');
                         }));
                       },
                     ),
