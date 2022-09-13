@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-// import 'dart:html';
+import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -16,6 +16,11 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+
+    TextEditingController email = TextEditingController();
+    TextEditingController password = TextEditingController();
+
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -75,7 +80,7 @@ class _LoginState extends State<Login> {
                         ),
                         child: const Text('Login'),
                         onPressed: () {
-                          print('Hello');
+                          validateUser(email.text,password.text);
                         },
                       ),
                     ),
@@ -94,15 +99,9 @@ class _LoginState extends State<Login> {
   }
 }
 
-Future<http.Response> createPatient(
-    String firstName,
-    String middleName,
-    String lastName,
+Future<http.Response> validateUser(
     String email,
-    String dOB,
-    String password,
-    String mobileNumber,
-    String medicalHistory) async {
+    String password,) async {
   var uri = Uri.http('localhost:8080', 'signup');
 
   return await http.put(
@@ -112,14 +111,8 @@ Future<http.Response> createPatient(
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(<String, String>{
-      'FirstName': firstName,
-      'MiddleName': middleName,
-      'LastName': lastName,
       'Email': email,
-      'DOB': dOB,
       'Password': password,
-      'MobileNumber': mobileNumber,
-      'MedicalHistory': medicalHistory,
     }),
   );
 }
