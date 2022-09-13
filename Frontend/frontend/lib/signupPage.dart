@@ -5,13 +5,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+class SignupPage extends StatefulWidget {
+  const SignupPage({Key? key}) : super(key: key);
   @override
-  State<RegisterPage> createState() => _MyAppState();
+  State<SignupPage> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<RegisterPage> {
+class _MyAppState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController middleNameController = TextEditingController();
@@ -47,7 +47,7 @@ class _MyAppState extends State<RegisterPage> {
                           child: Text(
                             'Register',
                             style:
-                                TextStyle(color: Colors.white, fontSize: 50.0),
+                            TextStyle(color: Colors.white, fontSize: 50.0),
                           ),
                         ),
                         Padding(
