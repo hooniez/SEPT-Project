@@ -12,6 +12,8 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
 
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -90,4 +92,34 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+}
+
+Future<http.Response> createPatient(
+    String firstName,
+    String middleName,
+    String lastName,
+    String email,
+    String dOB,
+    String password,
+    String mobileNumber,
+    String medicalHistory) async {
+  var uri = Uri.http('localhost:8080', 'signup');
+
+  return await http.put(
+    //Uri.parse('http://localhost:8080/signup'),
+    uri,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'FirstName': firstName,
+      'MiddleName': middleName,
+      'LastName': lastName,
+      'Email': email,
+      'DOB': dOB,
+      'Password': password,
+      'MobileNumber': mobileNumber,
+      'MedicalHistory': medicalHistory,
+    }),
+  );
 }
