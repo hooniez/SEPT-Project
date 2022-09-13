@@ -3,7 +3,8 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
-
+import 'loginPage.dart';
+import 'signupPage.dart';
 class FrontPage extends StatefulWidget {
   const FrontPage({Key? key}) : super(key: key);
 
@@ -45,7 +46,9 @@ class _MyAppState extends State<FrontPage> {
                       ),
                       child: const Text('Login'),
                       onPressed: () {
-                        print('Hello');
+                        Navigator.push(context, MaterialPageRoute(builder: (context) {
+                          return const LoginPage(title: 'Login Page');
+                        }));
                       },
                     ),
                   ),
@@ -62,7 +65,9 @@ class _MyAppState extends State<FrontPage> {
                       ),
                       child: const Text('Register'),
                       onPressed: () {
-                        print('Hello');
+                        Navigator.push(context, MaterialPageRoute(builder: (context) {
+                          return const LoginPage(title: 'Login Page');
+                        }));
                       },
                     ),
                   ),
