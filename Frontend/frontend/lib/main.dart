@@ -1,4 +1,4 @@
-import 'dart:html';
+// import 'dart:html';
 
 import 'frontPage.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: const PatientProfile(),
-      home: const PatientProfile(),
+      home: const FrontPage(),
     );
   }
 }
