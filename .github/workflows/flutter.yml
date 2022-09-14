@@ -33,7 +33,7 @@ jobs:
         flutter-version: '3.0.5'
     - run: cd ./Frontend/frontend
     - run: ls
-    - run: Frontend/frontend/flutter pub get
-    - run: Frontend/frontend/flutter test
-    - run: Frontend/frontend/flutter build apk
-    - run: Frontend/frontend/flutter build appbundle
+    - run: ./Frontend/frontend/lib/flutter pub get
+    - run: ./Frontend/frontend/lib/flutter test
+    - run: ./Frontend/frontend/lib/flutter build apk
+    - run: ./Frontend/frontend/lib/flutter build appbundle
