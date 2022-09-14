@@ -5,7 +5,11 @@ name: Flutter CI
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:   
+  push:
+    branches: 
+    - main
+    - Develop
+    - '**frontend**'   
     paths:
       - '[Ff]rontend/**'
   pull_request:
