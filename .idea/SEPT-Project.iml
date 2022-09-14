@@ -11,8 +11,13 @@
       <excludeFolder url="file://$MODULE_DIR$/Login/LoginFront/login/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/Login/LoginFront/login/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/Login/LoginFront/login/build" />
+      <excludeFolder url="file://$MODULE_DIR$/frontend/frontend/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/frontend/frontend/build" />
+      <excludeFolder url="file://$MODULE_DIR$/frontend/frontend/.dart_tool" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Dart SDK" level="project" />
+    <orderEntry type="library" name="Dart Packages" level="project" />
   </component>
 </module>

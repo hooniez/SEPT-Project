@@ -5,14 +5,10 @@
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
-class FrontPage extends StatefulWidget {
-  const FrontPage({Key? key}) : super(key: key);
+class FrontPage extends StatelessWidget {
+  final Function setUser;
+  FrontPage({required this.setUser});
 
-  @override
-  State<FrontPage> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<FrontPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -47,7 +43,7 @@ class _MyAppState extends State<FrontPage> {
                       child: const Text('Login'),
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return const Login();
+                          return Login(setUser: setUser,);
                         }));
                       },
                     ),

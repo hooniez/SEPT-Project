@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import com.sept_group6.sept_backend.dao.PatientRepository;
 import com.sept_group6.sept_backend.model.Patient;
 
-/*TODO: turn this resfful */
+
+/*TODO: turn this restful */
 @RestController
 @RequestMapping(path = "/signup")
 public class SignupController {
@@ -35,29 +36,16 @@ public class SignupController {
     // return new Users();
     // }
 
-    @PutMapping(path = "", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> addUser(
-            @RequestHeader(name = "X-COM-PERSIST", required = false) String headerPersist,
-            @RequestHeader(name = "X-COM-LOCATION", required = false, defaultValue = "AUS") String headerLocation,
-            @RequestBody Patient newPatient)
+    @PutMapping(path = "", consumes="application/json", produces =
+            "application/json")
+    public ResponseEntity<?> addUser(@RequestBody Patient newPatient)
             throws Exception {
-        logger.info("signup");
-//         Generate resource id
-//         Integer id = userDao.getNumOfUsers() + 1;
-//         user.setId(id);
+        logger.info(newPatient);
 
         // add resource
         Patient patient = patientRepository.save(newPatient);
-        System.out.println(newPatient.toString());
-        logger.info(patientRepository.findAll());
 
-        // Create resource location
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(patient.getid())
-                .toUri();
+        return ResponseEntity.ok().build();
 
-        // Send location in response
-        return ResponseEntity.created(location).build();
     }
 }
