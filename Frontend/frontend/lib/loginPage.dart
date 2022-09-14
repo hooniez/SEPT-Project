@@ -1,16 +1,17 @@
 
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:frontend/scrollercontroller.dart';
 // import 'dart:html';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class Login extends StatelessWidget {
+  final Function setUser;
+  Login({required this.setUser});
 
-  @override
-  State<Login> createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +22,12 @@ class _LoginState extends State<Login> {
           backgroundColor: const Color.fromARGB(255, 223, 28, 93),
           title: const Text("Neighbourhood Doctors Login"),
         ),
-        body: Center(
+        body: SingleChildScrollView(
+          controller: AdjustableScrollController(100),
           child: Container(
+            padding: const EdgeInsets.all(15),
+            width: 500,
+            height: 500,
             child: Form(
               key: _formKey,
               child: Column(
@@ -30,7 +35,7 @@ class _LoginState extends State<Login> {
                 children: [
                   const Text(
                     'Login',
-                    style: TextStyle(color: Colors.white, fontSize: 28.0),
+                    style: TextStyle(color: Colors.black, fontSize: 28.0),
                   ),
                   const Padding(
                     padding: EdgeInsets.only(top: 40.0),
@@ -38,6 +43,7 @@ class _LoginState extends State<Login> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
+                      controller: emailController,
                       decoration: InputDecoration(
                         labelText: "Email",
                         filled: true,
@@ -51,6 +57,7 @@ class _LoginState extends State<Login> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
+                      controller: passwordController,
                       decoration: InputDecoration(
                         labelText: "Password",
                         filled: true,
@@ -72,8 +79,24 @@ class _LoginState extends State<Login> {
                           onPrimary: Colors.white, // foreground
                         ),
                         child: const Text('Login'),
-                        onPressed: () {
-                          print('Hello');
+                        onPressed: () async {
+                          final queryParameters = {
+                            'email': emailController.text,
+                            'password': passwordController.text
+                          };
+                          final uri = Uri.http("10.0.2.2:8080", "/signin",
+                              queryParameters);
+                          print(uri);
+
+                          Response res = await get(uri);
+
+                          if (res.body.isNotEmpty) {
+                            print("hey");
+                            setUser(res.body);
+                            Navigator.pushNamed(context, '/profile');
+                          } else {
+                            print("empty");
+                          }
                         },
                       ),
                     ),
@@ -81,10 +104,6 @@ class _LoginState extends State<Login> {
                 ],
               ),
             ),
-            padding: const EdgeInsets.all(15),
-            color: Color.fromARGB(255, 113, 113, 113),
-            width: 500,
-            height: 500,
           ),
         ),
       ),
