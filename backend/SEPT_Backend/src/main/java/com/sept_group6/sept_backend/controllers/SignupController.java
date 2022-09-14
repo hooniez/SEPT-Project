@@ -45,7 +45,7 @@ public class SignupController {
         // add resource
         Patient patient = patientRepository.save(newPatient);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.accepted().body(patient);
 
     }
 }
