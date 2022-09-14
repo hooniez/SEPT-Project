@@ -32,7 +32,7 @@ class _MyAppState extends State<SignupPage> {
           title: const Text("My Neighbourhood Doctors Register"),
         ),
         body: SingleChildScrollView(
-          controller: AdjustableScrollController(100),
+            controller: AdjustableScrollController(100),
           child: Container(
             child: Form(
               key: _formKey,
