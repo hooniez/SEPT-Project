@@ -32,7 +32,7 @@ class _MyAppState extends State<SignupPage> {
           title: const Text("My Neighbourhood Doctors Register"),
         ),
         body: SingleChildScrollView(
-            controller: AdjustableScrollController(100),
+          controller: AdjustableScrollController(100),
           child: Container(
             child: Form(
               key: _formKey,
@@ -46,12 +46,12 @@ class _MyAppState extends State<SignupPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 24,
-                                horizontal: 6),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 24, horizontal: 6),
                             child: Text(
                               'Register',
-                              style:
-                              TextStyle(color: Colors.black, fontSize: 36.0),
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 36.0),
                             ),
                           ),
                           Padding(
@@ -143,6 +143,7 @@ class _MyAppState extends State<SignupPage> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
                               controller: passwordController,
+                              obscureText: true,
                               decoration: InputDecoration(
                                 labelText: "Password",
                                 filled: true,
@@ -157,6 +158,7 @@ class _MyAppState extends State<SignupPage> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
                               controller: passwordConfirmController,
+                              obscureText: true,
                               decoration: InputDecoration(
                                 labelText: "Confirm Password",
                                 fillColor: Colors.white,
@@ -181,7 +183,7 @@ class _MyAppState extends State<SignupPage> {
                                   'Register',
                                   style: TextStyle(color: Colors.white),
                                 ),
-                                onPressed:  () async {
+                                onPressed: () async {
                                   var res = await createPatient(
                                     firstNameController.text,
                                     lastNameController.text,
@@ -199,12 +201,10 @@ class _MyAppState extends State<SignupPage> {
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
             padding: const EdgeInsets.all(15),
-
           ),
         ),
       ),
@@ -244,8 +244,9 @@ Future<Response> createPatient(
     String password,
     String mobileNumber,
     String medicalHistory) async {
-  final url = Uri.parse("http://10.0.2.2:8080/signup");
-  Response res = await put(url,
+  final url = Uri.parse("http://localhost:8080/signup");
+  Response res = await put(
+    url,
     headers: {
       'Accept': 'application/json',
       'content-type': 'application/json',
@@ -261,6 +262,4 @@ Future<Response> createPatient(
     }),
   );
   return res;
-
-
 }
