@@ -31,13 +31,13 @@ class MyApp extends HookWidget {
         ),
 
         // home: const PatientProfile(),
-        home: ((user.value.isEmpty) ? FrontPage(setUser: _setUser,) :
-        const
-        PatientProfile
-          ()),
+        home: ((user.value.isEmpty)
+            ? FrontPage(
+                setUser: _setUser,
+              )
+            : const PatientProfile()),
         routes: {
-          '/profile' : (context) => PatientProfile(user: user),
-        }
-    );
+          '/profile': (context) => PatientProfile(user: user),
+        });
   }
 }
