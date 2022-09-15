@@ -1,18 +1,27 @@
 // ignore_for_file: sort_child_properties_last
 
+// import 'dart:html';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class PatientProfile extends StatefulWidget {
-  const PatientProfile({Key? key}) : super(key: key);
+  final user;
+  const PatientProfile({Key? key, this.user}) : super(key: key);
 
   @override
   State<PatientProfile> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<PatientProfile> {
+  late String _firstname;
+
+  @override
+  void initState() {
+    _firstname = widget.user.value['firstname'];
+  }
+
   final _formKey = GlobalKey<FormState>();
   Map<String, double> editButtonDetails = {
     'width': 60.0,
@@ -20,8 +29,8 @@ class _MyAppState extends State<PatientProfile> {
     'fontSize': 12
   };
 
-  Map<String, TextEditingController> textControllers = {
-    'firstname': TextEditingController(text: "Billy"),
+  late Map<String, TextEditingController> textControllers = {
+    'firstname': TextEditingController(text: _firstname),
     'lastname': TextEditingController(text: "Billinson"),
     'email': TextEditingController(text: "BillinsonBilly@bill.com.au"),
     'dob': TextEditingController(text: "12/12/1212"),
