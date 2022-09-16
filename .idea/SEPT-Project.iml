@@ -3,8 +3,8 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/backend/demo/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/backend/demo1/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Backend/demo/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Backend/demo1/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/Signup/SignupFront/signup/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/Signup/SignupFront/signup/build" />
       <excludeFolder url="file://$MODULE_DIR$/Signup/SignupFront/signup/.pub" />
