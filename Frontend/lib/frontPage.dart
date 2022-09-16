@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
+import 'symptomsPageCurrentSymptoms.dart';
 
 class FrontPage extends StatelessWidget {
   final Function setUser;
@@ -68,6 +69,26 @@ class FrontPage extends StatelessWidget {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return const SignupPage();
+                        }));
+                      },
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: SizedBox(
+                    width: 350.0, // <-- match_parent
+                    height: 75.0, // <-- match-parent
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.lightBlue, // background
+                        onPrimary: Colors.white, // foreground
+                      ),
+                      child: const Text('Symptoms'),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return SymptomsPageCurrentSymptoms();
                         }));
                       },
                     ),
