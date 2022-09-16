@@ -63,10 +63,6 @@
             <version>2.18.0</version>
         </dependency>
 
-<<<<<<< HEAD:backend/SEPT_Backend/pom.xml
-
-=======
->>>>>>> 83bfbf2e54bb0f2dbcb9493d926ed333ec0a5443:Backend/SEPT_Backend/pom.xml
         <!-- may be handy -->
         <!-- <dependency>
             <groupId>org.springframework.boot</groupId>

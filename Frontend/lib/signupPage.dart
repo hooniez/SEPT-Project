@@ -318,13 +318,12 @@ Future<Response> createUser(
     UserType userType) async {
 
   String API_HOST = "http://10.0.2.2:8080";
-  final url = Uri.parse(API_HOST + "/signup");
-  Response res = await put(url,
-    headers: {
-      'Accept': 'application/json',
-      'content-type': 'application/json',
-    },
-    body: jsonEncode(<String, String>{
+  String type = userType.toString().split('.').last;
+  final url = Uri.parse(API_HOST + "/" + type + "/signup");
+  print(url);
+  String body;
+  if (type == 'patient') {
+    body = jsonEncode(<String, String> {
       'firstname': firstName,
       'lastname': lastName,
       'email': email,
@@ -332,7 +331,26 @@ Future<Response> createUser(
       'password': password,
       'mobilenumber': mobileNumber,
       'medicalhistory': customInfo,
-    }),
+    });
+  } else {
+    // type == 'doctor'
+    body = jsonEncode(<String, String> {
+      'firstname': firstName,
+      'lastname': lastName,
+      'email': email,
+      'dob': dOB,
+      'password': password,
+      'mobilenumber': mobileNumber,
+      'certificate': customInfo,
+    });
+  }
+
+  Response res = await put(url,
+    headers: {
+      'Accept': 'application/json',
+      'content-type': 'application/json',
+    },
+    body: body
   );
   return res;
 
