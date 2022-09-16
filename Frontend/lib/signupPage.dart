@@ -41,7 +41,7 @@ class _SignupPageState extends State<SignupPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
             backgroundColor: const Color.fromARGB(255, 223, 28, 93),
             title: Center(child: const Text("Neighbourhood Doctors")),
@@ -324,7 +324,7 @@ Future<Response> createUser(
     });
   }
 
-  Response res = await put(url,
+  Response res = await post(url,
       headers: {
         'Accept': 'application/json',
         'content-type': 'application/json',

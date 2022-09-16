@@ -25,29 +25,24 @@ public class DoctorController {
     // }
 
     @GetMapping("/signin")
-    public ResponseEntity<?> loginUser(@RequestParam("email") String email,
+    public ResponseEntity<?> loginDoctor(@RequestParam("email") String email,
                                        @RequestParam("password") String password) {
 
         Optional<Doctor> doctor =
                 doctorRepository.findByEmailAndPassword(email, password);
 
         if (doctor.isPresent()) {
-            return ResponseEntity.accepted().body(doctor.get());
+            return ResponseEntity.ok().body(doctor.get());
         } else {
             return ResponseEntity.badRequest().build();
         }
     }
 
-    @PutMapping(path = "/signup", consumes="application/json", produces =
+    @PostMapping(path = "/signup", consumes="application/json", produces =
             "application/json")
-    public ResponseEntity<?> addUser(@RequestBody Doctor newDoctor)
+    public Doctor addDoctor(@RequestBody Doctor newDoctor)
             throws Exception {
-        logger.info(newDoctor);
-
-        // add resource
-        Doctor doctor = doctorRepository.save(newDoctor);
-
-        return ResponseEntity.accepted().body(doctor);
+        return doctorRepository.save(newDoctor);
 
     }
 }
