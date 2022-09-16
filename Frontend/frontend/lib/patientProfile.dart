@@ -241,26 +241,6 @@ class _MyAppState extends State<PatientProfile> {
                           width: editButtonDetails['width'], // <-- match_parent
                           height:
                           editButtonDetails['height'], // <-- match-parent
-                          child: IconButton(
-                            icon: const Icon(Icons.create_outlined),
-                            color: Colors.blue,
-                            onPressed: () {
-                              setState(() {
-                                enabledFlags['email'] =
-                                !(enabledFlags['email']!);
-                                if (enabledFlags['email'] == true) {
-                                  buttonText['email'] = buttonTextSave;
-                                  textBoxBackgrounds['email'] =
-                                      textBoxSelectedColor;
-                                } else {
-                                  buttonText['email'] = buttonTextEdit;
-                                  textBoxBackgrounds['email'] =
-                                      textBoxNotSelectedColor;
-                                  Future response = putPatientData(textControllers);
-                                }
-                              });
-                            },
-                          ),
                         ),
                       ),
                     ],
