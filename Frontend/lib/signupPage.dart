@@ -195,7 +195,7 @@ class _MyAppState extends State<SignupPage> {
                                       value.length < 10 ||
                                       value.length > 10 ||
                                       !isNumeric(value)) {
-                                    return 'Please enter a valid Australian number';
+                                    return 'Please enter a valid Australian number (10 digits)';
                                   } else {
                                     return null;
                                   }
