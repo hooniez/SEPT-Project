@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:frontend/scrollercontroller.dart';
 import 'package:http/http.dart';
+import 'package:intl/intl.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -57,45 +58,83 @@ class _MyAppState extends State<SignupPage> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
-                              controller: firstNameController,
-                              decoration: InputDecoration(
-                                labelText: "First Name",
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                controller: firstNameController,
+                                decoration: InputDecoration(
+                                  labelText: "First Name",
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
                                 ),
-                              ),
-                            ),
+                                validator: (value) {
+                                  if (value == null ||
+                                      value.isEmpty ||
+                                      value.length > 255) {
+                                    return 'Please enter a valid first name';
+                                  } else {
+                                    return null;
+                                  }
+                                }),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
-                              controller: lastNameController,
-                              decoration: InputDecoration(
-                                labelText: "Last Name",
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                controller: lastNameController,
+                                decoration: InputDecoration(
+                                  labelText: "Last Name",
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
                                 ),
-                              ),
-                            ),
+                                validator: (value) {
+                                  if (value == null ||
+                                      value.isEmpty ||
+                                      value.length > 255) {
+                                    return 'Please enter a valid last name';
+                                  } else {
+                                    return null;
+                                  }
+                                }),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              controller: dOBController,
-                              decoration: InputDecoration(
-                                labelText: "Date of Birth",
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                              ),
-                            ),
-                          ),
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextField(
+                                  controller: dOBController,
+                                  decoration: InputDecoration(
+                                    labelText: "Date of Birth",
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                  ),
+                                  readOnly: true,
+                                  onTap: () async {
+                                    DateTime? pickedDate = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime(1900),
+                                        lastDate: DateTime(2023));
+
+                                    if (pickedDate != null) {
+                                      String formattedDate =
+                                          DateFormat('dd-MM-yyyy')
+                                              .format(pickedDate);
+
+                                      setState(() {
+                                        dOBController.text = formattedDate;
+                                      });
+                                    } else {
+                                      print("Date is not selected");
+                                    }
+                                  })),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
