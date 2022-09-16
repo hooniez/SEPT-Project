@@ -8,32 +8,20 @@ import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 
 class SignupPage extends StatefulWidget {
-  final Function setUser;
-  const SignupPage({Key? key, required this.setUser}) : super(key: key);
-
+  const SignupPage({Key? key}) : super(key: key);
   @override
-  State<SignupPage> createState() => _SignupPageState();
+  State<SignupPage> createState() => _MyAppState();
 }
 
-class _SignupPageState extends State<SignupPage> {
-  UserType? _userType = UserType.patient;
-
+class _MyAppState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
-
   TextEditingController firstNameController = TextEditingController();
-
   TextEditingController lastNameController = TextEditingController();
-
   TextEditingController dOBController = TextEditingController();
-
   TextEditingController emailController = TextEditingController();
-
   TextEditingController mobileNumController = TextEditingController();
-
-  TextEditingController customController = TextEditingController();
-
+  TextEditingController medHisController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
   TextEditingController passwordConfirmController = TextEditingController();
 
   bool isNumeric(String? s) {
@@ -50,16 +38,9 @@ class _SignupPageState extends State<SignupPage> {
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-            backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-            title: Center(child: const Text("Neighbourhood Doctors")),
-            leading: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.white,
-                ))),
+          backgroundColor: const Color.fromARGB(255, 223, 28, 93),
+          title: const Text("My Neighbourhood Doctors Register"),
+        ),
         body: SingleChildScrollView(
           controller: AdjustableScrollController(100),
           child: Container(
@@ -70,7 +51,7 @@ class _SignupPageState extends State<SignupPage> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.all(30.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -189,7 +170,7 @@ class _SignupPageState extends State<SignupPage> {
                                   if (value == null ||
                                       value.isEmpty ||
                                       value.length > 255 ||
-                                      EmailValidator.validate(value)) {
+                                      !EmailValidator.validate(value)) {
                                     return 'Please enter a valid email';
                                   } else {
                                     return null;
@@ -342,7 +323,31 @@ class _SignupPageState extends State<SignupPage> {
   }
 }
 
-Future<Response> createUser(
+// postTest(String firstName,
+//     String lastName,
+//     String email,
+//     String dOB,
+//     String password,
+//     String mobileNumber,
+//     String medicalHistory) async {
+//     const uri = 'localhost:8080/signup';
+
+//     http.Response response = await http.post(
+//         Uri.parse(uri), headers: <String, String>{ },
+//         body: jsonEncode(<String, String>{
+//       'FirstName': firstName,
+//       'LastName': lastName,
+//       'Email': email,
+//       'DOB': dOB,
+//       'Password': password,
+//       'MobileNumber': mobileNumber,
+//       'MedicalHistory': medicalHistory,
+//     }),);
+
+//     print(response.body);
+//   }
+
+Future<Response> createPatient(
     String firstName,
     String lastName,
     String email,
@@ -364,15 +369,8 @@ Future<Response> createUser(
       'dob': dOB,
       'password': password,
       'mobilenumber': mobileNumber,
-      'certificate': customInfo,
-    });
-  }
-
-  Response res = await put(url,
-      headers: {
-        'Accept': 'application/json',
-        'content-type': 'application/json',
-      },
-      body: body);
+      'medicalhistory': medicalHistory,
+    }),
+  );
   return res;
 }

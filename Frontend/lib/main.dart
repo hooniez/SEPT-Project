@@ -19,13 +19,9 @@ class MyApp extends HookWidget {
   Widget build(BuildContext context) {
     final user = useState({});
 
-    void _setUser(String res, String userType) {
+    void _setUser(String res) {
       user.value = json.decode(res);
-      user.value['usertype'] = userType;
-    }
-
-    void _logoutUser() {
-      user.value = {};
+      print(user.value['firstname']);
     }
 
     return MaterialApp(
