@@ -69,8 +69,10 @@ class _LoginState extends State<Login> {
                             });
                           },
                         ),
-                        const Text("Patient", style: TextStyle
-                          (fontSize: 16),),
+                        const Text(
+                          "Patient",
+                          style: TextStyle(fontSize: 16),
+                        ),
                       ]),
                       Row(children: [
                         Radio<UserType>(
@@ -82,7 +84,10 @@ class _LoginState extends State<Login> {
                             });
                           },
                         ),
-                        const Text("Doctor", style: TextStyle(fontSize: 16),),
+                        const Text(
+                          "Doctor",
+                          style: TextStyle(fontSize: 16),
+                        ),
                       ]),
                     ],
                   ),
@@ -134,8 +139,7 @@ class _LoginState extends State<Login> {
                             'password': passwordController.text
                           };
                           final uri = Uri.http(
-                              API_HOST, "/$type/signin",
-                              queryParameters);
+                              API_HOST, "/$type/signin", queryParameters);
                           print(uri);
 
                           Response res = await get(uri);
@@ -144,7 +148,7 @@ class _LoginState extends State<Login> {
                             widget.setUser(res.body, type);
                             Navigator.pushNamed(context, '/frontPage');
                           } else {
-                            print("empty");
+                            debugPrint("empty");
                           }
                         },
                       ),

@@ -12,9 +12,8 @@ class FrontPage extends StatelessWidget {
   final Function setUser;
   final Function logoutUser;
 
-
-  FrontPage({required this.user, required this.setUser, required this
-      .logoutUser});
+  FrontPage(
+      {required this.user, required this.setUser, required this.logoutUser});
 
   @override
   Widget build(BuildContext context) {
@@ -41,63 +40,10 @@ class FrontPage extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           'Welcome ${user.value['firstname']}!',
-                          style: const TextStyle(color: Colors.black, fontSize: 24.0),
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 24.0),
                         ),
                       ),
-<<<<<<< HEAD
-                      child: const Text('Login'),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return Login(
-                            setUser: setUser,
-                          );
-                        }));
-                      },
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: SizedBox(
-                    width: 350.0, // <-- match_parent
-                    height: 75.0, // <-- match-parent
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.lightGreen, // background
-                        onPrimary: Colors.black, // foreground
-                      ),
-                      child: const Text('Register'),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return const SignupPage();
-                        }));
-                      },
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: SizedBox(
-                    width: 350.0, // <-- match_parent
-                    height: 75.0, // <-- match-parent
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.lightBlue, // background
-                        onPrimary: Colors.white, // foreground
-                      ),
-                      child: const Text('Symptoms'),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return SymptomsPageCurrentSymptoms();
-                        }));
-                      },
-                    ),
-                  ),
-                ),
-=======
                 user.value.isEmpty
                     ? Column(
                         children: [
@@ -160,24 +106,24 @@ class FrontPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          if (user.value['usertype'] == "patient") Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 200,
-                              height: 50,
-                              child: OutlinedButton(
-                                onPressed: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                        return SignupPage(setUser: setUser);
-                                      }));
-                                },
-                                child: const Text("Doctors",
-                                    style: TextStyle(fontSize: 18.0)),
+                          if (user.value['usertype'] == "patient")
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: 200,
+                                height: 50,
+                                child: OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return SignupPage(setUser: setUser);
+                                    }));
+                                  },
+                                  child: const Text("Doctors",
+                                      style: TextStyle(fontSize: 18.0)),
+                                ),
                               ),
                             ),
-                          ),
-
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: SizedBox(
@@ -229,7 +175,6 @@ class FrontPage extends StatelessWidget {
                           )
                         ],
                       )
->>>>>>> develop
               ],
             ),
           )),
