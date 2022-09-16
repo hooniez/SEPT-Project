@@ -22,6 +22,23 @@ class _MyAppState extends State<SignupPage> {
   TextEditingController medHisController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController passwordConfirmController = TextEditingController();
+  final bool isFirstNameValid = false;
+  final bool isLastNameValid = false;
+  final bool isDOBValid = false;
+  final bool isMobileValid = false;
+  final bool isEmailValid = false;
+  final bool isMedicalValid = false;
+  final bool isPasswordValid = false;
+
+  bool get isFormValid =>
+      isFirstNameValid &&
+      isLastNameValid &&
+      isDOBValid &&
+      isEmailValid &&
+      isMobileValid &&
+      isMedicalValid &&
+      isPasswordValid;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -105,7 +122,9 @@ class _MyAppState extends State<SignupPage> {
                           ),
                           Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: TextField(
+                              child: TextFormField(
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
                                   controller: dOBController,
                                   decoration: InputDecoration(
                                     labelText: "Date of Birth",
@@ -121,7 +140,7 @@ class _MyAppState extends State<SignupPage> {
                                         context: context,
                                         initialDate: DateTime.now(),
                                         firstDate: DateTime(1900),
-                                        lastDate: DateTime(2023));
+                                        lastDate: DateTime.now());
 
                                     if (pickedDate != null) {
                                       String formattedDate =
@@ -223,15 +242,19 @@ class _MyAppState extends State<SignupPage> {
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 onPressed: () async {
-                                  var res = await createPatient(
-                                    firstNameController.text,
-                                    lastNameController.text,
-                                    emailController.text,
-                                    dOBController.text,
-                                    passwordController.text,
-                                    mobileNumController.text,
-                                    medHisController.text,
-                                  );
+                                  final isValidForm =
+                                      _formKey.currentState!.validate();
+                                  if (isValidForm) {
+                                    var res = await createPatient(
+                                      firstNameController.text,
+                                      lastNameController.text,
+                                      emailController.text,
+                                      dOBController.text,
+                                      passwordController.text,
+                                      mobileNumController.text,
+                                      medHisController.text,
+                                    );
+                                  }
                                 },
                               ),
                             ),
