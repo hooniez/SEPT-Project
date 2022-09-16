@@ -76,36 +76,6 @@ class _SignupPageState extends State<SignupPage> {
                                   color: Colors.black, fontSize: 36.0),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(children: [
-                                Radio<UserType>(
-                                  value: UserType.patient,
-                                  groupValue: _userType,
-                                  onChanged: (UserType? value) {
-                                    setState(() {
-                                      _userType = value;
-                                    });
-                                  },
-                                ),
-                                const Text("Patient", style: TextStyle
-                                  (fontSize: 16),),
-                              ]),
-                              Row(children: [
-                                Radio<UserType>(
-                                  value: UserType.doctor,
-                                  groupValue: _userType,
-                                  onChanged: (UserType? value) {
-                                    setState(() {
-                                      _userType = value;
-                                    });
-                                  },
-                                ),
-                                const Text("Doctor", style: TextStyle(fontSize: 16),),
-                              ]),
-                            ],
-                          ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
@@ -211,6 +181,7 @@ class _SignupPageState extends State<SignupPage> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
                               controller: passwordController,
+                              obscureText: true,
                               decoration: InputDecoration(
                                 labelText: "Password",
                                 filled: true,
@@ -225,6 +196,7 @@ class _SignupPageState extends State<SignupPage> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
                               controller: passwordConfirmController,
+                              obscureText: true,
                               decoration: InputDecoration(
                                 labelText: "Confirm Password",
                                 fillColor: Colors.white,
@@ -250,9 +222,7 @@ class _SignupPageState extends State<SignupPage> {
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 onPressed: () async {
-                                  String type = _userType.toString().split(''
-                                  '.').last;
-                                  var res = await createUser(
+                                  var res = await createPatient(
                                     firstNameController.text,
                                     lastNameController.text,
                                     emailController.text,
@@ -294,26 +264,15 @@ Future<Response> createUser(
     String dOB,
     String password,
     String mobileNumber,
-    String customInfo,
-    String type) async {
-  String API_HOST = "http://10.0.2.2:8080";
-
-  final url = Uri.parse(API_HOST + "/" + type + "/signup");
-  print(url);
-  String body;
-  if (type == 'patient') {
-    body = jsonEncode(<String, String>{
-      'firstname': firstName,
-      'lastname': lastName,
-      'email': email,
-      'dob': dOB,
-      'password': password,
-      'mobilenumber': mobileNumber,
-      'medicalhistory': customInfo,
-    });
-  } else {
-    // type == 'doctor'
-    body = jsonEncode(<String, String>{
+    String medicalHistory) async {
+  final url = Uri.parse("http://localhost:8080/signup");
+  Response res = await put(
+    url,
+    headers: {
+      'Accept': 'application/json',
+      'content-type': 'application/json',
+    },
+    body: jsonEncode(<String, String>{
       'firstname': firstName,
       'lastname': lastName,
       'email': email,

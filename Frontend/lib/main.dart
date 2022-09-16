@@ -35,10 +35,13 @@ class MyApp extends HookWidget {
         ),
 
         // home: const PatientProfile(),
-        home: FrontPage(user: user, setUser: _setUser, logoutUser: _logoutUser),
+        home: ((user.value.isEmpty)
+            ? FrontPage(
+                setUser: _setUser,
+              )
+            : const PatientProfile()),
         routes: {
-          '/frontPage': (context) =>
-              FrontPage(user: user, setUser: _setUser, logoutUser: _logoutUser),
+          '/profile': (context) => PatientProfile(user: user),
         });
   }
 }
