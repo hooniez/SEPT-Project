@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -17,7 +14,14 @@ import javax.persistence.Id;
 @AllArgsConstructor
 public class Doctor {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long uid;
+    // @Email(message = "Email must be valid")
+    // @NotBlank(message = "Email is required")
+    // uniqueness when adding new row needs to be checked in contronller
+    @Column(unique = true)
     private String email;
+
     private String firstname;
     private String lastname;
 
@@ -28,7 +32,8 @@ public class Doctor {
 
     public String toString() {
         return " email= " + email + " firstName= " + firstname + " lastName= " + lastname +
-                " dob= " + dob + " password= " + password + " mobileNumber= " + mobilenumber + " certificate= " + certificate;
+                " dob= " + dob + " password= " + password + " mobileNumber= " + mobilenumber + " certificate= "
+                + certificate;
     }
 
 }
