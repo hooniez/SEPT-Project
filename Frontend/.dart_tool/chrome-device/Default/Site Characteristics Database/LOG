@@ -1,4 +1,7 @@
-2022/09/16-15:48:41.993 edc Reusing MANIFEST C:\Users\lachl\AppData\Local\Temp\flutter_tools.3cb89c82\flutter_tools_chrome_device.5457ad91\Default\Site Characteristics Database/MANIFEST-000001
-2022/09/16-15:48:41.993 edc Recovering log #6
-2022/09/16-15:48:41.994 edc Reusing old log C:\Users\lachl\AppData\Local\Temp\flutter_tools.3cb89c82\flutter_tools_chrome_device.5457ad91\Default\Site Characteristics Database/000006.log 
-2022/09/16-15:48:41.994 edc Delete type=0 #3
+2022/09/16-18:04:53.119 5d4 Reusing MANIFEST C:\Users\lachl\AppData\Local\Temp\flutter_tools.f4261f72\flutter_tools_chrome_device.9fb10123\Default\Site Characteristics Database/MANIFEST-000001
+2022/09/16-18:04:53.120 5d4 Recovering log #10
+2022/09/16-18:04:53.120 5d4 Reusing old log C:\Users\lachl\AppData\Local\Temp\flutter_tools.f4261f72\flutter_tools_chrome_device.9fb10123\Default\Site Characteristics Database/000010.log 
+2022/09/16-18:04:53.120 5d4 Delete type=0 #3
+2022/09/16-18:04:53.121 5d4 Delete type=2 #4
+2022/09/16-18:04:53.121 5d4 Delete type=2 #6
+2022/09/16-18:04:53.121 5d4 Delete type=0 #6
