@@ -2,22 +2,21 @@ package com.sept_group6.sept_backend.controllers;
 
 import com.sept_group6.sept_backend.dao.DoctorRepository;
 import com.sept_group6.sept_backend.model.Doctor;
-import com.sept_group6.sept_backend.model.Patient;
+import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(path = "/doctor")
 public class DoctorController {
     private static final Logger logger = LogManager.getLogger("Backend");
 
-    @Autowired
-    private DoctorRepository doctorRepository;
+    private final DoctorRepository doctorRepository;
 
     /* not need for signup at the moment */
     // @GetMapping(path = "", produces = "application/json")
