@@ -24,10 +24,10 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @ManyToOne
-    @Column(name = "email")
+    @JoinColumn(name = "patientEmail", referencedColumnName = "email")
     private Patient patient;
     @ManyToOne
-    @Column(name = "email")
+    @JoinColumn(name = "doctorEmail", referencedColumnName = "email")
     private Doctor doctor;
 
     private LocalTime starttime;
