@@ -19,9 +19,13 @@ class MyApp extends HookWidget {
   Widget build(BuildContext context) {
     final user = useState({});
 
-    void _setUser(String res) {
+    void _setUser(String res, String userType) {
       user.value = json.decode(res);
-      print(user.value['firstname']);
+      user.value['usertype'] = userType;
+    }
+
+    void _logoutUser() {
+      user.value = {};
     }
 
     return MaterialApp(
@@ -31,13 +35,10 @@ class MyApp extends HookWidget {
         ),
 
         // home: const PatientProfile(),
-        home: ((user.value.isEmpty) ? FrontPage(setUser: _setUser,) :
-        const
-        PatientProfile
-          ()),
+        home: FrontPage(user: user, setUser: _setUser, logoutUser: _logoutUser),
         routes: {
-          '/profile' : (context) => PatientProfile(user: user),
-        }
-    );
+          '/frontPage': (context) =>
+              FrontPage(user: user, setUser: _setUser, logoutUser: _logoutUser),
+        });
   }
 }

@@ -1,16 +1,25 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
 // import 'dart:html';
 
-class Login extends StatelessWidget {
+enum UserType { doctor, patient }
+
+class Login extends StatefulWidget {
   final Function setUser;
   Login({required this.setUser});
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  UserType? _userType = UserType.patient;
+
   final _formKey = GlobalKey<FormState>();
+
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
 
   @override
@@ -19,9 +28,16 @@ class Login extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-          title: const Text("Neighbourhood Doctors Login"),
-        ),
+            backgroundColor: const Color.fromARGB(255, 223, 28, 93),
+            title: Center(child: const Text("Neighbourhood Doctors")),
+            leading: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.white,
+                ))),
         body: SingleChildScrollView(
           controller: AdjustableScrollController(100),
           child: Container(
@@ -39,6 +55,36 @@ class Login extends StatelessWidget {
                   ),
                   const Padding(
                     padding: EdgeInsets.only(top: 40.0),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(children: [
+                        Radio<UserType>(
+                          value: UserType.patient,
+                          groupValue: _userType,
+                          onChanged: (UserType? value) {
+                            setState(() {
+                              _userType = value;
+                            });
+                          },
+                        ),
+                        const Text("Patient", style: TextStyle
+                          (fontSize: 16),),
+                      ]),
+                      Row(children: [
+                        Radio<UserType>(
+                          value: UserType.doctor,
+                          groupValue: _userType,
+                          onChanged: (UserType? value) {
+                            setState(() {
+                              _userType = value;
+                            });
+                          },
+                        ),
+                        const Text("Doctor", style: TextStyle(fontSize: 16),),
+                      ]),
+                    ],
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -80,19 +126,23 @@ class Login extends StatelessWidget {
                         ),
                         child: const Text('Login'),
                         onPressed: () async {
+                          String API_HOST = "10.0.2.2:8080";
+                          String type = _userType.toString().split('.').last;
+
                           final queryParameters = {
                             'email': emailController.text,
                             'password': passwordController.text
                           };
-                          final uri = Uri.http("10.0.2.2:8080", "/signin",
+                          final uri = Uri.http(
+                              API_HOST, "/$type/signin",
                               queryParameters);
                           print(uri);
 
                           Response res = await get(uri);
 
                           if (res.body.isNotEmpty) {
-                            setUser(res.body);
-                            Navigator.pushNamed(context, '/profile');
+                            widget.setUser(res.body, type);
+                            Navigator.pushNamed(context, '/frontPage');
                           } else {
                             print("empty");
                           }

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/scrollercontroller.dart';
 import 'package:http/http.dart';
 
-enum UserType {doctor, patient}
+enum UserType { doctor, patient }
 
 class SignupPage extends StatefulWidget {
   final Function setUser;
@@ -43,11 +43,18 @@ class _SignupPageState extends State<SignupPage> {
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-          title: const Text("My Neighbourhood Doctors Register"),
-        ),
+            backgroundColor: const Color.fromARGB(255, 223, 28, 93),
+            title: Center(child: const Text("Neighbourhood Doctors")),
+            leading: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.white,
+                ))),
         body: SingleChildScrollView(
-            controller: AdjustableScrollController(100),
+          controller: AdjustableScrollController(100),
           child: Container(
             child: Form(
               key: _formKey,
@@ -61,45 +68,42 @@ class _SignupPageState extends State<SignupPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 24,
-                                horizontal: 6),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 24, horizontal: 6),
                             child: Text(
                               'Register',
-                              style:
-                              TextStyle(color: Colors.black, fontSize: 36.0),
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 36.0),
                             ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Row(
-                                children: [
-                                  Radio<UserType>(
-                                    value: UserType.patient,
-                                    groupValue: _userType,
-                                    onChanged: (UserType? value) {
-                                      setState(() {
-                                        _userType = value;
-                                      });
-                                    },
-                                  ),
-                                  const Text("Patient"),
-                                ]
-                              ),
-                              Row(
-                                  children: [
-                                    Radio<UserType>(
-                                      value: UserType.doctor,
-                                      groupValue: _userType,
-                                      onChanged: (UserType? value) {
-                                        setState(() {
-                                          _userType = value;
-                                        });
-                                      },
-                                    ),
-                                    const Text("Doctor"),
-                                  ]
-                              ),
+                              Row(children: [
+                                Radio<UserType>(
+                                  value: UserType.patient,
+                                  groupValue: _userType,
+                                  onChanged: (UserType? value) {
+                                    setState(() {
+                                      _userType = value;
+                                    });
+                                  },
+                                ),
+                                const Text("Patient", style: TextStyle
+                                  (fontSize: 16),),
+                              ]),
+                              Row(children: [
+                                Radio<UserType>(
+                                  value: UserType.doctor,
+                                  groupValue: _userType,
+                                  onChanged: (UserType? value) {
+                                    setState(() {
+                                      _userType = value;
+                                    });
+                                  },
+                                ),
+                                const Text("Doctor", style: TextStyle(fontSize: 16),),
+                              ]),
                             ],
                           ),
                           Padding(
@@ -172,37 +176,37 @@ class _SignupPageState extends State<SignupPage> {
                               ),
                             ),
                           ),
-                          _userType == UserType.patient ?
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              controller: customController,
-                              maxLines: 6,
-                              decoration: InputDecoration(
-                                labelText: "Medical History",
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
+                          _userType == UserType.patient
+                              ? Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    controller: customController,
+                                    maxLines: 6,
+                                    decoration: InputDecoration(
+                                      labelText: "Medical History",
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    controller: customController,
+                                    maxLines: 6,
+                                    decoration: InputDecoration(
+                                      labelText: "Doctor Certificates",
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ) :
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              controller: customController,
-                              maxLines: 6,
-                              decoration: InputDecoration(
-                                labelText: "Doctor Certificates",
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                              ),
-                            ),
-                          ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
@@ -245,23 +249,25 @@ class _SignupPageState extends State<SignupPage> {
                                   'Register',
                                   style: TextStyle(color: Colors.white),
                                 ),
-                                onPressed:  () async {
-                                    var res = await createUser(
-                                      firstNameController.text,
-                                      lastNameController.text,
-                                      emailController.text,
-                                      dOBController.text,
-                                      passwordController.text,
-                                      mobileNumController.text,
-                                      customController.text,
-                                      _userType!,
-                                    );
-                                    if (res.body.isNotEmpty) {
-                                      widget.setUser(res.body);
-                                      Navigator.pushNamed(context, '/profile');
-                                    } else {
-                                      print("empty");
-                                    }
+                                onPressed: () async {
+                                  String type = _userType.toString().split(''
+                                  '.').last;
+                                  var res = await createUser(
+                                    firstNameController.text,
+                                    lastNameController.text,
+                                    emailController.text,
+                                    dOBController.text,
+                                    passwordController.text,
+                                    mobileNumController.text,
+                                    customController.text,
+                                    type,
+                                  );
+                                  if (res.body.isNotEmpty) {
+                                    widget.setUser(res.body, type);
+                                    Navigator.pushNamed(context, '/frontPage');
+                                  } else {
+                                    print("empty");
+                                  }
                                 },
                               ),
                             ),
@@ -270,42 +276,16 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
             padding: const EdgeInsets.all(15),
-
           ),
         ),
       ),
     );
   }
 }
-
-// postTest(String firstName,
-//     String lastName,
-//     String email,
-//     String dOB,
-//     String password,
-//     String mobileNumber,
-//     String medicalHistory) async {
-//     const uri = 'localhost:8080/signup';
-
-//     http.Response response = await http.post(
-//         Uri.parse(uri), headers: <String, String>{ },
-//         body: jsonEncode(<String, String>{
-//       'FirstName': firstName,
-//       'LastName': lastName,
-//       'Email': email,
-//       'DOB': dOB,
-//       'Password': password,
-//       'MobileNumber': mobileNumber,
-//       'MedicalHistory': medicalHistory,
-//     }),);
-
-//     print(response.body);
-//   }
 
 Future<Response> createUser(
     String firstName,
@@ -315,15 +295,14 @@ Future<Response> createUser(
     String password,
     String mobileNumber,
     String customInfo,
-    UserType userType) async {
-
+    String type) async {
   String API_HOST = "http://10.0.2.2:8080";
-  String type = userType.toString().split('.').last;
+
   final url = Uri.parse(API_HOST + "/" + type + "/signup");
   print(url);
   String body;
   if (type == 'patient') {
-    body = jsonEncode(<String, String> {
+    body = jsonEncode(<String, String>{
       'firstname': firstName,
       'lastname': lastName,
       'email': email,
@@ -334,7 +313,7 @@ Future<Response> createUser(
     });
   } else {
     // type == 'doctor'
-    body = jsonEncode(<String, String> {
+    body = jsonEncode(<String, String>{
       'firstname': firstName,
       'lastname': lastName,
       'email': email,
@@ -346,13 +325,10 @@ Future<Response> createUser(
   }
 
   Response res = await put(url,
-    headers: {
-      'Accept': 'application/json',
-      'content-type': 'application/json',
-    },
-    body: body
-  );
+      headers: {
+        'Accept': 'application/json',
+        'content-type': 'application/json',
+      },
+      body: body);
   return res;
-
-
 }

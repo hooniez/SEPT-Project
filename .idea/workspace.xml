@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/SEPT_Backend/src/main/java/com/sept_group6/sept_backend/controllers/PatientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/155313e4ee09b0f93b450e9ae5522af7/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/155313e4ee09b0f93b450e9ae5522af7/.filecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/155313e4ee09b0f93b450e9ae5522af7/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/155313e4ee09b0f93b450e9ae5522af7/app.dill" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.packages" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/build/4f2a58af27abc49ecf55570043bbf938.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/build/4f2a58af27abc49ecf55570043bbf938.cache.dill.track.dill" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/build/app/intermediates/assets/debug/mergeDebugAssets/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/build/app/intermediates/assets/debug/mergeDebugAssets/flutter_assets/kernel_blob.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/kernel_blob.bin.jar" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/kernel_blob.bin.jar" afterDir="false" />
@@ -20,10 +17,12 @@
       <change beforePath="$PROJECT_DIR$/Frontend/build/app/outputs/flutter-apk/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/build/app/outputs/flutter-apk/app-debug.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/build/app/outputs/flutter-apk/app.apk" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/build/app/outputs/flutter-apk/app.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/build/app/outputs/flutter-apk/app.apk.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/build/app/outputs/flutter-apk/app.apk.sha1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/SEPT_Backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/SEPT_Backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/SEPT_Backend/src/main/java/com/sept_group6/sept_backend/controllers/SigninController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/SEPT_Backend/src/main/java/com/sept_group6/sept_backend/controllers/SignupController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/SEPT_Backend/src/main/java/com/sept_group6/sept_backend/model/Doctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/SEPT_Backend/src/main/java/com/sept_group6/sept_backend/model/Doctor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/frontPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/frontPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/loginPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/loginPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/signupPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/signupPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/SEPT_Backend/src/main/java/com/sept_group6/sept_backend/controllers/DoctorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/SEPT_Backend/src/main/java/com/sept_group6/sept_backend/controllers/DoctorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/SEPT_Backend/src/main/java/com/sept_group6/sept_backend/dao/DoctorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/SEPT_Backend/src/main/java/com/sept_group6/sept_backend/dao/DoctorRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
