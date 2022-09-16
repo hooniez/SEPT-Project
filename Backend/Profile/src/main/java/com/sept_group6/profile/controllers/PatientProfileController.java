@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path="/profile")
+@RequestMapping(path="/profile/patients")
 public class PatientProfileController {
     private static final Logger logger = LogManager.getLogger("Backend");
     @Autowired
@@ -20,9 +20,7 @@ public class PatientProfileController {
 
 
     @PutMapping(path="", consumes="application/json", produces="application/json")
-    public ResponseEntity<?> updateInfo(@RequestBody Patient patientEdit,
-                                        @PathVariable("email") String email) {
-
+    public ResponseEntity<?> updateInfo(@RequestBody Patient patientEdit) {
         Optional<Patient> patient =
                 patientRepository.findByEmail(patientEdit.getEmail());
 

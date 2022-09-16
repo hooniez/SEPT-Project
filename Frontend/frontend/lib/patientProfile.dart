@@ -4,7 +4,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
 
 class PatientProfile extends StatefulWidget {
@@ -428,15 +428,18 @@ class _MyAppState extends State<PatientProfile> {
     );
   }
 }
-Future<http.Response> putPatientData(
+Future<Response> putPatientData(
     Map<String, TextEditingController> textControlDict
     ) async {
   print("in put method");
-  String email = textControlDict['email']!.text;
-  String uri = "localhost:8080/patients/$email";
+  String uri = "http://10.0.2.2:8091/profile/patients";
   final url = Uri.parse(uri);
-  http.Response response =
-      await http.put(url, headers: {'Accept': 'application/json'},body: jsonEncode(<String, String>{
+  Response response =
+      await put(url,
+          headers: {
+        'Accept': 'application/json',
+        'content-type': 'application/json',
+      }, body: jsonEncode(<String, String>{
         'firstname': textControlDict['firstname']!.text,
         'lastname': textControlDict['lastname']!.text,
         'email': textControlDict['email']!.text,
