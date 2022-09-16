@@ -44,7 +44,7 @@ class _MyAppState extends State<SymptomsPageCurrentSymptoms> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(30.0),
-                      child: Column(
+                      child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
@@ -55,11 +55,30 @@ class _MyAppState extends State<SymptomsPageCurrentSymptoms> {
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     primary: Color.fromARGB(
-                                        255, 0, 0, 0), // background
+                                        255, 221, 150, 17), // background
                                     onPrimary: Colors.white, // foreground
                                   ),
                                   child: const Text(
                                     'Current Symptoms',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  onPressed: () async {},
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(24.0),
+                              child: SizedBox(
+                                width: 300.0, // <-- match_parent
+                                height: 50.0, // <-- match-parent
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Color.fromARGB(
+                                        255, 144, 119, 151), // background
+                                    onPrimary: Colors.white, // foreground
+                                  ),
+                                  child: const Text(
+                                    'Add Symptoms',
                                     style: TextStyle(color: Colors.white),
                                   ),
                                   onPressed: () async {},
