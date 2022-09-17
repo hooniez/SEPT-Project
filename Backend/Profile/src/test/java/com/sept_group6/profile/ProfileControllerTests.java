@@ -42,4 +42,20 @@
         mockMvc.perform(mockRequest)
                 .andExpect(status().isAccepted());
     }
+
+        @Test
+        public void testUpdatePatientBadRequest() throws Exception {
+            Patient patient1 = new Patient("cal@calcal.cal", "cal", "l", "2002-02-02", "cal", "0000", "history here");
+            Patient patient2 = null;
+            Mockito.when(patientRepository.findByEmail("cal@calcal.cal")).thenReturn(Optional.empty());
+            Mockito.when(patientRepository.save(patient1)).thenReturn(patient1);
+            MockHttpServletRequestBuilder mockRequest =
+                    MockMvcRequestBuilders.put(
+                                    "/profile/patients").
+                            contentType(MediaType.APPLICATION_JSON)
+                            .content(objectMapper.writeValueAsString(patient1));
+            mockMvc.perform(mockRequest)
+                    .andExpect(status().isBadRequest());
+        }
+
 }
