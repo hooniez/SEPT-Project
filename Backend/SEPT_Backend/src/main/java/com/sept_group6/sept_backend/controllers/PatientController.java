@@ -8,6 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+// exception handling
+import com.sept_group6.sept_backend.exception.EmailAlreadyExistsException;
+import com.sept_group6.sept_backend.exception.GetRootException;
+import org.springframework.transaction.TransactionSystemException;
+import javax.transaction.RollbackException;
+import javax.validation.ConstraintViolationException;
+
 import java.util.Optional;
 
 @RestController
@@ -35,11 +42,25 @@ public class PatientController {
     public ResponseEntity<?> addUser(@RequestBody Patient newPatient)
             throws Exception {
         logger.info(newPatient);
+        try {
+            // add resource
+            if (patientRepository.existsByEmail(newPatient.getEmail())) {
+                throw new EmailAlreadyExistsException("Email already exists.");
+            }
+            Patient patient = patientRepository.save(newPatient);
 
-        // add resource
-        Patient patient = patientRepository.save(newPatient);
-
-        return ResponseEntity.accepted().body(patient);
+            return ResponseEntity.accepted().body(patient);
+        } catch (EmailAlreadyExistsException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (TransactionSystemException e) {
+            ConstraintViolationException causeException = (ConstraintViolationException) GetRootException
+                    .getRootException(e);
+            String errorMessage = "";
+            for (var error : causeException.getConstraintViolations()) {
+                errorMessage += error.getMessage() + "\n";
+            }
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
 
     }
 }
