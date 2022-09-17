@@ -1,4 +1,3 @@
-Frontend/.dart_tool/package_config.json
-Frontend/.dart_tool/package_config_subset
-Frontend/.packages
-Frontend/build
+Frontend/.dart_tool/
+Frontend/build/
+Backend/Appointment_Server/target/
