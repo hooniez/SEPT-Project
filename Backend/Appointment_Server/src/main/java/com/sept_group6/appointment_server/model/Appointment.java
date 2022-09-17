@@ -1,4 +1,4 @@
-package com.sept_group6.sept_backend.model;
+package com.sept_group6.appointment_server.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,10 @@ import java.time.LocalDate;
 
 import javax.persistence.*;
 
-import org.hibernate.query.criteria.internal.PathImplementor;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import com.sept_group6.appointment_server.model.AppointmentView;
 
 @Entity
 @Getter
@@ -35,4 +35,9 @@ public class Appointment {
     private LocalDate date;
     private boolean appointmentbooked;
 
+    public AppointmentView createView() {
+        return new AppointmentView(id, date, starttime, endtime,
+                patient.getFirstname() + " " + patient.getLastname(),
+                doctor.getFirstname() + " " + doctor.getLastname(), appointmentbooked);
+    }
 }
