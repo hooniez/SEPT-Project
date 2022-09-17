@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_hooks: ^0.18.5+1
   web_socket_channel: ^2.2.0
+  stomp_dart_client: ^0.4.4
 
 dev_dependencies:
   flutter_test:
