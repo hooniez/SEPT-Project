@@ -131,7 +131,7 @@ class _LoginState extends State<Login> {
                         ),
                         child: const Text('Login'),
                         onPressed: () async {
-                          String API_HOST = "10.0.2.2:8080";
+                          String API_HOST = "localhost:8080";
                           String type = _userType.toString().split('.').last;
 
                           final queryParameters = {

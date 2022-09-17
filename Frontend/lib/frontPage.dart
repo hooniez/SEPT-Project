@@ -133,6 +133,24 @@ class FrontPage extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
+                                    return SymptomsPageCurrentSymptoms(
+                                        getUser: user);
+                                  }));
+                                },
+                                child: const Text("Symptoms",
+                                    style: TextStyle(fontSize: 18.0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              width: 200,
+                              height: 50,
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
                                     return SignupPage(setUser: setUser);
                                   }));
                                 },
