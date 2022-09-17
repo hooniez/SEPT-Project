@@ -99,17 +99,19 @@ class _MyAppState extends State<AppointmentPage> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 List<AppointmentView> data = snapshot.data!;
-                return ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        height: 75,
-                        color: Colors.white,
-                        child: Center(
-                          child: Text(data[index].doctorName),
-                        ),
-                      );
-                    });
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  verticalDirection: VerticalDirection.down,
+                  children: <Widget>[
+                    const Text("Your Appointments"),
+                    Expanded(
+                      child: FittedBox(
+                          alignment: Alignment.topCenter,
+                          child: dataBody(data, widget.user.value['usertype'])),
+                    )
+                  ],
+                );
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
@@ -121,4 +123,40 @@ class _MyAppState extends State<AppointmentPage> {
       ),
     );
   }
+}
+
+SingleChildScrollView dataBody(List<AppointmentView> data, String usertype) {
+  return SingleChildScrollView(
+    scrollDirection: Axis.vertical,
+    child: DataTable(
+      sortColumnIndex: 0,
+      showCheckboxColumn: false,
+      columns: [
+        DataColumn(
+          label: Text("Date"),
+        ),
+        DataColumn(
+          label: Text("Start Time"),
+        ),
+        DataColumn(
+          label: Text("End Time"),
+        ),
+        DataColumn(
+          label: Text(usertype == "patient" ? "Doctor Name" : "Patient Name"),
+        ),
+      ],
+      rows: data
+          .map(
+            (appointmentView) => DataRow(cells: [
+              DataCell(Text(appointmentView.date)),
+              DataCell(Text(appointmentView.startTime)),
+              DataCell(Text(appointmentView.endTime)),
+              DataCell(Text(usertype == "patient"
+                  ? appointmentView.doctorName
+                  : appointmentView.patientName)),
+            ]),
+          )
+          .toList(),
+    ),
+  );
 }

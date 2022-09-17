@@ -5,15 +5,15 @@
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
+import 'appointmentPage.dart';
 
 class FrontPage extends StatelessWidget {
   final user;
   final Function setUser;
   final Function logoutUser;
 
-
-  FrontPage({required this.user, required this.setUser, required this
-      .logoutUser});
+  FrontPage(
+      {required this.user, required this.setUser, required this.logoutUser});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,8 @@ class FrontPage extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           'Welcome ${user.value['firstname']}!',
-                          style: const TextStyle(color: Colors.black, fontSize: 24.0),
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 24.0),
                         ),
                       ),
                 user.value.isEmpty
@@ -105,24 +106,24 @@ class FrontPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          if (user.value['usertype'] == "patient") Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 200,
-                              height: 50,
-                              child: OutlinedButton(
-                                onPressed: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                        return SignupPage(setUser: setUser);
-                                      }));
-                                },
-                                child: const Text("Doctors",
-                                    style: TextStyle(fontSize: 18.0)),
+                          if (user.value['usertype'] == "patient")
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: 200,
+                                height: 50,
+                                child: OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return SignupPage(setUser: setUser);
+                                    }));
+                                  },
+                                  child: const Text("Doctors",
+                                      style: TextStyle(fontSize: 18.0)),
+                                ),
                               ),
                             ),
-                          ),
-
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: SizedBox(
@@ -132,7 +133,7 @@ class FrontPage extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return SignupPage(setUser: setUser);
+                                    return AppointmentPage(user: user);
                                   }));
                                 },
                                 child: const Text("Appointments",
