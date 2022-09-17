@@ -10,7 +10,9 @@ import 'package:intl/intl.dart';
 
 class SymptomsPageAddSymptoms extends StatefulWidget {
   final getUser;
-  const SymptomsPageAddSymptoms({Key? key, required this.getUser})
+  final Response getSymptoms;
+  const SymptomsPageAddSymptoms(
+      {Key? key, required this.getUser, required this.getSymptoms})
       : super(key: key);
 
   @override
@@ -86,7 +88,9 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                                               MaterialPageRoute(
                                                   builder: (context) {
                                             return SymptomsPageCurrentSymptoms(
-                                                getUser: widget.getUser);
+                                                getUser: widget.getUser,
+                                                getSymptoms:
+                                                    widget.getSymptoms);
                                           }));
                                         },
                                       ),
@@ -112,7 +116,9 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                                               MaterialPageRoute(
                                                   builder: (context) {
                                             return SymptomsPageAddSymptoms(
-                                                getUser: widget.getUser);
+                                                getUser: widget.getUser,
+                                                getSymptoms:
+                                                    widget.getSymptoms);
                                           }));
                                         },
                                       ),

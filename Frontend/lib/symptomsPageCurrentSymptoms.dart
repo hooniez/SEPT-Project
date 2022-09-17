@@ -10,7 +10,9 @@ import 'package:intl/intl.dart';
 
 class SymptomsPageCurrentSymptoms extends StatefulWidget {
   final getUser;
-  const SymptomsPageCurrentSymptoms({Key? key, required this.getUser})
+  final Response getSymptoms;
+  const SymptomsPageCurrentSymptoms(
+      {Key? key, required this.getUser, required this.getSymptoms})
       : super(key: key);
 
   @override
@@ -25,15 +27,7 @@ class _SymptomsPageCurrentSymptomsState
 
   @override
   Widget build(BuildContext context) {
-    String API_HOST = "localhost:8080";
-    final queryParameters = {'email': widget.getUser.value["email"]};
-    final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
-    print(uri);
-
-    Response res = await get(uri);
-    print(res.body);
-    print(widget.getUser.value["email"]);
-
+    List<dynamic> allSymptoms = json.decode(widget.getSymptoms.body);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -96,7 +90,9 @@ class _SymptomsPageCurrentSymptomsState
                                               MaterialPageRoute(
                                                   builder: (context) {
                                             return SymptomsPageCurrentSymptoms(
-                                                getUser: widget.getUser);
+                                                getUser: widget.getUser,
+                                                getSymptoms:
+                                                    widget.getSymptoms);
                                           }));
                                         },
                                       ),
@@ -122,22 +118,39 @@ class _SymptomsPageCurrentSymptomsState
                                               MaterialPageRoute(
                                                   builder: (context) {
                                             return SymptomsPageAddSymptoms(
-                                                getUser: widget.getUser);
+                                                getUser: widget.getUser,
+                                                getSymptoms:
+                                                    widget.getSymptoms);
                                           }));
                                         },
                                       ),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 80, horizontal: 30),
-                                    child: TextField(
-                                      readOnly: true,
-                                      enabled: true,
-                                      controller: symptomDescriptionController,
-                                      decoration: const InputDecoration(
-                                        labelText: '1',
-                                        border: OutlineInputBorder(),
+                                    padding: const EdgeInsets.all(24.0),
+                                    child: SizedBox(
+                                      width: 300.0, // <-- match_parent
+                                      height: 50.0, // <-- match-parent
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Color.fromARGB(
+                                              255, 144, 119, 151), // background
+                                          onPrimary: Colors.white, // foreground
+                                        ),
+                                        child: const Text(
+                                          'Add Symptom',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        onPressed: () async {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return SymptomsPageAddSymptoms(
+                                                getUser: widget.getUser,
+                                                getSymptoms:
+                                                    widget.getSymptoms);
+                                          }));
+                                        },
                                       ),
                                     ),
                                   ),

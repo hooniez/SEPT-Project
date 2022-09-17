@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
 import 'symptomsPageCurrentSymptoms.dart';
+import 'package:http/http.dart';
+import 'dart:convert';
 
 class FrontPage extends StatelessWidget {
   final user;
@@ -130,11 +132,13 @@ class FrontPage extends StatelessWidget {
                               width: 200,
                               height: 50,
                               child: OutlinedButton(
-                                onPressed: () {
+                                onPressed: () async {
+                                  var res = await getSymptom(
+                                      user.value["email"], user);
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
                                     return SymptomsPageCurrentSymptoms(
-                                        getUser: user);
+                                        getUser: user, getSymptoms: res);
                                   }));
                                 },
                                 child: const Text("Symptoms",
@@ -198,4 +202,21 @@ class FrontPage extends StatelessWidget {
           )),
     );
   }
+}
+
+Future<Response> getSymptom(String patientemail, final user) async {
+  String API_HOST = "localhost:8080";
+  final queryParameters = {'email': user.value["email"]};
+  final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
+  print(uri);
+
+  Response res = await get(uri);
+  List<dynamic> result = json.decode(res.body);
+  print(result);
+  // THIS BELOW IS SUPER IMPORTANT
+  print(result[0]['symptomdescription']);
+  print(result.length);
+  print(res);
+  print(user.value["email"]);
+  return res;
 }
