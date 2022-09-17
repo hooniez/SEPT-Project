@@ -24,8 +24,10 @@ public class AppointmentController {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-    @GetMapping("/")
-    public ResponseEntity<?> loginUser(@RequestParam("email") String email, @RequestParam("usertype") String usertype) {
+    @GetMapping("")
+    public ResponseEntity<?> getAppointment(@RequestParam("email") String email,
+            @RequestParam("usertype") String usertype) {
+        logger.info(email + " " + usertype);
         Optional<List<Appointment>> appointments;
         if (usertype.equals("patient")) {
             appointments = appointmentRepository.findByPatientEmail(email);
@@ -40,6 +42,7 @@ public class AppointmentController {
         } else {
             return ResponseEntity.badRequest().build();
         }
+
     }
 
     // @PutMapping(path = "/signup", consumes = "application/json", produces =

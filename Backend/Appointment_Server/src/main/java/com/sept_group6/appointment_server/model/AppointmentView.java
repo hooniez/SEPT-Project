@@ -23,4 +23,15 @@ public class AppointmentView {
     private String doctorName;
     private boolean appointmentbooked;
 
+    // public AppointmentView(Appointment appointment) {
+    // id = appointment.getId();
+    // date = appointment.getDate();
+    // starttime = appointment.getStarttime();
+    // endtime = appointment.getEndtime();
+    // patientName = appointment.getPatient().getFirstname() + " " +
+    // appointment.getDoctor().getLastname();
+    // appointmentbooked = appointment.isAppointmentbooked();
+
+    // }
+
 }
