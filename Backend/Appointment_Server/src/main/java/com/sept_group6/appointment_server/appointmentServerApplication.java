@@ -10,10 +10,10 @@ import java.util.Collections;
 import java.util.Arrays;
 
 @SpringBootApplication
-public class appointmentServerApplication {
+public class AppointmentServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(appointmentServerApplication.class, args);
+        SpringApplication.run(AppointmentServerApplication.class, args);
     }
 
     @Bean

@@ -17,17 +17,17 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/appointment")
 public class AppointmentController {
     private static final Logger logger = LogManager.getLogger("Backend");
-    @Autowired
-    private PatientRepository patientRepository;
-    @Autowired
-    private DoctorRepository doctorRepository;
+    // @Autowired
+    // private PatientRepository patientRepository;
+    // @Autowired
+    // private DoctorRepository doctorRepository;
     @Autowired
     private AppointmentRepository appointmentRepository;
 
     @GetMapping("")
     public ResponseEntity<?> getAppointment(@RequestParam("email") String email,
             @RequestParam("usertype") String usertype) {
-        logger.info(email + " " + usertype);
+        // logger.info(email + " " + usertype);
         Optional<List<Appointment>> appointments;
         if (usertype.equals("patient")) {
             appointments = appointmentRepository.findByPatientEmail(email);
