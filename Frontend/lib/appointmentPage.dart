@@ -17,38 +17,41 @@ class AppointmentPage extends StatefulWidget {
   State<AppointmentPage> createState() => _MyAppState();
 }
 
-class Appointment {
+class AppointmentView {
+  final int id;
   final String date;
   final String startTime;
   final String endTime;
-  final String patient;
-  final String doctor;
-  final bool booked;
+  final String patientName;
+  final String doctorName;
+  final String booked;
 
-  Appointment(
-      {required this.date,
+  AppointmentView(
+      {required this.id,
+      required this.date,
       required this.startTime,
       required this.endTime,
-      required this.patient,
-      required this.doctor,
+      required this.patientName,
+      required this.doctorName,
       required this.booked});
 
-  factory Appointment.fromJson(Map<String, dynamic> json) {
-    return Appointment(
-      date: json['date'],
-      startTime: json['startTime'],
-      endTime: json['endTime'],
-      patient: json['patient'],
-      doctor: json['doctor'],
-      booked: json['booked'],
+  factory AppointmentView.fromJson(Map<String, dynamic> json) {
+    return AppointmentView(
+      id: json['id'] ?? "0",
+      date: json['date'] ?? "0",
+      startTime: json['startTime'] ?? "0",
+      endTime: json['endTime'] ?? "0",
+      patientName: json['patientName'] ?? "0",
+      doctorName: json['doctorName'] ?? "0",
+      booked: json['booked'] ?? "0",
     );
   }
 }
 
-Future<List<Appointment>> getAppointment(user) async {
+Future<List<AppointmentView>> getAppointment(user) async {
   // construct the request
-  String API_HOST = "lcoalhost:8081";
-  String APPOINTMENT_PATH = "/appointment/";
+  String API_HOST = "10.0.2.2:8081";
+  String APPOINTMENT_PATH = "/appointment";
 
   final queryParameters = {
     'email': user.value['email'],
@@ -57,67 +60,65 @@ Future<List<Appointment>> getAppointment(user) async {
 
   final url = Uri.http(API_HOST, APPOINTMENT_PATH, queryParameters);
 
+  print(url);
   final Response res = await get(url);
+  print(res.body.toString());
 
-  if (res.statusCode == 200) {
+  if (res.statusCode == 200 || res.statusCode == 202) {
     List jsonResponse = json.decode(res.body);
-    return jsonResponse.map((data) => new Appointment.fromJson(data)).toList();
+    return jsonResponse
+        .map((data) => new AppointmentView.fromJson(data))
+        .toList();
   } else {
     throw Exception('Failed to load appointments');
   }
 }
 
 class _MyAppState extends State<AppointmentPage> {
-  late Future<List<Appointment>> futureData;
+  late Future<List<AppointmentView>> futureData;
 
   @override
   void initState() {
     super.initState();
+    print("init");
     futureData = getAppointment(widget.user);
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          appBar: AppBar(
-            backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-            title: const Center(child: Text("Neighbourhood Doctors")),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 223, 28, 93),
+          title: const Center(child: Text("Neighbourhood Doctors")),
+        ),
+        body: Center(
+          child: FutureBuilder<List<AppointmentView>>(
+            future: futureData,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                List<AppointmentView> data = snapshot.data!;
+                return ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        height: 75,
+                        color: Colors.white,
+                        child: Center(
+                          child: Text(data[index].doctorName),
+                        ),
+                      );
+                    });
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+              // By default show a loading spinner.
+              return CircularProgressIndicator();
+            },
           ),
-          body: Center(
-            child: SingleChildScrollView(
-              child: Container(
-                padding: const EdgeInsets.all(15),
-                color: Colors.grey,
-                width: double.infinity,
-                height: double.infinity,
-                child: FutureBuilder<List<Appointment>>(
-                  future: futureData,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      List<Appointment> data = snapshot.data!;
-                      return ListView.builder(
-                          itemCount: data.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              height: 75,
-                              color: Colors.white,
-                              child: Center(
-                                child: Text(data[index].doctor),
-                              ),
-                            );
-                          });
-                    } else if (snapshot.hasError) {
-                      return Text("${snapshot.error}");
-                    }
-                    // By default show a loading spinner.
-                    return CircularProgressIndicator();
-                  },
-                ),
-              ),
-            ),
-          ),
-        ));
+        ),
+      ),
+    );
   }
 }
