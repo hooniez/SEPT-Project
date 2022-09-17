@@ -45,12 +45,15 @@ class Appointment {
   }
 }
 
-Future<List<Appointment>> getAppointment(String email) async {
+Future<List<Appointment>> getAppointment(user) async {
   // construct the request
   String API_HOST = "lcoalhost:8081";
   String APPOINTMENT_PATH = "/appointment/";
 
-  final queryParameters = {'email': email};
+  final queryParameters = {
+    'email': user.value['email'],
+    'usertype': user.value['usertype']
+  };
 
   final url = Uri.http(API_HOST, APPOINTMENT_PATH, queryParameters);
 
@@ -70,7 +73,7 @@ class _MyAppState extends State<AppointmentPage> {
   @override
   void initState() {
     super.initState();
-    futureData = getAppointment(widget.user.value['email']);
+    futureData = getAppointment(widget.user);
   }
 
   @override
