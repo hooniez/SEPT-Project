@@ -410,7 +410,6 @@ class _MyAppState extends State<PatientProfile> {
 Future<Response> putPatientData(
     Map<String, TextEditingController> textControlDict
     ) async {
-  print("in put method");
   String uri = "http://10.0.2.2:8091/profile/patients";
   final url = Uri.parse(uri);
   Response response =
