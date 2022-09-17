@@ -30,7 +30,9 @@
 
     @Test
     public void testUpdatePatientAccepted() throws Exception {
-        Patient patient1 = new Patient("cal@calcal.cal", "cal", "l", "2002-02-02", "cal", "0000", "history here");
+        Patient patient1 = new Patient("cal@calcal.cal", "cal",
+                "l", "2002-02-02", "cal", "0000",
+                "history here");
 
         Mockito.when(patientRepository.findByEmail("cal@calcal.cal")).thenReturn(Optional.of(patient1));
         Mockito.when(patientRepository.save(patient1)).thenReturn(patient1);
@@ -45,7 +47,9 @@
 
         @Test
         public void testUpdatePatientBadRequest() throws Exception {
-            Patient patient1 = new Patient("cal@calcal.cal", "cal", "l", "2002-02-02", "cal", "0000", "history here");
+            Patient patient1 = new Patient("cal@calcal.cal", "cal",
+                    "l", "2002-02-02", "cal", "0000",
+                    "history here");
             Patient patient2 = null;
             Mockito.when(patientRepository.findByEmail("cal@calcal.cal")).thenReturn(Optional.empty());
             Mockito.when(patientRepository.save(patient1)).thenReturn(patient1);
