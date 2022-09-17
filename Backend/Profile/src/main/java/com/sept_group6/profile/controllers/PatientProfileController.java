@@ -18,7 +18,6 @@ public class PatientProfileController {
     @Autowired
     private PatientRepository patientRepository;
 
-
     @PutMapping(path="", consumes="application/json", produces="application/json")
     public ResponseEntity<?> updateInfo(@RequestBody Patient patientEdit) {
         Optional<Patient> patient =
