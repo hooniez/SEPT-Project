@@ -39,6 +39,5 @@ jobs:
       with:
         flutter-version: '3.0.5'
     - run: flutter pub get
-    - run: flutter test
-    - run: flutter build apk
-    - run: flutter build appbundle
+    - run: flutter build apk --no-sound-null-safety
+    - run: flutter build appbundle --no-sound-null-safety
