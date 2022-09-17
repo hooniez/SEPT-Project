@@ -9,6 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+// exception handling
+import com.sept_group6.sept_backend.exception.EmailAlreadyExistsException;
+import com.sept_group6.sept_backend.exception.GetRootException;
+import org.springframework.transaction.TransactionSystemException;
+import javax.transaction.RollbackException;
+import javax.validation.ConstraintViolationException;
+
 import java.util.Optional;
 
 @RestController
@@ -18,12 +25,6 @@ public class DoctorController {
 
     @Autowired
     private DoctorRepository doctorRepository;
-
-    /* not need for signup at the moment */
-    // @GetMapping(path = "", produces = "application/json")
-    // public Users getUsers() {
-    // return new Users();
-    // }
 
     @GetMapping("/signin")
     public ResponseEntity<?> loginUser(@RequestBody Patient loginPatient) {
@@ -43,11 +44,31 @@ public class DoctorController {
     public ResponseEntity<?> addUser(@RequestBody Doctor newDoctor)
             throws Exception {
         logger.info(newDoctor);
+        try {
+            // add resource
+            if (doctorRepository.existsByEmail(newDoctor.getEmail())) {
+                throw new EmailAlreadyExistsException("Email already exists.");
+            }
+            Doctor doctor = doctorRepository.save(newDoctor);
 
-        // add resource
-        Doctor doctor = doctorRepository.save(newDoctor);
-
-        return ResponseEntity.accepted().body(doctor);
+            return ResponseEntity.accepted().body(doctor);
+        } catch (EmailAlreadyExistsException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (ConstraintViolationException e) {
+            String errorMessage = "";
+            for (var error : e.getConstraintViolations()) {
+                errorMessage += error.getMessage() + "\n";
+            }
+            return ResponseEntity.badRequest().body(errorMessage);
+        } catch (TransactionSystemException e) {
+            ConstraintViolationException causeException = (ConstraintViolationException) GetRootException
+                    .getRootException(e);
+            String errorMessage = "";
+            for (var error : causeException.getConstraintViolations()) {
+                errorMessage += error.getMessage() + "\n";
+            }
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
 
     }
 }

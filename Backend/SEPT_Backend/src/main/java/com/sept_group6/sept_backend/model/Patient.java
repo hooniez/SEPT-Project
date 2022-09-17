@@ -29,6 +29,7 @@ public class Patient {
     private String lastname;
 
     private String dob;
+    @NotBlank(message = "Password is required")
     private String password;
     private String mobilenumber;
     private String medicalhistory;

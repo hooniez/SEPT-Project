@@ -52,6 +52,12 @@ public class PatientController {
             return ResponseEntity.accepted().body(patient);
         } catch (EmailAlreadyExistsException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (ConstraintViolationException e) {
+            String errorMessage = "";
+            for (var error : e.getConstraintViolations()) {
+                errorMessage += error.getMessage() + "\n";
+            }
+            return ResponseEntity.badRequest().body(errorMessage);
         } catch (TransactionSystemException e) {
             ConstraintViolationException causeException = (ConstraintViolationException) GetRootException
                     .getRootException(e);
