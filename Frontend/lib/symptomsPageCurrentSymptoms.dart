@@ -25,6 +25,15 @@ class _SymptomsPageCurrentSymptomsState
 
   @override
   Widget build(BuildContext context) {
+    String API_HOST = "localhost:8080";
+    final queryParameters = {'email': widget.getUser.value["email"]};
+    final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
+    print(uri);
+
+    Response res = await get(uri);
+    print(res.body);
+    print(widget.getUser.value["email"]);
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -119,9 +128,22 @@ class _SymptomsPageCurrentSymptomsState
                                       ),
                                     ),
                                   ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 80, horizontal: 30),
+                                    child: TextField(
+                                      readOnly: true,
+                                      enabled: true,
+                                      controller: symptomDescriptionController,
+                                      decoration: const InputDecoration(
+                                        labelText: '1',
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                  ),
                                 ]),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
