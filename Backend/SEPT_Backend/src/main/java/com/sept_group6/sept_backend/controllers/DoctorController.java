@@ -26,11 +26,11 @@ public class DoctorController {
     // }
 
     @GetMapping("/signin")
-    public ResponseEntity<?> loginUser(@RequestParam("email") String email,
-                                       @RequestParam("password") String password) {
+    public ResponseEntity<?> loginUser(@RequestBody Patient loginPatient) {
+        String email = loginPatient.getEmail();
+        String password = loginPatient.getPassword();
 
-        Optional<Doctor> doctor =
-                doctorRepository.findByEmailAndPassword(email, password);
+        Optional<Doctor> doctor = doctorRepository.findByEmailAndPassword(email, password);
 
         if (doctor.isPresent()) {
             return ResponseEntity.accepted().body(doctor.get());
@@ -39,8 +39,7 @@ public class DoctorController {
         }
     }
 
-    @PutMapping(path = "/signup", consumes="application/json", produces =
-            "application/json")
+    @PutMapping(path = "/signup", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> addUser(@RequestBody Doctor newDoctor)
             throws Exception {
         logger.info(newDoctor);

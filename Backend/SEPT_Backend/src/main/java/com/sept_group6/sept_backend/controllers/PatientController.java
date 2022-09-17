@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path="/patient")
+@RequestMapping(path = "/patient")
 public class PatientController {
     private static final Logger logger = LogManager.getLogger("Backend");
     @Autowired
     private PatientRepository patientRepository;
 
-    @GetMapping("/signin")
-    public ResponseEntity<?> loginUser(@RequestParam("email") String email,
-                                       @RequestParam("password") String password) {
+    @PostMapping("/signin")
+    public ResponseEntity<?> loginUser(@RequestBody Patient loginPatient) {
+        String email = loginPatient.getEmail();
+        String password = loginPatient.getPassword();
 
-        Optional<Patient> patient =
-                patientRepository.findByEmailAndPassword(email, password);
+        Optional<Patient> patient = patientRepository.findByEmailAndPassword(email, password);
 
         if (patient.isPresent()) {
             return ResponseEntity.accepted().body(patient.get());
@@ -31,8 +31,7 @@ public class PatientController {
         }
     }
 
-    @PutMapping(path = "/signup", consumes="application/json", produces =
-            "application/json")
+    @PutMapping(path = "/signup", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> addUser(@RequestBody Patient newPatient)
             throws Exception {
         logger.info(newPatient);
