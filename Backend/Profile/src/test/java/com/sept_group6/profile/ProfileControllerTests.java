@@ -16,12 +16,9 @@
 
     import java.util.Optional;
 
-    import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
     import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//    @ExtendWith(MockitoExtension.class)
     @WebMvcTest(controllers = PatientProfileController.class)
-//    @SpringBootTest
     class ProfileControllerTests {
 
     @Autowired
