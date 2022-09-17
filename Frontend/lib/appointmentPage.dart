@@ -47,12 +47,12 @@ class Appointment {
 
 Future<List<Appointment>> getAppointment(String email) async {
   // construct the request
-  String API_HOST = "lcoalhost:8080";
-  String APPOINTMENT_HOST = "/appointment/";
+  String API_HOST = "lcoalhost:8081";
+  String APPOINTMENT_PATH = "/appointment/";
 
   final queryParameters = {'email': email};
 
-  final url = Uri.http(API_HOST, APPOINTMENT_HOST, queryParameters);
+  final url = Uri.http(API_HOST, APPOINTMENT_PATH, queryParameters);
 
   final Response res = await get(url);
 
