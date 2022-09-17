@@ -36,36 +36,43 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = AppointmentController.class)
 @ExtendWith(SpringExtension.class)
 public class AppointmentControllerTest {
-    private static final Logger logger = LogManager.getLogger("Test");
-    @Autowired
-    private MockMvc mockMvc;
+        private static final Logger logger = LogManager.getLogger("Test");
+        @Autowired
+        private MockMvc mockMvc;
 
-    // @Autowired
-    // private ObjectMapper objectMapper;
+        // @Autowired
+        // private ObjectMapper objectMapper;
 
-    @MockBean
-    private AppointmentRepository AppointmentRepository;
-    Patient patient = new Patient("JamesSmith@gmail.com", "James", "Smit", "01/01/1981", "1234", "0452013654", "None.");
-    Doctor doctor = new Doctor("Johndoe@gmail.com", "John", "Doe", "01/01/1990", "1234", "0498582854", "None");
-    Appointment appointment = new Appointment((Integer) 1, patient, doctor, LocalTime.parse("12:00:00"),
-            LocalTime.parse("13:00:00"), LocalDate.parse("01/01/2022", DateTimeFormatter.ofPattern("MM/dd/yyyy")),
-            true);
+        @MockBean
+        private AppointmentRepository AppointmentRepository;
+        // @MockBean
+        // private AppointmentRepository PatientRepository;
+        // @MockBean
+        // private AppointmentRepository DoctorRepository;
+        Patient patient = new Patient("JamesSmith@gmail.com", "James", "Smit", "01/01/1981", "1234", "0452013654",
+                        "None.");
+        Doctor doctor = new Doctor("Johndoe@gmail.com", "John", "Doe", "01/01/1990", "1234", "0498582854", "None");
+        Appointment appointment = new Appointment((Integer) 1, patient, doctor, LocalTime.parse("12:00:00"),
+                        LocalTime.parse("13:00:00"),
+                        LocalDate.parse("01/01/2022", DateTimeFormatter.ofPattern("MM/dd/yyyy")),
+                        true);
 
-    @Test
-    void testgetAppointment_returnsAppointmentList() throws Exception {
-        Mockito.when(AppointmentRepository.findByPatientEmail(patient.getEmail()))
-                .thenReturn(Optional.of(List.of(appointment)));
+        @Test
+        void testgetAppointment_returnsAppointmentList() throws Exception {
+                Mockito.when(AppointmentRepository.findByPatientEmail(patient.getEmail()))
+                                .thenReturn(Optional.of(List.of(appointment)));
 
-        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get(
-                "/appointment/").contentType(MediaType.APPLICATION_JSON)
-                .param("email", patient.getEmail())
-                .param("usertype", "patient");
+                MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get(
+                                "/appointment/").contentType(MediaType.APPLICATION_JSON)
+                                .param("email", patient.getEmail())
+                                .param("usertype", "patient");
 
-        mockMvc.perform(mockRequest)
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", Matchers.hasSize(1)))
-                .andExpect(
-                        jsonPath("$[0].doctorName", Matchers.is(doctor.getFirstname() + " " + doctor.getLastname())));
-    }
+                mockMvc.perform(mockRequest)
+                                .andExpect(status().isAccepted())
+                                .andExpect(jsonPath("$", Matchers.hasSize(1)))
+                                .andExpect(
+                                                jsonPath("$[0].doctorName", Matchers.is(
+                                                                doctor.getFirstname() + " " + doctor.getLastname())));
+        }
 
 }

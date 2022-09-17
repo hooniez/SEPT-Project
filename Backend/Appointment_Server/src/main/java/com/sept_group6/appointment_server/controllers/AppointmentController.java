@@ -17,10 +17,10 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/appointment")
 public class AppointmentController {
     private static final Logger logger = LogManager.getLogger("Backend");
-    @Autowired
-    private PatientRepository patientRepository;
-    @Autowired
-    private DoctorRepository doctorRepository;
+    // @Autowired
+    // private PatientRepository patientRepository;
+    // @Autowired
+    // private DoctorRepository doctorRepository;
     @Autowired
     private AppointmentRepository appointmentRepository;
 
