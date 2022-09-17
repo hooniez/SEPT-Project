@@ -27,7 +27,7 @@ public class AppointmentController {
     @GetMapping("")
     public ResponseEntity<?> getAppointment(@RequestParam("email") String email,
             @RequestParam("usertype") String usertype) {
-        logger.info(email + " " + usertype);
+        // logger.info(email + " " + usertype);
         Optional<List<Appointment>> appointments;
         if (usertype.equals("patient")) {
             appointments = appointmentRepository.findByPatientEmail(email);
