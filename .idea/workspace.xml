@@ -5,7 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/SEPT_Backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/SEPT_Backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/.filecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/app.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/kernel_snapshot.d" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/kernel_snapshot.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/kernel_snapshot.stamp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/outputs.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/outputs.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/version" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/build/c7922d95bf4a2462b75c84a97c312edb.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/build/c7922d95bf4a2462b75c84a97c312edb.cache.dill.track.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/signupPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/signupPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/pubspec.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +66,6 @@
   </component>
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="io.flutter.reload.alreadyRun" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -68,6 +78,7 @@
       <method v="2" />
     </configuration>
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="additionalArgs" value="--no-sound-null-safety" />
       <option name="filePath" value="$PROJECT_DIR$/frontend/lib/main.dart" />
       <method v="2" />
     </configuration>
@@ -84,6 +95,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Flutter.main.dart" />
+      <item itemvalue="Flutter.main.dart (1)" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
