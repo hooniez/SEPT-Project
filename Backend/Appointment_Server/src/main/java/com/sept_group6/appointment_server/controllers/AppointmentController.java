@@ -11,6 +11,7 @@ import com.sept_group6.appointment_server.model.*;
 
 import java.util.Optional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/appointment")
@@ -33,8 +34,9 @@ public class AppointmentController {
         }
         logger.info(appointments);
         if (appointments.isPresent()) {
-
-            return ResponseEntity.accepted().body(appointments.get());
+            var appointmentViews = appointments.get().stream().map(Appointment::createView)
+                    .collect(Collectors.toList());
+            return ResponseEntity.accepted().body(appointmentViews);
         } else {
             return ResponseEntity.badRequest().build();
         }
