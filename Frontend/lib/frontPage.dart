@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
+import 'patientProfile.dart';
 import 'appointmentPage.dart';
 
 class FrontPage extends StatelessWidget {
@@ -96,8 +97,8 @@ class FrontPage extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return Login(setUser: setUser);
-                                  }));
+                                        return PatientProfile(user: user);
+                                      }));
                                 },
                                 child: const Text(
                                   "Profile",
