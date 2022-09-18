@@ -3,6 +3,8 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
+import 'addAvailabilityPage.dart';
+
 // import 'dart:html';
 
 import 'package:flutter/material.dart';
@@ -12,7 +14,7 @@ import 'signupPage.dart';
 class AvailabilityPage extends StatefulWidget {
   final user;
 
-  AvailabilityPage({required this.user});
+  const AvailabilityPage({Key? key, required this.user}) : super(key: key);
 
   @override
   State<AvailabilityPage> createState() => _MyAppState();
@@ -123,6 +125,21 @@ class _MyAppState extends State<AvailabilityPage> {
                   return CircularProgressIndicator();
                 },
               ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Color.fromARGB(255, 144, 119, 151), // background
+                onPrimary: Colors.white, // foreground
+              ),
+              child: const Text(
+                'Add Availability',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () async {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return addAvailabilityPage(user: widget.user);
+                }));
+              },
             ),
           ])),
     );
