@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface PatientRepository extends CrudRepository<Patient, Long> {
     Optional<Patient> findByEmailAndPassword(String email, String password);
+
+    boolean existsByEmail(String Email);
 }
