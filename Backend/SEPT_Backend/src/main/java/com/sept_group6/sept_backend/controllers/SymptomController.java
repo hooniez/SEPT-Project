@@ -20,7 +20,6 @@ public class SymptomController {
 
     @GetMapping("/getsymptom")
     public ResponseEntity<?> getSymptom(@RequestParam("email") String email) {
-
         List<Symptom> symptom =
                 symptomRepository.findAllByEmail(email);
         return ResponseEntity.accepted().body(symptom);

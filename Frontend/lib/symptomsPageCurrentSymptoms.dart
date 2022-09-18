@@ -126,34 +126,47 @@ class _SymptomsPageCurrentSymptomsState
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(24.0),
-                                    child: SizedBox(
-                                      width: 300.0, // <-- match_parent
-                                      height: 50.0, // <-- match-parent
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 144, 119, 151), // background
-                                          onPrimary: Colors.white, // foreground
-                                        ),
-                                        child: const Text(
-                                          'Add Symptom',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        onPressed: () async {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return SymptomsPageAddSymptoms(
-                                                getUser: widget.getUser,
-                                                getSymptoms:
-                                                    widget.getSymptoms);
-                                          }));
-                                        },
-                                      ),
-                                    ),
-                                  ),
+                                  Text(
+                                      'Symptoms for ${widget.getUser.value['firstname']}:',
+                                      style: TextStyle(
+                                          fontSize: 24,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold)),
+                                  allSymptoms.isNotEmpty
+                                      ? ListView.separated(
+                                          shrinkWrap: true,
+                                          padding: const EdgeInsets.all(24.0),
+                                          itemCount: allSymptoms.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return Container(
+                                              width: 100.0,
+                                              height: 50.0,
+                                              color: Color.fromARGB(
+                                                  255, 218, 217, 217),
+                                              child: Center(
+                                                  child: Text(
+                                                      allSymptoms[index][
+                                                          'symptomdescription'],
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          color:
+                                                              Colors.black))),
+                                            );
+                                          },
+                                          separatorBuilder:
+                                              (BuildContext context,
+                                                      int index) =>
+                                                  const Divider(),
+                                        )
+                                      : const Center(
+                                          child: Text(
+                                              'No symptoms, you are healthy! If you are experiencing any symptoms please add them through the "Add Symptoms" button',
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.black,
+                                                  fontWeight:
+                                                      FontWeight.bold))),
                                 ]),
                           ),
                         )

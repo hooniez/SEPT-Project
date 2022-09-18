@@ -212,11 +212,5 @@ Future<Response> getSymptom(String patientemail, final user) async {
 
   Response res = await get(uri);
   List<dynamic> result = json.decode(res.body);
-  print(result);
-  // THIS BELOW IS SUPER IMPORTANT
-  print(result[0]['symptomdescription']);
-  print(result.length);
-  print(res);
-  print(user.value["email"]);
   return res;
 }
