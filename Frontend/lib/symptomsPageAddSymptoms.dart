@@ -84,13 +84,14 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                                           style: TextStyle(color: Colors.white),
                                         ),
                                         onPressed: () async {
+                                          var getRes = await getSymptom(
+                                              widget.getUser.value["email"]);
                                           Navigator.push(context,
                                               MaterialPageRoute(
                                                   builder: (context) {
                                             return SymptomsPageCurrentSymptoms(
                                                 getUser: widget.getUser,
-                                                getSymptoms:
-                                                    widget.getSymptoms);
+                                                getSymptoms: getRes);
                                           }));
                                         },
                                       ),
@@ -111,16 +112,7 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                                           'Add Symptom',
                                           style: TextStyle(color: Colors.white),
                                         ),
-                                        onPressed: () async {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return SymptomsPageAddSymptoms(
-                                                getUser: widget.getUser,
-                                                getSymptoms:
-                                                    widget.getSymptoms);
-                                          }));
-                                        },
+                                        onPressed: () {},
                                       ),
                                     ),
                                   ),
@@ -144,8 +136,8 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
                                             return 'Please enter a symptom above';
-                                          } else if (value.length > 255) {
-                                            return 'This is too long for a symptom, please shorten it';
+                                          } else if (value.length > 50) {
+                                            return 'This is too long for a single symptom, please shorten it';
                                           } else {
                                             return null;
                                           }
@@ -175,8 +167,16 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                                                     .text,
                                                 widget.getUser.value['email']);
                                             if (res.body.isNotEmpty) {
-                                              Navigator.pushNamed(
-                                                  context, '/frontPage');
+                                              var getRes = await getSymptom(
+                                                  widget
+                                                      .getUser.value["email"]);
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
+                                                return SymptomsPageCurrentSymptoms(
+                                                    getUser: widget.getUser,
+                                                    getSymptoms: getRes);
+                                              }));
                                             } else {
                                               print("empty");
                                             }
@@ -193,6 +193,16 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                   ),
                 ))));
   }
+}
+
+Future<Response> getSymptom(String patientemail) async {
+  String API_HOST = "localhost:8080";
+  final queryParameters = {'email': patientemail};
+  final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
+  print(uri);
+
+  Response res = await get(uri);
+  return res;
 }
 
 Future<Response> addSymptom(

@@ -23,11 +23,23 @@ class SymptomsPageCurrentSymptoms extends StatefulWidget {
 class _SymptomsPageCurrentSymptomsState
     extends State<SymptomsPageCurrentSymptoms> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController symptomDescriptionController = TextEditingController();
+  bool startOfProgram = true;
+  late List<bool> allEnables;
+  late List<dynamic> allSymptoms;
+  late Response updatedSymptoms;
 
   @override
   Widget build(BuildContext context) {
-    List<dynamic> allSymptoms = json.decode(widget.getSymptoms.body);
+    if (startOfProgram) {
+      updatedSymptoms = widget.getSymptoms;
+      allSymptoms = json.decode(widget.getSymptoms.body);
+      allEnables = List.filled(allSymptoms.length, false);
+    } else {
+      allSymptoms = json.decode(updatedSymptoms.body);
+    }
+    // allEnables will not fill false again so will save edit states
+    // will also save state of symptoms after deletion/edit
+    startOfProgram = false;
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -85,16 +97,7 @@ class _SymptomsPageCurrentSymptomsState
                                           'Current Symptoms',
                                           style: TextStyle(color: Colors.white),
                                         ),
-                                        onPressed: () async {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return SymptomsPageCurrentSymptoms(
-                                                getUser: widget.getUser,
-                                                getSymptoms:
-                                                    widget.getSymptoms);
-                                          }));
-                                        },
+                                        onPressed: () {},
                                       ),
                                     ),
                                   ),
@@ -119,8 +122,7 @@ class _SymptomsPageCurrentSymptomsState
                                                   builder: (context) {
                                             return SymptomsPageAddSymptoms(
                                                 getUser: widget.getUser,
-                                                getSymptoms:
-                                                    widget.getSymptoms);
+                                                getSymptoms: updatedSymptoms);
                                           }));
                                         },
                                       ),
@@ -139,20 +141,57 @@ class _SymptomsPageCurrentSymptomsState
                                           itemCount: allSymptoms.length,
                                           itemBuilder: (BuildContext context,
                                               int index) {
-                                            return Container(
-                                              width: 100.0,
-                                              height: 50.0,
-                                              color: Color.fromARGB(
-                                                  255, 218, 217, 217),
-                                              child: Center(
-                                                  child: Text(
-                                                      allSymptoms[index][
+                                            return Row(children: <Widget>[
+                                              Flexible(
+                                                child: Container(
+                                                    width: 1800.0,
+                                                    height: 50.0,
+                                                    child: Center(
+                                                        child: TextFormField(
+                                                      enabled:
+                                                          allEnables[index],
+                                                      initialValue: allSymptoms[
+                                                              index][
                                                           'symptomdescription'],
                                                       style: TextStyle(
-                                                          fontSize: 20,
-                                                          color:
-                                                              Colors.black))),
-                                            );
+                                                          fontSize: 16,
+                                                          color: Colors.black),
+                                                      decoration:
+                                                          InputDecoration(
+                                                        labelText:
+                                                            "Symptom ${index + 1}",
+                                                        fillColor: Colors.white,
+                                                        filled: true,
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(15),
+                                                        ),
+                                                      ),
+                                                    ))),
+                                              ),
+                                              IconButton(
+                                                  icon: Icon(Icons.edit),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      allEnables[index] = true;
+                                                    });
+                                                  }),
+                                              IconButton(
+                                                  icon: Icon(Icons.delete),
+                                                  onPressed: () async {
+                                                    await deleteSymptom(
+                                                        allSymptoms[index]
+                                                            ['id']);
+                                                    var res = await getSymptom(
+                                                        widget.getUser
+                                                            .value["email"]);
+                                                    setState(() {
+                                                      updatedSymptoms = res;
+                                                    });
+                                                  })
+                                            ]);
                                           },
                                           separatorBuilder:
                                               (BuildContext context,
@@ -161,7 +200,7 @@ class _SymptomsPageCurrentSymptomsState
                                         )
                                       : const Center(
                                           child: Text(
-                                              'No symptoms, you are healthy! If you are experiencing any symptoms please add them through the "Add Symptoms" button',
+                                              'No symptoms, you are healthy! If you are experiencing any symptoms please add them through the "Add Symptom" button',
                                               style: TextStyle(
                                                   fontSize: 16,
                                                   color: Colors.black,
@@ -175,4 +214,23 @@ class _SymptomsPageCurrentSymptomsState
                   ),
                 ))));
   }
+}
+
+Future<Response> getSymptom(String patientemail) async {
+  String API_HOST = "localhost:8080";
+  final queryParameters = {'email': patientemail};
+  final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
+  print(uri);
+
+  Response res = await get(uri);
+  return res;
+}
+
+Future<Response> deleteSymptom(int id) async {
+  String stringId = id.toString();
+  String API_HOST = "localhost:8080";
+  final uri = Uri.http(API_HOST, "/deletesymptom", {'id': stringId});
+  print(uri);
+  Response res = await delete(uri);
+  return res;
 }

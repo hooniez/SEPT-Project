@@ -133,8 +133,8 @@ class FrontPage extends StatelessWidget {
                               height: 50,
                               child: OutlinedButton(
                                 onPressed: () async {
-                                  var res = await getSymptom(
-                                      user.value["email"], user);
+                                  var res =
+                                      await getSymptom(user.value["email"]);
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
                                     return SymptomsPageCurrentSymptoms(
@@ -204,13 +204,12 @@ class FrontPage extends StatelessWidget {
   }
 }
 
-Future<Response> getSymptom(String patientemail, final user) async {
+Future<Response> getSymptom(String patientemail) async {
   String API_HOST = "localhost:8080";
-  final queryParameters = {'email': user.value["email"]};
+  final queryParameters = {'email': patientemail};
   final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
   print(uri);
 
   Response res = await get(uri);
-  List<dynamic> result = json.decode(res.body);
   return res;
 }

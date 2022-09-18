@@ -7,4 +7,5 @@ import java.util.*;
 
 public interface SymptomRepository extends CrudRepository<Symptom, Integer> {
     List<Symptom> findAllByEmail(String email);
+    void deleteById(int id);
 }

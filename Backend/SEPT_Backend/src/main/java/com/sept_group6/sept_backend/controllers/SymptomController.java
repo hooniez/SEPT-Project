@@ -25,6 +25,11 @@ public class SymptomController {
         return ResponseEntity.accepted().body(symptom);
     }
 
+    @DeleteMapping("/deletesymptom")
+    public void deleteSymptom(@RequestParam("id") int id) {
+        symptomRepository.deleteById(id);
+    }
+
     @PutMapping(path = "/addsymptom", consumes="application/json", produces =
             "application/json")
     public ResponseEntity<?> addSymptom(@RequestBody Symptom newSymptom)
