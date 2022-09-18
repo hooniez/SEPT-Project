@@ -5,10 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Getter
@@ -17,11 +16,19 @@ import javax.persistence.Id;
 @AllArgsConstructor
 public class Doctor {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long uid;
+    @Email(message = "Email must be valid")
+    @NotBlank(message = "Email is required")
+    // uniqueness when adding new row needs to be checked in contronller
+    @Column(unique = true)
     private String email;
+
     private String firstname;
     private String lastname;
 
     private String dob;
+    @NotBlank(message = "Password is required")
     private String password;
     private String mobilenumber;
     private String certificate;

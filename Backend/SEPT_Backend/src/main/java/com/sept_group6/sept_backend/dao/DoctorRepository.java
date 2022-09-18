@@ -8,4 +8,6 @@ import java.util.Optional;
 
 public interface DoctorRepository extends CrudRepository<Doctor, Integer> {
     Optional<Doctor> findByEmailAndPassword(String email, String password);
+
+    boolean existsByEmail(String Email);
 }

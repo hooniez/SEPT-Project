@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Getter
@@ -18,8 +20,8 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long uid;
-    // @Email(message = "Email must be valid")
-    // @NotBlank(message = "Email is required")
+    @Email(message = "Email must be valid")
+    @NotBlank(message = "Email is required")
     // uniqueness when adding new row needs to be checked in contronller
     @Column(unique = true)
     private String email;
@@ -27,6 +29,7 @@ public class Patient {
     private String lastname;
 
     private String dob;
+    @NotBlank(message = "Password is required")
     private String password;
     private String mobilenumber;
     private String medicalhistory;
