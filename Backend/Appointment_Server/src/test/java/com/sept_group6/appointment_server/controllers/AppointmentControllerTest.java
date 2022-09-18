@@ -49,9 +49,9 @@ public class AppointmentControllerTest {
         // private AppointmentRepository PatientRepository;
         // @MockBean
         // private AppointmentRepository DoctorRepository;
-        Patient patient = new Patient("JamesSmith@gmail.com", "James", "Smit", "01/01/1981", "1234", "0452013654",
+        Patient patient = new Patient(1L, "JamesSmith@gmail.com", "James", "Smit", "01/01/1981", "1234", "0452013654",
                         "None.");
-        Doctor doctor = new Doctor("Johndoe@gmail.com", "John", "Doe", "01/01/1990", "1234", "0498582854", "None");
+        Doctor doctor = new Doctor(1L, "Johndoe@gmail.com", "John", "Doe", "01/01/1990", "1234", "0498582854", "None");
         Appointment appointment = new Appointment((Integer) 1, patient, doctor, LocalTime.parse("12:00:00"),
                         LocalTime.parse("13:00:00"),
                         LocalDate.parse("01/01/2022", DateTimeFormatter.ofPattern("MM/dd/yyyy")),
