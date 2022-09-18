@@ -5,68 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_5_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_activation_jakarta_activation_1_2_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_istack_istack_commons_runtime_3_0_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_4_0_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_inject_jakarta_inject_api_2_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_persistence_jakarta_persistence_api_2_2_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_transaction_jakarta_transaction_api_1_3_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_javax_persistence_api_2_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_30.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_antlr_antlr4_runtime_4_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_9_7.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jaxb_jaxb_runtime_2_3_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jaxb_txw2_2_3_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_6_0_2_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_entitymanager_5_6_3_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_orm_hibernate_core_6_1_3_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_2_4_2_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_4_3_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_spec_javax_transaction_jboss_transaction_api_1_2_spec_1_1_1_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_2_7_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_jpa_2_7_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_7_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_7_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_jpa_2_7_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_5_3_22.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_3_22.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_5_3_22.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_3_22.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/SEPT_Backend/src/main/java/com/sept_group6/sept_backend/controllers/SigninController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/SEPT-Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SEPT-Project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_17_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_8_25_15_04_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_8_25_15_04__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_8_25_15_05_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_8_25_15_05__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_8_25_15_06_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_8_25_15_06__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/SEPT_Backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/SEPT_Backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/SEPT_Backend/src/main/java/com/sept_group6/sept_backend/controllers/SignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/SEPT_Backend/src/main/java/com/sept_group6/sept_backend/controllers/SignupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/SEPT_Backend/src/main/java/com/sept_group6/sept_backend/dao/PatientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/SEPT_Backend/src/main/java/com/sept_group6/sept_backend/dao/PatientRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/SEPT_Backend/src/main/java/com/sept_group6/sept_backend/model/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/SEPT_Backend/src/main/java/com/sept_group6/sept_backend/model/Patient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/SEPT_Backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/SEPT_Backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/frontend/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/frontend/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/frontend/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/frontend/.dart_tool/package_config_subset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/frontend/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/frontend/.packages" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/frontend/lib/loginPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/frontend/lib/loginPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/frontend/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/frontend/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/frontend/lib/signupPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/frontend/lib/signupPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/frontend/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/frontend/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/frontend/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/frontend/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/lib/patientProfile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/lib/patientProfile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SEPT-Project/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/.filecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/app.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/kernel_snapshot.d" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/kernel_snapshot.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/kernel_snapshot.stamp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/outputs.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/outputs.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/version" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/build/c7922d95bf4a2462b75c84a97c312edb.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/build/c7922d95bf4a2462b75c84a97c312edb.cache.dill.track.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/signupPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/signupPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/pubspec.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,11 +26,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Dart File" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JpbToolWindowState">
@@ -95,14 +51,14 @@
       <map>
         <entry key="com.haulmont.jpb.jpaInspector" value="false" />
         <entry key="com.haulmont.jpb.jpaPalette" value="false" />
-        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
       </map>
     </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2EjNC2HLrp6lYQIHtkUx6HxPMMn" />
+  <component name="ProjectId" id="2DhQhqmuRU73ek2m4tMKV5vymoI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -110,11 +66,20 @@
   </component>
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="io.flutter.reload.alreadyRun" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Frontend" />
+    </key>
   </component>
   <component name="RunManager" selected="Flutter.main.dart">
-    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+    <configuration name="main.dart (1)" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/frontend/frontend/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="additionalArgs" value="--no-sound-null-safety" />
+      <option name="filePath" value="$PROJECT_DIR$/frontend/lib/main.dart" />
       <method v="2" />
     </configuration>
     <configuration name="SeptBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
@@ -130,24 +95,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Flutter.main.dart" />
-      </list>
-    </recent_temporary>
+    <list>
+      <item itemvalue="Flutter.main.dart" />
+      <item itemvalue="Flutter.main.dart (1)" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="" />
-      <created>1663104905343</created>
+      <created>1661148960434</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1663104905343</updated>
-      <workItem from="1663104909997" duration="72000" />
-      <workItem from="1663104989693" duration="1289000" />
-      <workItem from="1663125378102" duration="374000" />
-      <workItem from="1663126086837" duration="4358000" />
+      <updated>1661148960434</updated>
+      <workItem from="1661148962945" duration="135000" />
+      <workItem from="1661150614091" duration="81000" />
+      <workItem from="1661151178024" duration="145000" />
+      <workItem from="1661151427719" duration="68000" />
+      <workItem from="1661153151778" duration="102000" />
+      <workItem from="1663152542164" duration="2112000" />
     </task>
     <servers />
   </component>
@@ -165,9 +131,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>
