@@ -15,7 +15,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AppointmentView {
-    private Integer id;
+    private Long id;
     private LocalDate date;
     private LocalTime starttime;
     private LocalTime endtime;
