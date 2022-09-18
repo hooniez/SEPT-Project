@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
@@ -18,7 +19,7 @@ class AppointmentPage extends StatefulWidget {
 }
 
 class AppointmentView {
-  final int id;
+  final Long id;
   final String date;
   final String startTime;
   final String endTime;
