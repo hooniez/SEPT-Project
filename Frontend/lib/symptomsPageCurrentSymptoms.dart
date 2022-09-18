@@ -172,13 +172,6 @@ class _SymptomsPageCurrentSymptomsState
                                                     ))),
                                               ),
                                               IconButton(
-                                                  icon: Icon(Icons.edit),
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      allEnables[index] = true;
-                                                    });
-                                                  }),
-                                              IconButton(
                                                   icon: Icon(Icons.delete),
                                                   onPressed: () async {
                                                     await deleteSymptom(
