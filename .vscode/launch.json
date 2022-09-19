@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch AppointmentServerApplication",
+            "request": "launch",
+            "mainClass": "com.sept_group6.appointment_server.AppointmentServerApplication",
+            "projectName": "Appointment_Server"
+        },
+        {
+            "type": "java",
             "name": "Launch appointmentServerApplication",
             "request": "launch",
             "mainClass": "com.sept_group6.appointment_server.appointmentServerApplication",

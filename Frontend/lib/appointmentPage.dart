@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
@@ -7,6 +8,7 @@ import 'package:frontend/scrollercontroller.dart';
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
+import 'addAppointmentPage.dart';
 
 class AppointmentPage extends StatefulWidget {
   final user;
@@ -24,7 +26,7 @@ class AppointmentView {
   final String endTime;
   final String patientName;
   final String doctorName;
-  final String booked;
+  final bool booked;
 
   AppointmentView(
       {required this.id,
@@ -37,13 +39,13 @@ class AppointmentView {
 
   factory AppointmentView.fromJson(Map<String, dynamic> json) {
     return AppointmentView(
-      id: json['id'] ?? "0",
-      date: json['date'] ?? "0",
-      startTime: json['startTime'] ?? "0",
-      endTime: json['endTime'] ?? "0",
-      patientName: json['patientName'] ?? "0",
-      doctorName: json['doctorName'] ?? "0",
-      booked: json['booked'] ?? "0",
+      id: json['id'] ?? "N/A",
+      date: json['date'] ?? "N/A",
+      startTime: json['starttime'] ?? "N/A",
+      endTime: json['endtime'] ?? "N/A",
+      patientName: json['patientName'] ?? "",
+      doctorName: json['doctorName'] ?? "",
+      booked: json['appointmentbooked'] ?? false,
     );
   }
 }
@@ -68,6 +70,8 @@ Future<List<AppointmentView>> getAppointment(user) async {
     List jsonResponse = json.decode(res.body);
     return jsonResponse
         .map((data) => new AppointmentView.fromJson(data))
+        // only show booked appointments
+        .where((data) => data.booked)
         .toList();
   } else {
     throw Exception('Failed to load appointments');
@@ -80,7 +84,6 @@ class _MyAppState extends State<AppointmentPage> {
   @override
   void initState() {
     super.initState();
-    print("init");
     futureData = getAppointment(widget.user);
   }
 
@@ -90,36 +93,75 @@ class _MyAppState extends State<AppointmentPage> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-          title: const Center(child: Text("Neighbourhood Doctors")),
-        ),
+            backgroundColor: const Color.fromARGB(255, 223, 28, 93),
+            title: const Center(child: Text("Neighbourhood Doctors")),
+            leading: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.white,
+                )),
+            actions: <Widget>[
+              Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/frontPage');
+                    },
+                    child: Icon(
+                      Icons.home,
+                      size: 26.0,
+                    ),
+                  )),
+            ]),
         body: Center(
-          child: FutureBuilder<List<AppointmentView>>(
-            future: futureData,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                List<AppointmentView> data = snapshot.data!;
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  verticalDirection: VerticalDirection.down,
-                  children: <Widget>[
-                    const Text("Your Appointments"),
-                    Expanded(
-                      child: FittedBox(
-                          alignment: Alignment.topCenter,
-                          child: dataBody(data, widget.user.value['usertype'])),
-                    )
-                  ],
-                );
-              } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
-              // By default show a loading spinner.
-              return CircularProgressIndicator();
+            child: Column(children: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Color.fromARGB(255, 144, 119, 151), // background
+              onPrimary: Colors.white, // foreground
+            ),
+            child: const Text(
+              'Make appointment',
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: () async {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return AddAppointmentPage(user: widget.user);
+              }));
             },
           ),
-        ),
+          Expanded(
+            child: FutureBuilder<List<AppointmentView>>(
+              future: futureData,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<AppointmentView> data = snapshot.data!;
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    verticalDirection: VerticalDirection.down,
+                    children: <Widget>[
+                      const Text("Your Appointments"),
+                      Expanded(
+                        child: FittedBox(
+                            alignment: Alignment.topCenter,
+                            child:
+                                dataBody(data, widget.user.value['usertype'])),
+                      )
+                    ],
+                  );
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
+                // By default show a loading spinner.
+                return CircularProgressIndicator();
+              },
+            ),
+          ),
+        ])),
       ),
     );
   }

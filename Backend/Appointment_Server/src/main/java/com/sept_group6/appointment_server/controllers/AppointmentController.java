@@ -17,10 +17,10 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/appointment")
 public class AppointmentController {
     private static final Logger logger = LogManager.getLogger("Backend");
-    // @Autowired
-    // private PatientRepository patientRepository;
-    // @Autowired
-    // private DoctorRepository doctorRepository;
+    @Autowired
+    private PatientRepository patientRepository;
+    @Autowired
+    private DoctorRepository doctorRepository;
     @Autowired
     private AppointmentRepository appointmentRepository;
 
@@ -41,6 +41,65 @@ public class AppointmentController {
             return ResponseEntity.accepted().body(appointmentViews);
         } else {
             return ResponseEntity.badRequest().build();
+        }
+
+    }
+
+    @GetMapping("all")
+    public ResponseEntity<?> getUnbookedAppointment() {
+        // logger.info(email + " " + usertype);
+        Optional<List<Appointment>> appointments;
+        // select all unbooked appointments
+        appointments = appointmentRepository.findByAppointmentbooked(false);
+        logger.info(appointments);
+        if (appointments.isPresent()) {
+            var appointmentViews = appointments.get().stream().map(Appointment::createView)
+                    .collect(Collectors.toList());
+            return ResponseEntity.accepted().body(appointmentViews);
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
+
+    @PutMapping("")
+    public ResponseEntity<?> makeAppointment(@RequestBody AppointmentView newView) {
+
+        // logger.info(email + " " + usertype);
+
+        // two different logics for patient and doctor
+        // not the best practice, need to refactor in the future
+
+        // patient name is email here
+        String patientName = newView.getPatientName();
+        if (patientName != null && !patientName.isEmpty()) {
+            logger.info("patient make appointment");
+            // patient updates an existing entry
+            Optional<Appointment> appointment;
+            appointment = appointmentRepository.findById(newView.getId());
+            if (appointment.isPresent()) {
+                appointment.get().setPatient(patientRepository.findByEmail(patientName));
+                appointment.get().setAppointmentbooked(true);
+                appointmentRepository.save(appointment.get());
+                var appointmentView = appointment.get().createView();
+                return ResponseEntity.accepted().body(appointmentView);
+            } else {
+                return ResponseEntity.badRequest().build();
+            }
+        } else {
+            // logger.info("doctor make appointment");
+            // logger.info(newView.getDoctorName());
+            // doctor create a new entry
+            Appointment newAppointment = new Appointment();
+            // doctor name is email here
+            newAppointment.setDoctor(doctorRepository.findByEmail(newView.getDoctorName()));
+            newAppointment.setDate(newView.getDate());
+            newAppointment.setStarttime(newView.getStarttime());
+            newAppointment.setEndtime(newView.getEndtime());
+            newAppointment.setAppointmentbooked(false);
+            Appointment savedAppointment = appointmentRepository.save(newAppointment);
+            AppointmentView savedView = savedAppointment.createView();
+            return ResponseEntity.accepted().body(savedView);
         }
 
     }

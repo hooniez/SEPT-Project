@@ -10,4 +10,6 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Long>
     Optional<List<Appointment>> findByPatientEmail(String patientEmail);
 
     Optional<List<Appointment>> findByDoctorEmail(String patientEmail);
+
+    Optional<List<Appointment>> findByAppointmentbooked(boolean booked);
 }
