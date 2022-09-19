@@ -5,6 +5,9 @@
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
+import 'patientProfile.dart';
+import 'appointmentPage.dart';
+import 'availabilityPage.dart';
 import 'symptomsPageCurrentSymptoms.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
@@ -98,7 +101,7 @@ class FrontPage extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return Login(setUser: setUser);
+                                    return PatientProfile(user: user);
                                   }));
                                 },
                                 child: const Text(
@@ -155,7 +158,7 @@ class FrontPage extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return SignupPage(setUser: setUser);
+                                    return AppointmentPage(user: user);
                                   }));
                                 },
                                 child: const Text("Appointments",
@@ -163,6 +166,24 @@ class FrontPage extends StatelessWidget {
                               ),
                             ),
                           ),
+                          if (user.value['usertype'] == "doctor")
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: 200,
+                                height: 50,
+                                child: OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return AvailabilityPage(user: user);
+                                    }));
+                                  },
+                                  child: const Text("Availabilitis",
+                                      style: TextStyle(fontSize: 18.0)),
+                                ),
+                              ),
+                            ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: SizedBox(

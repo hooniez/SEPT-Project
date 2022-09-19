@@ -50,7 +50,7 @@ class _SignupPageState extends State<SignupPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
             backgroundColor: const Color.fromARGB(255, 223, 28, 93),
             title: Center(child: const Text("Neighbourhood Doctors")),
