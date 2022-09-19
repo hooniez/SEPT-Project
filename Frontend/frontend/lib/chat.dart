@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/message.dart';
 import 'package:stomp_dart_client/stomp.dart';
 import 'package:stomp_dart_client/stomp_config.dart';
 import 'package:stomp_dart_client/stomp_frame.dart';
 import 'dart:convert';
 
 void main() {
+  client.activate();
   runApp(const ChatApp());
 }
 
@@ -25,26 +27,14 @@ class ChatPage extends StatefulWidget {
   }
 }
 
-void onConnect(StompFrame frame) {
-  print("connected");
-}
-
 class ChatPageState extends State<ChatPage> {
   TextEditingController textEdit = TextEditingController();
-  StompClient client = StompClient(
-      config: StompConfig.SockJS(
-    url: 'http://localhost:8080/ws',
-    onConnect: onConnect,
-    onWebSocketError: (dynamic error) => print(error.toString()),
-  ));
 
-  List<String> messageList = List.empty(growable: true);
+  List<Message> messages = <Message>[];
+  final List<String> strings = <String>[];
 
   @override
   Widget build(BuildContext context) {
-    client.activate();
-    client.send(
-        destination: '/app/hello', body: "You're a big cunt <3", headers: {});
     return Scaffold(
       appBar: AppBar(
         title: const Text("Chat!"),
@@ -61,20 +51,47 @@ class ChatPageState extends State<ChatPage> {
                   controller: textEdit,
                 ),
               ),
-              StreamBuilder(
-                builder: (context, snapshot) {
-                  return Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(snapshot.hasData ? '${snapshot.data}' : ''),
-                  );
-                },
-              )
+              Expanded(
+                  child: ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      itemCount: strings.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                          title: Text(strings[index]),
+                        );
+                      }))
             ],
           )),
       floatingActionButton: FloatingActionButton(
-        onPressed: (() => {}),
+        onPressed: addItemToList,
         child: const Icon(Icons.send),
       ),
     );
   }
+
+  void addItemToList() {
+    if (textEdit.text.isNotEmpty) {
+      setState(() {
+        strings.insert(0, textEdit.text);
+      });
+
+      client.send(
+          destination: '/app/message',
+          body: '{"from": "me", "text": "${textEdit.text}"}',
+          headers: {});
+
+      textEdit.text = '';
+    }
+  }
+}
+
+final StompClient client = StompClient(
+    config: StompConfig.SockJS(
+  url: 'http://localhost:8080/ws',
+  onConnect: onConnect,
+  onWebSocketError: (dynamic error) => print(error.toString()),
+));
+
+void onConnect(StompFrame frame) {
+  print("connected");
 }

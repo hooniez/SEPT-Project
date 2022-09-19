@@ -18,11 +18,13 @@ public class ChatController {
 
     private ArrayList<Connection> connections = new ArrayList<Connection>();
 
-    @MessageMapping("/register")
+    @MessageMapping("/message")
     public Message greeting(Message message, Principal principal) throws Exception {
+        System.out.print("Message from: ");
         System.out.println(principal.getName());
-        Thread.sleep(1000); // simulated delay
-        return new Message("us", "registered");
+
+        System.out.println(message.getText());
+        return new Message("us", "thanks");
     }
 
     @EventListener
