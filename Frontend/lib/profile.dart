@@ -87,7 +87,7 @@ class _MyAppState extends State<PatientProfile> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-          title: const Text("Patient Profile"),
+          title: const Text("Profile"),
             leading: InkWell(
             onTap: () {
               Navigator.pop(context);
