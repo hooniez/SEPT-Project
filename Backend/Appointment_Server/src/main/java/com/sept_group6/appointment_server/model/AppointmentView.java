@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-// this class is used to transfer data to frontend
+// this class is used to transfer data between server and client
 @Getter
 @Builder
 @NoArgsConstructor

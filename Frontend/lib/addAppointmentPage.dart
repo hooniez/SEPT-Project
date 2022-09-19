@@ -3,21 +3,21 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
-import 'addAvailabilityPage.dart';
 
 // import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
+import 'appointmentPage.dart';
 
-class AddAvailabilityPage extends StatefulWidget {
+class AddAppointmentPage extends StatefulWidget {
   final user;
 
-  const AddAvailabilityPage({Key? key, required this.user}) : super(key: key);
+  const AddAppointmentPage({Key? key, required this.user}) : super(key: key);
 
   @override
-  State<AddAvailabilityPage> createState() => _MyAppState();
+  State<AddAppointmentPage> createState() => _MyAppState();
 }
 
 class AppointmentView {
@@ -25,9 +25,9 @@ class AppointmentView {
   final String date;
   final String startTime;
   final String endTime;
-  final String patientName;
+  String patientName;
   final String doctorName;
-  final bool booked;
+  bool booked;
 
   AppointmentView(
       {required this.id,
@@ -56,12 +56,7 @@ Future<List<AppointmentView>> getAvailabilities(user) async {
   String API_HOST = "10.0.2.2:8081";
   String APPOINTMENT_PATH = "/appointment/all";
 
-  final queryParameters = {
-    'email': user.value['email'],
-    'usertype': user.value['usertype']
-  };
-
-  final url = Uri.http(API_HOST, APPOINTMENT_PATH, queryParameters);
+  final url = Uri.http(API_HOST, APPOINTMENT_PATH);
 
   print(url);
   final Response res = await get(url);
@@ -81,14 +76,81 @@ Future<List<AppointmentView>> getAvailabilities(user) async {
   }
 }
 
-class _MyAppState extends State<AvailabilityPage> {
+class _MyAppState extends State<AddAppointmentPage> {
   late Future<List<AppointmentView>> futureData;
 
   @override
   void initState() {
     super.initState();
-    print("init");
     futureData = getAvailabilities(widget.user);
+  }
+
+  void addAppointment(AppointmentView appointmentView) async {
+    String API_HOST = "10.0.2.2:8081";
+    String APPOINTMENT_PATH = "/appointment";
+
+    Map<String, String> header = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      // 'Authorization': '<Your token>'
+    };
+
+    final url = Uri.http(API_HOST, APPOINTMENT_PATH);
+
+    final body = {
+      'id': appointmentView.id,
+      'patientName': widget.user.value['email'],
+    };
+
+    final Response res =
+        await put(url, headers: header, body: json.encode(body));
+    print(res.body.toString());
+    if (res.body.isNotEmpty) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return AppointmentPage(user: widget.user);
+      }));
+    } else {
+      print("empty");
+    }
+  }
+
+  SingleChildScrollView dataBody(List<AppointmentView> data) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: DataTable(
+        sortColumnIndex: 0,
+        showCheckboxColumn: false,
+        columns: [
+          DataColumn(
+            label: Text("Date"),
+          ),
+          DataColumn(
+            label: Text("Start Time"),
+          ),
+          DataColumn(
+            label: Text("End Time"),
+          ),
+          DataColumn(
+            label: Text("Doctor Name"),
+          ),
+        ],
+        rows: data
+            .map(
+              (appointmentView) => DataRow(
+                onSelectChanged: (selected) {
+                  addAppointment(appointmentView);
+                },
+                cells: [
+                  DataCell(Text(appointmentView.date)),
+                  DataCell(Text(appointmentView.startTime)),
+                  DataCell(Text(appointmentView.endTime)),
+                  DataCell(Text(appointmentView.doctorName)),
+                ],
+              ),
+            )
+            .toList(),
+      ),
+    );
   }
 
   @override
@@ -97,27 +159,32 @@ class _MyAppState extends State<AvailabilityPage> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: AppBar(
-            backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-            title: const Center(child: Text("Neighbourhood Doctors")),
-          ),
+              backgroundColor: const Color.fromARGB(255, 223, 28, 93),
+              title: const Center(child: Text("Neighbourhood Doctors")),
+              leading: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.white,
+                  )),
+              actions: <Widget>[
+                Padding(
+                    padding: EdgeInsets.only(right: 20.0),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/frontPage');
+                      },
+                      child: Icon(
+                        Icons.home,
+                        size: 26.0,
+                      ),
+                    )),
+              ]),
           body: Center(
               child: Column(
             children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 144, 119, 151), // background
-                  onPrimary: Colors.white, // foreground
-                ),
-                child: const Text(
-                  'Add Availability',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () async {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return addAvailabilityPage(user: widget.user);
-                  }));
-                },
-              ),
               Expanded(
                 child: FutureBuilder<List<AppointmentView>>(
                   future: futureData,
@@ -129,12 +196,11 @@ class _MyAppState extends State<AvailabilityPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         verticalDirection: VerticalDirection.down,
                         children: <Widget>[
-                          const Text("Your Availabilities"),
+                          const Text("Tap on a time slot to book."),
                           Expanded(
                             child: FittedBox(
                                 alignment: Alignment.topCenter,
-                                child: dataBody(
-                                    data, widget.user.value['usertype'])),
+                                child: dataBody(data)),
                           )
                         ],
                       );
@@ -150,34 +216,4 @@ class _MyAppState extends State<AvailabilityPage> {
           )),
         ));
   }
-}
-
-SingleChildScrollView dataBody(List<AppointmentView> data, String usertype) {
-  return SingleChildScrollView(
-    scrollDirection: Axis.vertical,
-    child: DataTable(
-      sortColumnIndex: 0,
-      showCheckboxColumn: false,
-      columns: [
-        DataColumn(
-          label: Text("Date"),
-        ),
-        DataColumn(
-          label: Text("Start Time"),
-        ),
-        DataColumn(
-          label: Text("End Time"),
-        ),
-      ],
-      rows: data
-          .map(
-            (appointmentView) => DataRow(cells: [
-              DataCell(Text(appointmentView.date)),
-              DataCell(Text(appointmentView.startTime)),
-              DataCell(Text(appointmentView.endTime)),
-            ]),
-          )
-          .toList(),
-    ),
-  );
 }

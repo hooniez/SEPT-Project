@@ -45,6 +45,23 @@ public class AppointmentController {
 
     }
 
+    @GetMapping("all")
+    public ResponseEntity<?> getUnbookedAppointment() {
+        // logger.info(email + " " + usertype);
+        Optional<List<Appointment>> appointments;
+        // select all unbooked appointments
+        appointments = appointmentRepository.findByAppointmentbooked(false);
+        logger.info(appointments);
+        if (appointments.isPresent()) {
+            var appointmentViews = appointments.get().stream().map(Appointment::createView)
+                    .collect(Collectors.toList());
+            return ResponseEntity.accepted().body(appointmentViews);
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
+
     @PutMapping("")
     public ResponseEntity<?> makeAppointment(@RequestBody AppointmentView newView) {
 
@@ -61,7 +78,7 @@ public class AppointmentController {
             Optional<Appointment> appointment;
             appointment = appointmentRepository.findById(newView.getId());
             if (appointment.isPresent()) {
-                appointment.get().setPatient(patientRepository.findByEmail(newView.getDoctorName()));
+                appointment.get().setPatient(patientRepository.findByEmail(patientName));
                 appointment.get().setAppointmentbooked(true);
                 appointmentRepository.save(appointment.get());
                 var appointmentView = appointment.get().createView();
@@ -70,8 +87,8 @@ public class AppointmentController {
                 return ResponseEntity.badRequest().build();
             }
         } else {
-            logger.info("doctor make appointment");
-            logger.info(newView.getDoctorName());
+            // logger.info("doctor make appointment");
+            // logger.info(newView.getDoctorName());
             // doctor create a new entry
             Appointment newAppointment = new Appointment();
             // doctor name is email here

@@ -93,9 +93,29 @@ class _MyAppState extends State<AppointmentPage> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-          title: const Center(child: Text("Neighbourhood Doctors")),
-        ),
+            backgroundColor: const Color.fromARGB(255, 223, 28, 93),
+            title: const Center(child: Text("Neighbourhood Doctors")),
+            leading: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.white,
+                )),
+            actions: <Widget>[
+              Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/frontPage');
+                    },
+                    child: Icon(
+                      Icons.home,
+                      size: 26.0,
+                    ),
+                  )),
+            ]),
         body: Center(
             child: Column(children: [
           ElevatedButton(
@@ -104,39 +124,42 @@ class _MyAppState extends State<AppointmentPage> {
               onPrimary: Colors.white, // foreground
             ),
             child: const Text(
-              'Add Availability',
+              'Make appointment',
               style: TextStyle(color: Colors.white),
             ),
             onPressed: () async {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return addAppointmentPage(user: widget.user);
+                return AddAppointmentPage(user: widget.user);
               }));
             },
           ),
-          FutureBuilder<List<AppointmentView>>(
-            future: futureData,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                List<AppointmentView> data = snapshot.data!;
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  verticalDirection: VerticalDirection.down,
-                  children: <Widget>[
-                    const Text("Your Appointments"),
-                    Expanded(
-                      child: FittedBox(
-                          alignment: Alignment.topCenter,
-                          child: dataBody(data, widget.user.value['usertype'])),
-                    )
-                  ],
-                );
-              } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
-              // By default show a loading spinner.
-              return CircularProgressIndicator();
-            },
+          Expanded(
+            child: FutureBuilder<List<AppointmentView>>(
+              future: futureData,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<AppointmentView> data = snapshot.data!;
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    verticalDirection: VerticalDirection.down,
+                    children: <Widget>[
+                      const Text("Your Appointments"),
+                      Expanded(
+                        child: FittedBox(
+                            alignment: Alignment.topCenter,
+                            child:
+                                dataBody(data, widget.user.value['usertype'])),
+                      )
+                    ],
+                  );
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
+                // By default show a loading spinner.
+                return CircularProgressIndicator();
+              },
+            ),
           ),
         ])),
       ),
