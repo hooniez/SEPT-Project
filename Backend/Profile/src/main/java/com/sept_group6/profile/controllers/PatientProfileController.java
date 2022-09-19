@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequestMapping(path="/profile/patients")
 public class PatientProfileController {
     private static final Logger logger = LogManager.getLogger("Backend");
-    @Autowired
+
     private PatientRepository patientRepository;
 
     @PutMapping(path="", consumes="application/json", produces="application/json")
