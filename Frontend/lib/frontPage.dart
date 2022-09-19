@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
-import 'patientProfile.dart';
+import 'profile.dart';
 import 'appointmentPage.dart';
 import 'availabilityPage.dart';
 
