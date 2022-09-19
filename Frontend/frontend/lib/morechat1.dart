@@ -9,8 +9,12 @@ void onConnect(StompFrame frame) {
   print("now subscribing");
   client.subscribe(destination: '/topic/greetings', callback: onSubMessage);
   client.send(
-      destination: '/app/register',
-      body: '{"username": "bigdog"}',
+      destination: '/app/hello',
+      body: '{"from": "me", "text": "Hello world"}',
+      headers: {});
+  client.send(
+      destination: '/app/hello',
+      body: '{"from": "me", "text": "this is me"}',
       headers: {});
 }
 
