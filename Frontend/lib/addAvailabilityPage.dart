@@ -18,13 +18,13 @@ class addAvailabilityPage extends StatefulWidget {
 }
 
 class AppointmentView {
-  final Long id;
+  final int id;
   final String date;
   final String startTime;
   final String endTime;
   final String patientName;
   final String doctorName;
-  final String booked;
+  final bool booked;
 
   AppointmentView(
       {required this.id,
@@ -43,26 +43,58 @@ class _MyAppState extends State<addAvailabilityPage> {
   TextEditingController endtimeController = TextEditingController();
 
   Future<Response> addAvailability() async {
+    print(widget.user);
     String API_HOST = "10.0.2.2:8081";
     String APPOINTMENT_PATH = "/appointment";
 
-    final queryParameters = {
+    Map<String, String> header = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      // 'Authorization': '<Your token>'
+    };
+
+    DateTime start = DateFormat("HH:mm").parse(starttimeController.text);
+    DateTime end = DateFormat("HH:mm").parse(endtimeController.text);
+
+    final body = {
       'date': dateController.text,
-      'starttime': starttimeController.text,
-      'endtime': endtimeController.text,
+      'starttime': DateFormat("HH:mm").format(start),
+      'endtime': DateFormat("HH:mm").format(end),
       'doctorName': widget.user.value['email'],
     };
 
-    final url = Uri.http(API_HOST, APPOINTMENT_PATH, queryParameters);
+    final url = Uri.http(API_HOST, APPOINTMENT_PATH);
 
     print(url);
-    final Response res = await put(url);
+    print(body);
+    final Response res =
+        await put(url, headers: header, body: json.encode(body));
     print(res.body.toString());
 
     return res;
   }
 
-  dynamic saveAvailability() async {
+  void setStarttime() async {
+    TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (pickedTime != null) {
+      String formattedStarttime =
+          TimeOfDay(hour: pickedTime.hour, minute: pickedTime.minute)
+              .format(context);
+      TimeOfDay endTime = pickedTime.addMinutes(30);
+      String formattedEndtime =
+          TimeOfDay(hour: endTime.hour, minute: endTime.minute).format(context);
+
+      setState(() {
+        starttimeController.text = formattedStarttime;
+        endtimeController.text = formattedEndtime;
+      });
+    }
+  }
+
+  void saveAvailability() async {
     final isValidForm = _formKey.currentState!.validate();
     if (isValidForm) {
       var res = await addAvailability();
@@ -156,7 +188,7 @@ class _MyAppState extends State<addAvailabilityPage> {
                                                     lastDate: DateTime(2023));
                                             if (pickedDate != null) {
                                               String formattedDate =
-                                                  DateFormat('dd-MM-yyyy')
+                                                  DateFormat('yyyy-MM-dd')
                                                       .format(pickedDate);
 
                                               setState(() {
@@ -170,7 +202,7 @@ class _MyAppState extends State<addAvailabilityPage> {
                                       child: TextFormField(
                                           autovalidateMode: AutovalidateMode
                                               .onUserInteraction,
-                                          controller: dateController,
+                                          controller: starttimeController,
                                           decoration: InputDecoration(
                                             prefixIcon: Icon(
                                                 Icons.access_time_outlined),
@@ -192,35 +224,8 @@ class _MyAppState extends State<addAvailabilityPage> {
                                               return null;
                                             }
                                           },
-                                          onTap: () async {
-                                            TimeOfDay? pickedTime =
-                                                await showTimePicker(
-                                              context: context,
-                                              initialTime: TimeOfDay.now(),
-                                            );
-                                            if (pickedTime != null) {
-                                              String formattedStarttime =
-                                                  TimeOfDay(
-                                                          hour: pickedTime.hour,
-                                                          minute:
-                                                              pickedTime.minute)
-                                                      .format(context);
-                                              TimeOfDay endTime =
-                                                  pickedTime.addMinutes(30);
-                                              String formattedEndtime =
-                                                  TimeOfDay(
-                                                          hour: endTime.hour,
-                                                          minute:
-                                                              endTime.minute)
-                                                      .format(context);
-
-                                              setState(() {
-                                                starttimeController.text =
-                                                    formattedStarttime;
-                                                endtimeController.text =
-                                                    formattedEndtime;
-                                              });
-                                            }
+                                          onTap: () {
+                                            setStarttime();
                                           })),
                                   Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -230,7 +235,7 @@ class _MyAppState extends State<addAvailabilityPage> {
                                         controller: endtimeController,
                                         decoration: InputDecoration(
                                           prefixIcon:
-                                              Icon(Icons.calendar_month),
+                                              Icon(Icons.access_time_outlined),
                                           labelText:
                                               "End time of the half-hour availablity",
                                           filled: true,
@@ -257,7 +262,9 @@ class _MyAppState extends State<addAvailabilityPage> {
                                           'Save',
                                           style: TextStyle(color: Colors.white),
                                         ),
-                                        onPressed: saveAvailability(),
+                                        onPressed: () {
+                                          saveAvailability();
+                                        },
                                       ),
                                     ),
                                   ),

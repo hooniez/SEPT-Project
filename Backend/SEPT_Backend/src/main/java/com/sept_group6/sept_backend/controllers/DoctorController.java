@@ -26,7 +26,7 @@ public class DoctorController {
     @Autowired
     private DoctorRepository doctorRepository;
 
-    @GetMapping("/signin")
+    @PostMapping("/signin")
     public ResponseEntity<?> loginUser(@RequestBody Patient loginPatient) {
         String email = loginPatient.getEmail();
         String password = loginPatient.getPassword();

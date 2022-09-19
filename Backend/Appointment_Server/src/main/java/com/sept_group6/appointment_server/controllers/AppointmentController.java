@@ -54,7 +54,8 @@ public class AppointmentController {
         // not the best practice, need to refactor in the future
 
         // patient name is email here
-        if (!newView.getPatientName().isEmpty()) {
+        String patientName = newView.getPatientName();
+        if (patientName != null && !patientName.isEmpty()) {
             logger.info("patient make appointment");
             // patient updates an existing entry
             Optional<Appointment> appointment;
@@ -69,7 +70,8 @@ public class AppointmentController {
                 return ResponseEntity.badRequest().build();
             }
         } else {
-            logger.info("patient make appointment");
+            logger.info("doctor make appointment");
+            logger.info(newView.getDoctorName());
             // doctor create a new entry
             Appointment newAppointment = new Appointment();
             // doctor name is email here
@@ -78,8 +80,9 @@ public class AppointmentController {
             newAppointment.setStarttime(newView.getStarttime());
             newAppointment.setEndtime(newView.getEndtime());
             newAppointment.setAppointmentbooked(false);
-            Appointment savedppointment = appointmentRepository.save(newAppointment);
-            return ResponseEntity.accepted().body(savedppointment);
+            Appointment savedAppointment = appointmentRepository.save(newAppointment);
+            AppointmentView savedView = savedAppointment.createView();
+            return ResponseEntity.accepted().body(savedView);
         }
 
     }

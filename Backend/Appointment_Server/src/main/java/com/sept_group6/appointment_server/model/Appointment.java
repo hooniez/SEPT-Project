@@ -38,9 +38,20 @@ public class Appointment {
     private boolean appointmentbooked;
 
     public AppointmentView createView() {
-        return new AppointmentView(id, date, starttime, endtime,
-                patient.getFirstname() + " " + patient.getLastname(),
-                doctor.getFirstname() + " " + doctor.getLastname(), appointmentbooked);
+        String patientName;
+        String doctorName;
+        if (patient != null) {
+            patientName = patient.getFirstname() + " " + patient.getLastname();
+        } else {
+            patientName = "";
+        }
+        if (doctor != null) {
+            doctorName = doctor.getFirstname() + " " + doctor.getLastname();
+        } else {
+            doctorName = "";
+        }
+
+        return new AppointmentView(id, date, starttime, endtime, patientName, doctorName, appointmentbooked);
     }
 
 }

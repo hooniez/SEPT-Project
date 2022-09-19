@@ -8,6 +8,7 @@ import 'package:frontend/scrollercontroller.dart';
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
+import 'addAppointmentPage.dart';
 
 class AppointmentPage extends StatefulWidget {
   final user;
@@ -19,13 +20,13 @@ class AppointmentPage extends StatefulWidget {
 }
 
 class AppointmentView {
-  final Long id;
+  final int id;
   final String date;
   final String startTime;
   final String endTime;
   final String patientName;
   final String doctorName;
-  final String booked;
+  final bool booked;
 
   AppointmentView(
       {required this.id,
@@ -38,13 +39,13 @@ class AppointmentView {
 
   factory AppointmentView.fromJson(Map<String, dynamic> json) {
     return AppointmentView(
-      id: json['id'] ?? "0",
-      date: json['date'] ?? "0",
-      startTime: json['startTime'] ?? "0",
-      endTime: json['endTime'] ?? "0",
-      patientName: json['patientName'] ?? "0",
-      doctorName: json['doctorName'] ?? "0",
-      booked: json['booked'] ?? "0",
+      id: json['id'] ?? "N/A",
+      date: json['date'] ?? "N/A",
+      startTime: json['starttime'] ?? "N/A",
+      endTime: json['endtime'] ?? "N/A",
+      patientName: json['patientName'] ?? "",
+      doctorName: json['doctorName'] ?? "",
+      booked: json['appointmentbooked'] ?? false,
     );
   }
 }
@@ -69,6 +70,8 @@ Future<List<AppointmentView>> getAppointment(user) async {
     List jsonResponse = json.decode(res.body);
     return jsonResponse
         .map((data) => new AppointmentView.fromJson(data))
+        // only show booked appointments
+        .where((data) => data.booked)
         .toList();
   } else {
     throw Exception('Failed to load appointments');
@@ -81,7 +84,6 @@ class _MyAppState extends State<AppointmentPage> {
   @override
   void initState() {
     super.initState();
-    print("init");
     futureData = getAppointment(widget.user);
   }
 
@@ -95,7 +97,23 @@ class _MyAppState extends State<AppointmentPage> {
           title: const Center(child: Text("Neighbourhood Doctors")),
         ),
         body: Center(
-          child: FutureBuilder<List<AppointmentView>>(
+            child: Column(children: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Color.fromARGB(255, 144, 119, 151), // background
+              onPrimary: Colors.white, // foreground
+            ),
+            child: const Text(
+              'Add Availability',
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: () async {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return addAppointmentPage(user: widget.user);
+              }));
+            },
+          ),
+          FutureBuilder<List<AppointmentView>>(
             future: futureData,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -120,7 +138,7 @@ class _MyAppState extends State<AppointmentPage> {
               return CircularProgressIndicator();
             },
           ),
-        ),
+        ])),
       ),
     );
   }

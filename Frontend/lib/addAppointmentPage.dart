@@ -11,13 +11,13 @@ import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
 
-class AvailabilityPage extends StatefulWidget {
+class AddAvailabilityPage extends StatefulWidget {
   final user;
 
-  const AvailabilityPage({Key? key, required this.user}) : super(key: key);
+  const AddAvailabilityPage({Key? key, required this.user}) : super(key: key);
 
   @override
-  State<AvailabilityPage> createState() => _MyAppState();
+  State<AddAvailabilityPage> createState() => _MyAppState();
 }
 
 class AppointmentView {
@@ -54,7 +54,7 @@ class AppointmentView {
 Future<List<AppointmentView>> getAvailabilities(user) async {
   // construct the request
   String API_HOST = "10.0.2.2:8081";
-  String APPOINTMENT_PATH = "/appointment";
+  String APPOINTMENT_PATH = "/appointment/all";
 
   final queryParameters = {
     'email': user.value['email'],
@@ -97,29 +97,9 @@ class _MyAppState extends State<AvailabilityPage> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: AppBar(
-              backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-              title: const Center(child: Text("Neighbourhood Doctors")),
-              leading: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                  )),
-              actions: <Widget>[
-                Padding(
-                    padding: EdgeInsets.only(right: 20.0),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/frontPage');
-                      },
-                      child: Icon(
-                        Icons.home,
-                        size: 26.0,
-                      ),
-                    )),
-              ]),
+            backgroundColor: const Color.fromARGB(255, 223, 28, 93),
+            title: const Center(child: Text("Neighbourhood Doctors")),
+          ),
           body: Center(
               child: Column(
             children: [

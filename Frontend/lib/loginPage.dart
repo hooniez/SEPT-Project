@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
 // import 'dart:html';
@@ -21,6 +22,34 @@ class _LoginState extends State<Login> {
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
+
+  void login() async {
+    String API_HOST = "10.0.2.2:8080";
+    String type = _userType.toString().split('.').last;
+
+    Map<String, String> header = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      // 'Authorization': '<Your token>'
+    };
+
+    final body = {
+      'email': emailController.text,
+      'password': passwordController.text
+    };
+
+    final uri = Uri.http(API_HOST, "/$type/signin");
+    print(uri);
+
+    Response res = await post(uri, headers: header, body: json.encode(body));
+    print(res.body);
+    if (res.body.isNotEmpty) {
+      widget.setUser(res.body, type);
+      Navigator.pushNamed(context, '/frontPage');
+    } else {
+      print("login unsuccessful");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,8 +98,10 @@ class _LoginState extends State<Login> {
                             });
                           },
                         ),
-                        const Text("Patient", style: TextStyle
-                          (fontSize: 16),),
+                        const Text(
+                          "Patient",
+                          style: TextStyle(fontSize: 16),
+                        ),
                       ]),
                       Row(children: [
                         Radio<UserType>(
@@ -82,7 +113,10 @@ class _LoginState extends State<Login> {
                             });
                           },
                         ),
-                        const Text("Doctor", style: TextStyle(fontSize: 16),),
+                        const Text(
+                          "Doctor",
+                          style: TextStyle(fontSize: 16),
+                        ),
                       ]),
                     ],
                   ),
@@ -126,26 +160,7 @@ class _LoginState extends State<Login> {
                         ),
                         child: const Text('Login'),
                         onPressed: () async {
-                          String API_HOST = "10.0.2.2:8080";
-                          String type = _userType.toString().split('.').last;
-
-                          final queryParameters = {
-                            'email': emailController.text,
-                            'password': passwordController.text
-                          };
-                          final uri = Uri.http(
-                              API_HOST, "/$type/signin",
-                              queryParameters);
-                          print(uri);
-
-                          Response res = await get(uri);
-
-                          if (res.body.isNotEmpty) {
-                            widget.setUser(res.body, type);
-                            Navigator.pushNamed(context, '/frontPage');
-                          } else {
-                            print("empty");
-                          }
+                          login();
                         },
                       ),
                     ),
