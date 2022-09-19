@@ -8,6 +8,9 @@ import 'signupPage.dart';
 import 'patientProfile.dart';
 import 'appointmentPage.dart';
 import 'availabilityPage.dart';
+import 'symptomsPageCurrentSymptoms.dart';
+import 'package:http/http.dart';
+import 'dart:convert';
 
 class FrontPage extends StatelessWidget {
   final user;
@@ -98,8 +101,8 @@ class FrontPage extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                        return PatientProfile(user: user);
-                                      }));
+                                    return PatientProfile(user: user);
+                                  }));
                                 },
                                 child: const Text(
                                   "Profile",
@@ -126,6 +129,26 @@ class FrontPage extends StatelessWidget {
                                 ),
                               ),
                             ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              width: 200,
+                              height: 50,
+                              child: OutlinedButton(
+                                onPressed: () async {
+                                  var res =
+                                      await getSymptom(user.value["email"]);
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return SymptomsPageCurrentSymptoms(
+                                        getUser: user, getSymptoms: res);
+                                  }));
+                                },
+                                child: const Text("Symptoms",
+                                    style: TextStyle(fontSize: 18.0)),
+                              ),
+                            ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: SizedBox(
@@ -200,4 +223,14 @@ class FrontPage extends StatelessWidget {
           )),
     );
   }
+}
+
+Future<Response> getSymptom(String patientemail) async {
+  String API_HOST = "localhost:8080";
+  final queryParameters = {'email': patientemail};
+  final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
+  print(uri);
+
+  Response res = await get(uri);
+  return res;
 }
