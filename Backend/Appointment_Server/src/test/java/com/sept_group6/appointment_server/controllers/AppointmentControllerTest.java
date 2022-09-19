@@ -44,23 +44,37 @@ public class AppointmentControllerTest {
         // private ObjectMapper objectMapper;
 
         @MockBean
-        private AppointmentRepository AppointmentRepository;
-        // @MockBean
-        // private AppointmentRepository PatientRepository;
-        // @MockBean
-        // private AppointmentRepository DoctorRepository;
-        Patient patient = new Patient(1L, "JamesSmith@gmail.com", "James", "Smit", "01/01/1981", "1234", "0452013654",
+        private AppointmentRepository appointmentRepository;
+        @MockBean
+        private PatientRepository patientRepository;
+        @MockBean
+        private DoctorRepository doctorRepository;
+        Patient patient = new Patient(1L, "JamesSmith@gmail.com", "James",
+                        "Smit", "01/01/1981", "1234", "0452013654",
                         "None.");
-        Doctor doctor = new Doctor(1L, "Johndoe@gmail.com", "John", "Doe", "01/01/1990", "1234", "0498582854", "None");
-        Appointment appointment = new Appointment((Integer) 1, patient, doctor, LocalTime.parse("12:00:00"),
+        Doctor doctor = new Doctor(1L, "JohnDoe@gmail.com", "John",
+                        "Doe", "01/01/1990", "1234", "0498582854", "None");
+        Doctor anotherDoctor = new Doctor(2L, "JohnyArk@gmail.com", "Johny",
+                        "Ark", "01/01/1990", "1234", "0498582854", "None");
+        Appointment bookedAppointment = new Appointment(1L, patient, doctor, LocalTime.parse("12:00:00"),
                         LocalTime.parse("13:00:00"),
                         LocalDate.parse("01/01/2022", DateTimeFormatter.ofPattern("MM/dd/yyyy")),
                         true);
+        Appointment unbookedAppointment = new Appointment(2L, null, doctor, LocalTime.parse("12:00:00"),
+                        LocalTime.parse("13:00:00"),
+                        LocalDate.parse("01/01/2022", DateTimeFormatter.ofPattern("MM/dd/yyyy")),
+                        false);
+        Appointment anotherUnbookedAppointment = new Appointment(3L, null, anotherDoctor, LocalTime.parse("12:00:00"),
+                        LocalTime.parse("13:00:00"),
+                        LocalDate.parse("01/01/2022", DateTimeFormatter.ofPattern("MM/dd/yyyy")),
+                        false);
+        Optional<List<Appointment>> appointments = Optional
+                        .of(List.of(bookedAppointment, unbookedAppointment, anotherUnbookedAppointment));
 
         @Test
-        void testgetAppointment_returnsAppointmentList() throws Exception {
-                Mockito.when(AppointmentRepository.findByPatientEmail(patient.getEmail()))
-                                .thenReturn(Optional.of(List.of(appointment)));
+        void testGetAppointment_returnsBookedAppointment() throws Exception {
+                Mockito.when(appointmentRepository.findByPatientEmail(patient.getEmail()))
+                                .thenReturn(appointments);
 
                 MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get(
                                 "/appointment/").contentType(MediaType.APPLICATION_JSON)
@@ -70,9 +84,62 @@ public class AppointmentControllerTest {
                 mockMvc.perform(mockRequest)
                                 .andExpect(status().isAccepted())
                                 .andExpect(jsonPath("$", Matchers.hasSize(1)))
-                                .andExpect(
-                                                jsonPath("$[0].doctorName", Matchers.is(
-                                                                doctor.getFirstname() + " " + doctor.getLastname())));
+                                .andExpect(jsonPath("$[0].doctorName", Matchers.is(
+                                                doctor.getFirstname() + " " + doctor.getLastname())));
+        }
+
+        @Test
+        void testGetUnbookedAppointment_returnsAppointmentList() throws Exception {
+                Mockito.when(appointmentRepository.findByAppointmentbooked(false))
+                                .thenReturn(Optional.of(appointments.get().stream()
+                                                .filter(appointment -> appointment.isAppointmentbooked())
+                                                .collect(Collectors.toList())));
+
+                MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get(
+                                "/appointment/all");
+
+                mockMvc.perform(mockRequest)
+                                .andExpect(status().isAccepted())
+                                .andExpect(jsonPath("$", Matchers.hasSize(2)));
+        }
+
+        @Test
+        void testMakeAppointment_returnsBookedAppointment() throws Exception {
+                Mockito.when(appointmentRepository.findByPatientEmail(patient.getEmail()))
+                                .thenReturn(appointments);
+                Mockito.when(patientRepository.findByEmail(patient.getEmail()))
+                                .thenReturn(patient);
+
+                String json = "{\"id\":3, \"patientName\":\"JamesSmith@gmail.com\"}";
+                MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put(
+                                "/appointment/").contentType(MediaType.APPLICATION_JSON)
+                                .content(json);
+
+                mockMvc.perform(mockRequest)
+                                .andExpect(status().isAccepted())
+                                .andExpect(jsonPath("$", Matchers.hasSize(1)))
+                                .andExpect(jsonPath("$[0].doctorName", Matchers.is(
+                                                anotherDoctor.getFirstname() + " " + anotherDoctor.getLastname())))
+                                .andExpect(jsonPath("$[0].appointmentBooked", Matchers.is(true)));
+        }
+
+        @Test
+        void testMakeAppointment_returnsUnbookedAppointment() throws Exception {
+                Mockito.when(doctorRepository.findByEmail(doctor.getEmail()))
+                                .thenReturn(doctor);
+
+                String json = "{\"id\":3, \"doctorName\":\"JohnDoe@gmail.com\"}";
+                MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put(
+                                "/appointment/").contentType(MediaType.APPLICATION_JSON)
+                                .content(json);
+
+                mockMvc.perform(mockRequest)
+                                .andExpect(status().isAccepted())
+                                .andExpect(jsonPath("$", Matchers.hasSize(1)))
+                                .andExpect(jsonPath("$[0].doctorName", Matchers.is(
+                                                doctor.getFirstname() + " " + doctor.getLastname())))
+                                .andExpect(jsonPath("$[0].appointmentBooked", Matchers.is(true)));
+                ;
         }
 
 }
