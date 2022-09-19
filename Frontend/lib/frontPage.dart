@@ -7,6 +7,7 @@ import 'loginPage.dart';
 import 'signupPage.dart';
 import 'patientProfile.dart';
 import 'appointmentPage.dart';
+import 'availabilityPage.dart';
 
 class FrontPage extends StatelessWidget {
   final user;
@@ -142,6 +143,24 @@ class FrontPage extends StatelessWidget {
                               ),
                             ),
                           ),
+                          if (user.value['usertype'] == "doctor")
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: 200,
+                                height: 50,
+                                child: OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return AvailabilityPage(user: user);
+                                    }));
+                                  },
+                                  child: const Text("Availabilitis",
+                                      style: TextStyle(fontSize: 18.0)),
+                                ),
+                              ),
+                            ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: SizedBox(

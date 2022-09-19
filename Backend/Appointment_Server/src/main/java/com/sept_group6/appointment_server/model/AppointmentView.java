@@ -10,12 +10,13 @@ import java.time.LocalDate;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+// this class is used to transfer data between server and client
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class AppointmentView {
-    private Integer id;
+    private Long id;
     private LocalDate date;
     private LocalTime starttime;
     private LocalTime endtime;

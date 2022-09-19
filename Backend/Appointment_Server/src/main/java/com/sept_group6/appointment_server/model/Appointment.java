@@ -3,6 +3,7 @@ package com.sept_group6.appointment_server.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
@@ -16,13 +17,14 @@ import com.sept_group6.appointment_server.model.AppointmentView;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "patientUid", referencedColumnName = "uid")
     private Patient patient;
@@ -36,8 +38,20 @@ public class Appointment {
     private boolean appointmentbooked;
 
     public AppointmentView createView() {
-        return new AppointmentView(id, date, starttime, endtime,
-                patient.getFirstname() + " " + patient.getLastname(),
-                doctor.getFirstname() + " " + doctor.getLastname(), appointmentbooked);
+        String patientName;
+        String doctorName;
+        if (patient != null) {
+            patientName = patient.getFirstname() + " " + patient.getLastname();
+        } else {
+            patientName = "";
+        }
+        if (doctor != null) {
+            doctorName = doctor.getFirstname() + " " + doctor.getLastname();
+        } else {
+            doctorName = "";
+        }
+
+        return new AppointmentView(id, date, starttime, endtime, patientName, doctorName, appointmentbooked);
     }
+
 }
