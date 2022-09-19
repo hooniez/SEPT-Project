@@ -20,6 +20,7 @@ public class PatientProfileController {
 
     @PutMapping(path="", consumes="application/json", produces="application/json")
     public ResponseEntity<?> updateInfo(@RequestBody Patient patientEdit) {
+        System.out.println("Reached endpoint");
         Optional<Patient> patient =
                 patientRepository.findByEmail(patientEdit.getEmail());
 
