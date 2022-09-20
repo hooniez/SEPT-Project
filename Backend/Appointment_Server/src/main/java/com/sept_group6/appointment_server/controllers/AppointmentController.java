@@ -71,18 +71,19 @@ public class AppointmentController {
         // not the best practice, need to refactor in the future
 
         // patient name is email here
-        String patientName = newView.getPatientName();
-        if (patientName != null && !patientName.isEmpty()) {
+        String patientEmail = newView.getPatientName();
+        if (patientEmail != null && !patientEmail.isEmpty()) {
             logger.info("patient make appointment");
+            logger.info(newView);
             // patient updates an existing entry
             Optional<Appointment> appointment;
             appointment = appointmentRepository.findById(newView.getId());
             if (appointment.isPresent()) {
-                appointment.get().setPatient(patientRepository.findByEmail(patientName));
+                appointment.get().setPatient(patientRepository.findByEmail(patientEmail));
                 appointment.get().setAppointmentbooked(true);
-                appointmentRepository.save(appointment.get());
-                var appointmentView = appointment.get().createView();
-                return ResponseEntity.accepted().body(appointmentView);
+                Appointment savedAppointment = appointmentRepository.save(appointment.get());
+                AppointmentView savedView = savedAppointment.createView();
+                return ResponseEntity.accepted().body(savedView);
             } else {
                 return ResponseEntity.badRequest().build();
             }
@@ -91,6 +92,7 @@ public class AppointmentController {
             // logger.info(newView.getDoctorName());
             // doctor create a new entry
             Appointment newAppointment = new Appointment();
+            logger.info(newView);
             // doctor name is email here
             newAppointment.setDoctor(doctorRepository.findByEmail(newView.getDoctorName()));
             newAppointment.setDate(newView.getDate());
@@ -103,17 +105,4 @@ public class AppointmentController {
         }
 
     }
-
-    // @PutMapping(path = "/signup", consumes = "application/json", produces =
-    // "application/json")
-    // public ResponseEntity<?> addUser(@RequestBody Patient newPatient)
-    // throws Exception {
-    // logger.info(newPatient);
-
-    // // add resource
-    // Patient patient = patientRepository.save(newPatient);
-
-    // return ResponseEntity.accepted().body(patient);
-
-    // }
 }
