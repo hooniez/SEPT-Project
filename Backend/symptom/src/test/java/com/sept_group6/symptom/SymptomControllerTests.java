@@ -27,6 +27,8 @@ class ProfileControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
+    @Autowired
+    private ObjectMapper objectMapper;
     @MockBean
     private SymptomRepository patientRepository;
 
@@ -50,10 +52,10 @@ class ProfileControllerTests {
 
     @Test
     public void testDeleteSymptomsAccepted() throws Exception {
-        String idToUse = 1;
+        int idToUse = 1;
         Symptom symptom1 = new Symptom(idToUse, "lachlanvdk55@gmail.com", "Headache");
 
-        Mockito.when(patientRepository.deleteById("lachlanvdk55@gmail.com").thenReturn(Optional.empty()));
+        Mockito.when(patientRepository.deleteById(idToUse).thenReturn(Optional.empty()));
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.delete(
                                 "/deletesymptom").contentType(MediaType.APPLICATION_JSON)
                                 .param("id", idToUse);
