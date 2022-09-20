@@ -48,4 +48,42 @@ class ProfileControllerTests {
                                 .andExpect(status().isAccepted())
                                 .andExpect(jsonPath("$", Matchers.hasSize(2)));
     }
+
+    @Test
+    public void testAddSymptomsAccepted() throws Exception {
+        String emailToUse = "lachlanvdk55@gmail.com";
+        Symptom symptom1 = new Symptom(1, emailToUse, "Headache");
+        Symptom symptom2 = new Symptom(2, emailToUse, "Sore Throat");
+        List<Symptom> symptomList = new ArrayList<Symptom>();
+        symptomList.add(symptom1);
+        symptomList.add(symptom2);
+
+        Mockito.when(patientRepository.findAllByEmail("lachlanvdk55@gmail.com")).thenReturn(symptomList);
+        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get(
+                                "/getsymptom").contentType(MediaType.APPLICATION_JSON)
+                                .param("email", emailToUse);
+
+                mockMvc.perform(mockRequest)
+                                .andExpect(status().isAccepted())
+                                .andExpect(jsonPath("$", Matchers.hasSize(2)));
+    }
+
+    @Test
+    public void testDeleteSymptomsAccepted() throws Exception {
+        String emailToUse = "lachlanvdk55@gmail.com";
+        Symptom symptom1 = new Symptom(1, emailToUse, "Headache");
+        Symptom symptom2 = new Symptom(2, emailToUse, "Sore Throat");
+        List<Symptom> symptomList = new ArrayList<Symptom>();
+        symptomList.add(symptom1);
+        symptomList.add(symptom2);
+
+        Mockito.when(patientRepository.findAllByEmail("lachlanvdk55@gmail.com")).thenReturn(symptomList);
+        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get(
+                                "/getsymptom").contentType(MediaType.APPLICATION_JSON)
+                                .param("email", emailToUse);
+
+                mockMvc.perform(mockRequest)
+                                .andExpect(status().isAccepted())
+                                .andExpect(jsonPath("$", Matchers.hasSize(2)));
+    }
 }
