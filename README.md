@@ -10,7 +10,7 @@ This is the repository for Group 6 (Thursday 4:30 class) for Software Engineerin
 * s3759362 - Yongjie Shi
 
 ## Records
-* Github repository :https://github.com/LightZipper/SEPT-Project/tree/Develop
+* Github repository : https://github.com/LightZipper/SEPT-Project
 * jira Board : https://hoonz.atlassian.net/jira/software/projects/SEPT/boards/1
 
 ## Code documentation - Release 0.6 - 20-08-2022
