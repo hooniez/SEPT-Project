@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path="/profile/patients")
+@RequestMapping(path="/patient/profile")
 public class PatientProfileController {
     private static final Logger logger = LogManager.getLogger("Backend");
     @Autowired

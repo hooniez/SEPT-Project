@@ -23,11 +23,13 @@ public class Doctor {
     private String dob;
     private String password;
     private String mobilenumber;
-    private String medicalhistory;
+
+    private String certificate;
 
     public String toString() {
         return " email= " + email + " firstName= " + firstname + " lastName= " + lastname +
-                " dob= " + dob + " password= " + password + " mobileNumber= " + mobilenumber + " medicalHistory= " + medicalhistory;
+                " dob= " + dob + " password= " + password + " mobileNumber= " + mobilenumber + " certificate= "
+                + certificate;
     }
 
 }
