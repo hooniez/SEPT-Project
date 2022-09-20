@@ -1,0 +1,52 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch AppointmentServerApplication",
+            "request": "launch",
+            "mainClass": "com.sept_group6.appointment_server.AppointmentServerApplication",
+            "projectName": "Appointment_Server"
+        },
+        {
+            "type": "java",
+            "name": "Launch appointmentServerApplication",
+            "request": "launch",
+            "mainClass": "com.sept_group6.appointment_server.appointmentServerApplication",
+            "projectName": "Appointment_Server"
+        },
+        {
+            "type": "java",
+            "name": "Launch SeptBackendApplication",
+            "request": "launch",
+            "mainClass": "com.sept_group6.sept_backend.SeptBackendApplication",
+            "projectName": "SEPT_Backend"
+        },
+        {
+            "type": "java",
+            "name": "Launch SeptBackendApplication",
+            "request": "launch",
+            "mainClass": "com.example.sept_backend.SeptBackendApplication",
+            "projectName": "SEPT_Backend"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Demo1Application<demo1>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.demo.Demo1Application",
+            "projectName": "demo1",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DemoApplication<demo>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.demo.DemoApplication",
+            "projectName": "demo",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

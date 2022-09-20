@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/SEPT_Backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/SEPT_Backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/.filecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/app.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/kernel_snapshot.d" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/kernel_snapshot.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/kernel_snapshot.stamp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/outputs.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/20882ff635a3e79aa9561fe246d617e0/outputs.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/version" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/build/c7922d95bf4a2462b75c84a97c312edb.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/build/c7922d95bf4a2462b75c84a97c312edb.cache.dill.track.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/signupPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/signupPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/pubspec.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Develop" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2DhQhqmuRU73ek2m4tMKV5vymoI" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="dart.analysis.tool.window.visible" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Frontend" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Flutter.main.dart">
+    <configuration name="main.dart (1)" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/frontend/frontend/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="additionalArgs" value="--no-sound-null-safety" />
+      <option name="filePath" value="$PROJECT_DIR$/frontend/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SeptBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="SEPT_Backend" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.sept_group6.sept_backend.SeptBackendApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sept_group6.sept_backend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Flutter.main.dart" />
+      <item itemvalue="Flutter.main.dart (1)" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="" />
+      <created>1661148960434</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1661148960434</updated>
+      <workItem from="1661148962945" duration="135000" />
+      <workItem from="1661150614091" duration="81000" />
+      <workItem from="1661151178024" duration="145000" />
+      <workItem from="1661151427719" duration="68000" />
+      <workItem from="1661153151778" duration="102000" />
+      <workItem from="1663152542164" duration="2112000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>
