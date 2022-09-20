@@ -23,6 +23,7 @@ class _MyAppState extends State<PatientProfile> {
   late String _medhist;
   late String _password;
   late String _userType;
+  late String _cert;
 
   @override
   void initState() {
@@ -34,6 +35,7 @@ class _MyAppState extends State<PatientProfile> {
     _medhist = widget.user.value['medicalhistory'];
     _password = widget.user.value['password'];
     _userType = widget.user.value['usertype'];
+    _cert = widget.user.value['certificate'];
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -50,7 +52,8 @@ class _MyAppState extends State<PatientProfile> {
     'email': TextEditingController(text: _email),
     'dob': TextEditingController(text: _dob),
     'mobile': TextEditingController(text: _mobile),
-    'medhist': TextEditingController(text: _medhist)
+    'medhist': TextEditingController(text: _medhist),
+    'certificate':TextEditingController(text:_cert)
   };
 
   Map<String, bool> enabledFlags = {
@@ -394,11 +397,15 @@ class _MyAppState extends State<PatientProfile> {
                     child: Container(
                       width: double.infinity,
                       color: textBoxBackgrounds['medhist'],
-                      child: TextField(
+                      child: _userType == "doctor"?TextField(
+                        maxLines: 7,
+                        controller: textControllers['certificate'],
+                        enabled: enabledFlags['medhist'],
+                      ) :TextField(
                         maxLines: 7,
                         controller: textControllers['medhist'],
                         enabled: enabledFlags['medhist'],
-                      ),
+                      )
                     ),
                   ),
                   Row(
@@ -478,7 +485,7 @@ Future<Response> putPatientData(
           'dob': textControlDict['dob']!.text,
           'password': textControlDict['password']!.text,
           'mobilenumber': textControlDict['mobile']!.text,
-          'certificate': textControlDict['medhist']!.text,
+          'certificate': textControlDict['certificate']!.text,
         }));
   } else {
     String uri = "http://10.0.2.2:8091/patient/profile";
