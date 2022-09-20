@@ -55,10 +55,12 @@ class SymptomControllerTests {
         int idToUse = 1;
         Symptom symptom1 = new Symptom(idToUse, "lachlanvdk55@gmail.com", "Headache");
 
-        Mockito.when(symptomRepository.deleteById(idToUse).doNothing());
+        Mockito.when(symptomRepository.findById(idToUse)).thenReturn(Optional.of(symptom1));
+        symptomRepository.deleteById(idToUse);
+        Mockito.when(symptomRepository.findById(idToUse)).thenReturn(null);
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.delete(
                                 "/deletesymptom").contentType(MediaType.APPLICATION_JSON)
-                                .param("id", idToUse);
+                                .param("id", String.valueOf(idToUse));
 
                 mockMvc.perform(mockRequest)
                                 .andExpect(status().isAccepted());
