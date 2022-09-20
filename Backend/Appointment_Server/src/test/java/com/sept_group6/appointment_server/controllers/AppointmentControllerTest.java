@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.ArgumentMatchers;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +33,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.http.MediaType;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @WebMvcTest(controllers = AppointmentController.class)
@@ -123,27 +125,22 @@ public class AppointmentControllerTest {
 
         }
 
-        // @Test
-        // void testMakeAppointment_returnsUnbookedAppointment() throws Exception {
-        // Mockito.when(doctorRepository.findByEmail(doctor.getEmail()))
-        // .thenReturn(doctor);
-        // Mockito.when(appointmentRepository.save(newAppointment))
-        // .thenReturn(unbookedAppointment);
+        @Test
+        void testMakeAppointment_returnsUnbookedAppointment() throws Exception {
+                Mockito.when(doctorRepository.findByEmail(doctor.getEmail()))
+                                .thenReturn(doctor);
+                Mockito.when(appointmentRepository.save(any(Appointment.class))).thenReturn(unbookedAppointment);
 
-        // String json = "{\"date\":\"2022-03-26\",
-        // \"starttime\":\"08:25\",\"endtime\":\"08:55\",
-        // \"doctorName\":\"JohnDoe@gmail.com\"}";
-        // MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put(
-        // "/appointment/").contentType(MediaType.APPLICATION_JSON)
-        // .content(json);
+                String json = "{\"date\":\"2022-03-26\",\"starttime\":\"08:25\",\"endtime\":\"08:55\",\"doctorName\":\"JohnDoe@gmail.com\"}";
+                MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put(
+                                "/appointment/").contentType(MediaType.APPLICATION_JSON)
+                                .content(json);
 
-        // mockMvc.perform(mockRequest)
-        // .andExpect(status().isAccepted())
-        // .andExpect(jsonPath("$", Matchers.hasSize(1)))
-        // .andExpect(jsonPath("$.doctorName", Matchers.is(
-        // doctor.getFirstname() + " " + doctor.getLastname())))
-        // .andExpect(jsonPath("$[0].appointmentBooked", Matchers.is(false)));
-        // ;
-        // }
+                mockMvc.perform(mockRequest)
+                                .andExpect(status().isAccepted())
+                                .andExpect(jsonPath("$.doctorName", Matchers.is(
+                                                doctor.getFirstname() + " " + doctor.getLastname())));
+                ;
+        }
 
 }
