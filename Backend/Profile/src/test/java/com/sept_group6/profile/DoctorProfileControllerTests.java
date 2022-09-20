@@ -1,8 +1,8 @@
     package com.sept_group6.profile;
     import com.fasterxml.jackson.databind.ObjectMapper;
-    import com.sept_group6.profile.controllers.PatientProfileController;
-    import com.sept_group6.profile.dao.PatientRepository;
-    import com.sept_group6.profile.model.Patient;
+    import com.sept_group6.profile.controllers.DoctorProfileController;
+    import com.sept_group6.profile.dao.DoctorRepository;
+    import com.sept_group6.profile.model.Doctor;
     import org.junit.jupiter.api.Test;
     import org.mockito.Mockito;
     import org.springframework.beans.factory.annotation.Autowired;
@@ -13,51 +13,49 @@
     import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
     import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-
     import java.util.Optional;
 
     import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-    @WebMvcTest(controllers = PatientProfileController.class)
-    class ProfileControllerTests {
+    @WebMvcTest(controllers = DoctorProfileController.class)
+    class DoctorProfileControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     private ObjectMapper objectMapper;
     @MockBean
-    private PatientRepository patientRepository;
+    private DoctorRepository doctorRepository;
 
     @Test
-    public void testUpdatePatientAccepted() throws Exception {
-        Patient patient1 = new Patient("cal@calcal.cal", "cal",
-                "l", "2002-02-02", "cal", "0000",
+    public void testUpdateDoctorAccepted() throws Exception {
+        Doctor doctor1 = new Doctor("doc@docdoc.doc", "doc",
+                "l", "2002-02-02", "doc", "0000",
                 "history here");
 
-        Mockito.when(patientRepository.findByEmail("cal@calcal.cal")).thenReturn(Optional.of(patient1));
-        Mockito.when(patientRepository.save(patient1)).thenReturn(patient1);
+        Mockito.when(doctorRepository.findByEmail("doc@docdoc.doc")).thenReturn(Optional.of(doctor1));
+        Mockito.when(doctorRepository.save(doctor1)).thenReturn(doctor1);
         MockHttpServletRequestBuilder mockRequest =
                 MockMvcRequestBuilders.put(
-                                "/profile/patients").
+                                "/doctor/profile").
                         contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(patient1));
+                        .content(objectMapper.writeValueAsString(doctor1));
         mockMvc.perform(mockRequest)
                 .andExpect(status().isAccepted());
     }
 
         @Test
-        public void testUpdatePatientBadRequest() throws Exception {
-            Patient patient1 = new Patient("cal@calcal.cal", "cal",
-                    "l", "2002-02-02", "cal", "0000",
-                    "history here");
-            Patient patient2 = null;
-            Mockito.when(patientRepository.findByEmail("cal@calcal.cal")).thenReturn(Optional.empty());
-            Mockito.when(patientRepository.save(patient1)).thenReturn(patient1);
+        public void testUpdateDoctorBadRequest() throws Exception {
+            Doctor doctor1 = new Doctor("doc@docdoc.doc", "doc",
+                    "l", "2002-02-02", "doc", "0000", "history");
+            Doctor doctor2 = null;
+            Mockito.when(doctorRepository.findByEmail("doc@docdoc.doc")).thenReturn(Optional.empty());
+            Mockito.when(doctorRepository.save(doctor1)).thenReturn(doctor1);
             MockHttpServletRequestBuilder mockRequest =
                     MockMvcRequestBuilders.put(
-                                    "/profile/patients").
+                                    "/doctor/profile").
                             contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper.writeValueAsString(patient1));
+                            .content(objectMapper.writeValueAsString(doctor1));
             mockMvc.perform(mockRequest)
                     .andExpect(status().isBadRequest());
         }
