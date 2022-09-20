@@ -45,8 +45,7 @@ class ProfileControllerTests {
                                 .param("email", emailToUse);
 
                 mockMvc.perform(mockRequest)
-                                .andExpect(status().isAccepted())
-                                .andExpect(jsonPath("$", Matchers.hasSize(2)));
+                                .andExpect(status().isAccepted());
     }
 
     @Test
@@ -60,8 +59,7 @@ class ProfileControllerTests {
                                 .param("id", idToUse);
 
                 mockMvc.perform(mockRequest)
-                                .andExpect(status().isAccepted())
-                                .andExpect(jsonPath("$", Matchers.hasSize(0)));
+                                .andExpect(status().isAccepted());
     }
 
     @Test
@@ -74,7 +72,6 @@ class ProfileControllerTests {
                                 .content(objectMapper.writeValueAsString(symptom1));
         
                 mockMvc.perform(mockRequest)
-                                .andExpect(status().isAccepted())
-                                .andExpect(jsonPath("$", Matchers.hasSize(1)));
+                                .andExpect(status().isAccepted());
     }
 }
