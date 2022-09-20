@@ -429,7 +429,7 @@ Future<Response> createUser(
     String mobileNumber,
     String customInfo,
     String type) async {
-  String API_HOST = "http://10.0.2.2:8080";
+  String API_HOST = "http://localhost:8080";
 
   final url = Uri.parse(API_HOST + "/" + type + "/signup");
   print(url);
