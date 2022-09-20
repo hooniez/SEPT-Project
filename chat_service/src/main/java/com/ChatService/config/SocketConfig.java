@@ -13,7 +13,7 @@ public class SocketConfig implements WebSocketMessageBrokerConfigurer {
     
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-      config.enableSimpleBroker("/queue");
+      config.enableSimpleBroker("/topic", "/user");
       config.setApplicationDestinationPrefixes("/app");
       config.setUserDestinationPrefix("/user");
     }
@@ -22,7 +22,7 @@ public class SocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
       registry.addEndpoint("/ws")
               .setHandshakeHandler(new UserHandshakeHandler())
-              .setAllowedOrigins("*")
+              .setAllowedOriginPatterns("*")
               .withSockJS();
     }
 }

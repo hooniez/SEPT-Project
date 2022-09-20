@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.user.SimpUserRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
@@ -19,6 +20,8 @@ public class ChatController {
 
     @Autowired
     private SimpMessagingTemplate template;
+    @Autowired
+    private SimpUserRegistry userRegistry;
 
     private ArrayList<Connection> connections = new ArrayList<Connection>();
 
@@ -28,7 +31,38 @@ public class ChatController {
         System.out.println(principal.getName());
         System.out.println(message.getText());
         
-        template.convertAndSendToUser(user, destination, payload);
+        for (Connection con : connections) {
+            if (con.getUsername().equals(message.getTo())) {
+                // System.out.print(con.getUsername());
+                // System.out.println(" found! Now sending message back");
+                // template.convertAndSendToUser("max", "/user/queue/msg", message);
+                // System.out.println("message sent to user");
+            }
+
+            if (con.getSessionId().equals(principal.getName())) {
+                message.setFrom(con.getUsername());
+            }
+        }
+
+        template.convertAndSend("/topic/chat", message);
+
+        System.out.println("sent!");
+    }
+
+    @MessageMapping("/register")
+    public void register(String userName, Principal principal) throws Exception {
+        for (Connection con : connections) {
+            if (con.getSessionId().equals(principal.getName())) {
+                con.setUsername(userName);
+                System.out.print(userName);
+                System.out.print(" registered to: ");
+                System.out.println(principal.getName());
+                System.out.println(userRegistry.getUsers());
+                return;
+            }
+        }
+
+        System.out.println("could not register");
     }
 
     @EventListener
