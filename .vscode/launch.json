@@ -5,6 +5,13 @@
             "name": "Launch SymptomApplication",
             "request": "launch",
             "mainClass": "com.sept_group6.symptom.SymptomApplication",
+            "projectName": "Symptom"
+        },
+        {
+            "type": "java",
+            "name": "Launch SymptomApplication",
+            "request": "launch",
+            "mainClass": "com.sept_group6.symptom.SymptomApplication",
             "projectName": "symptom"
         },
         {
