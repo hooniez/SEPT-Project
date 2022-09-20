@@ -1,7 +1,6 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'dart:convert';
-import 'dart:ffi';
 // import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/scrollercontroller.dart';

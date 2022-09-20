@@ -21,14 +21,9 @@ public class SymptomController {
     @GetMapping("/getsymptom")
     public ResponseEntity<?> getSymptom(@RequestParam("email") String email) {
         try {
-            if (!symptomRepository.existsByEmail(email)) {
-                throw new UserNotFoundException("There is no user with this email.");
-            }
             List<Symptom> symptom = symptomRepository.findAllByEmail(email);
             return ResponseEntity.accepted().body(symptom);
-        } catch (UserNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (ConstraintViolationException e) {
+        }catch (ConstraintViolationException e) {
             String errorMessage = "";
             for (var error : e.getConstraintViolations()) {
                 errorMessage += error.getMessage() + "\n";
@@ -48,10 +43,12 @@ public class SymptomController {
     @DeleteMapping("/deletesymptom")
     public void deleteSymptom(@RequestParam("id") int id) {
         try {
-            if (!symptomRepository.existsById(id)) {
-                throw new UserNotFoundException("There is no user with this id.");
+            if(symptomRepository.existsById(id)) {
+                symptomRepository.deleteById(id);
             }
-            symptomRepository.deleteById(id);
+            else {
+                throw new UserNotFoundException("There is no sypmtom with this id.");
+            }
         } catch (UserNotFoundException e) {
             ResponseEntity.badRequest().body(e.getMessage());
         } catch (ConstraintViolationException e) {
