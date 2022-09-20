@@ -50,40 +50,31 @@ class ProfileControllerTests {
     }
 
     @Test
-    public void testAddSymptomsAccepted() throws Exception {
-        String emailToUse = "lachlanvdk55@gmail.com";
-        Symptom symptom1 = new Symptom(1, emailToUse, "Headache");
-        Symptom symptom2 = new Symptom(2, emailToUse, "Sore Throat");
-        List<Symptom> symptomList = new ArrayList<Symptom>();
-        symptomList.add(symptom1);
-        symptomList.add(symptom2);
+    public void testDeleteSymptomsAccepted() throws Exception {
+        String idToUse = 1;
+        Symptom symptom1 = new Symptom(idToUse, "lachlanvdk55@gmail.com", "Headache");
 
-        Mockito.when(patientRepository.findAllByEmail("lachlanvdk55@gmail.com")).thenReturn(symptomList);
-        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get(
-                                "/getsymptom").contentType(MediaType.APPLICATION_JSON)
-                                .param("email", emailToUse);
+        Mockito.when(patientRepository.deleteById("lachlanvdk55@gmail.com").thenReturn(Optional.empty()));
+        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.delete(
+                                "/deletesymptom").contentType(MediaType.APPLICATION_JSON)
+                                .param("id", idToUse);
 
                 mockMvc.perform(mockRequest)
                                 .andExpect(status().isAccepted())
-                                .andExpect(jsonPath("$", Matchers.hasSize(2)));
+                                .andExpect(jsonPath("$", Matchers.hasSize(0)));
     }
 
     @Test
-    public void testDeleteSymptomsAccepted() throws Exception {
-        String emailToUse = "lachlanvdk55@gmail.com";
-        Symptom symptom1 = new Symptom(1, emailToUse, "Headache");
-        Symptom symptom2 = new Symptom(2, emailToUse, "Sore Throat");
-        List<Symptom> symptomList = new ArrayList<Symptom>();
-        symptomList.add(symptom1);
-        symptomList.add(symptom2);
+    public void testAddSymptomsAccepted() throws Exception {
+        Symptom symptom1 = new Symptom(1, "lachlanvdk55@gmail.com", "Headache");
 
-        Mockito.when(patientRepository.findAllByEmail("lachlanvdk55@gmail.com")).thenReturn(symptomList);
-        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get(
-                                "/getsymptom").contentType(MediaType.APPLICATION_JSON)
-                                .param("email", emailToUse);
-
+        Mockito.when(patientRepository.save(symptom1)).thenReturn(symptom1);
+        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put(
+                                "/addsymptom").contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(symptom1));
+        
                 mockMvc.perform(mockRequest)
                                 .andExpect(status().isAccepted())
-                                .andExpect(jsonPath("$", Matchers.hasSize(2)));
+                                .andExpect(jsonPath("$", Matchers.hasSize(1)));
     }
 }
