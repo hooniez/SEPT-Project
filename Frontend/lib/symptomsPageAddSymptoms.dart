@@ -196,7 +196,7 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
 }
 
 Future<Response> getSymptom(String patientemail) async {
-  String API_HOST = "localhost:8085";
+  String API_HOST = "10.0.2.2:8085";
   final queryParameters = {'email': patientemail};
   final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
   print(uri);
@@ -207,7 +207,7 @@ Future<Response> getSymptom(String patientemail) async {
 
 Future<Response> addSymptom(
     String symptomdescription, String patientemail) async {
-  String API_HOST = "http://localhost:8085";
+  String API_HOST = "http://10.0.2.2:8085";
 
   final url = Uri.parse(API_HOST + "/addsymptom");
   print(url);
