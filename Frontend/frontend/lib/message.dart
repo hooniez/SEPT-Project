@@ -1,6 +1,17 @@
 class Message {
-  final String user;
-  final String message;
+  final String to;
+  final String text;
+  final String from;
 
-  Message(this.user, this.message);
+  Message(this.from, this.to, this.text);
+
+  Map toJson() => {
+        'to': to,
+        'text': text,
+      };
+
+  factory Message.fromJson(dynamic json) {
+    return Message(
+        json['from'] as String, json['to'] as String, json['text'] as String);
+  }
 }

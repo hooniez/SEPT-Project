@@ -27,11 +27,11 @@ class ChatPage extends StatefulWidget {
   }
 }
 
+List<Message> messages = <Message>[];
+final List<String> strings = <String>[];
+
 class ChatPageState extends State<ChatPage> {
   TextEditingController textEdit = TextEditingController();
-
-  List<Message> messages = <Message>[];
-  final List<String> strings = <String>[];
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ class ChatPageState extends State<ChatPage> {
 
       client.send(
           destination: '/app/message',
-          body: '{"from": "me", "text": "${textEdit.text}"}',
+          body: '{"to": "greg", "text": "${textEdit.text}"}',
           headers: {});
 
       textEdit.text = '';
@@ -94,5 +94,22 @@ final StompClient client = StompClient(
 
 void onConnect(StompFrame frame) {
   print("connected");
-  client.subscribe(destination: '/user/queue/msg', callback: onSubMessage);
+  // client.subscribe(destination: '/user/max/queue/msg', callback: onMessage);
+  client.subscribe(destination: '/topic/chat', callback: onMessageTopic);
+  client.send(destination: '/app/register', body: 'max', headers: {});
+  print("subscribed and registered");
+}
+
+// void onMessage(StompFrame frame) {
+//   print("here");
+// }
+
+void onMessageTopic(StompFrame frame) {
+  print(frame.body);
+  String json = '${frame.body}';
+  Message m = Message.fromJson(jsonDecode(json));
+  print(m);
+  if (m.from != 'max') {
+    strings.add(m.text);
+  }
 }
