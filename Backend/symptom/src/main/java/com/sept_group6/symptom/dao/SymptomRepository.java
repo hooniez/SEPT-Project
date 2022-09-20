@@ -8,4 +8,6 @@ import java.util.*;
 public interface SymptomRepository extends CrudRepository<Symptom, Integer> {
     List<Symptom> findAllByEmail(String email);
     void deleteById(int id);
+    boolean existsByEmail(String email);
+    boolean existsById(int id);
 }

@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -23,9 +22,8 @@ import org.springframework.http.MediaType;
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
 @WebMvcTest(controllers = SymptomController.class)
-class ProfileControllerTests {
+class SymptomControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -53,18 +51,18 @@ class ProfileControllerTests {
     }
 
     // @Test
-    // public void testDeleteSymptomsAccepted() throws Exception {
-    //     int idToUse = 1;
-    //     Symptom symptom1 = new Symptom(idToUse, "lachlanvdk55@gmail.com", "Headache");
+    public void testDeleteSymptomsAccepted() throws Exception {
+        int idToUse = 1;
+        Symptom symptom1 = new Symptom(idToUse, "lachlanvdk55@gmail.com", "Headache");
 
-    //     Mockito.when(symptomRepository.deleteById(idToUse));
-    //     MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.delete(
-    //                             "/deletesymptom").contentType(MediaType.APPLICATION_JSON)
-    //                             .param("id", idToUse);
+        Mockito.when(symptomRepository.deleteById(idToUse).doNothing());
+        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.delete(
+                                "/deletesymptom").contentType(MediaType.APPLICATION_JSON)
+                                .param("id", idToUse);
 
-    //             mockMvc.perform(mockRequest)
-    //                             .andExpect(status().isAccepted());
-    // }
+                mockMvc.perform(mockRequest)
+                                .andExpect(status().isAccepted());
+    }
 
     @Test
     public void testAddSymptomsAccepted() throws Exception {
