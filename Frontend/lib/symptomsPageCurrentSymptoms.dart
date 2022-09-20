@@ -210,7 +210,7 @@ class _SymptomsPageCurrentSymptomsState
 }
 
 Future<Response> getSymptom(String patientemail) async {
-  String API_HOST = "localhost:8080";
+  String API_HOST = "localhost:8085";
   final queryParameters = {'email': patientemail};
   final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
   print(uri);
@@ -221,7 +221,7 @@ Future<Response> getSymptom(String patientemail) async {
 
 Future<Response> deleteSymptom(int id) async {
   String stringId = id.toString();
-  String API_HOST = "localhost:8080";
+  String API_HOST = "localhost:8085";
   final uri = Uri.http(API_HOST, "/deletesymptom", {'id': stringId});
   print(uri);
   Response res = await delete(uri);
