@@ -94,4 +94,5 @@ final StompClient client = StompClient(
 
 void onConnect(StompFrame frame) {
   print("connected");
+  client.subscribe(destination: '/user/queue/msg', callback: onSubMessage);
 }

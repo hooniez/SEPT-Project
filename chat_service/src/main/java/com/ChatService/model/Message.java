@@ -13,5 +13,6 @@ import lombok.Setter;
 public class Message {
 
     private String from;
+    private String to;
     private String text;
 }

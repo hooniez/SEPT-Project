@@ -6,6 +6,8 @@ import java.security.Principal;
 import java.util.ArrayList;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 import org.springframework.web.socket.messaging.SessionConnectEvent;
@@ -15,15 +17,18 @@ import com.ChatService.model.Connection;
 @Controller
 public class ChatController {
 
+    @Autowired
+    private SimpMessagingTemplate template;
+
     private ArrayList<Connection> connections = new ArrayList<Connection>();
 
     @MessageMapping("/message")
-    public Message greeting(Message message, Principal principal) throws Exception {
+    public void greeting(Message message, Principal principal) throws Exception {
         System.out.print("Message from: ");
         System.out.println(principal.getName());
-
         System.out.println(message.getText());
-        return new Message("us", "thanks");
+        
+        template.convertAndSendToUser(user, destination, payload);
     }
 
     @EventListener
