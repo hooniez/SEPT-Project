@@ -33,10 +33,10 @@ public class ChatController {
         
         for (Connection con : connections) {
             if (con.getUsername().equals(message.getTo())) {
-                // System.out.print(con.getUsername());
-                // System.out.println(" found! Now sending message back");
-                // template.convertAndSendToUser("max", "/user/queue/msg", message);
-                // System.out.println("message sent to user");
+                System.out.print(con.getUsername());
+                System.out.println(" found! Now sending message back");
+                template.convertAndSendToUser("max", "/user/queue/msg", message);
+                System.out.println("message sent to user");
             }
 
             if (con.getSessionId().equals(principal.getName())) {

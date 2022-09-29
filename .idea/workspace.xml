@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat_service/src/main/java/com/ChatService/config/SocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/chat_service/src/main/java/com/ChatService/config/SocketConfig.java" afterDir="false" />
-    </list>
+    <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -95,7 +92,7 @@
       <workItem from="1663104989693" duration="1289000" />
       <workItem from="1663125378102" duration="374000" />
       <workItem from="1663126086837" duration="4358000" />
-      <workItem from="1663321667766" duration="63000" />
+      <workItem from="1663321667766" duration="686000" />
     </task>
     <servers />
   </component>
