@@ -3,6 +3,8 @@ import 'package:frontend/message.dart';
 import 'package:stomp_dart_client/stomp.dart';
 import 'package:stomp_dart_client/stomp_config.dart';
 import 'package:stomp_dart_client/stomp_frame.dart';
+import 'package:grouped_list/grouped_list.dart';
+import 'package:intl/intl.dart';
 import 'dart:convert';
 
 void main() {
@@ -26,12 +28,12 @@ class ChatPage extends StatefulWidget {
   }
 }
 
-List<Message> messages = <Message>[];
 final List<String> strings = <String>[];
 
 class ChatPageState extends State<ChatPage> {
   TextEditingController textEdit = TextEditingController();
   late StompClient client;
+  List<Message> messages = <Message>[];
 
   @override
   void initState() {
@@ -59,7 +61,7 @@ class ChatPageState extends State<ChatPage> {
     Message m = Message.fromJson(jsonDecode(json));
     if (m.from != 'max') {
       setState(() {
-        strings.insert(0, m.text);
+        messages.add(m);
       });
     }
   }
@@ -75,6 +77,45 @@ class ChatPageState extends State<ChatPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              Expanded(
+                  child: GroupedListView<Message, DateTime>(
+                      reverse: true,
+                      order: GroupedListOrder.DESC,
+                      padding: const EdgeInsets.all(8),
+                      elements: messages,
+                      groupBy: (message) => DateTime(
+                            message.date.year,
+                            message.date.month,
+                            message.date.day,
+                          ),
+                      groupHeaderBuilder: (Message message) => SizedBox(
+                            height: 40,
+                            child: Center(
+                              child: Text(
+                                DateFormat.yMMMd().format(message.date),
+                              ),
+                            ),
+                          ),
+                      itemBuilder: (context, Message message) => Align(
+                            alignment: (message.from == "me")
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
+                            child: Card(
+                              elevation: 8,
+                              color: (message.from == "me")
+                                  ? Theme.of(context).primaryColor
+                                  : Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: Text(
+                                  message.text,
+                                  style: (message.from == "me")
+                                      ? const TextStyle(color: Colors.white)
+                                      : const TextStyle(color: Colors.black),
+                                ),
+                              ),
+                            ),
+                          ))),
               Form(
                 child: TextFormField(
                   decoration:
@@ -82,15 +123,6 @@ class ChatPageState extends State<ChatPage> {
                   controller: textEdit,
                 ),
               ),
-              Expanded(
-                  child: ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemCount: strings.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          title: Text(strings[index]),
-                        );
-                      }))
             ],
           )),
       floatingActionButton: FloatingActionButton(
@@ -102,13 +134,14 @@ class ChatPageState extends State<ChatPage> {
 
   void addItemToList() {
     if (textEdit.text.isNotEmpty) {
+      Message message = Message("me", "greg", textEdit.text);
       setState(() {
-        strings.insert(0, textEdit.text);
+        messages.add(message);
       });
 
       client.send(
           destination: '/app/message',
-          body: '{"to": "greg", "text": "${textEdit.text}"}',
+          body: '{"to": "${message.to}", "text": "${message.text}"}',
           headers: {});
 
       textEdit.text = '';

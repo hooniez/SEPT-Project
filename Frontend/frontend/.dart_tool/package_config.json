@@ -74,6 +74,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "grouped_list",
+      "rootUri": "file:///C:/Users/maxfo/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/grouped_list-5.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "http",
       "rootUri": "file:///C:/Users/maxfo/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.5",
       "packageUri": "lib/",
@@ -82,6 +88,12 @@
     {
       "name": "http_parser",
       "rootUri": "file:///C:/Users/maxfo/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "intl",
+      "rootUri": "file:///C:/Users/maxfo/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -188,7 +200,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-09-17T04:59:49.022433Z",
+  "generated": "2022-09-29T09:01:11.481664Z",
   "generator": "pub",
   "generatorVersion": "2.18.0"
 }

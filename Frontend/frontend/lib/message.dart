@@ -1,9 +1,12 @@
 class Message {
-  final String to;
-  final String text;
-  final String from;
+  String to;
+  String text;
+  String from;
+  late DateTime date;
 
-  Message(this.from, this.to, this.text);
+  Message(this.from, this.to, this.text) {
+    date = DateTime.now();
+  }
 
   Map toJson() => {
         'to': to,
