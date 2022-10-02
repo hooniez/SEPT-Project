@@ -63,7 +63,14 @@ Future<List<AppointmentView>> getAvailabilities(user) async {
   final url = Uri.http(API_HOST, APPOINTMENT_PATH, queryParameters);
 
   print(url);
-  final Response res = await get(url);
+
+  Map<String, String> header = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': user.value["Authorization"]
+  };
+
+  final Response res = await get(url, headers: header);
   print(res.statusCode);
   print(res.body.toString());
 

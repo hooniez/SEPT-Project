@@ -15,10 +15,14 @@ import 'dart:convert';
 class FrontPage extends StatelessWidget {
   final user;
   final Function setUser;
+  final Function setUserWithoutToken;
   final Function logoutUser;
 
   FrontPage(
-      {required this.user, required this.setUser, required this.logoutUser});
+      {required this.user,
+      required this.setUser,
+      required this.setUserWithoutToken,
+      required this.logoutUser});
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +84,9 @@ class FrontPage extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return SignupPage(setUser: setUser);
+                                    return SignupPage(
+                                        setUserWithoutToken:
+                                            setUserWithoutToken);
                                   }));
                                 },
                                 child: const Text("Register",
@@ -121,7 +127,9 @@ class FrontPage extends StatelessWidget {
                                   onPressed: () {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) {
-                                      return SignupPage(setUser: setUser);
+                                      return SignupPage(
+                                          setUserWithoutToken:
+                                              setUserWithoutToken);
                                     }));
                                   },
                                   child: const Text("Doctors",
@@ -136,8 +144,7 @@ class FrontPage extends StatelessWidget {
                               height: 50,
                               child: OutlinedButton(
                                 onPressed: () async {
-                                  var res =
-                                      await getSymptom(user.value["email"]);
+                                  var res = await getSymptom(user);
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
                                     return SymptomsPageCurrentSymptoms(
@@ -193,7 +200,8 @@ class FrontPage extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return SignupPage(setUser: setUser);
+                                    return SignupPage(
+                                        setUserWithoutToken: setUser);
                                   }));
                                 },
                                 child: const Text("Chat",
@@ -225,12 +233,20 @@ class FrontPage extends StatelessWidget {
   }
 }
 
-Future<Response> getSymptom(String patientemail) async {
+Future<Response> getSymptom(user) async {
   String API_HOST = "10.0.2.2:8085";
-  final queryParameters = {'email': patientemail};
+  final queryParameters = {'email': user.value["email"]};
   final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
   print(uri);
 
-  Response res = await get(uri);
+  Map<String, String> header = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': user.value["Authorization"]
+  };
+  Response res = await get(
+    uri,
+    headers: header,
+  );
   return res;
 }
