@@ -13,7 +13,6 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor

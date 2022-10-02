@@ -87,7 +87,8 @@ public class SecurityConfig {
                         "/**/*.css",
                         "/**/*.js")
                 .permitAll()
-                .antMatchers(SecurityConstant.SIGN_UP_URLS).permitAll()
+                .antMatchers(SecurityConstant.SIGNUP_URLS).permitAll()
+                .antMatchers(SecurityConstant.SIGNIN_URLS).permitAll()
                 // .antMatchers("/api/users/**").permitAll()
                 // .antMatchers(SecurityConstant.H2_URL).permitAll()
                 .anyRequest().authenticated()

@@ -50,7 +50,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         if (userType.equals("patient")) {
             user = patientRepository.getById(id);
         } else {
-            user = patientRepository.getById(id);
+            user = doctorRepository.getById(id);
         }
 
         if (user == null)

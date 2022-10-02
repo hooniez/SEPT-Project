@@ -9,11 +9,11 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 
 @Entity
-@ToString(callSuper = true)
 @Getter
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
 public class Doctor extends User {
 
     private String certificate;

@@ -9,7 +9,7 @@ import com.sept_group6.appointment_server.model.Appointment;
 public interface AppointmentRepository extends CrudRepository<Appointment, Long> {
     Optional<List<Appointment>> findByPatientEmail(String patientEmail);
 
-    Optional<List<Appointment>> findByDoctorEmail(String patientEmail);
+    Optional<List<Appointment>> findByDoctorEmail(String doctorEmail);
 
     Optional<List<Appointment>> findByAppointmentbooked(boolean booked);
 }
