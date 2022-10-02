@@ -13,14 +13,14 @@ public class CustomAuthenticationToken extends UsernamePasswordAuthenticationTok
     public CustomAuthenticationToken(Object principal, Object credentials, String userType) {
         super(principal, credentials);
         this.userType = userType;
-        super.setAuthenticated(false);
+        // super.setAuthenticated(false);
     }
 
     public CustomAuthenticationToken(Object principal, Object credentials, String userType,
             Collection<? extends GrantedAuthority> authorities) {
         super(principal, credentials, authorities);
         this.userType = userType;
-        super.setAuthenticated(true); // must use super, as we override
+        // super.setAuthenticated(true); // must use super, as we override
     }
 
     public String getUserType() {

@@ -32,7 +32,8 @@ public class JwtUserDetailsService implements UserDetailsService {
         return null;
     }
 
-    public UserDetails loadUserByEmailAndUsertype(String email, String userType) throws UsernameNotFoundException {
+    @Transactional
+    public JwtUserDetails loadUserByEmailAndUsertype(String email, String userType) throws UsernameNotFoundException {
 
         User user;
         if (userType.equals("patient")) {
@@ -42,11 +43,11 @@ public class JwtUserDetailsService implements UserDetailsService {
         }
         if (user == null)
             new UsernameNotFoundException("User not found");
-        return new JwtUserDetails(user);
+        return new JwtUserDetails(user.getUid(), user.getEmail(), user.getPassword(), userType);
     }
 
     @Transactional
-    public User loadUserByIdAndUserType(Long id, String userType) {
+    public JwtUserDetails loadUserByIdAndUserType(Long id, String userType) {
         User user;
         if (userType.equals("patient")) {
             user = patientRepository.getById(id);
@@ -56,7 +57,6 @@ public class JwtUserDetailsService implements UserDetailsService {
 
         if (user == null)
             new UsernameNotFoundException("User not found");
-        return user;
-
+        return new JwtUserDetails(user.getUid(), user.getEmail(), user.getPassword(), userType);
     }
 }

@@ -4,16 +4,22 @@ package com.sept_group6.sept_backend.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.sept_group6.sept_backend.model.User;
+import org.hibernate.Hibernate;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
@@ -22,6 +28,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
+
+    private static final Logger logger = LogManager.getLogger("Backend");
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
@@ -34,8 +42,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
                 Long userUid = tokenProvider.getUserUidFromJWT(jwt);
                 String userType = tokenProvider.getUserTypeFromJWT(jwt);
-                JwtUserDetails userDetails = new JwtUserDetails(jwtUserDetailsService.loadUserByIdAndUserType(userUid,
-                        userType));
+                JwtUserDetails userDetails = jwtUserDetailsService.loadUserByIdAndUserType(userUid,
+                        userType);
 
                 UsernamePasswordAuthenticationToken authentication = new CustomAuthenticationToken(
                         userDetails, null, userType, Collections.emptyList());

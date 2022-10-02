@@ -1,10 +1,9 @@
 package com.sept_group6.sept_backend.security;
 
 import io.jsonwebtoken.*;
+
 import org.springframework.security.core.Authentication;
-// import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import com.sept_group6.sept_backend.model.User;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -17,17 +16,18 @@ public class JwtTokenProvider {
 
     public String generateToken(Authentication authentication) {
         JwtUserDetails userDetails = (JwtUserDetails) authentication.getPrincipal();
-        User user = userDetails.getUser();
+        // User user = userDetails.getUser();
         Date now = new Date(System.currentTimeMillis());
 
         Date expiryDate = new Date(now.getTime() + SecurityConstant.EXPIRATION_TIME);
 
-        String userId = Long.toString(user.getUid());
+        String userId = Long.toString(userDetails.getUid());
 
         Map<String, Object> claims = new HashMap<>();
-        claims.put("uid", (Long.toString(user.getUid())));
-        claims.put("email", user.getEmail());
-        claims.put("fullName", user.getFirstname() + " " + user.getLastname());
+        claims.put("uid", userId);
+        claims.put("email", userDetails.getUsername());
+        claims.put("userType", userDetails.getUserType());
+        // claims.put("fullName", user.getFirstname() + " " + user.getLastname());
 
         return Jwts.builder()
                 .setSubject(userId)
@@ -68,6 +68,7 @@ public class JwtTokenProvider {
 
     public String getUserTypeFromJWT(String token) {
         Claims claims = Jwts.parser().setSigningKey(SecurityConstant.SECRET).parseClaimsJws(token).getBody();
+
         String userType = (String) claims.get("userType");
 
         return userType;
