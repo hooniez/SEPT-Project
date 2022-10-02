@@ -176,10 +176,14 @@ class _SymptomsPageCurrentSymptomsState
                                                   onPressed: () async {
                                                     await deleteSymptom(
                                                         allSymptoms[index]
-                                                            ['id']);
+                                                            ['id'],
+                                                        widget.getUser.value[
+                                                            "Authorization"]);
                                                     var res = await getSymptom(
                                                         widget.getUser
-                                                            .value["email"]);
+                                                            .value["email"],
+                                                        widget.getUser.value[
+                                                            "Authorization"]);
                                                     setState(() {
                                                       updatedSymptoms = res;
                                                     });
@@ -209,21 +213,33 @@ class _SymptomsPageCurrentSymptomsState
   }
 }
 
-Future<Response> getSymptom(String patientemail) async {
+Future<Response> getSymptom(String patientemail, String token) async {
   String API_HOST = "10.0.2.2:8085";
   final queryParameters = {'email': patientemail};
   final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
   print(uri);
 
-  Response res = await get(uri);
+  Map<String, String> header = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': token
+  };
+
+  Response res = await get(uri, headers: header);
   return res;
 }
 
-Future<Response> deleteSymptom(int id) async {
+Future<Response> deleteSymptom(int id, String token) async {
   String stringId = id.toString();
   String API_HOST = "10.0.2.2:8085";
   final uri = Uri.http(API_HOST, "/deletesymptom", {'id': stringId});
   print(uri);
-  Response res = await delete(uri);
+
+  Map<String, String> header = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': token
+  };
+  Response res = await delete(uri, headers: header);
   return res;
 }
