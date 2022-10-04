@@ -10,8 +10,9 @@ import 'package:intl/intl.dart';
 enum UserType { doctor, patient }
 
 class SignupPage extends StatefulWidget {
-  final Function setUser;
-  const SignupPage({Key? key, required this.setUser}) : super(key: key);
+  final Function setUserWithoutToken;
+  const SignupPage({Key? key, required this.setUserWithoutToken})
+      : super(key: key);
 
   @override
   State<SignupPage> createState() => _SignupPageState();
@@ -393,8 +394,9 @@ class _SignupPageState extends State<SignupPage> {
                                       customController.text,
                                       type,
                                     );
-                                    if (res.body.isNotEmpty) {
-                                      widget.setUser(res.body, type);
+                                    if (res.statusCode == 202) {
+                                      // widget.setUserWithoutToken(
+                                      //     res.body, type);
                                       Navigator.pushNamed(
                                           context, '/frontPage');
                                     } else {
@@ -457,7 +459,7 @@ Future<Response> createUser(
     });
   }
 
-  Response res = await put(url,
+  Response res = await post(url,
       headers: {
         'Accept': 'application/json',
         'content-type': 'application/json',

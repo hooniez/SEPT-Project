@@ -53,12 +53,18 @@ class AppointmentView {
 Future<List<AppointmentView>> getAvailabilities(user) async {
   // construct the request
   String API_HOST = "10.0.2.2:8081";
-  String APPOINTMENT_PATH = "/appointment/all";
+  String PATH = "/availability";
 
-  final url = Uri.http(API_HOST, APPOINTMENT_PATH);
+  final url = Uri.http(API_HOST, PATH);
+
+  Map<String, String> header = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': user.value["Authorization"]
+  };
 
   print(url);
-  final Response res = await get(url);
+  final Response res = await get(url, headers: header);
   print(res.statusCode);
   print(res.body.toString());
 
@@ -91,7 +97,7 @@ class _MyAppState extends State<AddAppointmentPage> {
     Map<String, String> header = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
-      // 'Authorization': '<Your token>'
+      'Authorization': widget.user.value["Authorization"]
     };
 
     final url = Uri.http(API_HOST, APPOINTMENT_PATH);

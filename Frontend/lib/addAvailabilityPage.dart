@@ -44,12 +44,12 @@ class _MyAppState extends State<addAvailabilityPage> {
   Future<Response> addAvailability() async {
     print(widget.user);
     String API_HOST = "10.0.2.2:8081";
-    String APPOINTMENT_PATH = "/appointment";
+    String PATH = "/availability";
 
     Map<String, String> header = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
-      // 'Authorization': '<Your token>'
+      'Authorization': widget.user.value["Authorization"]
     };
 
     DateTime start = DateFormat("HH:mm").parse(starttimeController.text);
@@ -62,12 +62,12 @@ class _MyAppState extends State<addAvailabilityPage> {
       'doctorName': widget.user.value['email'],
     };
 
-    final url = Uri.http(API_HOST, APPOINTMENT_PATH);
+    final url = Uri.http(API_HOST, PATH);
 
     print(url);
     print(body);
     final Response res =
-        await put(url, headers: header, body: json.encode(body));
+        await post(url, headers: header, body: json.encode(body));
     print(res.body.toString());
 
     return res;

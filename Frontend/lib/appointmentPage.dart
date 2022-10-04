@@ -59,11 +59,17 @@ Future<List<AppointmentView>> getAppointment(user) async {
     'usertype': user.value['usertype']
   };
 
+  Map<String, String> header = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': user.value["Authorization"]
+  };
+
   final url = Uri.http(API_HOST, APPOINTMENT_PATH, queryParameters);
 
   print(url);
-  final Response res = await get(url);
-  print(res.body.toString());
+  final Response res = await get(url, headers: header);
+  print(res.headers.toString());
 
   if (res.statusCode == 200 || res.statusCode == 202) {
     List jsonResponse = json.decode(res.body);
@@ -117,21 +123,22 @@ class _MyAppState extends State<AppointmentPage> {
             ]),
         body: Center(
             child: Column(children: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Color.fromARGB(255, 144, 119, 151), // background
-              onPrimary: Colors.white, // foreground
+          if (widget.user.value['usertype'] == "patient")
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Color.fromARGB(255, 144, 119, 151), // background
+                onPrimary: Colors.white, // foreground
+              ),
+              child: const Text(
+                'Make appointment',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () async {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return AddAppointmentPage(user: widget.user);
+                }));
+              },
             ),
-            child: const Text(
-              'Make appointment',
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () async {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return AddAppointmentPage(user: widget.user);
-              }));
-            },
-          ),
           Expanded(
             child: FutureBuilder<List<AppointmentView>>(
               future: futureData,
