@@ -47,11 +47,17 @@ class FrontPage extends StatelessWidget {
                       )
                     : Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Welcome ${user.value['firstname']}!',
-                          style: const TextStyle(
-                              color: Colors.black, fontSize: 24.0),
-                        ),
+                        child: user.value['usertype'] == 'admin'
+                            ? Text(
+                                'Admin Page',
+                                style: const TextStyle(
+                                    color: Colors.black, fontSize: 24.0),
+                              )
+                            : Text(
+                                'Welcome ${user.value['firstname']}!',
+                                style: const TextStyle(
+                                    color: Colors.black, fontSize: 24.0),
+                              ),
                       ),
                 user.value.isEmpty
                     ? Column(
@@ -93,30 +99,74 @@ class FrontPage extends StatelessWidget {
                                     style: TextStyle(fontSize: 18.0)),
                               ),
                             ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              width: 125,
+                              height: 40,
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return Login(
+                                      setUser: setUser,
+                                      forAdmin: true,
+                                    );
+                                  }));
+                                },
+                                child: const Text("Admin Login",
+                                    style: TextStyle(
+                                        fontSize: 15.0, color: Colors.grey)),
+                              ),
+                            ),
                           )
                         ],
                       )
                     : Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 200,
-                              height: 50,
-                              child: OutlinedButton(
-                                onPressed: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return PatientProfile(user: user);
-                                  }));
-                                },
-                                child: const Text(
-                                  "Profile",
-                                  style: TextStyle(fontSize: 18.0),
+                          if (user.value['usertype'] == "admin")
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: 200,
+                                height: 50,
+                                child: OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return SignupPage(
+                                        setUserWithoutToken:
+                                            setUserWithoutToken,
+                                        forDoctor: true,
+                                      );
+                                    }));
+                                  },
+                                  child: const Text("Register Doctor",
+                                      style: TextStyle(fontSize: 18.0)),
                                 ),
                               ),
                             ),
-                          ),
+                          if (user.value['usertype'] != "admin")
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: 200,
+                                height: 50,
+                                child: OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return PatientProfile(user: user);
+                                    }));
+                                  },
+                                  child: const Text(
+                                    "Profile",
+                                    style: TextStyle(fontSize: 18.0),
+                                  ),
+                                ),
+                              ),
+                            ),
                           if (user.value['usertype'] == "patient")
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -137,42 +187,44 @@ class FrontPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 200,
-                              height: 50,
-                              child: OutlinedButton(
-                                onPressed: () async {
-                                  var res = await getSymptom(user);
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return SymptomsPageCurrentSymptoms(
-                                        getUser: user, getSymptoms: res);
-                                  }));
-                                },
-                                child: const Text("Symptoms",
-                                    style: TextStyle(fontSize: 18.0)),
+                          if (user.value['usertype'] != "admin")
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: 200,
+                                height: 50,
+                                child: OutlinedButton(
+                                  onPressed: () async {
+                                    var res = await getSymptom(user);
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return SymptomsPageCurrentSymptoms(
+                                          getUser: user, getSymptoms: res);
+                                    }));
+                                  },
+                                  child: const Text("Symptoms",
+                                      style: TextStyle(fontSize: 18.0)),
+                                ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 200,
-                              height: 50,
-                              child: OutlinedButton(
-                                onPressed: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return AppointmentPage(user: user);
-                                  }));
-                                },
-                                child: const Text("Appointments",
-                                    style: TextStyle(fontSize: 18.0)),
+                          if (user.value['usertype'] != "admin")
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: 200,
+                                height: 50,
+                                child: OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return AppointmentPage(user: user);
+                                    }));
+                                  },
+                                  child: const Text("Appointments",
+                                      style: TextStyle(fontSize: 18.0)),
+                                ),
                               ),
                             ),
-                          ),
                           if (user.value['usertype'] == "doctor")
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -191,24 +243,25 @@ class FrontPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 200,
-                              height: 50,
-                              child: OutlinedButton(
-                                onPressed: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return SignupPage(
-                                        setUserWithoutToken: setUser);
-                                  }));
-                                },
-                                child: const Text("Chat",
-                                    style: TextStyle(fontSize: 18.0)),
+                          if (user.value['usertype'] != "admin")
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: 200,
+                                height: 50,
+                                child: OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return SignupPage(
+                                          setUserWithoutToken: setUser);
+                                    }));
+                                  },
+                                  child: const Text("Chat",
+                                      style: TextStyle(fontSize: 18.0)),
+                                ),
                               ),
                             ),
-                          ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: SizedBox(
