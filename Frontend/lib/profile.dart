@@ -28,16 +28,16 @@ class _MyAppState extends State<PatientProfile> {
 
   @override
   void initState() {
-    _firstname = widget.user.value['firstname'];
-    _lastname = widget.user.value['lastname'];
-    _email = widget.user.value['email'];
-    _dob = widget.user.value['dob'];
-    _mobile = widget.user.value['mobilenumber'];
-    _medhist = widget.user.value['medicalhistory'];
-    _password = widget.user.value['password'];
-    _userType = widget.user.value['usertype'];
-    _cert = widget.user.value['certificate'];
-    _token = widget.user.value['Authorization'];
+    _firstname = widget.user.value['firstname']!;
+    _lastname = widget.user.value['lastname']!;
+    _email = widget.user.value['email']!;
+    _dob = widget.user.value['dob']!;
+    _mobile = widget.user.value['mobilenumber']!;
+    _medhist = widget.user.value['medicalhistory']!;
+    _password = widget.user.value['password']!;
+    _userType = widget.user.value['usertype']!;
+    _cert = widget.user.value['certificate']!;
+    _token = widget.user.value['Authorization']!;
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -549,4 +549,23 @@ Future<Response> putPatientData(
     print(response.headers);
   }
   return response;
+}
+
+class ProfileLabel extends StatelessWidget {
+
+  ProfileLabel({this.text = '',this.itemColor=Colors.black, this.itemTitleFontSize=12});
+
+  final String text;
+  final Color itemColor;
+  final double itemTitleFontSize;
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Text(
+          'Password:',
+          style: TextStyle(
+              color: itemColor, fontSize: itemTitleFontSize),
+        ),
+      );
+  }
 }
