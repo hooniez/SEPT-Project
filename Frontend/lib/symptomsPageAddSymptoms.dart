@@ -85,7 +85,9 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                                         ),
                                         onPressed: () async {
                                           var getRes = await getSymptom(
-                                              widget.getUser.value["email"]);
+                                              widget.getUser.value["email"],
+                                              widget.getUser
+                                                  .value['Authorization']);
                                           Navigator.push(context,
                                               MaterialPageRoute(
                                                   builder: (context) {
@@ -165,11 +167,14 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                                             var res = await addSymptom(
                                                 symptomDescriptionController
                                                     .text,
-                                                widget.getUser.value['email']);
+                                                widget.getUser.value['email'],
+                                                widget.getUser
+                                                    .value['Authorization']);
                                             if (res.body.isNotEmpty) {
                                               var getRes = await getSymptom(
-                                                  widget
-                                                      .getUser.value["email"]);
+                                                  widget.getUser.value["email"],
+                                                  widget.getUser
+                                                      .value['Authorization']);
                                               Navigator.push(context,
                                                   MaterialPageRoute(
                                                       builder: (context) {
@@ -195,18 +200,23 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
   }
 }
 
-Future<Response> getSymptom(String patientemail) async {
+Future<Response> getSymptom(String patientemail, String token) async {
   String API_HOST = "10.0.2.2:8085";
   final queryParameters = {'email': patientemail};
   final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
   print(uri);
 
-  Response res = await get(uri);
+  Map<String, String> header = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': token
+  };
+  Response res = await get(uri, headers: header);
   return res;
 }
 
 Future<Response> addSymptom(
-    String symptomdescription, String patientemail) async {
+    String symptomdescription, String patientemail, String token) async {
   String API_HOST = "http://10.0.2.2:8085";
 
   final url = Uri.parse(API_HOST + "/addsymptom");
@@ -220,6 +230,7 @@ Future<Response> addSymptom(
       headers: {
         'Accept': 'application/json',
         'content-type': 'application/json',
+        'Authorization': token
       },
       body: body);
   return res;

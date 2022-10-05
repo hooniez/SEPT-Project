@@ -15,28 +15,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path = "/appointment")
-public class AppointmentController {
+@RequestMapping(path = "/availability")
+public class AvailabilityController {
     private static final Logger logger = LogManager.getLogger("Backend");
-    @Autowired
-    private PatientRepository patientRepository;
+
     @Autowired
     private DoctorRepository doctorRepository;
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-    // gets all booked & unbooked appointments related to the user
+    // get all unbooked appointments
     @GetMapping("")
-    public ResponseEntity<?> getAppointment(CustomAuthenticationToken authentication) {
+    public ResponseEntity<?> getUnbookedAppointment() {
         // logger.info(email + " " + usertype);
-        String email = authentication.getName();
-        String usertype = authentication.getUserType();
         Optional<List<Appointment>> appointments;
-        if (usertype.equals("patient")) {
-            appointments = appointmentRepository.findByPatientEmail(email);
-        } else {
-            appointments = appointmentRepository.findByDoctorEmail(email);
-        }
+        // select all unbooked appointments
+        appointments = appointmentRepository.findByAppointmentbooked(false);
         logger.info(appointments);
         if (appointments.isPresent()) {
             var appointmentViews = appointments.get().stream().map(Appointment::createView)
@@ -48,33 +42,33 @@ public class AppointmentController {
 
     }
 
-    // better to refactor this part to make it more readable.
-
-    // update a unbooked appointment
-    @PutMapping("")
+    // create a unbooked appointment
+    @PostMapping("")
     public ResponseEntity<?> makeAppointment(@RequestBody AppointmentView newView,
             CustomAuthenticationToken authentication) {
 
-        if (!authentication.getUserType().equals("patient")) {
-            return ResponseEntity.badRequest().body("User type must be patient!");
+        // logger.info(email + " " + usertype);
+
+        if (!authentication.getUserType().equals("doctor")) {
+            return ResponseEntity.badRequest().body("User type must be doctor!");
         }
         // patient name is email here
         String patientEmail = newView.getPatientName();
-        if (patientEmail != null && !patientEmail.isEmpty()) {
-            logger.info("patient make appointment");
+        if (patientEmail == null || patientEmail.isEmpty()) {
+            // doctor create a new entry
+            Appointment newAppointment = new Appointment();
             logger.info(newView);
-            // patient updates an existing entry
-            Optional<Appointment> appointment;
-            appointment = appointmentRepository.findById(newView.getId());
-            if (appointment.isPresent()) {
-                appointment.get().setPatient(patientRepository.findByEmail(patientEmail));
-                appointment.get().setAppointmentbooked(true);
-                Appointment savedAppointment = appointmentRepository.save(appointment.get());
-                AppointmentView savedView = savedAppointment.createView();
-                return ResponseEntity.accepted().body(savedView);
-            }
+            // doctor name is email here
+            newAppointment.setDoctor(doctorRepository.findByEmail(newView.getDoctorName()));
+            newAppointment.setDate(newView.getDate());
+            newAppointment.setStarttime(newView.getStarttime());
+            newAppointment.setEndtime(newView.getEndtime());
+            newAppointment.setAppointmentbooked(false);
+            Appointment savedAppointment = appointmentRepository.save(newAppointment);
+            AppointmentView savedView = savedAppointment.createView();
+            return ResponseEntity.accepted().body(savedView);
         }
-
         return ResponseEntity.badRequest().build();
+
     }
 }

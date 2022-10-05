@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ProfileApplication",
+            "request": "launch",
+            "mainClass": "com.sept_group6.profile.ProfileApplication",
+            "projectName": "Profile"
+        },
+        {
+            "type": "java",
             "name": "Launch SymptomApplication",
             "request": "launch",
             "mainClass": "com.sept_group6.symptom.SymptomApplication",

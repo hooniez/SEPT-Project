@@ -35,16 +35,18 @@ class _LoginState extends State<Login> {
 
     final body = {
       'email': emailController.text,
-      'password': passwordController.text
+      'password': passwordController.text,
+      'userType': type
     };
 
     final uri = Uri.http(API_HOST, "/$type/signin");
     print(uri);
 
     Response res = await post(uri, headers: header, body: json.encode(body));
+    print(res.headers);
     print(res.body);
-    if (res.body.isNotEmpty) {
-      widget.setUser(res.body, type);
+    if (res.statusCode == 202) {
+      widget.setUser(res.body, type, res.headers['authorization']);
       Navigator.pushNamed(context, '/frontPage');
     } else {
       print("login unsuccessful");

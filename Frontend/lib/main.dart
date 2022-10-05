@@ -19,7 +19,13 @@ class MyApp extends HookWidget {
   Widget build(BuildContext context) {
     final user = useState({});
 
-    void _setUser(String res, String userType) {
+    void _setUser(String res, String userType, String token) {
+      user.value = json.decode(res);
+      user.value['usertype'] = userType;
+      user.value['Authorization'] = token;
+    }
+
+    void _setUserWithoutToken(String res, String userType) {
       user.value = json.decode(res);
       user.value['usertype'] = userType;
     }
@@ -35,10 +41,17 @@ class MyApp extends HookWidget {
         ),
 
         // home: const PatientProfile(),
-        home: FrontPage(user: user, setUser: _setUser, logoutUser: _logoutUser),
+        home: FrontPage(
+            user: user,
+            setUser: _setUser,
+            setUserWithoutToken: _setUserWithoutToken,
+            logoutUser: _logoutUser),
         routes: {
-          '/frontPage': (context) =>
-              FrontPage(user: user, setUser: _setUser, logoutUser: _logoutUser),
+          '/frontPage': (context) => FrontPage(
+              user: user,
+              setUser: _setUser,
+              setUserWithoutToken: _setUserWithoutToken,
+              logoutUser: _logoutUser),
         });
   }
 }
