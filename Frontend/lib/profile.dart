@@ -28,16 +28,16 @@ class _MyAppState extends State<PatientProfile> {
 
   @override
   void initState() {
-    _firstname = widget.user.value['firstname']!;
-    _lastname = widget.user.value['lastname']!;
-    _email = widget.user.value['email']!;
-    _dob = widget.user.value['dob']!;
-    _mobile = widget.user.value['mobilenumber']!;
-    _medhist = widget.user.value['medicalhistory']!;
-    _password = widget.user.value['password']!;
-    _userType = widget.user.value['usertype']!;
-    _cert = widget.user.value['certificate']!;
-    _token = widget.user.value['Authorization']!;
+    _firstname = widget.user.value['firstname'];
+    _lastname = widget.user.value['lastname'];
+    _email = widget.user.value['email'];
+    _dob = widget.user.value['dob'];
+    _mobile = widget.user.value['mobilenumber'];
+    _medhist = widget.user.value['medicalhistory'];
+    _password = widget.user.value['password'];
+    _userType = widget.user.value['usertype'];
+    _cert = widget.user.value['certificate'];
+    _token = widget.user.value['Authorization'];
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -111,14 +111,7 @@ class _MyAppState extends State<PatientProfile> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          'Email:',
-                          style: TextStyle(
-                              color: itemColor, fontSize: itemTitleFontSize),
-                        ),
-                      ),
+                      ProfileLabel(text:'Email',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
@@ -143,14 +136,7 @@ class _MyAppState extends State<PatientProfile> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          'First Name:',
-                          style: TextStyle(
-                              color: itemColor, fontSize: itemTitleFontSize),
-                        ),
-                      ),
+                      ProfileLabel(text:'First Name',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
@@ -197,14 +183,7 @@ class _MyAppState extends State<PatientProfile> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          'Last Name:',
-                          style: TextStyle(
-                              color: itemColor, fontSize: itemTitleFontSize),
-                        ),
-                      ),
+                      ProfileLabel(text:'Last Name',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
@@ -251,14 +230,7 @@ class _MyAppState extends State<PatientProfile> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          'Date of Birth:',
-                          style: TextStyle(
-                              color: itemColor, fontSize: itemTitleFontSize),
-                        ),
-                      ),
+                      ProfileLabel(text:'Date Of Birth',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
@@ -319,14 +291,7 @@ class _MyAppState extends State<PatientProfile> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          'Mobile No:',
-                          style: TextStyle(
-                              color: itemColor, fontSize: itemTitleFontSize),
-                        ),
-                      ),
+                      ProfileLabel(text:'Mobile No.',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
@@ -441,14 +406,7 @@ class _MyAppState extends State<PatientProfile> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          'Password:',
-                          style: TextStyle(
-                              color: itemColor, fontSize: itemTitleFontSize),
-                        ),
-                      ),
+                      ProfileLabel(text:'Password',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
@@ -562,7 +520,7 @@ class ProfileLabel extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.all(4.0),
         child: Text(
-          'Password:',
+          text,
           style: TextStyle(
               color: itemColor, fontSize: itemTitleFontSize),
         ),
