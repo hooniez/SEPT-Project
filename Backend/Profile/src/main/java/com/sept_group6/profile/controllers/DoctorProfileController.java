@@ -1,5 +1,12 @@
 package com.sept_group6.profile.controllers;
 
+// security
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.sept_group6.profile.dao.DoctorRepository;
 import com.sept_group6.profile.model.Doctor;
 import org.apache.logging.log4j.LogManager;
@@ -18,6 +25,9 @@ public class DoctorProfileController {
     @Autowired
     private DoctorRepository doctorRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @PutMapping(path="", consumes="application/json", produces="application/json")
     public ResponseEntity<?> updateInfo(@RequestBody Doctor doctorEdit) {
         System.out.println("Reached endpoint");
@@ -25,6 +35,12 @@ public class DoctorProfileController {
                 doctorRepository.findByEmail(doctorEdit.getEmail());
 
         if (doctor.isPresent()) {
+            if(doctorEdit.getPassword().equals(doctor.get().getPassword())) {
+                doctorEdit.setPassword(doctorEdit.getPassword());
+            } else {
+                doctorEdit.setPassword(bCryptPasswordEncoder.encode(doctorEdit.getPassword()));
+            }
+
             doctorRepository.save(doctorEdit);
             return ResponseEntity.accepted().build();
         } else {
