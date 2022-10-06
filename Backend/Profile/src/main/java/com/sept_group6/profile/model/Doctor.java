@@ -1,37 +1,27 @@
 package com.sept_group6.profile.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.ToString;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@ToString(callSuper = true)
 @Getter
-@Setter
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Doctor {
-
-    @Id
-    private String email;
-    private String firstname;
-    private String lastname;
-
-    private String dob;
-    private String password;
-    private String mobilenumber;
+public class Doctor extends User {
 
     private String certificate;
 
-    public String toString() {
-        return " email= " + email + " firstName= " + firstname + " lastName= " + lastname +
-                " dob= " + dob + " password= " + password + " mobileNumber= " + mobilenumber + " certificate= "
-                + certificate;
+    public Doctor(long uid, String email, String firstname, String lastname, String dob, String password,
+                  String mobilenumber, String certificate) {
+        super(uid, email, firstname, lastname, dob, password, mobilenumber);
+        this.certificate = certificate;
     }
 
 }
