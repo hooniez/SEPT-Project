@@ -1,6 +1,6 @@
 package com.sept_group6.profile.dao;
 
-import com.sept_group6.sept_backend.model.User;
+import com.sept_group6.profile.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 

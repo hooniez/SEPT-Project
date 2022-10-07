@@ -31,11 +31,11 @@ public class DoctorProfileController {
     @PutMapping(path="", consumes="application/json", produces="application/json")
     public ResponseEntity<?> updateInfo(@RequestBody Doctor doctorEdit) {
         System.out.println("Reached endpoint");
-        Optional<Doctor> doctor =
+        Doctor doctor =
                 doctorRepository.findByEmail(doctorEdit.getEmail());
 
-        if (doctor.isPresent()) {
-            if(doctorEdit.getPassword().equals(doctor.get().getPassword())) {
+        if(doctorRepository.existsByEmail(doctorEdit.getEmail())) {
+            if(doctorEdit.getPassword().equals(doctor.getPassword())) {
                 doctorEdit.setPassword(doctorEdit.getPassword());
             } else {
                 doctorEdit.setPassword(bCryptPasswordEncoder.encode(doctorEdit.getPassword()));

@@ -25,7 +25,7 @@ class _MyAppState extends State<PatientProfile> {
   late String _userType;
   late String _cert;
   late String _token;
-
+  late String _passworddupe = _password;
   @override
   void initState() {
     _firstname = widget.user.value['firstname'];
@@ -50,7 +50,8 @@ class _MyAppState extends State<PatientProfile> {
   late Map<String, TextEditingController> textControllers = {
     'firstname': TextEditingController(text: _firstname),
     'lastname': TextEditingController(text: _lastname),
-    'password': TextEditingController(text: _password),
+    'password': TextEditingController(text: ''),
+    'confirmPassword': TextEditingController(text: ''),
     'email': TextEditingController(text: _email),
     'dob': TextEditingController(text: _dob),
     'mobile': TextEditingController(text: _mobile),
@@ -58,27 +59,10 @@ class _MyAppState extends State<PatientProfile> {
     'certificate': TextEditingController(text: _cert)
   };
 
-  Map<String, bool> enabledFlags = {
-    'firstname': false,
-    'lastname': false,
-    'password': false,
-    'email': false,
-    'dob': false,
-    'mobile': false,
-    'medhist': false
-  };
-
+  bool enabledStatus = false;
   Color textBoxSelectedColor = Color.fromRGBO(201, 217, 214, 1);
   Color textBoxNotSelectedColor = Color.fromRGBO(224, 224, 224, 1);
-  late Map<String, Color> textBoxBackgrounds = {
-    'firstname': textBoxNotSelectedColor,
-    'lastname': textBoxNotSelectedColor,
-    'email': textBoxNotSelectedColor,
-    'dob': textBoxNotSelectedColor,
-    'mobile': textBoxNotSelectedColor,
-    'medhist': textBoxNotSelectedColor,
-    'password': textBoxNotSelectedColor
-  };
+  Color textBoxBackgrounds = Color.fromRGBO(224, 224, 224, 1);
 
   final double editButtonPadding = 4.0;
   Color itemColor = Colors.black;
@@ -116,19 +100,11 @@ class _MyAppState extends State<PatientProfile> {
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
                           width: 150,
-                          color: textBoxBackgrounds['email'],
-                          child: TextField(
+                          color: textBoxNotSelectedColor,
+                          child: TextFormField(
                             controller: textControllers['email'],
-                            enabled: enabledFlags['email'],
+                            enabled: false,
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(editButtonPadding),
-                        child: SizedBox(
-                          width: editButtonDetails['width'], // <-- match_parent
-                          height:
-                              editButtonDetails['height'], // <-- match-parent
                         ),
                       ),
                     ],
@@ -141,40 +117,10 @@ class _MyAppState extends State<PatientProfile> {
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
                           width: 150,
-                          color: textBoxBackgrounds['firstname'],
-                          child: TextField(
+                          color: textBoxBackgrounds,
+                          child: TextFormField(
                             controller: textControllers['firstname'],
-                            enabled: enabledFlags['firstname'],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(editButtonPadding),
-                        child: SizedBox(
-                          width: editButtonDetails['width'], // <-- match_parent
-                          height:
-                              editButtonDetails['height'], // <-- match-parent
-                          child: IconButton(
-                            icon: enabledFlags['firstname']!
-                                ? Icon(Icons.save_outlined)
-                                : Icon(Icons.create_outlined),
-                            color: Colors.blue,
-                            onPressed: () {
-                              setState(() {
-                                enabledFlags['firstname'] =
-                                    !(enabledFlags['firstname']!);
-                                if (enabledFlags['firstname'] == true) {
-                                  textBoxBackgrounds['firstname'] =
-                                      textBoxSelectedColor;
-                                  // do nothing
-                                } else {
-                                  textBoxBackgrounds['firstname'] =
-                                      textBoxNotSelectedColor;
-                                  Future response = putPatientData(
-                                      textControllers, _userType, _token);
-                                }
-                              });
-                            },
+                            enabled: enabledStatus,
                           ),
                         ),
                       ),
@@ -188,40 +134,10 @@ class _MyAppState extends State<PatientProfile> {
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
                           width: 150,
-                          color: textBoxBackgrounds['lastname'],
-                          child: TextField(
+                          color: textBoxBackgrounds,
+                          child: TextFormField(
                             controller: textControllers['lastname'],
-                            enabled: enabledFlags['lastname'],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(editButtonPadding),
-                        child: SizedBox(
-                          width: editButtonDetails['width'], // <-- match_parent
-                          height:
-                              editButtonDetails['height'], // <-- match-parent
-                          child: IconButton(
-                            icon: enabledFlags['lastname']!
-                                ? Icon(Icons.save_outlined)
-                                : Icon(Icons.create_outlined),
-                            color: Colors.blue,
-                            onPressed: () {
-                              setState(() {
-                                enabledFlags['lastname'] =
-                                    !(enabledFlags['lastname']!);
-                                if (enabledFlags['lastname'] == true) {
-                                  textBoxBackgrounds['lastname'] =
-                                      textBoxSelectedColor;
-                                  // do nothing
-                                } else {
-                                  textBoxBackgrounds['lastname'] =
-                                      textBoxNotSelectedColor;
-                                  Future response = putPatientData(
-                                      textControllers, _userType, _token);
-                                }
-                              });
-                            },
+                            enabled: enabledStatus,
                           ),
                         ),
                       ),
@@ -235,12 +151,12 @@ class _MyAppState extends State<PatientProfile> {
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
                           width: 150,
-                          color: textBoxBackgrounds['dob'],
-                          child: TextField(
+                          color: textBoxBackgrounds,
+                          child: TextFormField(
                               controller: textControllers['dob'],
-                              enabled: enabledFlags['dob'],
+                              enabled: enabledStatus,
                               onTap: () async {
-                                if (enabledFlags['dob'] == true) {
+                                if (enabledStatus) {
                                   DateTime? pickedDate = await showDatePicker(
                                       context: context,
                                       initialDate: DateTime.now(),
@@ -258,34 +174,6 @@ class _MyAppState extends State<PatientProfile> {
                               }),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(editButtonPadding),
-                        child: SizedBox(
-                          width: editButtonDetails['width'], // <-- match_parent
-                          height:
-                              editButtonDetails['height'], // <-- match-parent
-                          child: IconButton(
-                            icon: enabledFlags['dob']!
-                                ? Icon(Icons.save_outlined)
-                                : Icon(Icons.create_outlined),
-                            color: Colors.blue,
-                            onPressed: () {
-                              setState(() {
-                                enabledFlags['dob'] = !(enabledFlags['dob']!);
-                                if (enabledFlags['dob'] == true) {
-                                  textBoxBackgrounds['dob'] =
-                                      textBoxSelectedColor;
-                                } else {
-                                  textBoxBackgrounds['dob'] =
-                                      textBoxNotSelectedColor;
-                                  Future response = putPatientData(
-                                      textControllers, _userType, _token);
-                                }
-                              });
-                            },
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                   Row(
@@ -296,40 +184,10 @@ class _MyAppState extends State<PatientProfile> {
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
                           width: 150,
-                          color: textBoxBackgrounds['mobile'],
-                          child: TextField(
+                          color: textBoxBackgrounds,
+                          child: TextFormField(
                             controller: textControllers['mobile'],
-                            enabled: enabledFlags['mobile'],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(editButtonPadding),
-                        child: SizedBox(
-                          width: editButtonDetails['width'], // <-- match_parent
-                          height:
-                              editButtonDetails['height'], // <-- match-parent
-                          child: IconButton(
-                            icon: enabledFlags['mobile']!
-                                ? Icon(Icons.save_outlined)
-                                : Icon(Icons.create_outlined),
-                            color: Colors.blue,
-                            onPressed: () {
-                              setState(() {
-                                enabledFlags['mobile'] =
-                                    !(enabledFlags['mobile']!);
-                                if (enabledFlags['mobile'] == true) {
-                                  textBoxBackgrounds['mobile'] =
-                                      textBoxSelectedColor;
-                                  // do nothing
-                                } else {
-                                  textBoxBackgrounds['mobile'] =
-                                      textBoxNotSelectedColor;
-                                  Future response = putPatientData(
-                                      textControllers, _userType, _token);
-                                }
-                              });
-                            },
+                            enabled: enabledStatus,
                           ),
                         ),
                       ),
@@ -354,53 +212,23 @@ class _MyAppState extends State<PatientProfile> {
                                     fontSize: itemTitleFontSize),
                               ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(editButtonPadding),
-                        child: SizedBox(
-                          width: editButtonDetails['width'], // <-- match_parent
-                          height:
-                              editButtonDetails['height'], // <-- match-parent
-                          child: IconButton(
-                            icon: enabledFlags['medhist']!
-                                ? Icon(Icons.save_outlined)
-                                : Icon(Icons.create_outlined),
-                            color: Colors.blue,
-                            onPressed: () {
-                              setState(() {
-                                enabledFlags['medhist'] =
-                                    !(enabledFlags['medhist']!);
-                                if (enabledFlags['medhist'] == true) {
-                                  textBoxBackgrounds['medhist'] =
-                                      textBoxSelectedColor;
-                                  // do nothing
-                                } else {
-                                  textBoxBackgrounds['medhist'] =
-                                      textBoxNotSelectedColor;
-                                  Future response = putPatientData(
-                                      textControllers, _userType, _token);
-                                }
-                              });
-                            },
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                   Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Container(
                         width: double.infinity,
-                        color: textBoxBackgrounds['medhist'],
+                        color: textBoxBackgrounds,
                         child: _userType == "doctor"
-                            ? TextField(
-                                maxLines: 7,
+                            ? TextFormField(
+                                maxLines: 5,
                                 controller: textControllers['certificate'],
-                                enabled: enabledFlags['medhist'],
+                                enabled: enabledStatus,
                               )
-                            : TextField(
-                                maxLines: 7,
+                            : TextFormField(
+                                maxLines: 5,
                                 controller: textControllers['medhist'],
-                                enabled: enabledFlags['medhist'],
+                                enabled: enabledStatus,
                               )),
                   ),
                   Row(
@@ -411,44 +239,89 @@ class _MyAppState extends State<PatientProfile> {
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
                           width: 150,
-                          color: textBoxBackgrounds['password'],
-                          child: TextField(
+                          color: textBoxBackgrounds,
+                          child: TextFormField(
                             controller: textControllers['password'],
-                            enabled: enabledFlags['password'],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(editButtonPadding),
-                        child: SizedBox(
-                          width: editButtonDetails['width'], // <-- match_parent
-                          height:
-                              editButtonDetails['height'], // <-- match-parent
-                          child: IconButton(
-                            icon: enabledFlags['password']!
-                                ? Icon(Icons.save_outlined)
-                                : Icon(Icons.create_outlined),
-                            color: Colors.blue,
-                            onPressed: () {
-                              setState(() {
-                                enabledFlags['password'] =
-                                    !(enabledFlags['password']!);
-                                if (enabledFlags['password'] == true) {
-                                  textBoxBackgrounds['password'] =
-                                      textBoxSelectedColor;
-                                  // do nothing
+                            obscureText: true,
+                            enabled: enabledStatus,
+                              validator: (value) {
+                                if (value == null ||
+                                    value.length < 7 ||
+                                    value.length > 255) {
+                                  return 'This password does not match with the inputted password';
                                 } else {
-                                  textBoxBackgrounds['password'] =
-                                      textBoxNotSelectedColor;
-                                  Future response = putPatientData(
-                                      textControllers, _userType, _token);
+                                  return null;
                                 }
-                              });
-                            },
+                              }
                           ),
                         ),
                       ),
                     ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ProfileLabel(text:'Confirm password',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Container(
+                          width: 150,
+                          color: textBoxBackgrounds,
+                          child: TextFormField(
+                            controller: textControllers['confirmPassword'],
+                            obscureText: true,
+                            enabled: enabledStatus,
+                              validator: (value) {
+                                if (value == null ||
+                                    value.length < 7 ||
+                                    value.length > 255 ||
+                                    value != textControllers['password']!.text) {
+                                  return 'Passwords do not match';
+                                } else {
+                                  return null;
+                                }
+                              }
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),Padding(
+                    padding: EdgeInsets.all(editButtonPadding),
+                    child: SizedBox(
+                      width: editButtonDetails['width'], // <-- match_parent
+                      height:
+                      editButtonDetails['height'], // <-- match-parent
+                      child: IconButton(
+                        icon: enabledStatus
+                            ? Icon(Icons.save_outlined)
+                            : Icon(Icons.create_outlined),
+                        color: Colors.blue,
+                        onPressed: () {
+                          setState(() {
+                                enabledStatus = !enabledStatus;
+                                if (enabledStatus) {
+                                  textBoxBackgrounds = textBoxSelectedColor;
+                                  // do nothing
+                                } else {
+                                  textBoxBackgrounds = textBoxNotSelectedColor;
+                                  if (_formKey.currentState!.validate()) {
+                                    print('valid');
+                                    Future response = putPatientData(
+                                        textControllers, _userType, _token);
+                                  } else {
+                                    print('invalid');
+                                    textControllers['password']!.text =
+                                        _passworddupe;
+                                    Future response = putPatientData(
+                                        textControllers, _userType, _token);
+                                    textControllers['password']!.text = '';
+                                    textControllers['password']!.text = textControllers['password']!.text;
+                                  }
+                                }
+                          });
+                        },
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -461,6 +334,8 @@ class _MyAppState extends State<PatientProfile> {
 Future<Response> putPatientData(
     Map<String, TextEditingController> textControlDict, userType, token) async {
   Response response;
+
+  print(textControlDict['password']!.text);
   if (userType == "doctor") {
     String uri = "http://10.0.2.2:8091/doctor/profile";
     final url = Uri.parse(uri);
@@ -500,9 +375,7 @@ Future<Response> putPatientData(
   }
 
   if (response.statusCode == 200 || response.statusCode == 202) {
-    final parsed = json.decode(response.body);
-    print(parsed);
-    return parsed;
+    return response;
   } else {
     print(response.headers);
   }
