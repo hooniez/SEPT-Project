@@ -52,7 +52,7 @@ class AppointmentView {
 
 Future<List<AppointmentView>> getAvailabilities(user) async {
   // construct the request
-  String API_HOST = "10.0.2.2:8081";
+  String API_HOST = "localhost:8081";
   String PATH = "/availability";
 
   final url = Uri.http(API_HOST, PATH);
@@ -91,7 +91,7 @@ class _MyAppState extends State<AddAppointmentPage> {
   }
 
   void addAppointment(AppointmentView appointmentView) async {
-    String API_HOST = "10.0.2.2:8081";
+    String API_HOST = "localhost:8081";
     String APPOINTMENT_PATH = "/appointment";
 
     Map<String, String> header = {

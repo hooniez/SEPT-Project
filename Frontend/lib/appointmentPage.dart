@@ -51,7 +51,7 @@ class AppointmentView {
 
 Future<List<AppointmentView>> getAppointment(user) async {
   // construct the request
-  String API_HOST = "10.0.2.2:8081";
+  String API_HOST = "localhost:8081";
   String APPOINTMENT_PATH = "/appointment";
 
   final queryParameters = {

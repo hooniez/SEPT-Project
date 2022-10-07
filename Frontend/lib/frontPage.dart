@@ -234,7 +234,7 @@ class FrontPage extends StatelessWidget {
 }
 
 Future<Response> getSymptom(user) async {
-  String API_HOST = "10.0.2.2:8085";
+  String API_HOST = "localhost:8085";
   final queryParameters = {'email': user.value["email"]};
   final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
   print(uri);

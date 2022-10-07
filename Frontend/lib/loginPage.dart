@@ -24,7 +24,7 @@ class _LoginState extends State<Login> {
   TextEditingController passwordController = TextEditingController();
 
   void login() async {
-    String API_HOST = "10.0.2.2:8080";
+    String API_HOST = "localhost:8080";
     String type = _userType.toString().split('.').last;
 
     Map<String, String> header = {
