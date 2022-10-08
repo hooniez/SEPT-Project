@@ -1,0 +1,7 @@
+docker network create sept-mysql
+
+docker container run --name mysqldb --network sept-mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=sept_db -d mysql:8
+
+docker build -f Dockerfile -t sept-backend-docker-spring-boot .
+
+docker container run --network sept-mysql --name true-container -p 8080:8080 -d sept-backend-docker-spring-boot
