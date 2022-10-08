@@ -4,18 +4,27 @@ import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
 // import 'dart:html';
 
-enum UserType { doctor, patient }
+enum UserType { doctor, patient, admin }
 
 class Login extends StatefulWidget {
   final Function setUser;
-  Login({required this.setUser});
+  final bool forAdmin;
+  Login({required this.setUser, this.forAdmin=false});
 
   @override
   State<Login> createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-  UserType? _userType = UserType.patient;
+  UserType? _userType;
+  String? API_HOST;
+
+  @override
+  void initState() {
+    _userType = widget.forAdmin ? UserType.admin : UserType.patient;
+    API_HOST = widget.forAdmin ? "10.0.2.2:8089" : "10.0.2.2:8080";
+  }
+
 
   final _formKey = GlobalKey<FormState>();
 
@@ -24,7 +33,6 @@ class _LoginState extends State<Login> {
   TextEditingController passwordController = TextEditingController();
 
   void login() async {
-    String API_HOST = "10.0.2.2:8080";
     String type = _userType.toString().split('.').last;
 
     Map<String, String> header = {
@@ -39,7 +47,8 @@ class _LoginState extends State<Login> {
       'userType': type
     };
 
-    final uri = Uri.http(API_HOST, "/$type/signin");
+    final uri = Uri.http(API_HOST!, "/$type/signin");
+    print(body);
     print(uri);
 
     Response res = await post(uri, headers: header, body: json.encode(body));
@@ -80,13 +89,19 @@ class _LoginState extends State<Login> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  _userType == UserType.admin ?
                   const Text(
+                    'Admin Login',
+                    style: TextStyle(color: Colors.black, fontSize: 28.0),
+                  ) : const Text(
                     'Login',
                     style: TextStyle(color: Colors.black, fontSize: 28.0),
-                  ),
+                  )
+                  ,
                   const Padding(
                     padding: EdgeInsets.only(top: 40.0),
                   ),
+                  _userType != UserType.admin ?
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -121,6 +136,8 @@ class _LoginState extends State<Login> {
                         ),
                       ]),
                     ],
+                  ) : (
+                  Row()
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
