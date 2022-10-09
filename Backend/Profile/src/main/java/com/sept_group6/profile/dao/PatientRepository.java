@@ -1,11 +1,11 @@
 package com.sept_group6.profile.dao;
 
 import com.sept_group6.profile.model.Patient;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface PatientRepository extends CrudRepository<Patient, Long> {
-    Optional<Patient> findByEmail(String email);
+public interface PatientRepository extends UserRepository<Patient> {
+    // Optional<Patient> findByEmailAndPassword(String email, String password);
 
+    // boolean existsByEmail(String Email);
 }
