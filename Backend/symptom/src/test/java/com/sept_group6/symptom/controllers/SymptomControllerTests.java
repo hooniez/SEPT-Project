@@ -1,4 +1,4 @@
-package com.sept_group6.symptom;
+package com.sept_group6.symptom.controllers;
 
 //import org.hamcrest.Matchers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,8 @@ import java.util.*;
 import org.mockito.Mockito;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -23,6 +25,7 @@ import org.springframework.http.MediaType;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = SymptomController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class SymptomControllerTests {
 
     @Autowired
