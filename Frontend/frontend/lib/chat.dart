@@ -50,7 +50,8 @@ class ChatPageState extends State<ChatPage> {
   void onConnect(StompFrame frame) {
     print("connected");
     // client.subscribe(destination: '/user/max/queue/msg', callback: onMessage);
-    client.subscribe(destination: '/topic/chat', callback: onMessageTopic);
+    // client.subscribe(destination: '/topic/chat', callback: onMessageTopic);
+    client.subscribe(destination: '/topic/chat/max', callback: onMessageTopic);
     client.send(destination: '/app/register', body: 'max', headers: {});
     print("subscribed and registered");
   }
@@ -64,6 +65,10 @@ class ChatPageState extends State<ChatPage> {
         messages.add(m);
       });
     }
+  }
+
+  void onPrivateMessage(StompFrame frame) {
+    print("message");
   }
 
   @override

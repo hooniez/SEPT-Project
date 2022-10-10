@@ -30,22 +30,23 @@ public class ChatController {
         System.out.print("Message from: ");
         System.out.println(principal.getName());
         System.out.println(message.getText());
-        
-        for (Connection con : connections) {
-            if (con.getUsername().equals(message.getTo())) {
-                System.out.print(con.getUsername());
-                System.out.println(" found! Now sending message back");
-                template.convertAndSendToUser("max", "/user/queue/msg", message);
-                System.out.println("message sent to user");
-            }
 
+        for (Connection con : connections) {
             if (con.getSessionId().equals(principal.getName())) {
                 message.setFrom(con.getUsername());
             }
         }
 
-        template.convertAndSend("/topic/chat", message);
-
+        for (Connection con : connections) {
+            if (con.getUsername().equals(message.getTo())) {
+                System.out.print(con.getUsername());
+                System.out.println(" found! Now sending message back");
+                System.out.println("topic/chat/" + con.getUsername());
+                template.convertAndSend("/topic/chat/" + con.getUsername(), message);
+                System.out.println("message sent to user");
+            }
+        }
+        
         System.out.println("sent!");
     }
 

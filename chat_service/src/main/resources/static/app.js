@@ -21,6 +21,10 @@ function connect() {
         stompClient.subscribe('/topic/test', function (greeting) {
             console.log(JSON.parse(greeting.body).content);
         });
+        stompClient.subscribe('/topic/chat/greg', function (greeting) {
+            console.log("It worked!!");
+            console.log(JSON.parse(greeting.body).content);
+        });
         stompClient.send("/app/register", {}, "greg")
     });
 }
