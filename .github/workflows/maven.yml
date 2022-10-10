@@ -29,8 +29,8 @@ jobs:
         cache: maven
     - name: Build SEPT_Backend
       run: mvn -B package --file Backend/SEPT_Backend/pom.xml
-    - name: Build sympton
-      run: mvn -B package --file Backend/sympton/pom.xml
+    - name: Build symptom
+      run: mvn -B package --file Backend/symptom/pom.xml
     - name: Build Profile
       run: mvn -B package --file Backend/Profile/pom.xml
     - name: Build Appointment_Server
