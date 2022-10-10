@@ -1,6 +1,6 @@
-package com.sept_group6.profile.dao;
+package com.sept_group6.symptom.dao;
 
-import com.sept_group6.profile.model.Patient;
+import com.sept_group6.symptom.model.Patient;
 
 import java.util.Optional;
 

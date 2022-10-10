@@ -1,4 +1,4 @@
-package com.sept_group6.profile.model;
+package com.sept_group6.symptom.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

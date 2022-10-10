@@ -1,35 +1,38 @@
-    package com.sept_group6.profile;
-    import com.fasterxml.jackson.databind.ObjectMapper;
-    import com.sept_group6.profile.controllers.DoctorProfileController;
-    import com.sept_group6.profile.dao.DoctorRepository;
-    import com.sept_group6.profile.model.Doctor;
-    import org.junit.jupiter.api.Test;
-    import org.mockito.Mockito;
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-    import org.springframework.boot.test.mock.mockito.MockBean;
-    import org.springframework.http.MediaType;
-    import org.springframework.test.web.servlet.MockMvc;
-    import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-    import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+package com.sept_group6.profile;
 
-    import java.util.Optional;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sept_group6.profile.controllers.DoctorProfileController;
+import com.sept_group6.profile.dao.DoctorRepository;
+import com.sept_group6.profile.model.Doctor;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-    import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import java.util.Optional;
 
-    @WebMvcTest(controllers = DoctorProfileController.class)
-    class DoctorProfileControllerTests {
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-    @Autowired
-    private MockMvc mockMvc;
-    @Autowired
-    private ObjectMapper objectMapper;
-    @MockBean
-    private DoctorRepository doctorRepository;
+@WebMvcTest(controllers = DoctorProfileController.class)
+@AutoConfigureMockMvc(addFilters = false)
+class DoctorProfileControllerTests {
+
+        @Autowired
+        private MockMvc mockMvc;
+        @Autowired
+        private ObjectMapper objectMapper;
+        @MockBean
+        private DoctorRepository doctorRepository;
 
     @Test
     public void testUpdateDoctorAccepted() throws Exception {
-        Doctor doctor1 = new Doctor("doc@docdoc.doc", "doc",
+        Doctor doctor1 = new Doctor(1L,"doc@docdoc.doc", "doc",
                 "l", "2002-02-02", "doc", "0000",
                 "history here");
 
@@ -46,7 +49,7 @@
 
         @Test
         public void testUpdateDoctorBadRequest() throws Exception {
-            Doctor doctor1 = new Doctor("doc@docdoc.doc", "doc",
+            Doctor doctor1 = new Doctor(1L,"doc@docdoc.doc", "doc",
                     "l", "2002-02-02", "doc", "0000", "history");
             Doctor doctor2 = null;
             Mockito.when(doctorRepository.findByEmail("doc@docdoc.doc")).thenReturn(Optional.empty());
