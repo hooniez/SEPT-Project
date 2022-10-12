@@ -15,6 +15,8 @@ class PatientProfile extends StatefulWidget {
 }
 
 class _MyAppState extends State<PatientProfile> {
+
+  // late Future<List<ProfileData>> userData;
   late String _firstname;
   late String _lastname;
   late String _email;
@@ -28,16 +30,25 @@ class _MyAppState extends State<PatientProfile> {
   late String _passworddupe = _password;
   @override
   void initState() {
-    _firstname = widget.user.value['firstname'];
-    _lastname = widget.user.value['lastname'];
-    _email = widget.user.value['email'];
-    _dob = widget.user.value['dob'];
-    _mobile = widget.user.value['mobilenumber'];
-    _medhist = widget.user.value['medicalhistory'];
-    _password = widget.user.value['password'];
-    _userType = widget.user.value['usertype'];
-    _cert = widget.user.value['certificate'];
-    _token = widget.user.value['Authorization'];
+    print("state started");
+    Future futureData = getUserData(widget.user);
+    futureData.then((value) {
+      _firstname = json.decode(value)['firstname'];
+      _lastname = json.decode(value)['lastname'];
+      _password = json.decode(value)['password'];
+      _email = json.decode(value)['email'];
+      _dob = json.decode(value)['dob'];
+      _mobile = json.decode(value)['mobile'];
+      _medhist = json.decode(value)['medhist'];
+      _userType = json.decode(value)['usertype'];
+      _cert = json.decode(value)['cert'];
+      _token = json.decode(value)['token'];
+    });
+  }
+
+    //
+
+
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -46,6 +57,7 @@ class _MyAppState extends State<PatientProfile> {
     'height': 25.0,
     'fontSize': 12
   };
+
 
   late Map<String, TextEditingController> textControllers = {
     'firstname': TextEditingController(text: _firstname),
@@ -59,6 +71,20 @@ class _MyAppState extends State<PatientProfile> {
     'certificate': TextEditingController(text: _cert)
   };
 
+  Map<String, EdgeInsetsGeometry> textInset = {
+    'firstname': const EdgeInsets.fromLTRB(30, 4, 4, 4),
+    'lastname': const EdgeInsets.fromLTRB(31, 4, 4, 4),
+    'password': const EdgeInsets.fromLTRB(70, 4, 4, 4),
+    'confirmPassword': const EdgeInsets.fromLTRB(10, 4, 4, 4),
+    'email': const EdgeInsets.fromLTRB(69, 4, 4, 4),
+    'dob': const EdgeInsets.fromLTRB(17, 4, 4, 4),
+    'mobile': const EdgeInsets.fromLTRB(31, 4, 4, 4),
+    'medhist': const EdgeInsets.fromLTRB(30, 4, 4, 4),
+    'certificate': const EdgeInsets.fromLTRB(30, 4, 4, 4),
+  };
+
+
+  // Variables
   bool enabledStatus = false;
   Color textBoxSelectedColor = Color.fromRGBO(201, 217, 214, 1);
   Color textBoxNotSelectedColor = Color.fromRGBO(224, 224, 224, 1);
@@ -68,6 +94,10 @@ class _MyAppState extends State<PatientProfile> {
   Color itemColor = Colors.black;
   double itemTitleFontSize = 16;
   double itemFontSize = 18;
+  double textBoxWidth = 200;
+  int passwordMaxLength = 255;
+  int passwordMinLength = 7;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -93,13 +123,13 @@ class _MyAppState extends State<PatientProfile> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       ProfileLabel(text:'Email',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: textInset['email']!,
                         child: Container(
-                          width: 150,
+                          width: textBoxWidth,
                           color: textBoxNotSelectedColor,
                           child: TextFormField(
                             controller: textControllers['email'],
@@ -110,13 +140,13 @@ class _MyAppState extends State<PatientProfile> {
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       ProfileLabel(text:'First Name',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: textInset['firstname']!,
                         child: Container(
-                          width: 150,
+                          width: textBoxWidth,
                           color: textBoxBackgrounds,
                           child: TextFormField(
                             controller: textControllers['firstname'],
@@ -127,13 +157,13 @@ class _MyAppState extends State<PatientProfile> {
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       ProfileLabel(text:'Last Name',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: textInset['lastname']!,
                         child: Container(
-                          width: 150,
+                          width: textBoxWidth,
                           color: textBoxBackgrounds,
                           child: TextFormField(
                             controller: textControllers['lastname'],
@@ -144,13 +174,13 @@ class _MyAppState extends State<PatientProfile> {
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       ProfileLabel(text:'Date Of Birth',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: textInset['dob']!,
                         child: Container(
-                          width: 150,
+                          width: textBoxWidth,
                           color: textBoxBackgrounds,
                           child: TextFormField(
                               controller: textControllers['dob'],
@@ -177,13 +207,13 @@ class _MyAppState extends State<PatientProfile> {
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       ProfileLabel(text:'Mobile No.',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: textInset['mobile']!,
                         child: Container(
-                          width: 150,
+                          width: textBoxWidth,
                           color: textBoxBackgrounds,
                           child: TextFormField(
                             controller: textControllers['mobile'],
@@ -197,7 +227,7 @@ class _MyAppState extends State<PatientProfile> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: const EdgeInsets.fromLTRB(10, 4, 4, 4),
                         child: _userType == "doctor"
                             ? Text(
                                 'Doctor Certificates',
@@ -215,7 +245,7 @@ class _MyAppState extends State<PatientProfile> {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(4.0),
+                    padding: const EdgeInsets.fromLTRB(12, 4, 12, 4),
                     child: Container(
                         width: double.infinity,
                         color: textBoxBackgrounds,
@@ -232,13 +262,13 @@ class _MyAppState extends State<PatientProfile> {
                               )),
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       ProfileLabel(text:'Password',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: textInset['password']!,
                         child: Container(
-                          width: 150,
+                          width: textBoxWidth,
                           color: textBoxBackgrounds,
                           child: TextFormField(
                             controller: textControllers['password'],
@@ -246,8 +276,8 @@ class _MyAppState extends State<PatientProfile> {
                             enabled: enabledStatus,
                               validator: (value) {
                                 if (value == null ||
-                                    value.length < 7 ||
-                                    value.length > 255) {
+                                    value.length < passwordMinLength ||
+                                    value.length > passwordMaxLength) {
                                   return 'This password does not match with the inputted password';
                                 } else {
                                   return null;
@@ -259,13 +289,13 @@ class _MyAppState extends State<PatientProfile> {
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       ProfileLabel(text:'Confirm password',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: textInset['confirmPassword']!,
                         child: Container(
-                          width: 150,
+                          width: textBoxWidth,
                           color: textBoxBackgrounds,
                           child: TextFormField(
                             controller: textControllers['confirmPassword'],
@@ -273,8 +303,8 @@ class _MyAppState extends State<PatientProfile> {
                             enabled: enabledStatus,
                               validator: (value) {
                                 if (value == null ||
-                                    value.length < 7 ||
-                                    value.length > 255 ||
+                                    value.length < passwordMinLength ||
+                                    value.length > passwordMaxLength ||
                                     value != textControllers['password']!.text) {
                                   return 'Passwords do not match';
                                 } else {
@@ -293,8 +323,8 @@ class _MyAppState extends State<PatientProfile> {
                       editButtonDetails['height'], // <-- match-parent
                       child: IconButton(
                         icon: enabledStatus
-                            ? Icon(Icons.save_outlined)
-                            : Icon(Icons.create_outlined),
+                            ? const Icon(Icons.save_outlined)
+                            : const Icon(Icons.create_outlined),
                         color: Colors.blue,
                         onPressed: () {
                           setState(() {
@@ -305,11 +335,9 @@ class _MyAppState extends State<PatientProfile> {
                                 } else {
                                   textBoxBackgrounds = textBoxNotSelectedColor;
                                   if (_formKey.currentState!.validate()) {
-                                    print('valid');
                                     Future response = putPatientData(
                                         textControllers, _userType, _token);
                                   } else {
-                                    print('invalid');
                                     textControllers['password']!.text =
                                         _passworddupe;
                                     Future response = putPatientData(
@@ -335,7 +363,6 @@ Future<Response> putPatientData(
     Map<String, TextEditingController> textControlDict, userType, token) async {
   Response response;
 
-  print(textControlDict['password']!.text);
   if (userType == "doctor") {
     String uri = "http://10.0.2.2:8091/doctor/profile";
     final url = Uri.parse(uri);
@@ -391,12 +418,80 @@ class ProfileLabel extends StatelessWidget {
   final double itemTitleFontSize;
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(4.0),
+        padding: const EdgeInsets.fromLTRB(10, 4, 4, 4),
         child: Text(
           text,
           style: TextStyle(
               color: itemColor, fontSize: itemTitleFontSize),
         ),
       );
+  }
+}
+
+Future<String> getUserData(user) async {
+  // construct the request
+  String uri = "http://10.0.2.2:8091/";
+  String typeUri = "doctor/profile/";
+  if(user.value['usertype']=='patient') {
+    typeUri = "patient/profile/";
+  }
+  uri = uri + typeUri + user.value["uid"].toString();
+  final url = Uri.parse(uri);
+
+  print(url);
+  final Response response = await get(url,
+      headers: {
+        'Accept': 'application/json',
+        'content-type': 'application/json',
+        'Authorization': user.value["Authorization"]
+      });
+  if (response.statusCode == 200) {
+    print(json.decode(response.body));
+    return response.body;
+  } else {
+    print(response.statusCode);
+    throw Exception("Error getting profile data");
+  }
+}
+
+
+class ProfileData {
+  String firstname;
+  String lastname;
+  String email;
+  String dob;
+  String mobile;
+  String medhist;
+  String password;
+  String userType;
+  String cert;
+  String token;
+
+  ProfileData(
+      {required this.firstname,
+        required this.lastname,
+        required this.email,
+        required this.dob,
+        required this.mobile,
+        required this.medhist,
+        required this.password,
+        required this.userType,
+        required this.cert,
+        required this.token
+      });
+
+  factory ProfileData.fromJson(Map<String, dynamic> json) {
+    return ProfileData(
+      firstname: json['firstname'] ?? "",
+      lastname: json['lastname'] ?? "",
+      email: json['email'] ?? "",
+      dob: json['dob'] ?? "",
+      mobile: json['mobile'] ?? "",
+      medhist: json['medhist'] ?? "",
+      password: json['password'] ?? "",
+      userType: json['userType'] ?? "",
+      cert: json['cert'] ?? "",
+      token: json['token'] ?? "",
+    );
   }
 }

@@ -1,6 +1,8 @@
 package com.sept_group6.profile.controllers;
 
 // security
+import com.sept_group6.profile.exception.ResourceNotFoundException;
+import com.sept_group6.profile.model.Doctor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -47,4 +49,14 @@ public class PatientProfileController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @GetMapping(path="/{id}", produces="application/json")
+    public ResponseEntity<Patient> getPatientById(@PathVariable("id") Long id) {
+        System.out.println("**** In get Patient by Id ****");
+        Patient accountData = patientRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Patient with id: " + id +" not found."));
+        return new ResponseEntity<>(accountData,HttpStatus.OK);
+    }
+
+
 }
