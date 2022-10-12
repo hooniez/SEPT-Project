@@ -14,7 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
@@ -31,8 +31,8 @@ class DoctorProfileControllerTests {
         @MockBean
         private DoctorRepository doctorRepository;
 
-        @Autowired
-        private BCryptPasswordEncoder bCryptPasswordEncoder;
+        // @MockBean
+        // private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Test
     public void testUpdateDoctorAccepted() throws Exception {
