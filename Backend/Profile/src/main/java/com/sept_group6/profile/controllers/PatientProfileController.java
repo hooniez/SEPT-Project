@@ -12,17 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path="/patient/profile")
+@RequestMapping(path = "/patient/profile")
 public class PatientProfileController {
     private static final Logger logger = LogManager.getLogger("Backend");
     @Autowired
     private PatientRepository patientRepository;
 
-    @PutMapping(path="", consumes="application/json", produces="application/json")
+    @PutMapping(path = "", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> updateInfo(@RequestBody Patient patientEdit) {
         System.out.println("Reached endpoint");
-        Optional<Patient> patient =
-                patientRepository.findByEmail(patientEdit.getEmail());
+        Optional<Patient> patient = patientRepository.findByEmail(patientEdit.getEmail());
 
         if (patient.isPresent()) {
             patientRepository.save(patientEdit);

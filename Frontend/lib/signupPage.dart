@@ -11,7 +11,9 @@ enum UserType { doctor, patient }
 
 class SignupPage extends StatefulWidget {
   final Function setUserWithoutToken;
-  const SignupPage({Key? key, required this.setUserWithoutToken})
+  final bool forDoctor;
+  const SignupPage({Key? key, required this.setUserWithoutToken, this
+      .forDoctor=false})
       : super(key: key);
 
   @override
@@ -19,7 +21,12 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  UserType? _userType = UserType.patient;
+  UserType? _userType;
+  @override
+  void initState() {
+    _userType = widget.forDoctor ? UserType.doctor : UserType.patient;
+    super.initState();
+  }
 
   final _formKey = GlobalKey<FormState>();
 
@@ -77,50 +84,23 @@ class _SignupPageState extends State<SignupPage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Padding(
+                           Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: 24, horizontal: 6),
-                            child: Text(
+                            child:
+                            widget.forDoctor ?
+                            const Text(
+                              'Register a Doctor',
+                              style: TextStyle(color: Colors.black, fontSize:
+                              30.0)
+                            ) :
+                            Text(
                               'Register',
                               style: TextStyle(
-                                  color: Colors.black, fontSize: 36.0),
+                                  color: Colors.black, fontSize: 30.0),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(children: [
-                                Radio<UserType>(
-                                  value: UserType.patient,
-                                  groupValue: _userType,
-                                  onChanged: (UserType? value) {
-                                    setState(() {
-                                      _userType = value;
-                                    });
-                                  },
-                                ),
-                                const Text(
-                                  "Patient",
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                              ]),
-                              Row(children: [
-                                Radio<UserType>(
-                                  value: UserType.doctor,
-                                  groupValue: _userType,
-                                  onChanged: (UserType? value) {
-                                    setState(() {
-                                      _userType = value;
-                                    });
-                                  },
-                                ),
-                                const Text(
-                                  "Doctor",
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                              ]),
-                            ],
-                          ),
+
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
