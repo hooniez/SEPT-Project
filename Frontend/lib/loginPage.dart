@@ -23,7 +23,7 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     _userType = widget.forAdmin ? UserType.admin : UserType.patient;
-    API_HOST = widget.forAdmin ? "10.0.2.2:8089" : "10.0.2.2:8080";
+    API_HOST = widget.forAdmin ? "10.0.2.2:6868" : "10.0.2.2:6871";
   }
 
 

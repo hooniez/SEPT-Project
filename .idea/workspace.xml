@@ -5,7 +5,59 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_4_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_javax_activation_api_1_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_13_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_19_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_core_2_19_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_all_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_2_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/Admin/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/Appointment_Server/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/Profile/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/SEPT_Backend/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/SEPT_Backend/SEPT_Backend" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/symptom/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Admin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/Appointment_Server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Appointment_Server/Appointment_Server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Appointment_Server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Appointment_Server/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/target/classes/com/sept_group6/appointment_server/controllers/AppointmentController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/target/classes/com/sept_group6/appointment_server/dao/AppointmentRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/target/classes/com/sept_group6/appointment_server/dao/DoctorRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/target/classes/com/sept_group6/appointment_server/dao/PatientRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/target/classes/com/sept_group6/appointment_server/exception/CustomExceptionHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/target/classes/com/sept_group6/appointment_server/exception/ErrorResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/target/classes/com/sept_group6/appointment_server/exception/MissingHeaderException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/target/classes/com/sept_group6/appointment_server/model/Appointment$AppointmentBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/target/classes/com/sept_group6/appointment_server/model/Appointment.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/target/classes/com/sept_group6/appointment_server/model/Doctor$DoctorBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/target/classes/com/sept_group6/appointment_server/model/Doctor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/target/classes/com/sept_group6/appointment_server/model/Patient$PatientBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Appointment_Server/target/classes/com/sept_group6/appointment_server/model/Patient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Profile/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Profile/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Profile/target/classes/com/sept_group6/profile/security/JwtAuthenticationEntryPoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Profile/target/classes/com/sept_group6/profile/security/JwtAuthenticationEntryPoint.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/SEPT_Backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/SEPT_Backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/challenge2/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/symptom/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/symptom/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/5b353e3f8c60b8f56a0e9baf5c1e4670/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/5b353e3f8c60b8f56a0e9baf5c1e4670/.filecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/5b353e3f8c60b8f56a0e9baf5c1e4670/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/flutter_build/5b353e3f8c60b8f56a0e9baf5c1e4670/app.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/version" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/loginPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/loginPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/profile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/signupPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/signupPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/pubspec.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,12 +112,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
-    <property name="cidr.known.project.marker" value="true" />
-    <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="show.migrate.to.gradle.popup" value="false" />
-  </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Backend" />
@@ -78,7 +124,7 @@
       <option name="filePath" value="$PROJECT_DIR$/frontend/frontend/lib/main.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" nameIsGenerated="true">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
       <option name="additionalArgs" value="--no-sound-null-safety" />
       <option name="filePath" value="$PROJECT_DIR$/Frontend/lib/main.dart" />
       <method v="2" />
@@ -120,6 +166,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="AppointmentServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="Appointment_Server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.sept_group6.appointment_server.AppointmentServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProfileApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="Profile" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.sept_group6.profile.ProfileApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sept_group6.profile.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SeptBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="SEPT_Backend" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.sept_group6.sept_backend.SeptBackendApplication" />
@@ -133,11 +199,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SymptomApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="Symptom" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.sept_group6.symptom.SymptomApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
+      <item itemvalue="Flutter.main.dart" />
+      <item itemvalue="Flutter.main.dart (1)" />
       <item itemvalue="JUnit.PatientControllerTest" />
       <item itemvalue="JUnit.DoctorControllerTest" />
-      <item itemvalue="Spring Boot.AdminApplication" />
-      <item itemvalue="Spring Boot.SeptBackendApplication" />
     </list>
     <recent_temporary>
       <list>
@@ -163,7 +236,9 @@
       <workItem from="1663655047558" duration="942000" />
       <workItem from="1664934576790" duration="6227000" />
       <workItem from="1665463156287" duration="1640000" />
-      <workItem from="1665509454202" duration="331000" />
+      <workItem from="1665509454202" duration="938000" />
+      <workItem from="1665569543802" duration="11470000" />
+      <workItem from="1665611291735" duration="663000" />
     </task>
     <servers />
   </component>
