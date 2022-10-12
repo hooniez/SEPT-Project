@@ -109,7 +109,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <!-- add resource path for java project-->
-             <plugin>
+             <!-- <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <version>3.3.0</version>
@@ -122,12 +122,12 @@
                     </goals>
                     <configuration>
                     <sources>
-                        <source>Backend/SEPT_Backend/src</source>
+                        <source>Backend/Appointment_server/src</source>
                     </sources>
                     </configuration>
                 </execution>
                 </executions>
-            </plugin>
+            </plugin> -->
         </plugins>
     </build>
 
