@@ -50,7 +50,7 @@ services:
         - .m2:/root/.m2
       stdin_open: true
       tty: true
-    profile_service:
+    profileservice:
       depends_on:
         - mysqldb
       build: ./Backend/Profile
@@ -91,7 +91,7 @@ services:
     adminservice:
       depends_on:
         - mysqldb
-      build: ./Backend/SEPT_Backend
+      build: ./Backend/Admin
       restart: on-failure
       env_file: ./.env
       ports:
