@@ -15,29 +15,61 @@ class PatientProfile extends StatefulWidget {
 }
 
 class _MyAppState extends State<PatientProfile> {
-  late String _firstname;
-  late String _lastname;
-  late String _email;
-  late String _dob;
-  late String _mobile;
-  late String _medhist;
-  late String _password;
-  late String _userType;
-  late String _cert;
-  late String _token;
 
+  late String _firstname = "";
+  late String _lastname = "";
+  late String _email = "";
+  late String _dob = "";
+  late String _mobile = "";
+  late String _medhist = "";
+  late String _password = "";
+  late String _userType = "";
+  late String _cert = "";
+  late String _token = "";
+  late String _passworddupe = _password;
+
+
+  // @override
+  // void initState() {
+  //   _firstname = widget.user.value['firstname'];
+  //   _lastname = widget.user.value['lastname'];
+  //   _email = widget.user.value['email'];
+  //   _dob = widget.user.value['dob'];
+  //   _mobile = widget.user.value['mobilenumber'];
+  //   _medhist = widget.user.value['medicalhistory'];
+  //   _password = widget.user.value['password'];
+  //   _userType = widget.user.value['usertype'];
+  //   _cert = widget.user.value['certificate'];
+  //   _token = widget.user.value['Authorization'];
+  // }
   @override
   void initState() {
-    _firstname = widget.user.value['firstname'];
-    _lastname = widget.user.value['lastname'];
-    _email = widget.user.value['email'];
-    _dob = widget.user.value['dob'];
-    _mobile = widget.user.value['mobilenumber'];
-    _medhist = widget.user.value['medicalhistory'];
-    _password = widget.user.value['password'];
-    _userType = widget.user.value['usertype'];
-    _cert = widget.user.value['certificate'];
-    _token = widget.user.value['Authorization'];
+    print("state started");
+    Future futureData = getUserData(widget.user);
+    futureData.then((value) {
+      print("value is" + json.decode(value)['firstname']);
+      _firstname = json.decode(value)['firstname'];
+      _lastname = json.decode(value)['lastname'];
+      _password = json.decode(value)['password'];
+      _passworddupe = _password;
+      _email = json.decode(value)['email'];
+      _dob = json.decode(value)['dob'];
+      _mobile = json.decode(value)['mobilenumber'];
+      _medhist = json.decode(value)['medicalhistory'];
+      _userType = json.decode(value)['usertype'];
+      _cert = json.decode(value)['certificate'];
+      _token = widget.user.value['Authorization'];
+      textControllers['firstname']!.text = _firstname;
+      textControllers['lastname']!.text = _lastname;
+      textControllers['password']!.text = "";
+      textControllers['confirmPassword']!.text = "";
+      textControllers['email']!.text = _email;
+      textControllers['dob']!.text = _dob;
+      textControllers['mobile']!.text = _mobile;
+      textControllers['medhist']!.text = _medhist;
+      textControllers['usertype']!.text = _userType;
+      textControllers['certificate']!.text = _cert;
+    });
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -47,10 +79,12 @@ class _MyAppState extends State<PatientProfile> {
     'fontSize': 12
   };
 
+
   late Map<String, TextEditingController> textControllers = {
     'firstname': TextEditingController(text: _firstname),
     'lastname': TextEditingController(text: _lastname),
-    'password': TextEditingController(text: _password),
+    'password': TextEditingController(text: ''),
+    'confirmPassword': TextEditingController(text: ''),
     'email': TextEditingController(text: _email),
     'dob': TextEditingController(text: _dob),
     'mobile': TextEditingController(text: _mobile),
@@ -58,37 +92,39 @@ class _MyAppState extends State<PatientProfile> {
     'certificate': TextEditingController(text: _cert)
   };
 
-  Map<String, bool> enabledFlags = {
-    'firstname': false,
-    'lastname': false,
-    'password': false,
-    'email': false,
-    'dob': false,
-    'mobile': false,
-    'medhist': false
+  Map<String, EdgeInsetsGeometry> textInset = {
+    'firstname': const EdgeInsets.fromLTRB(30, 4, 4, 4),
+    'lastname': const EdgeInsets.fromLTRB(31, 4, 4, 4),
+    'password': const EdgeInsets.fromLTRB(70, 4, 4, 4),
+    'confirmPassword': const EdgeInsets.fromLTRB(10, 4, 4, 4),
+    'email': const EdgeInsets.fromLTRB(69, 4, 4, 4),
+    'dob': const EdgeInsets.fromLTRB(17, 4, 4, 4),
+    'mobile': const EdgeInsets.fromLTRB(31, 4, 4, 4),
+    'medhist': const EdgeInsets.fromLTRB(30, 4, 4, 4),
+    'certificate': const EdgeInsets.fromLTRB(30, 4, 4, 4),
   };
 
+
+  // Variables
+  bool enabledStatus = false;
   Color textBoxSelectedColor = Color.fromRGBO(201, 217, 214, 1);
   Color textBoxNotSelectedColor = Color.fromRGBO(224, 224, 224, 1);
-  late Map<String, Color> textBoxBackgrounds = {
-    'firstname': textBoxNotSelectedColor,
-    'lastname': textBoxNotSelectedColor,
-    'email': textBoxNotSelectedColor,
-    'dob': textBoxNotSelectedColor,
-    'mobile': textBoxNotSelectedColor,
-    'medhist': textBoxNotSelectedColor,
-    'password': textBoxNotSelectedColor
-  };
+  Color textBoxBackgrounds = Color.fromRGBO(224, 224, 224, 1);
 
   final double editButtonPadding = 4.0;
   Color itemColor = Colors.black;
   double itemTitleFontSize = 16;
   double itemFontSize = 18;
+  double textBoxWidth = 200;
+  int passwordMaxLength = 255;
+  int passwordMinLength = 7;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
             backgroundColor: const Color.fromARGB(255, 223, 28, 93),
             title: const Text("Profile"),
@@ -109,166 +145,70 @@ class _MyAppState extends State<PatientProfile> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      ProfileLabel(text:'Email',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          'Email:',
-                          style: TextStyle(
-                              color: itemColor, fontSize: itemTitleFontSize),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: textInset['email']!,
                         child: Container(
-                          width: 150,
-                          color: textBoxBackgrounds['email'],
-                          child: TextField(
+                          width: textBoxWidth,
+                          color: textBoxNotSelectedColor,
+                          child: TextFormField(
                             controller: textControllers['email'],
-                            enabled: enabledFlags['email'],
+                            enabled: false,
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(editButtonPadding),
-                        child: SizedBox(
-                          width: editButtonDetails['width'], // <-- match_parent
-                          height:
-                              editButtonDetails['height'], // <-- match-parent
                         ),
                       ),
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      ProfileLabel(text:'First Name',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          'First Name:',
-                          style: TextStyle(
-                              color: itemColor, fontSize: itemTitleFontSize),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: textInset['firstname']!,
                         child: Container(
-                          width: 150,
-                          color: textBoxBackgrounds['firstname'],
-                          child: TextField(
+                          width: textBoxWidth,
+                          color: textBoxBackgrounds,
+                          child: TextFormField(
                             controller: textControllers['firstname'],
-                            enabled: enabledFlags['firstname'],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(editButtonPadding),
-                        child: SizedBox(
-                          width: editButtonDetails['width'], // <-- match_parent
-                          height:
-                              editButtonDetails['height'], // <-- match-parent
-                          child: IconButton(
-                            icon: enabledFlags['firstname']!
-                                ? Icon(Icons.save_outlined)
-                                : Icon(Icons.create_outlined),
-                            color: Colors.blue,
-                            onPressed: () {
-                              setState(() {
-                                enabledFlags['firstname'] =
-                                    !(enabledFlags['firstname']!);
-                                if (enabledFlags['firstname'] == true) {
-                                  textBoxBackgrounds['firstname'] =
-                                      textBoxSelectedColor;
-                                  // do nothing
-                                } else {
-                                  textBoxBackgrounds['firstname'] =
-                                      textBoxNotSelectedColor;
-                                  Future response = putPatientData(
-                                      textControllers, _userType, _token);
-                                }
-                              });
-                            },
+                            enabled: enabledStatus,
                           ),
                         ),
                       ),
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      ProfileLabel(text:'Last Name',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          'Last Name:',
-                          style: TextStyle(
-                              color: itemColor, fontSize: itemTitleFontSize),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: textInset['lastname']!,
                         child: Container(
-                          width: 150,
-                          color: textBoxBackgrounds['lastname'],
-                          child: TextField(
+                          width: textBoxWidth,
+                          color: textBoxBackgrounds,
+                          child: TextFormField(
                             controller: textControllers['lastname'],
-                            enabled: enabledFlags['lastname'],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(editButtonPadding),
-                        child: SizedBox(
-                          width: editButtonDetails['width'], // <-- match_parent
-                          height:
-                              editButtonDetails['height'], // <-- match-parent
-                          child: IconButton(
-                            icon: enabledFlags['lastname']!
-                                ? Icon(Icons.save_outlined)
-                                : Icon(Icons.create_outlined),
-                            color: Colors.blue,
-                            onPressed: () {
-                              setState(() {
-                                enabledFlags['lastname'] =
-                                    !(enabledFlags['lastname']!);
-                                if (enabledFlags['lastname'] == true) {
-                                  textBoxBackgrounds['lastname'] =
-                                      textBoxSelectedColor;
-                                  // do nothing
-                                } else {
-                                  textBoxBackgrounds['lastname'] =
-                                      textBoxNotSelectedColor;
-                                  Future response = putPatientData(
-                                      textControllers, _userType, _token);
-                                }
-                              });
-                            },
+                            enabled: enabledStatus,
                           ),
                         ),
                       ),
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      ProfileLabel(text:'Date Of Birth',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          'Date of Birth:',
-                          style: TextStyle(
-                              color: itemColor, fontSize: itemTitleFontSize),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: textInset['dob']!,
                         child: Container(
-                          width: 150,
-                          color: textBoxBackgrounds['dob'],
-                          child: TextField(
+                          width: textBoxWidth,
+                          color: textBoxBackgrounds,
+                          child: TextFormField(
                               controller: textControllers['dob'],
-                              enabled: enabledFlags['dob'],
+                              enabled: enabledStatus,
                               onTap: () async {
-                                if (enabledFlags['dob'] == true) {
+                                if (enabledStatus) {
                                   DateTime? pickedDate = await showDatePicker(
                                       context: context,
                                       initialDate: DateTime.now(),
@@ -286,85 +226,20 @@ class _MyAppState extends State<PatientProfile> {
                               }),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(editButtonPadding),
-                        child: SizedBox(
-                          width: editButtonDetails['width'], // <-- match_parent
-                          height:
-                              editButtonDetails['height'], // <-- match-parent
-                          child: IconButton(
-                            icon: enabledFlags['dob']!
-                                ? Icon(Icons.save_outlined)
-                                : Icon(Icons.create_outlined),
-                            color: Colors.blue,
-                            onPressed: () {
-                              setState(() {
-                                enabledFlags['dob'] = !(enabledFlags['dob']!);
-                                if (enabledFlags['dob'] == true) {
-                                  textBoxBackgrounds['dob'] =
-                                      textBoxSelectedColor;
-                                } else {
-                                  textBoxBackgrounds['dob'] =
-                                      textBoxNotSelectedColor;
-                                  Future response = putPatientData(
-                                      textControllers, _userType, _token);
-                                }
-                              });
-                            },
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      ProfileLabel(text:'Mobile No.',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          'Mobile No:',
-                          style: TextStyle(
-                              color: itemColor, fontSize: itemTitleFontSize),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: textInset['mobile']!,
                         child: Container(
-                          width: 150,
-                          color: textBoxBackgrounds['mobile'],
-                          child: TextField(
+                          width: textBoxWidth,
+                          color: textBoxBackgrounds,
+                          child: TextFormField(
                             controller: textControllers['mobile'],
-                            enabled: enabledFlags['mobile'],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(editButtonPadding),
-                        child: SizedBox(
-                          width: editButtonDetails['width'], // <-- match_parent
-                          height:
-                              editButtonDetails['height'], // <-- match-parent
-                          child: IconButton(
-                            icon: enabledFlags['mobile']!
-                                ? Icon(Icons.save_outlined)
-                                : Icon(Icons.create_outlined),
-                            color: Colors.blue,
-                            onPressed: () {
-                              setState(() {
-                                enabledFlags['mobile'] =
-                                    !(enabledFlags['mobile']!);
-                                if (enabledFlags['mobile'] == true) {
-                                  textBoxBackgrounds['mobile'] =
-                                      textBoxSelectedColor;
-                                  // do nothing
-                                } else {
-                                  textBoxBackgrounds['mobile'] =
-                                      textBoxNotSelectedColor;
-                                  Future response = putPatientData(
-                                      textControllers, _userType, _token);
-                                }
-                              });
-                            },
+                            enabled: enabledStatus,
                           ),
                         ),
                       ),
@@ -374,7 +249,7 @@ class _MyAppState extends State<PatientProfile> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: const EdgeInsets.fromLTRB(10, 4, 4, 4),
                         child: _userType == "doctor"
                             ? Text(
                                 'Doctor Certificates',
@@ -389,108 +264,116 @@ class _MyAppState extends State<PatientProfile> {
                                     fontSize: itemTitleFontSize),
                               ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(editButtonPadding),
-                        child: SizedBox(
-                          width: editButtonDetails['width'], // <-- match_parent
-                          height:
-                              editButtonDetails['height'], // <-- match-parent
-                          child: IconButton(
-                            icon: enabledFlags['medhist']!
-                                ? Icon(Icons.save_outlined)
-                                : Icon(Icons.create_outlined),
-                            color: Colors.blue,
-                            onPressed: () {
-                              setState(() {
-                                enabledFlags['medhist'] =
-                                    !(enabledFlags['medhist']!);
-                                if (enabledFlags['medhist'] == true) {
-                                  textBoxBackgrounds['medhist'] =
-                                      textBoxSelectedColor;
-                                  // do nothing
-                                } else {
-                                  textBoxBackgrounds['medhist'] =
-                                      textBoxNotSelectedColor;
-                                  Future response = putPatientData(
-                                      textControllers, _userType, _token);
-                                }
-                              });
-                            },
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(4.0),
+                    padding: const EdgeInsets.fromLTRB(12, 4, 12, 4),
                     child: Container(
                         width: double.infinity,
-                        color: textBoxBackgrounds['medhist'],
+                        color: textBoxBackgrounds,
                         child: _userType == "doctor"
-                            ? TextField(
-                                maxLines: 7,
+                            ? TextFormField(
+                                maxLines: 5,
                                 controller: textControllers['certificate'],
-                                enabled: enabledFlags['medhist'],
+                                enabled: enabledStatus,
                               )
-                            : TextField(
-                                maxLines: 7,
+                            : TextFormField(
+                                maxLines: 5,
                                 controller: textControllers['medhist'],
-                                enabled: enabledFlags['medhist'],
+                                enabled: enabledStatus,
                               )),
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      ProfileLabel(text:'Password',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          'Password:',
-                          style: TextStyle(
-                              color: itemColor, fontSize: itemTitleFontSize),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: textInset['password']!,
                         child: Container(
-                          width: 150,
-                          color: textBoxBackgrounds['password'],
-                          child: TextField(
+                          width: textBoxWidth,
+                          color: textBoxBackgrounds,
+                          child: TextFormField(
                             controller: textControllers['password'],
-                            enabled: enabledFlags['password'],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(editButtonPadding),
-                        child: SizedBox(
-                          width: editButtonDetails['width'], // <-- match_parent
-                          height:
-                              editButtonDetails['height'], // <-- match-parent
-                          child: IconButton(
-                            icon: enabledFlags['password']!
-                                ? Icon(Icons.save_outlined)
-                                : Icon(Icons.create_outlined),
-                            color: Colors.blue,
-                            onPressed: () {
-                              setState(() {
-                                enabledFlags['password'] =
-                                    !(enabledFlags['password']!);
-                                if (enabledFlags['password'] == true) {
-                                  textBoxBackgrounds['password'] =
-                                      textBoxSelectedColor;
-                                  // do nothing
+                            obscureText: true,
+                            enabled: enabledStatus,
+                              validator: (value) {
+                                if (value == null ||
+                                    value.length < passwordMinLength ||
+                                    value.length > passwordMaxLength) {
+                                  return 'This password does not match with the inputted password';
                                 } else {
-                                  textBoxBackgrounds['password'] =
-                                      textBoxNotSelectedColor;
-                                  Future response = putPatientData(
-                                      textControllers, _userType, _token);
+                                  return null;
                                 }
-                              });
-                            },
+                              }
                           ),
                         ),
                       ),
                     ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      ProfileLabel(text:'Confirm password',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
+                      Padding(
+                        padding: textInset['confirmPassword']!,
+                        child: Container(
+                          width: textBoxWidth,
+                          color: textBoxBackgrounds,
+                          child: TextFormField(
+                            controller: textControllers['confirmPassword'],
+                            obscureText: true,
+                            enabled: enabledStatus,
+                              validator: (value) {
+                                if (value == null ||
+                                    value.length < passwordMinLength ||
+                                    value.length > passwordMaxLength ||
+                                    value != textControllers['password']!.text) {
+                                  return 'Passwords do not match';
+                                } else {
+                                  return null;
+                                }
+                              }
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),Padding(
+                    padding: EdgeInsets.all(editButtonPadding),
+                    child: SizedBox(
+                      width: editButtonDetails['width'], // <-- match_parent
+                      height:
+                      editButtonDetails['height'], // <-- match-parent
+                      child: IconButton(
+                        icon: enabledStatus
+                            ? const Icon(Icons.save_outlined)
+                            : const Icon(Icons.create_outlined),
+                        color: Colors.blue,
+                        onPressed: () {
+                          setState(() {
+                                enabledStatus = !enabledStatus;
+                                if (enabledStatus) {
+                                  textBoxBackgrounds = textBoxSelectedColor;
+                                  // do nothing
+                                } else {
+                                  textBoxBackgrounds = textBoxNotSelectedColor;
+                                  print("Has the token," +_token.toString());
+                                  if (_formKey.currentState!.validate()) {
+                                    Future response = putPatientData(
+                                        textControllers, _userType, _token);
+                                  } else {
+                                    print("The duplicated password is: "+_passworddupe.toString());
+                                    textControllers['password']!.text =
+                                        _passworddupe;
+                                    Future response = putPatientData(
+                                        textControllers, _userType, _token);
+                                    textControllers['password']!.text = '';
+                                    textControllers['password']!.text = textControllers['password']!.text;
+                                  }
+                                }
+                          });
+                        },
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -503,6 +386,7 @@ class _MyAppState extends State<PatientProfile> {
 Future<Response> putPatientData(
     Map<String, TextEditingController> textControlDict, userType, token) async {
   Response response;
+
   if (userType == "doctor") {
     String uri = "http://10.0.2.2:8091/doctor/profile";
     final url = Uri.parse(uri);
@@ -524,6 +408,7 @@ Future<Response> putPatientData(
   } else {
     String uri = "http://10.0.2.2:8091/patient/profile";
     final url = Uri.parse(uri);
+    print(textControlDict['password']!.text);
     response = await put(url,
         headers: {
           'Accept': 'application/json',
@@ -542,11 +427,55 @@ Future<Response> putPatientData(
   }
 
   if (response.statusCode == 200 || response.statusCode == 202) {
-    final parsed = json.decode(response.body);
-    print(parsed);
-    return parsed;
+    print("success response");
+    return response;
   } else {
     print(response.headers);
   }
   return response;
+}
+
+class ProfileLabel extends StatelessWidget {
+
+  ProfileLabel({this.text = '',this.itemColor=Colors.black, this.itemTitleFontSize=12});
+
+  final String text;
+  final Color itemColor;
+  final double itemTitleFontSize;
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(10, 4, 4, 4),
+        child: Text(
+          text,
+          style: TextStyle(
+              color: itemColor, fontSize: itemTitleFontSize),
+        ),
+      );
+  }
+}
+
+Future<String> getUserData(user) async {
+  // construct the request
+  String uri = "http://10.0.2.2:8091/";
+  String typeUri = "doctor/profile/";
+  if(user.value['usertype']=='patient') {
+    typeUri = "patient/profile/";
+  }
+  uri = uri + typeUri + user.value["uid"].toString();
+  final url = Uri.parse(uri);
+  print(user.value["password"]);
+  print(url);
+  final Response response = await get(url,
+      headers: {
+        'Accept': 'application/json',
+        'content-type': 'application/json',
+        'Authorization': user.value["Authorization"]
+      });
+  if (response.statusCode == 200) {
+    print(json.decode(response.body));
+    return response.body;
+  } else {
+    print(response.statusCode);
+    throw Exception("Error getting profile data");
+  }
 }

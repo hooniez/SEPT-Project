@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.Optional;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @WebMvcTest(controllers = PatientProfileController.class)
 @AutoConfigureMockMvc(addFilters = false)
@@ -29,6 +30,8 @@ class PatientProfileControllerTests {
         private ObjectMapper objectMapper;
         @MockBean
         private PatientRepository patientRepository;
+        @MockBean
+        private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Test
     public void testUpdatePatientAccepted() throws Exception {
@@ -38,6 +41,7 @@ class PatientProfileControllerTests {
 
         Mockito.when(patientRepository.findByEmail("cal@calcal.cal")).thenReturn(Optional.of(patient1));
         Mockito.when(patientRepository.save(patient1)).thenReturn(patient1);
+        Mockito.when(patientRepository.existsByEmail("cal@calcal.cal")).thenReturn(true);
         MockHttpServletRequestBuilder mockRequest =
                 MockMvcRequestBuilders.put(
                                 "/patient/profile").

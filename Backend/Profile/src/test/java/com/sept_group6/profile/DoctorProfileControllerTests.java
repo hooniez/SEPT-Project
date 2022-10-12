@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
@@ -30,6 +31,9 @@ class DoctorProfileControllerTests {
         @MockBean
         private DoctorRepository doctorRepository;
 
+        @MockBean
+        private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Test
     public void testUpdateDoctorAccepted() throws Exception {
         Doctor doctor1 = new Doctor(1L,"doc@docdoc.doc", "doc",
@@ -37,6 +41,7 @@ class DoctorProfileControllerTests {
                 "history here");
 
         Mockito.when(doctorRepository.findByEmail("doc@docdoc.doc")).thenReturn(Optional.of(doctor1));
+        Mockito.when(doctorRepository.existsByEmail("doc@docdoc.doc")).thenReturn(true);
         Mockito.when(doctorRepository.save(doctor1)).thenReturn(doctor1);
         MockHttpServletRequestBuilder mockRequest =
                 MockMvcRequestBuilders.put(
