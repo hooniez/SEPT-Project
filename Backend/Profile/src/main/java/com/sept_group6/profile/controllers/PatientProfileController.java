@@ -33,18 +33,18 @@ public class PatientProfileController {
     @PutMapping(path="", consumes="application/json", produces="application/json")
     public ResponseEntity<?> updateInfo(@RequestBody Patient patientEdit) {
         System.out.println("Reached endpoint");
-        Patient patient =
+        Optional<Patient> patient =
                 patientRepository.findByEmail(patientEdit.getEmail());
 
         if(patientRepository.existsByEmail(patientEdit.getEmail())) {
-            if(patientEdit.getPassword().equals(patient.getPassword())) {
+            if(patientEdit.getPassword().equals(patient.get().getPassword())) {
                 System.out.println("Password did not change");
                 patientEdit.setPassword(patientEdit.getPassword());
             } else {
                 patientEdit.setPassword(bCryptPasswordEncoder.encode(patientEdit.getPassword()));
                 System.out.println("Password changed");
             }
-            patientEdit.setUid(patient.getUid());
+            patientEdit.setUid(patient.get().getUid());
             patientRepository.save(patientEdit);
             return ResponseEntity.accepted().build();
         } else {
