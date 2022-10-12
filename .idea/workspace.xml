@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="" />
+=======
+    <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+>>>>>>> backend_frontend_livechat_integration
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,11 +19,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Dart File" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -47,12 +59,20 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2EjNC2HLrp6lYQIHtkUx6HxPMMn" />
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2DhQhqmuRU73ek2m4tMKV5vymoI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -63,8 +83,67 @@
 }]]></component>
   <component name="RunManager" selected="Spring Boot.SeptBackendApplication">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+=======
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Backend" />
+      <recent name="$PROJECT_DIR$/Backend/SEPT_Backend/src/test/java/com/sept_group6/sept_backend/controllers" />
+      <recent name="$PROJECT_DIR$/Frontend" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.PatientControllerTest">
+    <configuration name="main.dart (1)" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+>>>>>>> backend_frontend_livechat_integration
       <option name="filePath" value="$PROJECT_DIR$/frontend/frontend/lib/main.dart" />
       <method v="2" />
+    </configuration>
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" nameIsGenerated="true">
+      <option name="additionalArgs" value="--no-sound-null-safety" />
+      <option name="filePath" value="$PROJECT_DIR$/Frontend/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="DoctorControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SEPT_Backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sept_group6.sept_backend.controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sept_group6.sept_backend.controllers" />
+      <option name="MAIN_CLASS_NAME" value="com.sept_group6.sept_backend.controllers.DoctorControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PatientControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SEPT_Backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sept_group6.sept_backend.controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sept_group6.sept_backend.controllers" />
+      <option name="MAIN_CLASS_NAME" value="com.sept_group6.sept_backend.controllers.PatientControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AdminApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="Admin" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.admin.AdminApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="SeptBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="SEPT_Backend" />
@@ -79,20 +158,49 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
+=======
+    <list>
+      <item itemvalue="JUnit.PatientControllerTest" />
+      <item itemvalue="JUnit.DoctorControllerTest" />
+      <item itemvalue="Spring Boot.AdminApplication" />
+      <item itemvalue="Spring Boot.SeptBackendApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.PatientControllerTest" />
+        <item itemvalue="JUnit.DoctorControllerTest" />
+      </list>
+    </recent_temporary>
+>>>>>>> backend_frontend_livechat_integration
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="" />
-      <created>1663104905343</created>
+      <created>1661148960434</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< HEAD
       <updated>1663104905343</updated>
       <workItem from="1663104909997" duration="72000" />
       <workItem from="1663104989693" duration="1289000" />
       <workItem from="1663125378102" duration="374000" />
       <workItem from="1663126086837" duration="4358000" />
       <workItem from="1663321667766" duration="686000" />
+=======
+      <updated>1661148960434</updated>
+      <workItem from="1661148962945" duration="135000" />
+      <workItem from="1661150614091" duration="81000" />
+      <workItem from="1661151178024" duration="145000" />
+      <workItem from="1661151427719" duration="68000" />
+      <workItem from="1661153151778" duration="102000" />
+      <workItem from="1663152542164" duration="2112000" />
+      <workItem from="1663655047558" duration="942000" />
+      <workItem from="1664934576790" duration="6227000" />
+      <workItem from="1665463156287" duration="1640000" />
+      <workItem from="1665509454202" duration="331000" />
+>>>>>>> backend_frontend_livechat_integration
     </task>
     <servers />
   </component>
@@ -109,9 +217,12 @@
         </entry>
       </map>
     </option>
+<<<<<<< HEAD
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+=======
+>>>>>>> backend_frontend_livechat_integration
   </component>
 </project>

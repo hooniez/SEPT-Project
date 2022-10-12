@@ -1,87 +1,27 @@
 package com.sept_group6.sept_backend.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.ToString;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+import javax.persistence.*;
 
 @Entity
-public class Doctor {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    private String email;
-    private String firstname;
-    private String middlename;
-    private String lastname;
-    private String password;
-    private String mobilenumber;
+@ToString(callSuper = true)
+@Getter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Doctor extends User {
 
-    public Doctor(Integer id, String email, String firstname, String middlename, String lastname, String password,
-            String mobilenumber) {
-        this.id = id;
-        this.email = email;
-        this.firstname = firstname;
-        this.middlename = middlename;
-        this.lastname = lastname;
-        this.password = password;
-        this.mobilenumber = mobilenumber;
-    }
+    private String certificate;
 
-    public Integer getid() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public String getMiddlename() {
-        return middlename;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getMobilenumber() {
-        return mobilenumber;
-    }
-
-    public void setid(Integer id) {
-        this.id = id;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public void setMiddlename(String middlename) {
-        this.middlename = middlename;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setMobilenumber(String mobilenumber) {
-        this.mobilenumber = mobilenumber;
+    public Doctor(long uid, String email, String firstname, String lastname, String dob, String password,
+            String mobilenumber, String certificate) {
+        super(uid, email, firstname, lastname, dob, password, mobilenumber);
+        this.certificate = certificate;
     }
 
 }

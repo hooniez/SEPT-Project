@@ -1,9 +1,11 @@
 package com.sept_group6.sept_backend.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 
@@ -11,23 +13,19 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Builder
+
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Patient {
-    @Id
-    private String email;
-    private String firstname;
-    private String lastname;
+@ToString(callSuper = true)
+public class Patient extends User {
 
-    private String dob;
-    private String password;
-    private String mobilenumber;
     private String medicalhistory;
 
-    public String toString() {
-        return " email= " + email + " firstName= " + firstname + " lastName= " + lastname +
-                " dob= " + dob + " password= " + password + " mobileNumber= " + mobilenumber + " medicalHistory= " + medicalhistory;
+    public Patient(long uid, String email, String firstname, String lastname, String dob, String password,
+            String mobilenumber, String medicalhistory) {
+        super(uid, email, firstname, lastname, dob, password, mobilenumber);
+        this.medicalhistory = medicalhistory;
     }
 
 }
