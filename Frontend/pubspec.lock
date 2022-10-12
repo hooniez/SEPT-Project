@@ -43,13 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.16.0"
-  crypto:
-    dependency: transitive
-    description:
-      name: crypto
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.2"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -95,13 +88,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  grouped_list:
-    dependency: "direct main"
-    description:
-      name: grouped_list
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.1.2"
   http:
     dependency: "direct main"
     description:
@@ -122,11 +108,7 @@ packages:
       name: intl
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD:Frontend/frontend/pubspec.lock
-    version: "0.17.0"
-=======
     version: "0.16.1"
->>>>>>> backend_frontend_livechat_integration:Frontend/pubspec.lock
   lints:
     dependency: transitive
     description:
@@ -181,13 +163,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0"
-  stomp_dart_client:
-    dependency: "direct main"
-    description:
-      name: stomp_dart_client
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.4"
   stream_channel:
     dependency: transitive
     description:
@@ -230,13 +205,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
-  web_socket_channel:
-    dependency: "direct main"
-    description:
-      name: web_socket_channel
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.2.0"
 sdks:
   dart: ">=2.17.6 <3.0.0"
   flutter: ">=3.0.0"
