@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.Optional;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @WebMvcTest(controllers = PatientProfileController.class)
 @AutoConfigureMockMvc(addFilters = false)
@@ -30,6 +30,8 @@ class PatientProfileControllerTests {
         private ObjectMapper objectMapper;
         @MockBean
         private PatientRepository patientRepository;
+        @MockBean
+        private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Test
     public void testUpdatePatientAccepted() throws Exception {
