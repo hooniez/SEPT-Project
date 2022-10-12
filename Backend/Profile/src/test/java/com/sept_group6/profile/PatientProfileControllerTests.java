@@ -31,6 +31,9 @@ class PatientProfileControllerTests {
         @MockBean
         private PatientRepository patientRepository;
 
+        @MockBean
+        private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Test
     public void testUpdatePatientAccepted() throws Exception {
         Patient patient1 = new Patient(1L,"cal@calcal.cal", "cal",
@@ -39,6 +42,7 @@ class PatientProfileControllerTests {
 
         Mockito.when(patientRepository.findByEmail("cal@calcal.cal")).thenReturn(Optional.of(patient1));
         Mockito.when(patientRepository.save(patient1)).thenReturn(patient1);
+        Mockito.when(patientRepository.existsByEmail("cal@calcal.cal")).thenReturn(true);
         MockHttpServletRequestBuilder mockRequest =
                 MockMvcRequestBuilders.put(
                                 "/patient/profile").

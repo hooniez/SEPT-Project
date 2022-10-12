@@ -31,7 +31,7 @@ class DoctorProfileControllerTests {
         @MockBean
         private DoctorRepository doctorRepository;
 
-        @Autowired
+        @MockBean
         private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Test
@@ -41,6 +41,7 @@ class DoctorProfileControllerTests {
                 "history here");
 
         Mockito.when(doctorRepository.findByEmail("doc@docdoc.doc")).thenReturn(Optional.of(doctor1));
+        Mockito.when(doctorRepository.existsByEmail("doc@docdoc.doc")).thenReturn(true);
         Mockito.when(doctorRepository.save(doctor1)).thenReturn(doctor1);
         MockHttpServletRequestBuilder mockRequest =
                 MockMvcRequestBuilders.put(
