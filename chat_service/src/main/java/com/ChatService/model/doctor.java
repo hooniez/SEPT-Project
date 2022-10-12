@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class doctor {
+public class Doctor {
     @Id
     private String email;
     private String firstname;
@@ -24,5 +24,3 @@ public class doctor {
     private String mobilenumber;
     private String certificate;
 }
-
-
