@@ -2,6 +2,12 @@
     "configurations": [
         {
             "type": "java",
+<<<<<<< HEAD
+            "name": "Launch ChatServiceApplication",
+            "request": "launch",
+            "mainClass": "com.ChatService.ChatServiceApplication",
+            "projectName": "ChatService"
+=======
             "name": "Launch ProfileApplication",
             "request": "launch",
             "mainClass": "com.sept_group6.profile.ProfileApplication",
@@ -34,6 +40,7 @@
             "request": "launch",
             "mainClass": "com.sept_group6.appointment_server.appointmentServerApplication",
             "projectName": "Appointment_Server"
+>>>>>>> backend_frontend_livechat_integration
         },
         {
             "type": "java",
