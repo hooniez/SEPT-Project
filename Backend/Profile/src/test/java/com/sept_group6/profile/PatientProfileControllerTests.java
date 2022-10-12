@@ -30,6 +30,8 @@ class PatientProfileControllerTests {
         private ObjectMapper objectMapper;
         @MockBean
         private PatientRepository patientRepository;
+        @MockBean
+        private BCryptPasswordEncoder bCryptPasswordEncoder;
 
         @MockBean
         private BCryptPasswordEncoder bCryptPasswordEncoder;
