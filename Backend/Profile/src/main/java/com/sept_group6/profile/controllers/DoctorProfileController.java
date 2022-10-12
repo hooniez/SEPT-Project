@@ -39,8 +39,10 @@ public class DoctorProfileController {
 
         if(doctorRepository.existsByEmail(doctorEdit.getEmail())) {
             if(doctorEdit.getPassword().equals(doctor.getPassword())) {
+                System.out.println("Password did not change");
                 doctorEdit.setPassword(doctorEdit.getPassword());
             } else {
+                System.out.println("Password changed");
                 doctorEdit.setPassword(bCryptPasswordEncoder.encode(doctorEdit.getPassword()));
             }
 

@@ -38,9 +38,11 @@ public class PatientProfileController {
 
         if(patientRepository.existsByEmail(patientEdit.getEmail())) {
             if(patientEdit.getPassword().equals(patient.getPassword())) {
+                System.out.println("Password did not change");
                 patientEdit.setPassword(patientEdit.getPassword());
             } else {
                 patientEdit.setPassword(bCryptPasswordEncoder.encode(patientEdit.getPassword()));
+                System.out.println("Password changed");
             }
             patientEdit.setUid(patient.getUid());
             patientRepository.save(patientEdit);

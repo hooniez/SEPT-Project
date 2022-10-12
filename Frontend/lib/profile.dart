@@ -16,39 +16,60 @@ class PatientProfile extends StatefulWidget {
 
 class _MyAppState extends State<PatientProfile> {
 
-  // late Future<List<ProfileData>> userData;
-  late String _firstname;
-  late String _lastname;
-  late String _email;
-  late String _dob;
-  late String _mobile;
-  late String _medhist;
-  late String _password;
-  late String _userType;
-  late String _cert;
-  late String _token;
+  late String _firstname = "";
+  late String _lastname = "";
+  late String _email = "";
+  late String _dob = "";
+  late String _mobile = "";
+  late String _medhist = "";
+  late String _password = "";
+  late String _userType = "";
+  late String _cert = "";
+  late String _token = "";
   late String _passworddupe = _password;
+
+
+  // @override
+  // void initState() {
+  //   _firstname = widget.user.value['firstname'];
+  //   _lastname = widget.user.value['lastname'];
+  //   _email = widget.user.value['email'];
+  //   _dob = widget.user.value['dob'];
+  //   _mobile = widget.user.value['mobilenumber'];
+  //   _medhist = widget.user.value['medicalhistory'];
+  //   _password = widget.user.value['password'];
+  //   _userType = widget.user.value['usertype'];
+  //   _cert = widget.user.value['certificate'];
+  //   _token = widget.user.value['Authorization'];
+  // }
   @override
   void initState() {
     print("state started");
     Future futureData = getUserData(widget.user);
     futureData.then((value) {
+      print("value is" + json.decode(value)['firstname']);
       _firstname = json.decode(value)['firstname'];
       _lastname = json.decode(value)['lastname'];
       _password = json.decode(value)['password'];
+      _passworddupe = _password;
       _email = json.decode(value)['email'];
       _dob = json.decode(value)['dob'];
-      _mobile = json.decode(value)['mobile'];
-      _medhist = json.decode(value)['medhist'];
+      _mobile = json.decode(value)['mobilenumber'];
+      _medhist = json.decode(value)['medicalhistory'];
       _userType = json.decode(value)['usertype'];
-      _cert = json.decode(value)['cert'];
-      _token = json.decode(value)['token'];
+      _cert = json.decode(value)['certificate'];
+      _token = widget.user.value['Authorization'];
+      textControllers['firstname']!.text = _firstname;
+      textControllers['lastname']!.text = _lastname;
+      textControllers['password']!.text = "";
+      textControllers['confirmPassword']!.text = "";
+      textControllers['email']!.text = _email;
+      textControllers['dob']!.text = _dob;
+      textControllers['mobile']!.text = _mobile;
+      textControllers['medhist']!.text = _medhist;
+      textControllers['usertype']!.text = _userType;
+      textControllers['certificate']!.text = _cert;
     });
-  }
-
-    //
-
-
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -103,6 +124,7 @@ class _MyAppState extends State<PatientProfile> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
             backgroundColor: const Color.fromARGB(255, 223, 28, 93),
             title: const Text("Profile"),
@@ -334,10 +356,12 @@ class _MyAppState extends State<PatientProfile> {
                                   // do nothing
                                 } else {
                                   textBoxBackgrounds = textBoxNotSelectedColor;
+                                  print("Has the token," +_token.toString());
                                   if (_formKey.currentState!.validate()) {
                                     Future response = putPatientData(
                                         textControllers, _userType, _token);
                                   } else {
+                                    print("The duplicated password is: "+_passworddupe.toString());
                                     textControllers['password']!.text =
                                         _passworddupe;
                                     Future response = putPatientData(
@@ -384,6 +408,7 @@ Future<Response> putPatientData(
   } else {
     String uri = "http://10.0.2.2:8091/patient/profile";
     final url = Uri.parse(uri);
+    print(textControlDict['password']!.text);
     response = await put(url,
         headers: {
           'Accept': 'application/json',
@@ -402,6 +427,7 @@ Future<Response> putPatientData(
   }
 
   if (response.statusCode == 200 || response.statusCode == 202) {
+    print("success response");
     return response;
   } else {
     print(response.headers);
@@ -437,7 +463,7 @@ Future<String> getUserData(user) async {
   }
   uri = uri + typeUri + user.value["uid"].toString();
   final url = Uri.parse(uri);
-
+  print(user.value["password"]);
   print(url);
   final Response response = await get(url,
       headers: {
@@ -451,47 +477,5 @@ Future<String> getUserData(user) async {
   } else {
     print(response.statusCode);
     throw Exception("Error getting profile data");
-  }
-}
-
-
-class ProfileData {
-  String firstname;
-  String lastname;
-  String email;
-  String dob;
-  String mobile;
-  String medhist;
-  String password;
-  String userType;
-  String cert;
-  String token;
-
-  ProfileData(
-      {required this.firstname,
-        required this.lastname,
-        required this.email,
-        required this.dob,
-        required this.mobile,
-        required this.medhist,
-        required this.password,
-        required this.userType,
-        required this.cert,
-        required this.token
-      });
-
-  factory ProfileData.fromJson(Map<String, dynamic> json) {
-    return ProfileData(
-      firstname: json['firstname'] ?? "",
-      lastname: json['lastname'] ?? "",
-      email: json['email'] ?? "",
-      dob: json['dob'] ?? "",
-      mobile: json['mobile'] ?? "",
-      medhist: json['medhist'] ?? "",
-      password: json['password'] ?? "",
-      userType: json['userType'] ?? "",
-      cert: json['cert'] ?? "",
-      token: json['token'] ?? "",
-    );
   }
 }
