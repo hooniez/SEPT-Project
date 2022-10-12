@@ -1,0 +1,4 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Oct 12 02:55:38 UTC 2022
+@default-central-https\://repo.maven.apache.org/maven2/.lastUpdated=1665543338424
+https\://repo.maven.apache.org/maven2/.error=Could not transfer artifact org.springframework.security\:spring-security-core\:jar\:5.7.3 from/to central (https\://repo.maven.apache.org/maven2)\: No such file or directory

@@ -1,0 +1,4 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Oct 12 02:55:40 UTC 2022
+@default-central-https\://repo.maven.apache.org/maven2/.lastUpdated=1665543340773
+https\://repo.maven.apache.org/maven2/.error=Could not transfer artifact org.springframework.hateoas\:spring-hateoas\:jar\:1.5.1 from/to central (https\://repo.maven.apache.org/maven2)\: /root/.m2/repository/org/springframework/hateoas/spring-hateoas/1.5.1/spring-hateoas-1.5.1.jar.part.lock (No such file or directory)
