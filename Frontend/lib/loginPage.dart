@@ -19,6 +19,7 @@ class _LoginState extends State<Login> {
   UserType? _userType;
   String? API_HOST;
 
+  // Login page two fronts: one for admin and the other for patient
   @override
   void initState() {
     _userType = widget.forAdmin ? UserType.admin : UserType.patient;

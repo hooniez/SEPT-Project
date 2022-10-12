@@ -19,12 +19,14 @@ class MyApp extends HookWidget {
   Widget build(BuildContext context) {
     final user = useState({});
 
+    // a prop function passed down to child widgets with token
     void _setUser(String res, String userType, String token) {
       user.value = json.decode(res);
       user.value['usertype'] = userType;
       user.value['Authorization'] = token;
     }
 
+    // a prop function passed down to child widgets without token
     void _setUserWithoutToken(String res, String userType) {
       user.value = json.decode(res);
       user.value['usertype'] = userType;
