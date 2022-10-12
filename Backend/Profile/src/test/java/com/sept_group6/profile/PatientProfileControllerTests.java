@@ -3,6 +3,7 @@ package com.sept_group6.profile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sept_group6.profile.controllers.PatientProfileController;
 import com.sept_group6.profile.dao.PatientRepository;
+import com.sept_group6.profile.model.Doctor;
 import com.sept_group6.profile.model.Patient;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -67,5 +68,21 @@ class PatientProfileControllerTests {
             mockMvc.perform(mockRequest)
                     .andExpect(status().isBadRequest());
         }
+
+    @Test
+    public void testGetPatientAccepted() throws Exception {
+        long patientId = 1;
+        Patient patient1 = new Patient(1,"cal@calcal.cal", "cal",
+                "l", "2002-02-02", "cal", "0000",
+                "history here");
+        Mockito.when(patientRepository.findById(patientId)).thenReturn(Optional.of(patient1));
+        MockHttpServletRequestBuilder mockRequest =
+                MockMvcRequestBuilders.get(
+                                "/patient/profile/1").
+                        contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(patient1));
+        mockMvc.perform(mockRequest)
+                .andExpect(status().isOk());
+    }
 
 }
