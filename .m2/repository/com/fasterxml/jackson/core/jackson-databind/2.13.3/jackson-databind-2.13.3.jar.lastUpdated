@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Oct 12 02:55:44 UTC 2022
+https\://dl.bintray.com/jwtk/coveralls-maven-plugin/.error=Could not transfer artifact com.fasterxml.jackson.core\:jackson-databind\:jar\:2.13.3 from/to bintray-jwtk-coveralls-maven-plugin (https\://dl.bintray.com/jwtk/coveralls-maven-plugin)\: transfer failed for https\://dl.bintray.com/jwtk/coveralls-maven-plugin/com/fasterxml/jackson/core/jackson-databind/2.13.3/jackson-databind-2.13.3.jar, status\: 502 Bad Gateway
+@default-central-https\://repo.maven.apache.org/maven2/.lastUpdated=1665543338736
+https\://repo.maven.apache.org/maven2/.error=Could not transfer artifact com.fasterxml.jackson.core\:jackson-databind\:jar\:2.13.3 from/to central (https\://repo.maven.apache.org/maven2)\: No such file or directory
+@default-bintray-jwtk-coveralls-maven-plugin-https\://dl.bintray.com/jwtk/coveralls-maven-plugin/.lastUpdated=1665543344721
