@@ -33,9 +33,6 @@ class PatientProfileControllerTests {
         @MockBean
         private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-        @MockBean
-        private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     @Test
     public void testUpdatePatientAccepted() throws Exception {
         Patient patient1 = new Patient(1L,"cal@calcal.cal", "cal",
