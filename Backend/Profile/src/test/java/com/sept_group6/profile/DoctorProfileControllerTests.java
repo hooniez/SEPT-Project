@@ -68,4 +68,21 @@ class DoctorProfileControllerTests {
                     .andExpect(status().isBadRequest());
         }
 
+    @Test
+    public void testGetDoctorAccepted() throws Exception {
+        long docId = 1;
+        Doctor doctor1 = new Doctor(1,"doc@docdoc.doc", "doc",
+                "l", "2002-02-02", "doc", "0000", "history");
+        Doctor doctor2 = null;
+        Mockito.when(doctorRepository.findById(docId)).thenReturn(Optional.of(doctor1));
+        MockHttpServletRequestBuilder mockRequest =
+                MockMvcRequestBuilders.get(
+                                "/doctor/profile/1").
+                        contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(doctor1));
+        mockMvc.perform(mockRequest)
+                .andExpect(status().isOk());
+    }
+
+
 }
