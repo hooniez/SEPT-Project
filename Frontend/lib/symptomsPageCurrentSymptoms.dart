@@ -30,16 +30,21 @@ class _SymptomsPageCurrentSymptomsState
 
   @override
   Widget build(BuildContext context) {
+    // if this page is in its first local running (that is, hasnt been refreshed and has come from another page)
+    // then that means we are at the start running, so we take data from the page that was come from and use that
+    // until the page is refreshed by deleting a symptom
     if (startOfProgram) {
       updatedSymptoms = widget.getSymptoms;
       allSymptoms = json.decode(widget.getSymptoms.body);
       allEnables = List.filled(allSymptoms.length, false);
+      // if a symptom is deleted, we now take the updatedsymptoms instead
     } else {
       allSymptoms = json.decode(updatedSymptoms.body);
     }
     // allEnables will not fill false again so will save edit states
     // will also save state of symptoms after deletion/edit
     startOfProgram = false;
+    // standard materialApp procedures with comments on unclear aspects
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -134,6 +139,8 @@ class _SymptomsPageCurrentSymptomsState
                                           fontSize: 24,
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold)),
+                                  // display all the items if they exist, otherwise display another message letting the user know
+                                  // they have to add symptoms
                                   allSymptoms.isNotEmpty
                                       ? ListView.separated(
                                           shrinkWrap: true,
@@ -141,6 +148,7 @@ class _SymptomsPageCurrentSymptomsState
                                           itemCount: allSymptoms.length,
                                           itemBuilder: (BuildContext context,
                                               int index) {
+                                            // iterate over all the symptom items and display them
                                             return Row(children: <Widget>[
                                               Flexible(
                                                 child: Container(
@@ -150,6 +158,10 @@ class _SymptomsPageCurrentSymptomsState
                                                         child: TextFormField(
                                                       enabled:
                                                           allEnables[index],
+                                                      // key that allows updating of initialvalue when it is changed via setState
+                                                      key: Key(allSymptoms[
+                                                              index][
+                                                          'symptomdescription']),
                                                       initialValue: allSymptoms[
                                                               index][
                                                           'symptomdescription'],
@@ -171,6 +183,7 @@ class _SymptomsPageCurrentSymptomsState
                                                       ),
                                                     ))),
                                               ),
+                                              // an iconbutton to display an icon to be pressed, and when pressed delete that item and refresh page
                                               IconButton(
                                                   icon: Icon(Icons.delete),
                                                   onPressed: () async {
@@ -213,8 +226,9 @@ class _SymptomsPageCurrentSymptomsState
   }
 }
 
+// getSymptom response to get all the symptoms after deletion (or in general)
 Future<Response> getSymptom(String patientemail, String token) async {
-  String API_HOST = "10.0.2.2:8085";
+  String API_HOST = "localhost:8085";
   final queryParameters = {'email': patientemail};
   final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
   print(uri);
@@ -229,9 +243,10 @@ Future<Response> getSymptom(String patientemail, String token) async {
   return res;
 }
 
+// deleteSymptom response to successfully delete a particular symptom
 Future<Response> deleteSymptom(int id, String token) async {
   String stringId = id.toString();
-  String API_HOST = "10.0.2.2:8085";
+  String API_HOST = "localhost:8085";
   final uri = Uri.http(API_HOST, "/deletesymptom", {'id': stringId});
   print(uri);
 
