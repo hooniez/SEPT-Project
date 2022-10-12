@@ -23,6 +23,7 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends State<SignupPage> {
   UserType? _userType;
   @override
+  // SignupPage has two fronts: one for doctor and the other for patient
   void initState() {
     _userType = widget.forDoctor ? UserType.doctor : UserType.patient;
     super.initState();
