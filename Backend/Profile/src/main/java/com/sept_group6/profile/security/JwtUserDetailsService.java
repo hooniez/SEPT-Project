@@ -1,11 +1,13 @@
 package com.sept_group6.profile.security;
 
-import com.sept_group6.profile.dao.DoctorRepository;
-import com.sept_group6.profile.dao.PatientRepository;
-import com.sept_group6.profile.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import com.sept_group6.profile.dao.PatientRepository;
+import com.sept_group6.profile.dao.DoctorRepository;
+import com.sept_group6.profile.model.User;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,9 +35,9 @@ public class JwtUserDetailsService implements UserDetailsService {
 
         User user;
         if (userType.equals("patient")) {
-            user = patientRepository.findByEmail(email);
+            user = patientRepository.findByEmail(email).get();
         } else {
-            user = doctorRepository.findByEmail(email);
+            user = doctorRepository.findByEmail(email).get();
         }
         if (user == null)
             new UsernameNotFoundException("User not found");

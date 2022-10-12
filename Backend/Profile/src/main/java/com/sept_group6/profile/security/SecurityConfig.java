@@ -1,10 +1,10 @@
 package com.sept_group6.profile.security;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
@@ -85,8 +87,7 @@ public class SecurityConfig {
                         "/**/*.css",
                         "/**/*.js")
                 .permitAll()
-                .antMatchers(SecurityConstant.SIGNUP_URLS).permitAll()
-                .antMatchers(SecurityConstant.SIGNIN_URLS).permitAll()
+                // .antMatchers(SecurityConstant.SIGN_UP_URLS).permitAll()
                 // .antMatchers("/api/users/**").permitAll()
                 // .antMatchers(SecurityConstant.H2_URL).permitAll()
                 .anyRequest().authenticated()

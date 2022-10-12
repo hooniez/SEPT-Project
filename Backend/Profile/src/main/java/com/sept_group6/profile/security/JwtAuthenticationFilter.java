@@ -1,7 +1,6 @@
 package com.sept_group6.profile.security;
 
 // import com.sept_group6.sept_backend.model.User;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

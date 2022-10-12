@@ -1,11 +1,10 @@
 package com.sept_group6.profile.security;
 
 // https://www.baeldung.com/spring-security-extra-login-fields
+import java.util.Collection;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
-
-import java.util.Collection;
 
 public class CustomAuthenticationToken extends UsernamePasswordAuthenticationToken {
 

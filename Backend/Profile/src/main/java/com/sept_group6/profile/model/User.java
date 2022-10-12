@@ -1,7 +1,13 @@
 package com.sept_group6.profile.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import java.time.LocalDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

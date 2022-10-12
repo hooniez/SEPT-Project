@@ -23,7 +23,7 @@ public class Patient extends User {
     private String medicalhistory;
 
     public Patient(long uid, String email, String firstname, String lastname, String dob, String password,
-                   String mobilenumber, String medicalhistory) {
+            String mobilenumber, String medicalhistory) {
         super(uid, email, firstname, lastname, dob, password, mobilenumber);
         this.medicalhistory = medicalhistory;
     }

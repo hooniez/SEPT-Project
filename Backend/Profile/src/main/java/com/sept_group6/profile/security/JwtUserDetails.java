@@ -1,9 +1,7 @@
 package com.sept_group6.profile.security;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
@@ -13,8 +11,6 @@ public class JwtUserDetails implements UserDetails {
     private String password;
     private String userType;
     private Collection<? extends GrantedAuthority> authorities;
-
-    private static final Logger logger = LogManager.getLogger("Backend");
 
     /*
      * UserDetails interface methods
