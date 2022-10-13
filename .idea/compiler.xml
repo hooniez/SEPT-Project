@@ -7,28 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Appointment_Server" />
-        <module name="SEPT_Backend" />
         <module name="Admin" />
-        <module name="Symptom" />
-        <module name="Profile" />
+        <module name="SEPT_Backend" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Admin" target="11" />
-      <module name="Appointment_Server" target="11" />
-      <module name="Profile" target="11" />
       <module name="SEPT_Backend" target="11" />
-      <module name="Symptom" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Admin" options="-parameters" />
-      <module name="Appointment_Server" options="-parameters" />
-      <module name="Profile" options="-parameters" />
       <module name="SEPT_Backend" options="-parameters" />
-      <module name="Symptom" options="-parameters" />
     </option>
   </component>
 </project>
