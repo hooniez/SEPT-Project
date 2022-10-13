@@ -43,7 +43,7 @@ class _MyAppState extends State<addAvailabilityPage> {
 
   Future<Response> addAvailability() async {
     print(widget.user);
-    String API_HOST = "10.0.2.2:6869";
+    String API_HOST = "10.0.2.2:8081";
     String PATH = "/availability";
 
     Map<String, String> header = {
