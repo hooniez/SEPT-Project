@@ -5,7 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Backend/Admin/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/Appointment_Server/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/Profile/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/SEPT_Backend/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/symptom/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_inject_jakarta_inject_api_2_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_antlr_antlr4_runtime_4_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_6_0_2_Final.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/version" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/addAppointmentPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/addAppointmentPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/addAvailabilityPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/addAvailabilityPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/appointmentPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/appointmentPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/availabilityPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/availabilityPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/frontPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/frontPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/loginPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/loginPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/profile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/signupPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/signupPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/symptomsPageAddSymptoms.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/symptomsPageAddSymptoms.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/symptomsPageCurrentSymptoms.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/symptomsPageCurrentSymptoms.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javax.annotation.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javax.ejb.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javax.jms.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javax.persistence.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javax.resource.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javax.servlet.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javax.servlet.jsp.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javax.servlet.jsp.jstl.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javax.transaction.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,20 +91,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
-    <property name="cidr.known.project.marker" value="true" />
-    <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="show.migrate.to.gradle.popup" value="false" />
-  </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Backend" />
-      <recent name="$PROJECT_DIR$/Backend/SEPT_Backend/src/test/java/com/sept_group6/sept_backend/controllers" />
       <recent name="$PROJECT_DIR$/Frontend" />
+      <recent name="$PROJECT_DIR$/Backend" />
+      <recent name="$PROJECT_DIR$/Backend/symptom" />
+      <recent name="$PROJECT_DIR$/Backend/SEPT_Backend" />
+      <recent name="$PROJECT_DIR$/Backend/Profile" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PatientControllerTest">
+  <component name="RunManager" selected="JUnit.DoctorControllerTest">
     <configuration name="main.dart (1)" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/frontend/frontend/lib/main.dart" />
       <method v="2" />
@@ -134,10 +161,10 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.PatientControllerTest" />
+      <item itemvalue="Flutter.main.dart" />
+      <item itemvalue="Flutter.main.dart (1)" />
       <item itemvalue="JUnit.DoctorControllerTest" />
-      <item itemvalue="Spring Boot.AdminApplication" />
-      <item itemvalue="Spring Boot.SeptBackendApplication" />
+      <item itemvalue="JUnit.PatientControllerTest" />
     </list>
     <recent_temporary>
       <list>
@@ -164,6 +191,8 @@
       <workItem from="1664934576790" duration="6227000" />
       <workItem from="1665463156287" duration="1640000" />
       <workItem from="1665509454202" duration="331000" />
+      <workItem from="1665639293702" duration="818000" />
+      <workItem from="1665699030603" duration="1084000" />
     </task>
     <servers />
   </component>

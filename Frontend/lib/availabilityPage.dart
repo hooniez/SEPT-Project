@@ -52,7 +52,7 @@ class AppointmentView {
 
 Future<List<AppointmentView>> getAvailabilities(user) async {
   // construct the request
-  String API_HOST = "10.0.2.2:8081";
+  String API_HOST = "10.0.2.2:6869";
   String APPOINTMENT_PATH = "/appointment";
 
   final queryParameters = {
