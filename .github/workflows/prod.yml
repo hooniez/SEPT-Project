@@ -10,18 +10,17 @@ on:
 
 jobs:
   build-and-deploy-back:
+    name: Build and Deploy Back-end
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-      - name: docker login
-        env:
-          DOCKER_USER: septbackend
-          DOCKER_PASSWORD: 123456789
-        run: |
-          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-      - name: Build the Docker image
-        run: docker build . --file Backend/Admin/Dockerfile
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Docker Push
-        run: docker push septbackend/prod
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          username: septbackend
+          password: 123456789
+          repository: septbackend/prod
+          dockerfile: Backend/Admin/Dockerfile
+          tags: latest
