@@ -5,28 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Backend/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/Admin/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/Appointment_Server/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/Profile/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/SEPT_Backend/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/symptom/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/challenge2/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/.dart_tool/version" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/.dart_tool/version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/addAppointmentPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/addAppointmentPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/addAvailabilityPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/addAvailabilityPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/appointmentPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/appointmentPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/availabilityPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/availabilityPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/frontPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/frontPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/loginPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/loginPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/profile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/signupPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/signupPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/symptomsPageAddSymptoms.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/symptomsPageAddSymptoms.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/symptomsPageCurrentSymptoms.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/symptomsPageCurrentSymptoms.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/pubspec.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,14 +61,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
-    <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -159,10 +132,10 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Flutter.main.dart" />
-      <item itemvalue="Flutter.main.dart (1)" />
       <item itemvalue="JUnit.PatientControllerTest" />
       <item itemvalue="JUnit.DoctorControllerTest" />
+      <item itemvalue="Spring Boot.AdminApplication" />
+      <item itemvalue="Spring Boot.SeptBackendApplication" />
     </list>
     <recent_temporary>
       <list>
@@ -205,6 +178,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

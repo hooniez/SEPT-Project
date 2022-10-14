@@ -1,0 +1,24 @@
+name: Build Containers for Prod & Push to Dockerhub
+
+on:
+  pull_request:
+    branches:
+      - docker_backend
+  push:
+    branches:
+      - docker_backend
+
+jobs:
+  build-and-deploy-back:
+    name: Build and Deploy Admin
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: docker/build-push-action@v1
+      with:
+        username: septbackend
+        password: 123456789
+        repository: septbackend/prod
+        dockerfile: Develop/Admin/Dockerfile
+        tags: latest
+    
