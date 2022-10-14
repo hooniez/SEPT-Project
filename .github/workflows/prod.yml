@@ -18,5 +18,5 @@ jobs:
         with:
           email: s3774430@student.rmit.edu.au # your heroku email
           api_key: da8fc1ed-129a-4e55-ae0b-0366801d9690 # your  heroku api key
-          docker_compose_file: "docker-compose.yml" # set the path to the folder where the docker-compose file is located
+          docker_compose_file: "Backend/docker-compose.yml" # set the path to the folder where the docker-compose file is located
           heroku_apps: '[{"imagename":"admin","appname":"sept-admin","apptype":"web"}]' # List of Docker Image name, Heroku app and Heroku app type
