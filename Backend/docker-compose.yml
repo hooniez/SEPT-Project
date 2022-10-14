@@ -11,8 +11,6 @@ services:
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
     ports:
       - $MYSQL_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
-    logging:       
-      driver: none
     volumes:
       - db:/var/lib/mysql
   admin:
@@ -23,8 +21,6 @@ services:
     env_file: ./.env
     ports:
       - $ADMIN_LOCAL_PORT:$ADMIN_DOCKER_PORT
-    logging:       
-      driver: none
     environment:
       SPRING_APPLICATION_JSON: '{
           "spring.datasource.url"  : "jdbc:mysql://mysqldb:$MYSQLDB_DOCKER_PORT/$MYSQLDB_DATABASE?allowPublicKeyRetrieval=true&useSSL=false",
@@ -45,8 +41,6 @@ services:
     env_file: ./.env
     ports:
       - $APPOINTMENT_SERVER_LOCAL_PORT:$APPOINTMENT_SERVER_DOCKER_PORT
-    logging:       
-      driver: none
     environment:
       SPRING_APPLICATION_JSON: '{
            "spring.datasource.url"  : "jdbc:mysql://mysqldb:$MYSQLDB_DOCKER_PORT/$MYSQLDB_DATABASE?allowPublicKeyRetrieval=true&useSSL=false",
@@ -68,8 +62,6 @@ services:
     env_file: ./.env
     ports:
       - $PROFILE_LOCAL_PORT:$PROFILE_DOCKER_PORT
-    logging:       
-      driver: none
     environment:
       SPRING_APPLICATION_JSON: '{
              "spring.datasource.url"  : "jdbc:mysql://mysqldb:$MYSQLDB_DOCKER_PORT/$MYSQLDB_DATABASE?allowPublicKeyRetrieval=true&useSSL=false",
@@ -91,8 +83,6 @@ services:
     env_file: ./.env
     ports:
       - $SEPT_BACKEND_LOCAL_PORT:$SEPT_BACKEND_DOCKER_PORT
-    logging:       
-      driver: none
     environment:
       SPRING_APPLICATION_JSON: '{
              "spring.datasource.url"  : "jdbc:mysql://mysqldb:$MYSQLDB_DOCKER_PORT/$MYSQLDB_DATABASE?allowPublicKeyRetrieval=true&useSSL=false",
@@ -114,8 +104,6 @@ services:
     env_file: ./.env
     ports:
       - $SYMPTOM_LOCAL_PORT:$SYMPTOM_DOCKER_PORT
-    logging:       
-      driver: none
     environment:
       SPRING_APPLICATION_JSON: '{
              "spring.datasource.url"  : "jdbc:mysql://mysqldb:$MYSQLDB_DOCKER_PORT/$MYSQLDB_DATABASE?allowPublicKeyRetrieval=true&useSSL=false",
