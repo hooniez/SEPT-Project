@@ -1,28 +1,22 @@
-name: Build Containers for Prod & Push to Dockerhub
-
+name: docker-compose-multiple-apps-heroku-deploy #set whatevername you want to your github job
 on:
   pull_request:
     branches:
       - docker_backend
   push:
     branches:
-      - docker_backend
-
+      - docker_backend # set the events you would like to trigger this job
 jobs:
-  build-and-deploy-back:
-    name: Build and Deploy Back-end
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v2
+      - name: Build, Push and Deploy to Heroku #set the whatever name you want to this step
+        id: heroku
+        uses: snithyanantham/docker-compose-multiple-apps-heroku-deploy@v1.0 # use the latest version of the action
         with:
-          path: docker_backend
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          username: septbackend
-          password: 123456789
-          repository: septbackend/prod
-          dockerfile: Backend/Admin/Dockerfile
-          tags: latest
+          email: s3774430@student.rmit.edu.au # your heroku email
+          api_key: da8fc1ed-129a-4e55-ae0b-0366801d9690 # your  heroku api key
+          docker_compose_file: "docker-compose.yml" # set the path to the folder where the docker-compose file is located
+          heroku_apps: '[{"imagename":"admin","appname":"sept-admin","apptype":"web"}]' # List of Docker Image name, Heroku app and Heroku app type
