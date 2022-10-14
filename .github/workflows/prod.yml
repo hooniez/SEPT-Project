@@ -19,5 +19,5 @@ jobs:
           username: septbackend
           password: 123456789
           repository: septbackend/prod
-          dockerfile: Develop/Admin/Dockerfile
+          dockerfile: Backend/Admin/Dockerfile
           tags: latest
