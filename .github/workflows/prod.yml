@@ -13,12 +13,11 @@ jobs:
     name: Build and Deploy Admin
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: docker/build-push-action@v1
-      with:
-        username: septbackend
-        password: 123456789
-        repository: septbackend/prod
-        dockerfile: Develop/Admin/Dockerfile
-        tags: latest
-    
+      - name: Checkout code
+        uses: docker/build-push-action@v2
+        with:
+          username: septbackend
+          password: 123456789
+          repository: septbackend/prod
+          dockerfile: Develop/Admin/Dockerfile
+          tags: latest
