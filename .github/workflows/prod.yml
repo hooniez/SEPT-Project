@@ -1,27 +1,29 @@
 name: Build Containers for Prod & Push to Dockerhub
 
 on:
-  pull_request:
-    branches:
-      - docker_backend
   push:
     branches:
       - docker_backend
 
 jobs:
-  build-and-deploy-back:
+  docker:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-      - name: docker login
-        env:
-          DOCKER_USER: septbackend
-          DOCKER_PASSWORD: 123456789
-        run: |
-          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-      - name: Build the Docker image
-        run: docker build . --file Backend/Admin/Dockerfile
-
-      - name: Docker Push
-        run: docker push septbackend/prod
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: septbackend
+          password: 123456789
+      -
+        name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: user/app:latest
