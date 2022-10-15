@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Run bash
-        run: sudo rm -r /etc/ssh/ssh_known_hosts
+        run: cat /etc/ssh/ssh_known_hosts
         shell: bash
       - name: Deploy to Docker Host
         uses: wshihadeh/docker-deployment-action@v1
