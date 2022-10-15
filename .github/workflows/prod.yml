@@ -14,6 +14,9 @@ jobs:
 
     steps:
       - name: Run bash
+        run: sudo rm /etc/ssh/ssh_known_hosts
+        shell: bash
+      - name: Run bash2
         run: cat /etc/ssh/ssh_known_hosts
         shell: bash
       - name: Deploy to Docker Host
