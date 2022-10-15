@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Run bash
+        run: cat /etc/ssh/ssh_known_hosts
+        shell: bash
       - name: Deploy to Docker Host
         uses: wshihadeh/docker-deployment-action@v1
         with:
