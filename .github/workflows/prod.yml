@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Run bash
+        run: ssh-keygen -R 188.166.220.203
+        shell: bash
       - name: Deploy to Docker Host
         uses: wshihadeh/docker-deployment-action@v1
         with:
