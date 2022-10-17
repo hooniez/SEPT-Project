@@ -28,7 +28,6 @@ jobs:
         with:
           host: 165.232.172.169
           username: root
-          key: DOCKER_SSH_PRIVATE_KEY
-          port: 22
+          key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
           source: "deploy.tar"
           target: "destination/folder"
