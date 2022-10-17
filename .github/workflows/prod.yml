@@ -11,6 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
 
     steps:
       - uses: actions/checkout@v3
@@ -52,3 +53,4 @@ jobs:
             tar -xf deploy.tar
             cd docker-test
             cd Backend
+            docker-compose up -d
