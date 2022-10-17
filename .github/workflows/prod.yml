@@ -28,5 +28,5 @@ jobs:
           stack_file_name: /github/home/runner/work/SEPT-Project/SEPT-Project/Backend/docker-compose.yml
           args: up -d
           pre_deployment_command_args: "bundle exec rake db:migrate"
-          docker_prune: "true"
+          # docker_prune: "true"
           pull_images_first: "true"
