@@ -23,5 +23,5 @@ jobs:
           stack_file_name: ./Backend/docker-compose.yaml
           args: up -d
           pre_deployment_command_args: "bundle exec rake db:migrate"
-          docker_prune: "true"
+          # docker_prune: "true"
           pull_images_first: "true"
