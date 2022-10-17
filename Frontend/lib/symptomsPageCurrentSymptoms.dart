@@ -87,10 +87,10 @@ class _SymptomsPageCurrentSymptomsState
                             child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(24.0),
+                                  Row(children:[Padding(
+                                    padding: const EdgeInsets.fromLTRB(0, 10, 5, 10),
                                     child: SizedBox(
-                                      width: 300.0, // <-- match_parent
+                                      width: 150.0, // <-- match_parent
                                       height: 50.0, // <-- match-parent
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
@@ -106,33 +106,33 @@ class _SymptomsPageCurrentSymptomsState
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(24.0),
-                                    child: SizedBox(
-                                      width: 300.0, // <-- match_parent
-                                      height: 50.0, // <-- match-parent
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 144, 119, 151), // background
-                                          onPrimary: Colors.white, // foreground
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(5, 10, 0, 10),
+                                      child: SizedBox(
+                                        width: 150.0, // <-- match_parent
+                                        height: 50.0, // <-- match-parent
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            primary: Color.fromARGB(
+                                                255, 144, 119, 151), // background
+                                            onPrimary: Colors.white, // foreground
+                                          ),
+                                          child: const Text(
+                                            'Add Symptom',
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                          onPressed: () async {
+                                            Navigator.push(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                                      return SymptomsPageAddSymptoms(
+                                                          getUser: widget.getUser,
+                                                          getSymptoms: updatedSymptoms);
+                                                    }));
+                                          },
                                         ),
-                                        child: const Text(
-                                          'Add Symptom',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        onPressed: () async {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return SymptomsPageAddSymptoms(
-                                                getUser: widget.getUser,
-                                                getSymptoms: updatedSymptoms);
-                                          }));
-                                        },
                                       ),
-                                    ),
-                                  ),
+                                    ),]),
                                   Text(
                                       'Symptoms for ${widget.getUser.value['firstname']}:',
                                       style: TextStyle(
