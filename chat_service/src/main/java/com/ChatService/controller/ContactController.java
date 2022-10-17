@@ -10,12 +10,18 @@ import com.ChatService.model.Doctor;
 import com.ChatService.dao.DoctorRepository;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+
 import java.util.Optional;
 
+@Controller
+@RequestMapping(path="/")
 public class ContactController {
     @Autowired
     private PatientRepository patientRepo;
+    @Autowired
     private DoctorRepository doctorRepo;
 
     @GetMapping(path="/chat/patient/{stringId}")
@@ -63,6 +69,7 @@ public class ContactController {
 
     @GetMapping(path="/chat/doctor/all", produces = "application/json")
     public @ResponseBody Iterable<Doctor> getAllDoctors() {
+        System.out.println("cunt");
         return doctorRepo.findAll();
     }
 }
