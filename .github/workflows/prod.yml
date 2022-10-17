@@ -18,6 +18,7 @@ jobs:
           path: docker-test
       - run: |
           cd docker-test
+          cd Backend
           ls
 
       - uses: wshihadeh/docker-deployment-action@v2
