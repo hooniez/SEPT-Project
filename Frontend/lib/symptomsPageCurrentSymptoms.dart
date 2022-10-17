@@ -207,7 +207,7 @@ class _SymptomsPageCurrentSymptomsState
 
 // getSymptom response to get all the symptoms after deletion (or in general)
 Future<Response> getSymptom(String patientemail, String token) async {
-  String API_HOST = "10.0.2.2:8085";
+  String API_HOST = "localhost:8085";
   final queryParameters = {'email': patientemail};
   final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
   print(uri);
@@ -225,7 +225,7 @@ Future<Response> getSymptom(String patientemail, String token) async {
 // deleteSymptom response to successfully delete a particular symptom
 Future<Response> deleteSymptom(int id, String token) async {
   String stringId = id.toString();
-  String API_HOST = "10.0.2.2:8085";
+  String API_HOST = "localhost:8085";
   final uri = Uri.http(API_HOST, "/deletesymptom", {'id': stringId});
   print(uri);
 
