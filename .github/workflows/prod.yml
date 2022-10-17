@@ -28,7 +28,8 @@ jobs:
           ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
           deployment_mode: docker-compose
           copy_stack_file: true
-          stack_file_name: docker-test/Backend/docker-compose.yml
+          deploy_path: /root/my-deployment
+          stack_file_name: docker-compose.yml
           keep_files: 10
           args: up -d
           docker_prune: "false"
