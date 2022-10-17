@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
 import 'addAvailabilityPage.dart';
+import 'api_key.dart';
 
 // import 'dart:html';
 
@@ -52,7 +53,8 @@ class AppointmentView {
 
 Future<List<AppointmentView>> getAvailabilities(user) async {
   // construct the request
-  String API_HOST = "10.0.2.2:6869";
+
+  String API_HOST = "$api:6869";
   String APPOINTMENT_PATH = "/appointment";
 
   final queryParameters = {

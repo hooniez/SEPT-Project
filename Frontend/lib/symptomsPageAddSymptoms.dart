@@ -8,6 +8,7 @@ import 'symptomsPageCurrentSymptoms.dart';
 import 'package:http/http.dart';
 import 'support_pages/customButtons.dart';
 import 'package:intl/intl.dart';
+import 'api_key.dart';
 
 class SymptomsPageAddSymptoms extends StatefulWidget {
   final getUser;
@@ -185,7 +186,7 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
 }
 
 Future<Response> getSymptom(String patientemail, String token) async {
-  String API_HOST = "localhost:8085";
+  String API_HOST = "$api:6872";
   final queryParameters = {'email': patientemail};
   final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
   print(uri);
@@ -201,7 +202,7 @@ Future<Response> getSymptom(String patientemail, String token) async {
 
 Future<Response> addSymptom(
     String symptomdescription, String patientemail, String token) async {
-  String API_HOST = "http://localhost:8085";
+  String API_HOST = "$api:6872";
 
   final url = Uri.parse(API_HOST + "/addsymptom");
   print(url);

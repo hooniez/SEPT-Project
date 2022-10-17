@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
+import 'scrollercontroller.dart';
 
 class PatientProfile extends StatefulWidget {
   final user;
@@ -125,6 +126,7 @@ class _MyAppState extends State<PatientProfile> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
+
         appBar: AppBar(
             backgroundColor: const Color.fromARGB(255, 223, 28, 93),
             title: const Text("Profile"),
@@ -136,241 +138,280 @@ class _MyAppState extends State<PatientProfile> {
                   Icons.arrow_back_ios,
                   color: Colors.white,
                 ))),
-        body: Container(
-            width: double.infinity,
-            height: double.infinity,
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.email_outlined),
-                      ProfileLabel(text:'Email',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
-                      ProfileInput(textInset: textInset['email']!,textBoxWidth:textBoxWidth,textBoxBackgrounds:textBoxNotSelectedColor,
-                          textController: textControllers['email']!,enabledStatus: false),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.person_outlined),
-                      ProfileLabel(text:'First Name',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
-                      ProfileInput(textInset: textInset['firstname']!,textBoxWidth:textBoxWidth,textBoxBackgrounds:textBoxBackgrounds,
-                          textController: textControllers['firstname']!,enabledStatus: enabledStatus),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.person),
-                      ProfileLabel(text:'Last Name',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
-                      ProfileInput(textInset: textInset['lastname']!,textBoxWidth:textBoxWidth,textBoxBackgrounds:textBoxBackgrounds,
-                          textController: textControllers['lastname']!,enabledStatus: enabledStatus),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.calendar_month_rounded),
-                      ProfileLabel(text:'Date Of Birth',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
-                      Padding(
-                        padding: textInset['dob']!,
-                        child: SizedBox(
-                          width: textBoxWidth,
-                          child: TextFormField(
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: textBoxBackgrounds,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10)
-                                ),
-                              ),
-                              controller: textControllers['dob'],
-                              enabled: enabledStatus,
-                              onTap: () async {
-                                if (enabledStatus) {
-                                  DateTime? pickedDate = await showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime(1900),
-                                      lastDate: DateTime.now());
-                                  if (pickedDate != null) {
-                                    String newDOB = DateFormat('dd-MM-yyyy')
-                                        .format(pickedDate);
-                                    setState(() {
-                                      textControllers["dob"] =
-                                          TextEditingController(text: newDOB);
-                                    });
-                                  }
-                                }
-                              }),
+        body: SingleChildScrollView (
+            controller: AdjustableScrollController(100),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: <Widget>[
+                            const Icon(Icons.email_outlined),
+                            ProfileLabel(text:'Email',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
+                          ]
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.local_phone_rounded),
-                      ProfileLabel(text:'Mobile No.',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
-                      ProfileInput(textInset: textInset['mobile']!,textBoxWidth:textBoxWidth,textBoxBackgrounds:textBoxBackgrounds,
-                          textController: textControllers['mobile']!,enabledStatus: enabledStatus),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.newspaper_outlined),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 4, 4, 4),
-                        child: _userType == "doctor"
-                            ? Text(
-                                'Doctor Certificates',
-                                style: TextStyle(
-                                    color: itemColor,
-                                    fontSize: itemTitleFontSize),
-                              )
-                            : Text(
-                                'Medical History',
-                                style: TextStyle(
-                                    color: itemColor,
-                                    fontSize: itemTitleFontSize),
-                              ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 4, 12, 4),
-                    child: Container(
-                        width: double.infinity,
-                        color: textBoxBackgrounds,
-                        child: _userType == "doctor"
-                            ? TextFormField(
-                                maxLines: 5,
-                                controller: textControllers['certificate'],
-                                enabled: enabledStatus,
-                              )
-                            : TextFormField(
-                                maxLines: 5,
-                                controller: textControllers['medhist'],
-                                enabled: enabledStatus,
-                              )),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.lock_outline_rounded),
-                      ProfileLabel(text:'Password',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
-                      Padding(
-                        padding: textInset['password']!,
-                        child: SizedBox(
-                          width: textBoxWidth,
-                          child: TextFormField(
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: textBoxBackgrounds,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10)
-                                ),
-                              ),
-                            controller: textControllers['password'],
-                            obscureText: true,
-                            enabled: enabledStatus,
-                              validator: (value) {
-                                if (value == null ||
-                                    value.length < passwordMinLength ||
-                                    value.length > passwordMaxLength) {
-                                  return 'This password does not match with the inputted password';
-                                } else {
-                                  return null;
-                                }
-                              }
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.lock_outline_rounded),
-                      ProfileLabel(text:'Confirm password',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
-                      Padding(
-                        padding: textInset['confirmPassword']!,
-                        child: SizedBox(
-                          width: textBoxWidth,
-                          child: TextFormField(
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: textBoxBackgrounds,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10)
-                                ),
-                              ),
-                            controller: textControllers['confirmPassword'],
-                            obscureText: true,
-                            enabled: enabledStatus,
-                              validator: (value) {
-                                if (value == null ||
-                                    value.length < passwordMinLength ||
-                                    value.length > passwordMaxLength ||
-                                    value != textControllers['password']!.text) {
-                                  return 'Passwords do not match';
-                                } else {
-                                  return null;
-                                }
-                              }
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),Padding(
-                    padding: EdgeInsets.all(editButtonPadding),
-                    child: SizedBox(
-                      width: editButtonDetails['width'], // <-- match_parent
-                      height:
-                      editButtonDetails['height'], // <-- match-parent
-                      child: SizedBox(
-                          child:IconButton(
-                            iconSize: 50,
-                        icon: enabledStatus
-                            ? const Icon(Icons.save_outlined)
-                            : const Icon(Icons.create_outlined),
-                        color: Colors.blue,
-                        onPressed: () {
-                          setState(() {
-                                enabledStatus = !enabledStatus;
-                                if (enabledStatus) {
-                                  textBoxBackgrounds = textBoxSelectedColor;
-                                  // do nothing
-                                } else {
-                                  textBoxBackgrounds = textBoxNotSelectedColor;
-                                  print("Has the token," +_token.toString());
-                                  if (_formKey.currentState!.validate()) {
-                                    Future response = putPatientData(
-                                        textControllers, _userType, _token);
-                                  } else {
-                                    print("The duplicated password is: "+_passworddupe.toString());
-                                    textControllers['password']!.text =
-                                        _passworddupe;
-                                    Future response = putPatientData(
-                                        textControllers, _userType, _token);
-                                    textControllers['password']!.text = '';
-                                    textControllers['password']!.text = textControllers['password']!.text;
-                                  }
-                                }
-                          });
-                        },
-                      )),
+                        ProfileInput(textInset: textInset['email']!,textBoxWidth:textBoxWidth,textBoxBackgrounds:textBoxNotSelectedColor,
+                            textController: textControllers['email']!,enabledStatus: false),
+                      ],
                     ),
-                  ),
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: <Widget>[
+                            const Icon(Icons.person_outlined),
+                            ProfileLabel(text:'First Name',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
+                            ]
+                        ),
+
+                        ProfileInput(textInset: textInset['firstname']!,textBoxWidth:textBoxWidth,textBoxBackgrounds:textBoxBackgrounds,
+                            textController: textControllers['firstname']!,enabledStatus: enabledStatus),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                            children: <Widget>[
+                              const Icon(Icons.person),
+                              ProfileLabel(text:'Last Name',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
+
+                          ],
+                        ),
+
+                        ProfileInput(textInset: textInset['lastname']!,textBoxWidth:textBoxWidth,textBoxBackgrounds:textBoxBackgrounds,
+                            textController: textControllers['lastname']!,enabledStatus: enabledStatus),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: <Widget>[
+                            const Icon(Icons.calendar_month_rounded),
+                            ProfileLabel(text:'Date Of Birth',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
+
+                          ],
+                        ),
+
+                        Padding(
+                          padding: textInset['dob']!,
+                          child: SizedBox(
+                            width: textBoxWidth,
+                            child: TextFormField(
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: textBoxBackgrounds,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)
+                                  ),
+                                ),
+                                controller: textControllers['dob'],
+                                enabled: enabledStatus,
+                                onTap: () async {
+                                  if (enabledStatus) {
+                                    DateTime? pickedDate = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime(1900),
+                                        lastDate: DateTime.now());
+                                    if (pickedDate != null) {
+                                      String newDOB = DateFormat('dd-MM-yyyy')
+                                          .format(pickedDate);
+                                      setState(() {
+                                        textControllers["dob"] =
+                                            TextEditingController(text: newDOB);
+                                      });
+                                    }
+                                  }
+                                }),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: <Widget>[
+                            const Icon(Icons.local_phone_rounded),
+                            ProfileLabel(text:'Mobile No.',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
+                          ],
+                        ),
+
+                        ProfileInput(textInset: textInset['mobile']!,textBoxWidth:textBoxWidth,textBoxBackgrounds:textBoxBackgrounds,
+                            textController: textControllers['mobile']!,enabledStatus: enabledStatus),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.newspaper_outlined),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(6, 4, 4, 4),
+                          child: _userType == "doctor"
+                              ? Text(
+                            'Doctor Certificates',
+                            style: TextStyle(
+                                color: itemColor,
+                                fontSize: itemTitleFontSize),
+                          )
+                              : Text(
+                            'Medical History',
+                            style: TextStyle(
+                                color: itemColor,
+                                fontSize: itemTitleFontSize),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
+                      child: Container(
+                          width: double.infinity,
+                          color: textBoxBackgrounds,
+                          child: _userType == "doctor"
+                              ? TextFormField(
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10)
+                              )
+                            ),
+                            maxLines: 5,
+                            controller: textControllers['certificate'],
+                            enabled: enabledStatus,
+                          )
+                              : TextFormField(
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10)
+                                )
+                            ),
+                            maxLines: 5,
+                            controller: textControllers['medhist'],
+                            enabled: enabledStatus,
+                          )),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.lock_outline_rounded),
+                        ProfileLabel(text:'Password',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
+                        Padding(
+                          padding: textInset['password']!,
+                          child: SizedBox(
+                            width: textBoxWidth,
+                            child: TextFormField(
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: textBoxBackgrounds,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)
+                                  ),
+                                ),
+                                controller: textControllers['password'],
+                                obscureText: true,
+                                enabled: enabledStatus,
+                                validator: (value) {
+                                  if (value == null ||
+                                      value.length < passwordMinLength ||
+                                      value.length > passwordMaxLength) {
+                                    return 'This password does not match with the inputted password';
+                                  } else {
+                                    return null;
+                                  }
+                                }
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.lock_outline_rounded),
+                        ProfileLabel(text:'Confirm password',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
+                        Padding(
+                          padding: textInset['confirmPassword']!,
+                          child: SizedBox(
+                            width: textBoxWidth,
+                            child: TextFormField(
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: textBoxBackgrounds,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)
+                                  ),
+                                ),
+                                controller: textControllers['confirmPassword'],
+                                obscureText: true,
+                                enabled: enabledStatus,
+                                validator: (value) {
+                                  if (value == null ||
+                                      value.length < passwordMinLength ||
+                                      value.length > passwordMaxLength ||
+                                      value != textControllers['password']!.text) {
+                                    return 'Passwords do not match';
+                                  } else {
+                                    return null;
+                                  }
+                                }
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),Padding(
+                      padding: EdgeInsets.all(editButtonPadding),
+                      child: SizedBox(
+                        width: editButtonDetails['width'], // <-- match_parent
+                        height:
+                        editButtonDetails['height'], // <-- match-parent
+                        child: SizedBox(
+                            child:IconButton(
+                              iconSize: 30,
+                              icon: enabledStatus
+                                  ? const Icon(Icons.save_outlined)
+                                  : const Icon(Icons.create_outlined),
+                              color: Colors.blue,
+                              onPressed: () {
+                                setState(() {
+                                  enabledStatus = !enabledStatus;
+                                  if (enabledStatus) {
+                                    textBoxBackgrounds = textBoxSelectedColor;
+                                    // do nothing
+                                  } else {
+                                    textBoxBackgrounds = textBoxNotSelectedColor;
+                                    print("Has the token," +_token.toString());
+                                    if (_formKey.currentState!.validate()) {
+                                      Future response = putPatientData(
+                                          textControllers, _userType, _token);
+                                    } else {
+                                      print("The duplicated password is: "+_passworddupe.toString());
+                                      textControllers['password']!.text =
+                                          _passworddupe;
+                                      Future response = putPatientData(
+                                          textControllers, _userType, _token);
+                                      textControllers['password']!.text = '';
+                                      textControllers['password']!.text = textControllers['password']!.text;
+                                    }
+                                  }
+                                });
+                              },
+                            )),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            )),
-      ),
+            )
+        )
+            ),
     );
   }
 }
