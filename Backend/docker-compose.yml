@@ -96,6 +96,8 @@ services:
     stdin_open: true
     tty: true
 
+    # test
+
   symptom:
     depends_on:
       - mysqldb
