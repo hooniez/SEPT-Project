@@ -19,8 +19,8 @@ jobs:
       # - name: ls
       #   run: ls
       - name: Deploy to Docker Host
-        uses: S3759362rmit/docker-deployment-action@v0.51
-        working-directory: ./Backend      
+        working-directory: ./Backend
+        uses: S3759362rmit/docker-deployment-action@v0.51              
         with:
           remote_docker_host: root@165.232.172.169
           ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
