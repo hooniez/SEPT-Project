@@ -62,7 +62,7 @@ class _MyAppState extends State<addAvailabilityPage> {
       'doctorName': widget.user.value['email'],
     };
 
-    final url = Uri.http('$api:6869', PATH);
+    final url = Uri.parse('$api:6869$PATH');
 
     print(url);
     print(body);

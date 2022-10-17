@@ -55,7 +55,7 @@ Future<List<AppointmentView>> getAvailabilities(user) async {
   // construct the request
   String PATH = "/availability";
 
-  final url = Uri.http('$api:6869', PATH);
+  final url = Uri.parse('$api:6869$PATH');
 
   Map<String, String> header = {
     'Content-type': 'application/json',
