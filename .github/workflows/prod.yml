@@ -24,6 +24,6 @@ jobs:
         with:
           local: docker-test/Backend
           remote: scp/directory
-          host: 165.232.172.169
+          host: root@165.232.172.169
           username: root
           password: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
