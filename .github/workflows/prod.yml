@@ -20,21 +20,10 @@ jobs:
           cd docker-test
           cd Backend
           ls
-
-      - uses: wshihadeh/docker-deployment-action@v2
+      - uses: garygrossgarten/github-action-scp@release
         with:
-          remote_docker_host: root@165.232.172.169
-          ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
-          ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
-          deployment_mode: docker-compose
-          copy_stack_file: true
-          deploy_path: /root/my-deployment
-          stack_file_name: docker-compose.yml
-          keep_files: 10
-          args: up -d
-          docker_prune: "false"
-          pull_images_first: "false"
-      - run: |
-          cd docker-test
-          cd Backend
-          ls
+          local: docker-test/Backend
+          remote: scp/directory
+          host: 165.232.172.169
+          username: root
+          password: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
