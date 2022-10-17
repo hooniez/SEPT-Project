@@ -61,32 +61,28 @@ class FrontPage extends StatelessWidget {
                 user.value.isEmpty
                     ? Column(
                         children: [
-                    MenuButton(buttonHeight:50, buttonWidth: 200, buttonIcon: Icons.face_outlined, buttonText: "Login",
-                    onPressed: () async {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                            return Login(setUser: setUser);
-                          }));
-                    }),
-    MenuButton(fontSize: 18, buttonHeight:50, buttonWidth: 200, buttonIcon: Icons.pages_sharp, buttonText: "Register",
-    onPressed: () async {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) {
-            return SignupPage(
-                setUserWithoutToken:
-                setUserWithoutToken);
-          }));
-    }),
+                          MenuButton(buttonHeight:50, buttonWidth: 200, buttonIcon: Icons.face_outlined, buttonText: "Login",
+                              onPressed: () async {
+                              Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                                  return Login(setUser: setUser);
+                              }));
+                          }),
+                          MenuButton(fontSize: 18, buttonHeight:50, buttonWidth: 200, buttonIcon: Icons.pages_sharp, buttonText: "Register",
+                              onPressed: () async {
+                                Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return SignupPage(setUserWithoutToken: setUserWithoutToken);
+                              }));
+                          }),
                           MenuButton(itemColor: Colors.grey,fontSize: 18, buttonHeight:50, buttonWidth: 200, buttonIcon: Icons.pages_sharp, buttonText: "Admin Login",
                               onPressed: () async {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                      return Login(
-                                        setUser: setUser,
-                                        forAdmin: true,
+                                      return Login(setUser: setUser, forAdmin: true,
                                       );
                                     }));
-                              }),
+                          }),
                         ],
                       )
                     : Column(
@@ -96,10 +92,7 @@ class FrontPage extends StatelessWidget {
                     onPressed: () async {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                            return SignupPage(
-                              setUserWithoutToken: setUserWithoutToken,
-                              forDoctor: true,
-                            );
+                            return SignupPage(setUserWithoutToken: setUserWithoutToken, forDoctor: true,);
                           }));
                     }),
                           if (user.value['usertype'] != "admin")
@@ -115,8 +108,7 @@ class FrontPage extends StatelessWidget {
                                   var res = await getSymptom(user);
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                        return SymptomsPageCurrentSymptoms(
-                                            getUser: user, getSymptoms: res);
+                                        return SymptomsPageCurrentSymptoms(getUser: user, getSymptoms: res);
                                       }));
                                 }),
                           if (user.value['usertype'] != "admin")
@@ -143,8 +135,7 @@ class FrontPage extends StatelessWidget {
                                   onPressed: () {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) {
-                                      return SignupPage(
-                                          setUserWithoutToken: setUser);
+                                          return SignupPage(setUserWithoutToken: setUser);
                                     }));
                                   },
                                   child: const Text("Chat",
