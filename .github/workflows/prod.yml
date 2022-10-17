@@ -16,18 +16,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          path: docker-test
-<<<<<<< HEAD
+          path: main
 
-=======
->>>>>>> 0d55b6623d7bbb97294ff24dfd09bf7edab45338
       - run: |
-          cd docker-test
+          cd main
           cd Backend
           ls
 
       - run: |
-          tar -cvf deploy.tar docker-test/Backend
+          tar -cvf deploy.tar main/Backend
 
       - uses: appleboy/ssh-action@master
         with:
@@ -56,6 +53,6 @@ jobs:
           script: |
             cd deploy
             tar -xf deploy.tar
-            cd docker-test
+            cd main
             cd Backend
             docker-compose up -d
