@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/scrollercontroller.dart';
 import 'symptomsPageCurrentSymptoms.dart';
 import 'package:http/http.dart';
+import 'support_pages/customButtons.dart';
 import 'package:intl/intl.dart';
 
 class SymptomsPageAddSymptoms extends StatefulWidget {
@@ -68,56 +69,40 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                             child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(24.0),
-                                    child: SizedBox(
-                                      width: 300.0, // <-- match_parent
-                                      height: 50.0, // <-- match-parent
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 144, 119, 151), // background
-                                          onPrimary: Colors.white, // foreground
+                                  Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      children: [
+                                        SymptomsButton(
+                                          itemColor:Colors.green,
+                                          buttonWidth: 160,
+                                          iconSize: 30,
+                                          onPressed: () async {
+                                            var getRes = await getSymptom(
+                                                widget.getUser.value["email"],
+                                                widget.getUser
+                                                    .value['Authorization']);
+                                            Navigator.push(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                                      return SymptomsPageCurrentSymptoms(
+                                                          getUser: widget.getUser,
+                                                          getSymptoms: getRes);
+                                                    }));
+                                          },
+                                          buttonText: "Current Symptoms",
+                                          buttonIcon: Icons.sick_rounded,
+                                          fontSize: 16,
                                         ),
-                                        child: const Text(
-                                          'Current Symptoms',
-                                          style: TextStyle(color: Colors.white),
+                                        SymptomsButton(
+                                          buttonWidth: 150,
+                                          iconSize: 30,
+                                          onPressed: () {},
+                                          buttonText: "Add Symptom",
+                                          fontSize: 16,
+                                          buttonIcon: Icons.add_circle_rounded,
                                         ),
-                                        onPressed: () async {
-                                          var getRes = await getSymptom(
-                                              widget.getUser.value["email"],
-                                              widget.getUser
-                                                  .value['Authorization']);
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return SymptomsPageCurrentSymptoms(
-                                                getUser: widget.getUser,
-                                                getSymptoms: getRes);
-                                          }));
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(24.0),
-                                    child: SizedBox(
-                                      width: 300.0, // <-- match_parent
-                                      height: 50.0, // <-- match-parent
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 221, 150, 17), // background
-                                          onPrimary: Colors.white, // foreground
-                                        ),
-                                        child: const Text(
-                                          'Add Symptom',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                  ),
+                                      ]),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: TextFormField(
@@ -127,7 +112,7 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                                             symptomDescriptionController,
                                         decoration: InputDecoration(
                                           prefixIcon: Icon(Icons.sick),
-                                          labelText: "Symptom Description",
+                                          labelText: "What's the Symptom",
                                           filled: true,
                                           fillColor: Colors.white,
                                           border: OutlineInputBorder(
@@ -152,8 +137,7 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                                       height: 50.0, // <-- match-parent
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 144, 119, 151), // background
+                                          primary: Colors.blue, // background
                                           onPrimary: Colors.white, // foreground
                                         ),
                                         child: const Text(
