@@ -3,32 +3,28 @@ name: Deploy
 on:
   push:
     branches:
-      - docker_backend
+      - docker_test
   pull_request:
     branches:
-      - docker_backend
+      - docker_test
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    # defaults:
-    #   run:
-    #     working-directory: Backend
 
     steps:
-      - name: Run bash
-        run: find . -name 'docker-compose.yml'
-        shell: bash
-      # - name: ls
-      #   run: ls
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: docker_test
       - name: Deploy to Docker Host
-        uses: gonzalochief/docker-deployment-action@v2
+        uses: wshihadeh/docker-deployment-action@v2
         with:
           remote_docker_host: root@165.232.172.169
           ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
           ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
           deployment_mode: docker-compose
-          stack_file_name: SEPT-Project/SEPT-Project/Backend/docker-compose.yml
+          stack_file_name: Backend/docker-compose.yml
           args: up -d
           pre_deployment_command_args: "bundle exec rake db:migrate"
           docker_prune: "true"
