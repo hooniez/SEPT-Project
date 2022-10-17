@@ -13,17 +13,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-        - uses: actions/checkout@v3
-          with:
-            path: docker-test
-        - uses: wshihadeh/docker-deployment-action@v2
-          with:
-            remote_docker_host: root@165.232.172.169
-            ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
-            ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
-            deployment_mode: docker-compose
-            stack_file_name: Backend/docker-compose.yml
-            args: up -d
-            pre_deployment_command_args: "bundle exec rake db:migrate"
-            docker_prune: "true"
-            pull_images_first: "true"
+      - uses: actions/checkout@v3
+        with:
+          path: docker-test
+      - run: ls
+      - uses: wshihadeh/docker-deployment-action@v2
+        with:
+          remote_docker_host: root@165.232.172.169
+          ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
+          ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
+          deployment_mode: docker-compose
+          stack_file_name: Backend/docker-compose.yml
+          args: up -d
+          pre_deployment_command_args: "bundle exec rake db:migrate"
+          docker_prune: "true"
+          pull_images_first: "true"
