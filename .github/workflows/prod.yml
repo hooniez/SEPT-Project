@@ -19,6 +19,8 @@ jobs:
       # - name: Run bash
       #   run: find . -name 'docker-compose.yml'
       #   shell: bash
+      - name: ls
+        run: ls
       - name: Deploy to Docker Host
         uses: wshihadeh/docker-deployment-action@v2
         with:
