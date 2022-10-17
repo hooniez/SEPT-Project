@@ -3,10 +3,10 @@ name: Deploy
 on:
   push:
     branches:
-      - docker-test
+      - main
   pull_request:
     branches:
-      - docker-test
+      - main
 
 jobs:
   build:
