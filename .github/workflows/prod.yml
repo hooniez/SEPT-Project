@@ -1,0 +1,61 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: docker-test
+<<<<<<< HEAD
+
+=======
+>>>>>>> 0d55b6623d7bbb97294ff24dfd09bf7edab45338
+      - run: |
+          cd docker-test
+          cd Backend
+          ls
+
+      - run: |
+          tar -cvf deploy.tar docker-test/Backend
+
+      - uses: appleboy/ssh-action@master
+        with:
+          host: 165.232.172.169
+          username: root
+          key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
+          script_stop: true
+          script: |
+            rm -r deploy
+
+      - uses: appleboy/scp-action@master
+        with:
+          host: 165.232.172.169
+          username: root
+          key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
+          source: "deploy.tar"
+          target: "deploy"
+
+      - uses: appleboy/ssh-action@master
+        with:
+          host: 165.232.172.169
+          username: root
+          key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
+          command_timeout: 60m
+          script_stop: true
+          script: |
+            cd deploy
+            tar -xf deploy.tar
+            cd docker-test
+            cd Backend
+            docker-compose up -d

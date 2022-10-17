@@ -380,7 +380,7 @@ Future<Response> putPatientData(
   Response response;
 
   if (userType == "doctor") {
-    String uri = "http://10.0.2.2:8091/doctor/profile";
+    String uri = "http://10.0.2.2:6870/doctor/profile";
     final url = Uri.parse(uri);
     response = await put(url,
         headers: {
@@ -398,7 +398,7 @@ Future<Response> putPatientData(
           'certificate': textControlDict['certificate']!.text,
         }));
   } else {
-    String uri = "http://10.0.2.2:8091/patient/profile";
+    String uri = "http://10.0.2.2:6870/patient/profile";
     final url = Uri.parse(uri);
     print(textControlDict['password']!.text);
     response = await put(url,
@@ -485,7 +485,7 @@ class ProfileInput extends StatelessWidget {
 
 Future<String> getUserData(user) async {
   // construct the request
-  String uri = "http://10.0.2.2:8091/";
+  String uri = "http://10.0.2.2:6870/";
   String typeUri = "doctor/profile/";
   if(user.value['usertype']=='patient') {
     typeUri = "patient/profile/";
