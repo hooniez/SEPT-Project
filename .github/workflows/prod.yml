@@ -21,7 +21,7 @@ jobs:
       # - name: pwd
       #   run: pwd
       - name: Deploy to Docker Host        
-        uses: gonzalochief/docker-deployment-action@v3         
+        uses: gonzalochief/docker-deployment-action@v2         
         with:
           remote_docker_host: root@165.232.172.169
           ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
