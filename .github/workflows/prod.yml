@@ -28,7 +28,7 @@ jobs:
           ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
           deployment_mode: docker-compose
           stack_file_name: Backend/docker-compose.yml
-          args: up -d
+          args: up -d --env-file Backend/.env
           pre_deployment_command_args: "bundle exec rake db:migrate"
           # docker_prune: "true"
           pull_images_first: "true"
