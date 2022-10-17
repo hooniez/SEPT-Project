@@ -47,9 +47,11 @@ jobs:
           host: 165.232.172.169
           username: root
           key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
+          command_timeout: 60m
           script_stop: true
           script: |
             cd deploy
             tar -xf deploy.tar
             cd docker-test
             cd Backend
+            docker-compose up -d

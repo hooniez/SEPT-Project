@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/scrollercontroller.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
+import 'api_key.dart';
 
 enum UserType { doctor, patient }
 
@@ -412,9 +413,9 @@ Future<Response> createUser(
     String mobileNumber,
     String customInfo,
     String type) async {
-  String API_HOST = "http://10.0.2.2:6871";
 
-  final url = Uri.parse(API_HOST + "/" + type + "/signup");
+
+  final url = Uri.parse('$api:6871' + "/" + type + "/signup");
   print(url);
   String body;
   if (type == 'patient') {

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
 // import 'dart:html';
+import 'api_key.dart';
 
 enum UserType { doctor, patient, admin }
 
@@ -23,7 +24,7 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     _userType = widget.forAdmin ? UserType.admin : UserType.patient;
-    API_HOST = widget.forAdmin ? "10.0.2.2:6868" : "10.0.2.2:6871";
+    API_HOST = widget.forAdmin ? "$api:6868" : "$api:6871";
   }
 
 
@@ -34,6 +35,7 @@ class _LoginState extends State<Login> {
   TextEditingController passwordController = TextEditingController();
 
   void login() async {
+
     String type = _userType.toString().split('.').last;
 
     Map<String, String> header = {
@@ -48,7 +50,9 @@ class _LoginState extends State<Login> {
       'userType': type
     };
 
-    final uri = Uri.http(API_HOST!, "/$type/signin");
+    final uri = Uri.parse(API_HOST! + "/$type/signin");
+    print(uri);
+    print("hello");
     print(body);
     print(uri);
 

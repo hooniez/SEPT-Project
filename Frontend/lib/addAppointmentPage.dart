@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
+import 'api_key.dart';
 
 // import 'dart:html';
 
@@ -52,10 +53,9 @@ class AppointmentView {
 
 Future<List<AppointmentView>> getAvailabilities(user) async {
   // construct the request
-  String API_HOST = "10.0.2.2:6869";
   String PATH = "/availability";
 
-  final url = Uri.http(API_HOST, PATH);
+  final url = Uri.http('$api:6869', PATH);
 
   Map<String, String> header = {
     'Content-type': 'application/json',
@@ -91,7 +91,7 @@ class _MyAppState extends State<AddAppointmentPage> {
   }
 
   void addAppointment(AppointmentView appointmentView) async {
-    String API_HOST = "10.0.2.2:6869";
+
     String APPOINTMENT_PATH = "/appointment";
 
     Map<String, String> header = {
@@ -100,7 +100,7 @@ class _MyAppState extends State<AddAppointmentPage> {
       'Authorization': widget.user.value["Authorization"]
     };
 
-    final url = Uri.http(API_HOST, APPOINTMENT_PATH);
+    final url = Uri.http('$api:6869', APPOINTMENT_PATH);
 
     final body = {
       'id': appointmentView.id,

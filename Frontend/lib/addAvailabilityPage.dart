@@ -7,6 +7,7 @@ import 'package:frontend/scrollercontroller.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'availabilityPage.dart';
+import 'api_key.dart';
 
 class addAvailabilityPage extends StatefulWidget {
   final user;
@@ -43,7 +44,6 @@ class _MyAppState extends State<addAvailabilityPage> {
 
   Future<Response> addAvailability() async {
     print(widget.user);
-    String API_HOST = "10.0.2.2:6869";
     String PATH = "/availability";
 
     Map<String, String> header = {
@@ -62,7 +62,7 @@ class _MyAppState extends State<addAvailabilityPage> {
       'doctorName': widget.user.value['email'],
     };
 
-    final url = Uri.http(API_HOST, PATH);
+    final url = Uri.http('$api:6869', PATH);
 
     print(url);
     print(body);

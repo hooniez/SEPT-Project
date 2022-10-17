@@ -5,7 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Frontend/lib/api_key.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/.m2/copy_reference_file.log" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/.m2/copy_reference_file.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/addAppointmentPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/addAppointmentPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/addAvailabilityPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/addAvailabilityPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/appointmentPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/appointmentPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/loginPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/loginPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/signupPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/signupPage.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Dart File" />
         <option value="Class" />
+        <option value="Dart File" />
       </list>
     </option>
   </component>
@@ -60,10 +69,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="io.flutter.reload.alreadyRun" value="true" />
-  </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Backend" />
@@ -71,7 +76,7 @@
       <recent name="$PROJECT_DIR$/Frontend" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PatientControllerTest">
+  <component name="RunManager" selected="Flutter.main.dart">
     <configuration name="main.dart (1)" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/frontend/frontend/lib/main.dart" />
       <method v="2" />
@@ -132,13 +137,14 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Flutter.main.dart" />
+      <item itemvalue="Flutter.main.dart (1)" />
       <item itemvalue="JUnit.PatientControllerTest" />
       <item itemvalue="JUnit.DoctorControllerTest" />
-      <item itemvalue="Spring Boot.AdminApplication" />
-      <item itemvalue="Spring Boot.SeptBackendApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter.main.dart" />
         <item itemvalue="JUnit.PatientControllerTest" />
         <item itemvalue="JUnit.DoctorControllerTest" />
       </list>
@@ -162,6 +168,7 @@
       <workItem from="1664934576790" duration="6227000" />
       <workItem from="1665463156287" duration="1640000" />
       <workItem from="1665509454202" duration="331000" />
+      <workItem from="1665999963666" duration="374000" />
     </task>
     <servers />
   </component>
