@@ -7,6 +7,7 @@ import 'package:frontend/scrollercontroller.dart';
 import 'symptomsPageAddSymptoms.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
+import 'support_pages/customButtons.dart';
 import 'api_key.dart';
 
 class SymptomsPageCurrentSymptoms extends StatefulWidget {
@@ -52,7 +53,7 @@ class _SymptomsPageCurrentSymptomsState
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
                 backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-                title: const Text("Neighbourhood Doctors"),
+                title: const Text("Symptoms"),
                 leading: InkWell(
                     onTap: () {
                       Navigator.pop(context);
@@ -88,58 +89,36 @@ class _SymptomsPageCurrentSymptomsState
                             child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(24.0),
-                                    child: SizedBox(
-                                      width: 300.0, // <-- match_parent
-                                      height: 50.0, // <-- match-parent
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 221, 150, 17), // background
-                                          onPrimary: Colors.white, // foreground
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SymptomsButton(
+                                          itemColor:Colors.green,
+                                          buttonWidth: 160,
+                                          iconSize: 30,
+                                          onPressed: () async {},
+                                          buttonText: "Current Symptoms",
+                                          buttonIcon: Icons.sick_rounded,
+                                          fontSize: 16,
                                         ),
-                                        child: const Text(
-                                          'Current Symptoms',
-                                          style: TextStyle(color: Colors.white),
+                                        SymptomsButton(
+                                          buttonWidth: 150,
+                                          iconSize: 30,
+                                          onPressed: () async {
+                                            Navigator.push(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                              return SymptomsPageAddSymptoms(
+                                                  getUser: widget.getUser,
+                                                  getSymptoms: updatedSymptoms);
+                                            }));
+                                          },
+                                          buttonText: "Add Symptom",
+                                          fontSize: 16,
+                                          buttonIcon: Icons.add_circle_rounded,
                                         ),
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(24.0),
-                                    child: SizedBox(
-                                      width: 300.0, // <-- match_parent
-                                      height: 50.0, // <-- match-parent
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 144, 119, 151), // background
-                                          onPrimary: Colors.white, // foreground
-                                        ),
-                                        child: const Text(
-                                          'Add Symptom',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        onPressed: () async {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return SymptomsPageAddSymptoms(
-                                                getUser: widget.getUser,
-                                                getSymptoms: updatedSymptoms);
-                                          }));
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                      'Symptoms for ${widget.getUser.value['firstname']}:',
-                                      style: TextStyle(
-                                          fontSize: 24,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold)),
+                                      ]),
                                   // display all the items if they exist, otherwise display another message letting the user know
                                   // they have to add symptoms
                                   allSymptoms.isNotEmpty
