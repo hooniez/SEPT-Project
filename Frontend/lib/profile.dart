@@ -147,64 +147,47 @@ class _MyAppState extends State<PatientProfile> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      const Icon(Icons.email_outlined),
                       ProfileLabel(text:'Email',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
-                      Padding(
-                        padding: textInset['email']!,
-                        child: Container(
-                          width: textBoxWidth,
-                          color: textBoxNotSelectedColor,
-                          child: TextFormField(
-                            controller: textControllers['email'],
-                            enabled: false,
-                          ),
-                        ),
-                      ),
+                      ProfileInput(textInset: textInset['email']!,textBoxWidth:textBoxWidth,textBoxBackgrounds:textBoxNotSelectedColor,
+                          textController: textControllers['email']!,enabledStatus: false),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      const Icon(Icons.person_outlined),
                       ProfileLabel(text:'First Name',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
-                      Padding(
-                        padding: textInset['firstname']!,
-                        child: Container(
-                          width: textBoxWidth,
-                          color: textBoxBackgrounds,
-                          child: TextFormField(
-                            controller: textControllers['firstname'],
-                            enabled: enabledStatus,
-                          ),
-                        ),
-                      ),
+                      ProfileInput(textInset: textInset['firstname']!,textBoxWidth:textBoxWidth,textBoxBackgrounds:textBoxBackgrounds,
+                          textController: textControllers['firstname']!,enabledStatus: enabledStatus),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      const Icon(Icons.person),
                       ProfileLabel(text:'Last Name',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
-                      Padding(
-                        padding: textInset['lastname']!,
-                        child: Container(
-                          width: textBoxWidth,
-                          color: textBoxBackgrounds,
-                          child: TextFormField(
-                            controller: textControllers['lastname'],
-                            enabled: enabledStatus,
-                          ),
-                        ),
-                      ),
+                      ProfileInput(textInset: textInset['lastname']!,textBoxWidth:textBoxWidth,textBoxBackgrounds:textBoxBackgrounds,
+                          textController: textControllers['lastname']!,enabledStatus: enabledStatus),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      const Icon(Icons.calendar_month_rounded),
                       ProfileLabel(text:'Date Of Birth',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
                         padding: textInset['dob']!,
-                        child: Container(
+                        child: SizedBox(
                           width: textBoxWidth,
-                          color: textBoxBackgrounds,
                           child: TextFormField(
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: textBoxBackgrounds,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10)
+                                ),
+                              ),
                               controller: textControllers['dob'],
                               enabled: enabledStatus,
                               onTap: () async {
@@ -231,23 +214,16 @@ class _MyAppState extends State<PatientProfile> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      const Icon(Icons.local_phone_rounded),
                       ProfileLabel(text:'Mobile No.',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
-                      Padding(
-                        padding: textInset['mobile']!,
-                        child: Container(
-                          width: textBoxWidth,
-                          color: textBoxBackgrounds,
-                          child: TextFormField(
-                            controller: textControllers['mobile'],
-                            enabled: enabledStatus,
-                          ),
-                        ),
-                      ),
+                      ProfileInput(textInset: textInset['mobile']!,textBoxWidth:textBoxWidth,textBoxBackgrounds:textBoxBackgrounds,
+                          textController: textControllers['mobile']!,enabledStatus: enabledStatus),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      const Icon(Icons.newspaper_outlined),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(10, 4, 4, 4),
                         child: _userType == "doctor"
@@ -286,13 +262,20 @@ class _MyAppState extends State<PatientProfile> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      const Icon(Icons.lock_outline_rounded),
                       ProfileLabel(text:'Password',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
                         padding: textInset['password']!,
-                        child: Container(
+                        child: SizedBox(
                           width: textBoxWidth,
-                          color: textBoxBackgrounds,
                           child: TextFormField(
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: textBoxBackgrounds,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10)
+                                ),
+                              ),
                             controller: textControllers['password'],
                             obscureText: true,
                             enabled: enabledStatus,
@@ -313,13 +296,20 @@ class _MyAppState extends State<PatientProfile> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      const Icon(Icons.lock_outline_rounded),
                       ProfileLabel(text:'Confirm password',itemColor: itemColor, itemTitleFontSize:itemTitleFontSize),
                       Padding(
                         padding: textInset['confirmPassword']!,
-                        child: Container(
+                        child: SizedBox(
                           width: textBoxWidth,
-                          color: textBoxBackgrounds,
                           child: TextFormField(
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: textBoxBackgrounds,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10)
+                                ),
+                              ),
                             controller: textControllers['confirmPassword'],
                             obscureText: true,
                             enabled: enabledStatus,
@@ -343,7 +333,9 @@ class _MyAppState extends State<PatientProfile> {
                       width: editButtonDetails['width'], // <-- match_parent
                       height:
                       editButtonDetails['height'], // <-- match-parent
-                      child: IconButton(
+                      child: SizedBox(
+                          child:IconButton(
+                            iconSize: 50,
                         icon: enabledStatus
                             ? const Icon(Icons.save_outlined)
                             : const Icon(Icons.create_outlined),
@@ -372,7 +364,7 @@ class _MyAppState extends State<PatientProfile> {
                                 }
                           });
                         },
-                      ),
+                      )),
                     ),
                   ),
                 ],
@@ -435,6 +427,7 @@ Future<Response> putPatientData(
   return response;
 }
 
+// Adds
 class ProfileLabel extends StatelessWidget {
 
   ProfileLabel({this.text = '',this.itemColor=Colors.black, this.itemTitleFontSize=12});
@@ -444,7 +437,7 @@ class ProfileLabel extends StatelessWidget {
   final double itemTitleFontSize;
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.fromLTRB(10, 4, 4, 4),
+        padding: const EdgeInsets.fromLTRB(6, 4, 4, 4),
         child: Text(
           text,
           style: TextStyle(
@@ -453,6 +446,42 @@ class ProfileLabel extends StatelessWidget {
       );
   }
 }
+
+class ProfileInput extends StatelessWidget {
+
+  ProfileInput({
+    required this.textInset,
+    this.textBoxWidth=10,
+    this.textBoxBackgrounds=Colors.blueGrey,
+    required this.textController,
+    required this.enabledStatus});
+
+  final bool enabledStatus;
+  final TextEditingController textController;
+  final EdgeInsetsGeometry textInset;
+  final double textBoxWidth;
+  final Color textBoxBackgrounds;
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: textInset,
+      child: SizedBox(
+        width: textBoxWidth,
+        child: TextFormField(
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: textBoxBackgrounds,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10)
+            ),
+          ),
+          controller: textController,
+          enabled: enabledStatus,
+        ),
+      ),
+    );
+  }
+}
+
 
 Future<String> getUserData(user) async {
   // construct the request
