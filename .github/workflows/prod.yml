@@ -30,4 +30,3 @@ jobs:
           username: root
           key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
           source: "deploy.tar"
-          target: "destination/folder"
