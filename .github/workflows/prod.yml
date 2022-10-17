@@ -53,3 +53,4 @@ jobs:
             cd docker-test
             cd Backend
             docker-compose up -d
+            ls
