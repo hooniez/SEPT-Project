@@ -11,14 +11,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # defaults:
-    #   run:
-    #     working-directory: Backend
+    defaults:
+      run:
+        working-directory: Backend
 
     steps:
-      # - name: Run bash
-      #   run: find . -name 'docker-compose.yml'
-      #   shell: bash
+      - name: Run bash
+        run: find . -name 'docker-compose.yml'
+        shell: bash
       - name: ls
         run: ls
       - name: Deploy to Docker Host
