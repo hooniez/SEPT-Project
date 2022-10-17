@@ -11,16 +11,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Backend
+    # defaults:
+    #   run:
+    #     working-directory: Backend
 
     steps:
       - name: Run bash
         run: find . -name 'docker-compose.yml'
         shell: bash
-      - name: ls
-        run: ls
+      # - name: ls
+      #   run: ls
       - name: Deploy to Docker Host
         uses: gonzalochief/docker-deployment-action@v2
         with:
@@ -28,7 +28,7 @@ jobs:
           ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
           ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
           deployment_mode: docker-compose
-          stack_file_name: docker-compose.yml
+          stack_file_name: /home/runner/work/SEPT-Project/SEPT-Project/Backend/docker-compose.yml
           args: up -d
           pre_deployment_command_args: "bundle exec rake db:migrate"
           docker_prune: "true"
