@@ -17,7 +17,6 @@ class FrontPage extends StatelessWidget {
   final Function setUser;
   final Function setUserWithoutToken;
   final Function logoutUser;
-
   FrontPage(
       {required this.user,
       required this.setUser,
@@ -62,187 +61,78 @@ class FrontPage extends StatelessWidget {
                 user.value.isEmpty
                     ? Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 200,
-                              height: 50,
-                              child: OutlinedButton(
-                                onPressed: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return Login(setUser: setUser);
-                                  }));
-                                },
-                                child: const Text(
-                                  "Login",
-                                  style: TextStyle(fontSize: 18.0),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 200,
-                              height: 50,
-                              child: OutlinedButton(
-                                onPressed: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return SignupPage(
-                                        setUserWithoutToken:
-                                            setUserWithoutToken);
-                                  }));
-                                },
-                                child: const Text("Register",
-                                    style: TextStyle(fontSize: 18.0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 125,
-                              height: 40,
-                              child: OutlinedButton(
-                                onPressed: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return Login(
-                                      setUser: setUser,
-                                      forAdmin: true,
-                                    );
-                                  }));
-                                },
-                                child: const Text("Admin Login",
-                                    style: TextStyle(
-                                        fontSize: 15.0, color: Colors.grey)),
-                              ),
-                            ),
-                          )
+                    MenuButton(buttonHeight:50, buttonWidth: 200, buttonIcon: Icons.face_outlined, buttonText: "Login",
+                    onPressed: () async {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                            return Login(setUser: setUser);
+                          }));
+                    }),
+    MenuButton(fontSize: 18, buttonHeight:50, buttonWidth: 200, buttonIcon: Icons.pages_sharp, buttonText: "Register",
+    onPressed: () async {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) {
+            return SignupPage(
+                setUserWithoutToken:
+                setUserWithoutToken);
+          }));
+    }),
+                          MenuButton(itemColor: Colors.grey,fontSize: 18, buttonHeight:50, buttonWidth: 200, buttonIcon: Icons.pages_sharp, buttonText: "Admin Login",
+                              onPressed: () async {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return Login(
+                                        setUser: setUser,
+                                        forAdmin: true,
+                                      );
+                                    }));
+                              }),
                         ],
                       )
                     : Column(
                         children: [
                           if (user.value['usertype'] == "admin")
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                width: 200,
-                                height: 50,
-                                child: OutlinedButton(
-                                  onPressed: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return SignupPage(
-                                        setUserWithoutToken:
-                                            setUserWithoutToken,
-                                        forDoctor: true,
-                                      );
-                                    }));
-                                  },
-                                  child: const Text("Register Doctor",
-                                      style: TextStyle(fontSize: 18.0)),
-                                ),
-                              ),
-                            ),
+                MenuButton(buttonHeight:50, buttonWidth: 200, buttonIcon: Icons.face_outlined, buttonText: "Register Doctor",
+                    onPressed: () async {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                            return SignupPage(
+                              setUserWithoutToken: setUserWithoutToken,
+                              forDoctor: true,
+                            );
+                          }));
+                    }),
                           if (user.value['usertype'] != "admin")
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                width: 200,
-                                height: 50,
-                                child: OutlinedButton(
-                                  onPressed: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return PatientProfile(user: user);
-                                    }));
-                                  },
-                                  child: const Text(
-                                    "Profile",
-                                    style: TextStyle(fontSize: 18.0),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          if (user.value['usertype'] == "patient")
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                width: 200,
-                                height: 50,
-                                child: OutlinedButton(
-                                  onPressed: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return SignupPage(
-                                          setUserWithoutToken:
-                                              setUserWithoutToken);
-                                    }));
-                                  },
-                                  child: const Text("Doctors",
-                                      style: TextStyle(fontSize: 18.0)),
-                                ),
-                              ),
-                            ),
+                          MenuButton(fontSize: 18,buttonHeight:50, buttonWidth: 200, buttonIcon: Icons.face_outlined, buttonText: "Profile",
+                              onPressed: () async {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                return PatientProfile(user: user);
+                            }));
+                          }),
                           if (user.value['usertype'] != "admin")
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                width: 200,
-                                height: 50,
-                                child: OutlinedButton(
-                                  onPressed: () async {
-                                    var res = await getSymptom(user);
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return SymptomsPageCurrentSymptoms(
-                                          getUser: user, getSymptoms: res);
-                                    }));
-                                  },
-                                  child: const Text("Symptoms",
-                                      style: TextStyle(fontSize: 18.0)),
-                                ),
-                              ),
-                            ),
+                            MenuButton(fontSize:18, buttonHeight:50, buttonWidth: 200, buttonIcon: Icons.sick_outlined, buttonText: "Symptoms",
+                                onPressed: () async {
+                                  var res = await getSymptom(user);
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                        return SymptomsPageCurrentSymptoms(
+                                            getUser: user, getSymptoms: res);
+                                      }));
+                                }),
                           if (user.value['usertype'] != "admin")
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                width: 200,
-                                height: 50,
-                                child: OutlinedButton(
-                                  onPressed: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return AppointmentPage(user: user);
-                                    }));
-                                  },
-                                  child: const Text("Appointments",
-                                      style: TextStyle(fontSize: 18.0)),
-                                ),
-                              ),
-                            ),
+                            MenuButton(fontSize: 18, buttonHeight:60, buttonWidth: 200, buttonIcon: Icons.calendar_month_rounded, buttonText: "Appointments",
+                                onPressed: () async {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                    return AppointmentPage(user: user);
+                                  }));
+                                }),
                           if (user.value['usertype'] == "doctor")
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                width: 200,
-                                height: 50,
-                                child: OutlinedButton(
-                                  onPressed: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return AvailabilityPage(user: user);
-                                    }));
-                                  },
-                                  child: const Text("Availabilitis",
-                                      style: TextStyle(fontSize: 18.0)),
-                                ),
-                              ),
-                            ),
+                            MenuButton(fontSize: 18, buttonHeight:60, buttonWidth: 200, buttonIcon: Icons.calendar_month_rounded, buttonText: "Availabilities",
+                                onPressed: () async {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                    return AvailabilityPage(user: user);
+                                  }));
+                                }),
                           if (user.value['usertype'] != "admin")
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -258,25 +148,14 @@ class FrontPage extends StatelessWidget {
                                     }));
                                   },
                                   child: const Text("Chat",
-                                      style: TextStyle(fontSize: 18.0)),
+                                      style: TextStyle(fontSize: 18.0,decoration:TextDecoration.lineThrough)),
                                 ),
                               ),
                             ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 200,
-                              height: 50,
-                              child: OutlinedButton(
-                                onPressed: () {
-                                  logoutUser();
-                                },
-                                child: const Text("Logout",
-                                    style: TextStyle(
-                                        color: Colors.red, fontSize: 18.0)),
-                              ),
-                            ),
-                          )
+                          MenuButton(itemColor: Colors.red,fontSize: 18, buttonHeight:60, buttonWidth: 200, buttonIcon: Icons.exit_to_app_rounded, buttonText: "Logout",
+                              onPressed: () async {
+                                logoutUser();
+                              }),
                         ],
                       )
               ],
@@ -302,4 +181,49 @@ Future<Response> getSymptom(user) async {
     headers: header,
   );
   return res;
+}
+
+class MenuButton extends StatelessWidget {
+
+  MenuButton({
+    this.buttonWidth=100,
+    this.buttonHeight=50,
+    this.itemColor=Colors.blue,
+    this.itemTitleFontSize=12,
+    this.buttonText='',
+    this.fontSize = 20,
+    this.buttonIcon = Icons.access_alarm,
+    this.iconSize = 40,
+    required this.onPressed,
+  });
+
+  final Function onPressed;
+  final double iconSize;
+  final IconData buttonIcon;
+  final double fontSize;
+  final String buttonText;
+  final double buttonWidth;
+  final double buttonHeight;
+  final Color itemColor;
+  final double itemTitleFontSize;
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: SizedBox(
+        width: buttonWidth,
+        height: buttonHeight,
+        child: OutlinedButton.icon(
+          label: Align(alignment: Alignment.center,
+              child: Text(buttonText,
+                style: TextStyle(fontSize: fontSize,color:itemColor),
+                textAlign: TextAlign.center,)),
+          icon: Icon(buttonIcon,size: 38,color:itemColor),
+          onPressed: () {
+              onPressed();
+          },
+
+        ),
+      ),
+    );
+  }
 }
