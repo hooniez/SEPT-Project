@@ -1,0 +1,118 @@
+version: '3.3'
+
+services:
+  mysqldb:
+    image: mysql:8.0.30
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=mysql
+    ports:
+      - 3307:3306
+    volumes:
+      - db:/var/lib/mysql
+  admin:
+    depends_on:
+      - mysqldb
+    build: ./Admin
+    restart: on-failure
+    ports:
+      - 6868:8089
+    environment:
+      SPRING_APPLICATION_JSON: '{
+          "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/mysql?allowPublicKeyRetrieval=true&useSSL=false",
+          "spring.datasource.username" : "root",
+          "spring.datasource.password" : "123456",
+          "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5Dialect",
+          "spring.jpa.hibernate.ddl-auto" : "update"
+        }'
+    volumes:
+      - .m1:/root/.m1
+    stdin_open: true
+    tty: true
+  appointment:
+    depends_on:
+      - mysqldb
+    build: ./Appointment_Server
+    restart: on-failure
+    ports:
+      - 6869:8081
+    environment:
+      SPRING_APPLICATION_JSON: '{
+          "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/mysql?allowPublicKeyRetrieval=true&useSSL=false",
+          "spring.datasource.username" : "root",
+          "spring.datasource.password" : "123456",
+          "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5Dialect",
+          "spring.jpa.hibernate.ddl-auto" : "update"
+        }'
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
+
+  profile:
+    depends_on:
+      - mysqldb
+    build: ./Profile
+    restart: on-failure
+    ports:
+      - 6870:8091
+    environment:
+      SPRING_APPLICATION_JSON: '{
+          "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/mysql?allowPublicKeyRetrieval=true&useSSL=false",
+          "spring.datasource.username" : "root",
+          "spring.datasource.password" : "123456",
+          "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5Dialect",
+          "spring.jpa.hibernate.ddl-auto" : "update"
+        }'
+    volumes:
+      - .m3:/root/.m3
+    stdin_open: true
+    tty: true
+
+  sept_backend:
+    depends_on:
+      - mysqldb
+    build: ./SEPT_Backend
+    restart: on-failure
+    ports:
+      - 6871:8080
+    environment:
+      SPRING_APPLICATION_JSON: '{
+          "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/mysql?allowPublicKeyRetrieval=true&useSSL=false",
+          "spring.datasource.username" : "root",
+          "spring.datasource.password" : "123456",
+          "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5Dialect",
+          "spring.jpa.hibernate.ddl-auto" : "update"
+        }'
+    volumes:
+      - .m4:/root/.m4
+    stdin_open: true
+    tty: true
+
+    # test
+
+  symptom:
+    depends_on:
+      - mysqldb
+    build: ./symptom
+    restart: on-failure
+    ports:
+      - 6872:8085
+    environment:
+      SPRING_APPLICATION_JSON: '{
+          "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/mysql?allowPublicKeyRetrieval=true&useSSL=false",
+          "spring.datasource.username" : "root",
+          "spring.datasource.password" : "123456",
+          "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5Dialect",
+          "spring.jpa.hibernate.ddl-auto" : "update"
+        }'
+    volumes:
+      - .m5:/root/.m5
+    stdin_open: true
+    tty: true
+
+volumes:
+  db:
+
+
