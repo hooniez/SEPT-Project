@@ -50,7 +50,7 @@ class _LoginState extends State<Login> {
       'userType': type
     };
 
-    final uri = Uri.parse(API_HOST! + "/$type/signin");
+    final uri = Uri.parse("${API_HOST!}/$type/signin");
     print(uri);
     print("hello");
     print(body);
