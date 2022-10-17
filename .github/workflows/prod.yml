@@ -16,9 +16,9 @@ jobs:
         working-directory: Backend
 
     steps:
-      - name: Run bash
-        run: find . -name 'docker-compose.yml'
-        shell: bash
+      # - name: Run bash
+      #   run: find . -name 'docker-compose.yml'
+      #   shell: bash
       - name: Deploy to Docker Host
         uses: wshihadeh/docker-deployment-action@v2
         with:
