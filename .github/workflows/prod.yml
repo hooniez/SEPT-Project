@@ -17,7 +17,7 @@ jobs:
         run: find . -name 'docker-compose.yml'
         shell: bash
       - name: Deploy to Docker Host
-        uses: wshihadeh/docker-deployment-action@v1
+        uses: wshihadeh/docker-deployment-action@v2
         with:
           remote_docker_host: root@165.232.172.169
           ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
