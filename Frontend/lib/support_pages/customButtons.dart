@@ -123,7 +123,7 @@ class DefaultAppbar extends StatelessWidget with PreferredSizeWidget {
               padding: EdgeInsets.only(right: 20.0),
               child: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, '/frontPage');
+                  Navigator.of(context, rootNavigator: true).pushNamed("/frontPage");
                 },
                 child: Icon(
                   Icons.home,
