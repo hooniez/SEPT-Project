@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
-import 'api_key.dart';
+import 'urls.dart';
 
 // import 'dart:html';
 
@@ -100,7 +100,7 @@ class _MyAppState extends State<AddAppointmentPage> {
       'Authorization': widget.user.value["Authorization"]
     };
 
-    final url = Uri.http('$api:6869', APPOINTMENT_PATH);
+    final url = Uri.parse('$api:6869$APPOINTMENT_PATH');
 
     final body = {
       'id': appointmentView.id,

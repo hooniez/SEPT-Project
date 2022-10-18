@@ -3,6 +3,7 @@
 // import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:frontend/urls.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
 import 'profile.dart';
@@ -157,9 +158,9 @@ class FrontPage extends StatelessWidget {
 }
 
 Future<Response> getSymptom(user) async {
-  String API_HOST = "10.0.2.2:6872";
-  final queryParameters = {'email': user.value["email"]};
-  final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
+
+  final uri = Uri.parse("$api:$symptom_port/getsymptom?email=${user
+      .value['email']}");
   print(uri);
 
   Map<String, String> header = {

@@ -7,7 +7,7 @@ import 'package:frontend/scrollercontroller.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'availabilityPage.dart';
-import 'api_key.dart';
+import 'urls.dart';
 
 class addAvailabilityPage extends StatefulWidget {
   final user;
@@ -62,7 +62,7 @@ class _MyAppState extends State<addAvailabilityPage> {
       'doctorName': widget.user.value['email'],
     };
 
-    final url = Uri.parse('$api:6869$PATH');
+    final url = Uri.parse('$api:$appointment_port$PATH');
 
     print(url);
     print(body);

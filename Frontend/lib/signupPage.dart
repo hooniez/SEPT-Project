@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/scrollercontroller.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
-import 'api_key.dart';
+import 'urls.dart';
 
 enum UserType { doctor, patient }
 
@@ -415,7 +415,7 @@ Future<Response> createUser(
     String type) async {
 
 
-  final url = Uri.parse('$api:6871' + "/" + type + "/signup");
+  final url = Uri.parse('$api:$sept_backend_port' + "/" + type + "/signup");
   print(url);
   String body;
   if (type == 'patient') {
