@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_inject_jakarta_inject_api_2_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_antlr_antlr4_runtime_4_10.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_6_0_2_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/addAppointmentPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/addAppointmentPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/addAvailabilityPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/addAvailabilityPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/api_key.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/api_key.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/availabilityPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/availabilityPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/loginPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/loginPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/profile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/symptomsPageAddSymptoms.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/symptomsPageAddSymptoms.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/lib/symptomsPageCurrentSymptoms.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/symptomsPageCurrentSymptoms.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,9 +61,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="dart.analysis.tool.window.visible" value="false" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "node.js.selected.package.tslint": "(autodetect)"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Backend" />
@@ -142,10 +134,10 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Flutter.main.dart" />
-      <item itemvalue="Flutter.main.dart (1)" />
       <item itemvalue="JUnit.PatientControllerTest" />
       <item itemvalue="JUnit.DoctorControllerTest" />
+      <item itemvalue="Spring Boot.AdminApplication" />
+      <item itemvalue="Spring Boot.SeptBackendApplication" />
     </list>
     <recent_temporary>
       <list>
@@ -188,6 +180,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
