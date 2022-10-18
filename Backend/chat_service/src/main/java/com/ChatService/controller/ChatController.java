@@ -46,12 +46,13 @@ public class ChatController {
                 System.out.println("message sent to user");
             }
         }
-        
+
         System.out.println("sent!");
     }
 
     @MessageMapping("/register")
     public void register(String userName, Principal principal) throws Exception {
+
         for (Connection con : connections) {
             if (con.getSessionId().equals(principal.getName())) {
                 con.setUsername(userName);

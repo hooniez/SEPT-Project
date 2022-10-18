@@ -1,10 +1,11 @@
 package com.ChatService.dao;
 
-import org.springframework.data.repository.CrudRepository;
-import com.ChatService.model.Patient;
-import org.springframework.stereotype.Repository;
+import com.sept_group6.appointment_server.model.Patient;
 
-@Repository
-public interface PatientRepository extends CrudRepository<Patient, Long> {
+import java.util.Optional;
 
+public interface PatientRepository extends UserRepository<Patient> {
+    // Optional<Patient> findByEmailAndPassword(String email, String password);
+
+    // boolean existsByEmail(String Email);
 }

@@ -186,7 +186,7 @@ class FrontPage extends StatelessWidget {
                                   onPressed: () async {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) {
-                                      return ChatPage(user: user);
+                                      return ChatSelectPage(user: user);
                                     }));
                                   },
                                   child: const Text("Chat",

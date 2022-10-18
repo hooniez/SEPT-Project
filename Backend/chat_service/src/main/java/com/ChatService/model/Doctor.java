@@ -1,26 +1,27 @@
 package com.ChatService.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.ToString;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
+public class Doctor extends User {
 
-public class Doctor {
-    @Id
-    private String email;
-    private String firstname;
-    private String lastname;
-    private String dob;
-    private String password;
-    private String mobilenumber;
     private String certificate;
+
+    public Doctor(long uid, String email, String firstname, String lastname, String dob, String password,
+            String mobilenumber, String certificate) {
+        super(uid, email, firstname, lastname, dob, password, mobilenumber);
+        this.certificate = certificate;
+    }
+
 }

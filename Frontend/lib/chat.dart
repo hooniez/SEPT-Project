@@ -6,21 +6,25 @@ import 'package:stomp_dart_client/stomp_frame.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'dart:convert';
+import 'urls.dart';
 
-void main() {
-  runApp(const ChatApp());
-}
+// void main() {
+//   runApp(const ChatApp());
+// }
 
-class ChatApp extends StatelessWidget {
-  const ChatApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(home: ChatPage());
-  }
-}
+// class ChatApp extends StatelessWidget {
+//   const ChatApp({super.key});
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(home: ChatPage());
+//   }
+// }
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({super.key});
+  final String sender;
+  final String receiver;
+  const ChatPage({Key? key, required this.sender, required this.receiver})
+      : super(key: key);
 
   @override
   ChatPageState createState() {
@@ -40,7 +44,7 @@ class ChatPageState extends State<ChatPage> {
     super.initState();
     client = StompClient(
         config: StompConfig.SockJS(
-      url: 'http://localhost:8080/ws',
+      url: 'http://$api:$chat_port/ws',
       onConnect: onConnect,
       onWebSocketError: (dynamic error) => print(error.toString()),
     ));
@@ -51,8 +55,9 @@ class ChatPageState extends State<ChatPage> {
     print("connected");
     // client.subscribe(destination: '/user/max/queue/msg', callback: onMessage);
     // client.subscribe(destination: '/topic/chat', callback: onMessageTopic);
-    client.subscribe(destination: '/topic/chat/max', callback: onMessageTopic);
-    client.send(destination: '/app/register', body: 'max', headers: {});
+    client.subscribe(
+        destination: '/topic/chat/' + widget.sender, callback: onMessageTopic);
+    client.send(destination: '/app/register', body: widget.sender, headers: {});
     print("subscribed and registered");
   }
 
@@ -60,7 +65,7 @@ class ChatPageState extends State<ChatPage> {
     print(frame.body);
     String json = '${frame.body}';
     Message m = Message.fromJson(jsonDecode(json));
-    if (m.from != 'max') {
+    if (m.from != widget.sender) {
       setState(() {
         messages.add(m);
       });
@@ -102,19 +107,19 @@ class ChatPageState extends State<ChatPage> {
                             ),
                           ),
                       itemBuilder: (context, Message message) => Align(
-                            alignment: (message.from == "me")
+                            alignment: (message.from == widget.sender)
                                 ? Alignment.centerRight
                                 : Alignment.centerLeft,
                             child: Card(
                               elevation: 8,
-                              color: (message.from == "me")
+                              color: (message.from == widget.sender)
                                   ? Theme.of(context).primaryColor
                                   : Colors.white,
                               child: Padding(
                                 padding: const EdgeInsets.all(12),
                                 child: Text(
                                   message.text,
-                                  style: (message.from == "me")
+                                  style: (message.from == widget.sender)
                                       ? const TextStyle(color: Colors.white)
                                       : const TextStyle(color: Colors.black),
                                 ),
@@ -139,7 +144,7 @@ class ChatPageState extends State<ChatPage> {
 
   void addItemToList() {
     if (textEdit.text.isNotEmpty) {
-      Message message = Message("me", "greg", textEdit.text);
+      Message message = Message(widget.sender, widget.receiver, textEdit.text);
       setState(() {
         messages.add(message);
       });

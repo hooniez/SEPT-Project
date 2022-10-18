@@ -10,13 +10,13 @@ import 'signupPage.dart';
 import 'chat.dart';
 import 'urls.dart';
 
-class ChatPage extends StatefulWidget {
+class ChatSelectPage extends StatefulWidget {
   final user;
 
-  ChatPage({required this.user});
+  ChatSelectPage({required this.user});
 
   @override
-  State<ChatPage> createState() => _MyAppState();
+  State<ChatSelectPage> createState() => _MyAppState();
 }
 
 class AppointmentView {
@@ -83,7 +83,7 @@ Future<List<AppointmentView>> getAppointment(user) async {
   }
 }
 
-class _MyAppState extends State<ChatPage> {
+class _MyAppState extends State<ChatSelectPage> {
   late Future<List<AppointmentView>> futureData;
 
   @override
@@ -137,7 +137,7 @@ class _MyAppState extends State<ChatPage> {
                       children: <Widget>[
                         const Text("Tap to chat to a doctor."),
                         Expanded(
-                          child: dataBody(data, widget.user),
+                          child: dataBody(data),
                         )
                       ],
                     );
@@ -153,46 +153,74 @@ class _MyAppState extends State<ChatPage> {
       ),
     );
   }
-}
 
-SingleChildScrollView dataBody(List<AppointmentView> data, dynamic user) {
-  String usertype = user.value['usertype'];
-  return SingleChildScrollView(
-    scrollDirection: Axis.vertical,
-    child: DataTable(
-      sortColumnIndex: 0,
-      showCheckboxColumn: false,
-      columns: [
-        // DataColumn(
-        //   label: Text("Date"),
-        // ),
-        // DataColumn(
-        //   label: Text("Start Time"),
-        // ),
-        // DataColumn(
-        //   label: Text("End Time"),
-        // ),
-        DataColumn(
-          label: Text(usertype == "patient" ? "Doctor Name" : "Patient Name"),
-        ),
-      ],
-      rows: data
-          .map(
-            (appointmentView) => DataRow(
-                onSelectChanged: (selected) {
-                  ChatPage(user, appointmentView);
-                },
-                cells: [
-                  // DataCell(Text(appointmentView.date)),
-                  // DataCell(Text(appointmentView.startTime)),
-                  // DataCell(Text(appointmentView.endTime)),
+  void startChat(int appointmentID) async {
+    String sender = widget.user.value['email'];
+    Map<String, String> header = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': widget.user.value["Authorization"]
+    };
+    final url = Uri.parse('$api:$appointment_port/appointment');
 
-                  DataCell(Text(usertype == "patient"
-                      ? appointmentView.doctorName
-                      : appointmentView.patientName)),
-                ]),
-          )
-          .toList(),
-    ),
-  );
+    final Response res =
+        await post(url, headers: header, body: json.encode(appointmentID));
+    print(res.statusCode);
+    print(res.body.toString());
+    if (res.body.isNotEmpty) {
+      Map<String, String> jsonResponse = json.decode(res.body);
+      String receiver = widget.user.value['usertype'] == 'patient'
+          ? jsonResponse['doctor']!
+          : jsonResponse['patient']!;
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return ChatPage(sender: sender, receiver: receiver);
+      }));
+    } else {
+      print("empty");
+    }
+
+    ;
+  }
+
+  SingleChildScrollView dataBody(List<AppointmentView> data) {
+    String usertype = widget.user.value['usertype'];
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: DataTable(
+        sortColumnIndex: 0,
+        showCheckboxColumn: false,
+        columns: [
+          // DataColumn(
+          //   label: Text("Date"),
+          // ),
+          // DataColumn(
+          //   label: Text("Start Time"),
+          // ),
+          // DataColumn(
+          //   label: Text("End Time"),
+          // ),
+          DataColumn(
+            label: Text(usertype == "patient" ? "Doctor Name" : "Patient Name"),
+          ),
+        ],
+        rows: data
+            .map(
+              (appointmentView) => DataRow(
+                  onSelectChanged: (selected) {
+                    startChat(appointmentView.id);
+                  },
+                  cells: [
+                    // DataCell(Text(appointmentView.date)),
+                    // DataCell(Text(appointmentView.startTime)),
+                    // DataCell(Text(appointmentView.endTime)),
+
+                    DataCell(Text(usertype == "patient"
+                        ? appointmentView.doctorName
+                        : appointmentView.patientName)),
+                  ]),
+            )
+            .toList(),
+      ),
+    );
+  }
 }
