@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class MenuButton extends StatelessWidget {
   MenuButton({
-    this.buttonWidth = 200,
-    this.buttonHeight = 50,
+    this.buttonWidth = 250,
+    this.buttonHeight = 90,
     this.itemColor = Colors.blue,
     this.itemTitleFontSize = 12,
     this.buttonText = '',
-    this.fontSize = 20,
+    this.fontSize = 22,
     this.buttonIcon = Icons.access_alarm,
     this.iconSize = 40,
     required this.onPressed,
