@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
 import 'addAvailabilityPage.dart';
+import 'urls.dart';
 
 // import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
+import 'support_pages/customButtons.dart';
 
 class AvailabilityPage extends StatefulWidget {
   final user;
@@ -52,7 +54,7 @@ class AppointmentView {
 
 Future<List<AppointmentView>> getAvailabilities(user) async {
   // construct the request
-  String API_HOST = "10.0.2.2:8081";
+
   String APPOINTMENT_PATH = "/appointment";
 
   final queryParameters = {
@@ -60,10 +62,17 @@ Future<List<AppointmentView>> getAvailabilities(user) async {
     'usertype': user.value['usertype']
   };
 
-  final url = Uri.http(API_HOST, APPOINTMENT_PATH, queryParameters);
+  final url = Uri.parse("$api:$appointment_port$APPOINTMENT_PATH");
 
   print(url);
-  final Response res = await get(url);
+
+  Map<String, String> header = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': user.value["Authorization"]
+  };
+
+  final Response res = await get(url, headers: header);
   print(res.statusCode);
   print(res.body.toString());
 
@@ -95,48 +104,17 @@ class _MyAppState extends State<AvailabilityPage> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          appBar: AppBar(
-              backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-              title: const Center(child: Text("Neighbourhood Doctors")),
-              leading: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                  )),
-              actions: <Widget>[
-                Padding(
-                    padding: EdgeInsets.only(right: 20.0),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/frontPage');
-                      },
-                      child: Icon(
-                        Icons.home,
-                        size: 26.0,
-                      ),
-                    )),
-              ]),
+          appBar: DefaultAppbar(appbarText: "Availabilities",onPressed: () {
+            Navigator.pop(context);
+          },),
           body: Center(
               child: Column(
             children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 144, 119, 151), // background
-                  onPrimary: Colors.white, // foreground
-                ),
-                child: const Text(
-                  'Add Availability',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () async {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return addAvailabilityPage(user: widget.user);
-                  }));
-                },
-              ),
+              AppointmentsButton(buttonWidth:250,buttonHeight:60,iconSize:30,buttonText: "Add Availability", onPressed: () async {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return addAvailabilityPage(user: widget.user);
+                }));
+              },),
               Expanded(
                 child: FutureBuilder<List<AppointmentView>>(
                   future: futureData,
@@ -148,7 +126,6 @@ class _MyAppState extends State<AvailabilityPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         verticalDirection: VerticalDirection.down,
                         children: <Widget>[
-                          const Text("Your Availabilities"),
                           Expanded(
                             child: FittedBox(
                                 alignment: Alignment.topCenter,
@@ -161,7 +138,7 @@ class _MyAppState extends State<AvailabilityPage> {
                       return Text("${snapshot.error}");
                     }
                     // By default show a loading spinner.
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   },
                 ),
               ),

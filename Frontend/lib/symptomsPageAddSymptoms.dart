@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:frontend/scrollercontroller.dart';
 import 'symptomsPageCurrentSymptoms.dart';
 import 'package:http/http.dart';
+import 'support_pages/customButtons.dart';
 import 'package:intl/intl.dart';
+import 'urls.dart';
 
 class SymptomsPageAddSymptoms extends StatefulWidget {
   final getUser;
@@ -30,30 +32,11 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: AppBar(
-                backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-                title: const Text("Neighbourhood Doctors"),
-                leading: InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    )),
-                actions: <Widget>[
-                  Padding(
-                      padding: EdgeInsets.only(right: 20.0),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/frontPage');
-                        },
-                        child: Icon(
-                          Icons.home,
-                          size: 26.0,
-                        ),
-                      )),
-                ]),
+            appBar: DefaultAppbar(
+                appbarText: "Symptoms",
+                onPressed: () async {
+                  Navigator.pop(context);
+                }),
             body: SingleChildScrollView(
                 controller: AdjustableScrollController(100),
                 child: Container(
@@ -68,54 +51,40 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                             child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(24.0),
-                                    child: SizedBox(
-                                      width: 300.0, // <-- match_parent
-                                      height: 50.0, // <-- match-parent
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 144, 119, 151), // background
-                                          onPrimary: Colors.white, // foreground
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SymptomsButton(
+                                          itemColor: Colors.green,
+                                          buttonWidth: 160,
+                                          iconSize: 30,
+                                          onPressed: () async {
+                                            var getRes = await getSymptom(
+                                                widget.getUser.value["email"],
+                                                widget.getUser
+                                                    .value['Authorization']);
+                                            Navigator.push(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                              return SymptomsPageCurrentSymptoms(
+                                                  getUser: widget.getUser,
+                                                  getSymptoms: getRes);
+                                            }));
+                                          },
+                                          buttonText: "Current Symptoms",
+                                          buttonIcon: Icons.sick_rounded,
+                                          fontSize: 16,
                                         ),
-                                        child: const Text(
-                                          'Current Symptoms',
-                                          style: TextStyle(color: Colors.white),
+                                        SymptomsButton(
+                                          buttonWidth: 150,
+                                          iconSize: 30,
+                                          onPressed: () {},
+                                          buttonText: "Add Symptom",
+                                          fontSize: 16,
+                                          buttonIcon: Icons.add_circle_rounded,
                                         ),
-                                        onPressed: () async {
-                                          var getRes = await getSymptom(
-                                              widget.getUser.value["email"]);
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return SymptomsPageCurrentSymptoms(
-                                                getUser: widget.getUser,
-                                                getSymptoms: getRes);
-                                          }));
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(24.0),
-                                    child: SizedBox(
-                                      width: 300.0, // <-- match_parent
-                                      height: 50.0, // <-- match-parent
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 221, 150, 17), // background
-                                          onPrimary: Colors.white, // foreground
-                                        ),
-                                        child: const Text(
-                                          'Add Symptom',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                  ),
+                                      ]),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: TextFormField(
@@ -125,7 +94,7 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                                             symptomDescriptionController,
                                         decoration: InputDecoration(
                                           prefixIcon: Icon(Icons.sick),
-                                          labelText: "Symptom Description",
+                                          labelText: "What's the Symptom",
                                           filled: true,
                                           fillColor: Colors.white,
                                           border: OutlineInputBorder(
@@ -150,8 +119,7 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                                       height: 50.0, // <-- match-parent
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 144, 119, 151), // background
+                                          primary: Colors.blue, // background
                                           onPrimary: Colors.white, // foreground
                                         ),
                                         child: const Text(
@@ -165,11 +133,14 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                                             var res = await addSymptom(
                                                 symptomDescriptionController
                                                     .text,
-                                                widget.getUser.value['email']);
+                                                widget.getUser.value['email'],
+                                                widget.getUser
+                                                    .value['Authorization']);
                                             if (res.body.isNotEmpty) {
                                               var getRes = await getSymptom(
-                                                  widget
-                                                      .getUser.value["email"]);
+                                                  widget.getUser.value["email"],
+                                                  widget.getUser
+                                                      .value['Authorization']);
                                               Navigator.push(context,
                                                   MaterialPageRoute(
                                                       builder: (context) {
@@ -195,21 +166,22 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
   }
 }
 
-Future<Response> getSymptom(String patientemail) async {
-  String API_HOST = "10.0.2.2:8085";
-  final queryParameters = {'email': patientemail};
-  final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
+Future<Response> getSymptom(String patientemail, String token) async {
+  final uri = Uri.parse("$api:$symptom_port/getsymptom/?email=$patientemail");
   print(uri);
 
-  Response res = await get(uri);
+  Map<String, String> header = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': token
+  };
+  Response res = await get(uri, headers: header);
   return res;
 }
 
 Future<Response> addSymptom(
-    String symptomdescription, String patientemail) async {
-  String API_HOST = "http://10.0.2.2:8085";
-
-  final url = Uri.parse(API_HOST + "/addsymptom");
+    String symptomdescription, String patientemail, String token) async {
+  final url = Uri.parse("$api:$symptom_port/addsymptom");
   print(url);
   String body;
   body = jsonEncode(<String, String>{
@@ -220,6 +192,7 @@ Future<Response> addSymptom(
       headers: {
         'Accept': 'application/json',
         'content-type': 'application/json',
+        'Authorization': token
       },
       body: body);
   return res;

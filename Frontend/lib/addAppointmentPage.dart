@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
+import 'urls.dart';
+import 'support_pages/customButtons.dart';
 
 // import 'dart:html';
 
@@ -52,13 +54,18 @@ class AppointmentView {
 
 Future<List<AppointmentView>> getAvailabilities(user) async {
   // construct the request
-  String API_HOST = "10.0.2.2:8081";
-  String APPOINTMENT_PATH = "/appointment/all";
+  String PATH = "/availability";
 
-  final url = Uri.http(API_HOST, APPOINTMENT_PATH);
+  final url = Uri.parse('$api:6869$PATH');
+
+  Map<String, String> header = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': user.value["Authorization"]
+  };
 
   print(url);
-  final Response res = await get(url);
+  final Response res = await get(url, headers: header);
   print(res.statusCode);
   print(res.body.toString());
 
@@ -85,16 +92,16 @@ class _MyAppState extends State<AddAppointmentPage> {
   }
 
   void addAppointment(AppointmentView appointmentView) async {
-    String API_HOST = "10.0.2.2:8081";
+
     String APPOINTMENT_PATH = "/appointment";
 
     Map<String, String> header = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
-      // 'Authorization': '<Your token>'
+      'Authorization': widget.user.value["Authorization"]
     };
 
-    final url = Uri.http(API_HOST, APPOINTMENT_PATH);
+    final url = Uri.parse('$api:6869$APPOINTMENT_PATH');
 
     final body = {
       'id': appointmentView.id,
@@ -157,30 +164,7 @@ class _MyAppState extends State<AddAppointmentPage> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          appBar: AppBar(
-              backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-              title: const Center(child: Text("Neighbourhood Doctors")),
-              leading: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                  )),
-              actions: <Widget>[
-                Padding(
-                    padding: EdgeInsets.only(right: 20.0),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/frontPage');
-                      },
-                      child: Icon(
-                        Icons.home,
-                        size: 26.0,
-                      ),
-                    )),
-              ]),
+          appBar: DefaultAppbar(appbarText: "Appointments",onPressed: () async {Navigator.pop(context);}),
           body: Center(
               child: Column(
             children: [

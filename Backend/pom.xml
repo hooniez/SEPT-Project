@@ -1,0 +1,9 @@
+<build>
+  <plugins>
+    <plugin>
+      <groupId>com.tweesky.cloudtools</groupId>
+      <artifactId>heroku-docker-maven-plugin</artifactId>
+      <version>0.0.1</version>
+    </plugin>
+  </plugins>
+</build>

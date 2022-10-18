@@ -3,19 +3,30 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
 // import 'dart:html';
+import 'urls.dart';
 
-enum UserType { doctor, patient }
+enum UserType { doctor, patient, admin }
 
 class Login extends StatefulWidget {
   final Function setUser;
-  Login({required this.setUser});
+  final bool forAdmin;
+  Login({required this.setUser, this.forAdmin=false});
 
   @override
   State<Login> createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-  UserType? _userType = UserType.patient;
+  UserType? _userType;
+  String? api_host;
+
+  // Login page two fronts: one for admin and the other for patient
+  @override
+  void initState() {
+    _userType = widget.forAdmin ? UserType.admin : UserType.patient;
+    api_host = widget.forAdmin ? "$api:$admin_port" : "$api:$sept_backend_port";
+  }
+
 
   final _formKey = GlobalKey<FormState>();
 
@@ -24,7 +35,7 @@ class _LoginState extends State<Login> {
   TextEditingController passwordController = TextEditingController();
 
   void login() async {
-    String API_HOST = "10.0.2.2:8080";
+
     String type = _userType.toString().split('.').last;
 
     Map<String, String> header = {
@@ -35,16 +46,21 @@ class _LoginState extends State<Login> {
 
     final body = {
       'email': emailController.text,
-      'password': passwordController.text
+      'password': passwordController.text,
+      'userType': type
     };
 
-    final uri = Uri.http(API_HOST, "/$type/signin");
+    final uri = Uri.parse("${api_host!}/$type/signin");
+    print(uri);
+    print("hello");
+    print(body);
     print(uri);
 
     Response res = await post(uri, headers: header, body: json.encode(body));
+    print(res.headers);
     print(res.body);
-    if (res.body.isNotEmpty) {
-      widget.setUser(res.body, type);
+    if (res.statusCode == 202) {
+      widget.setUser(res.body, type, res.headers['authorization']);
       Navigator.pushNamed(context, '/frontPage');
     } else {
       print("login unsuccessful");
@@ -78,13 +94,19 @@ class _LoginState extends State<Login> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  _userType == UserType.admin ?
                   const Text(
+                    'Admin Login',
+                    style: TextStyle(color: Colors.black, fontSize: 28.0),
+                  ) : const Text(
                     'Login',
                     style: TextStyle(color: Colors.black, fontSize: 28.0),
-                  ),
+                  )
+                  ,
                   const Padding(
                     padding: EdgeInsets.only(top: 40.0),
                   ),
+                  _userType != UserType.admin ?
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -119,6 +141,8 @@ class _LoginState extends State<Login> {
                         ),
                       ]),
                     ],
+                  ) : (
+                  Row()
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

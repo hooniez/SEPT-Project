@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
 // import 'dart:html';
+import "support_pages/customButtons.dart";
 
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
 import 'addAppointmentPage.dart';
+import 'urls.dart';
 
 class AppointmentPage extends StatefulWidget {
   final user;
@@ -51,7 +53,6 @@ class AppointmentView {
 
 Future<List<AppointmentView>> getAppointment(user) async {
   // construct the request
-  String API_HOST = "10.0.2.2:8081";
   String APPOINTMENT_PATH = "/appointment";
 
   final queryParameters = {
@@ -59,11 +60,17 @@ Future<List<AppointmentView>> getAppointment(user) async {
     'usertype': user.value['usertype']
   };
 
-  final url = Uri.http(API_HOST, APPOINTMENT_PATH, queryParameters);
+  Map<String, String> header = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': user.value["Authorization"]
+  };
+
+  final url = Uri.parse('$api:$appointment_port$APPOINTMENT_PATH');
 
   print(url);
-  final Response res = await get(url);
-  print(res.body.toString());
+  final Response res = await get(url, headers: header);
+  print(res.headers.toString());
 
   if (res.statusCode == 200 || res.statusCode == 202) {
     List jsonResponse = json.decode(res.body);
@@ -91,47 +98,15 @@ class _MyAppState extends State<AppointmentPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-            backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-            title: const Center(child: Text("Neighbourhood Doctors")),
-            leading: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.white,
-                )),
-            actions: <Widget>[
-              Padding(
-                  padding: EdgeInsets.only(right: 20.0),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/frontPage');
-                    },
-                    child: Icon(
-                      Icons.home,
-                      size: 26.0,
-                    ),
-                  )),
-            ]),
+        appBar: DefaultAppbar(appbarText: "Appointments",onPressed: () async {Navigator.pop(context);}),
         body: Center(
             child: Column(children: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Color.fromARGB(255, 144, 119, 151), // background
-              onPrimary: Colors.white, // foreground
-            ),
-            child: const Text(
-              'Make appointment',
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () async {
+          if (widget.user.value['usertype'] == "patient")
+            AppointmentsButton(itemColor: Colors.green,iconSize: 30, buttonWidth:300,buttonText: "Make Appointment", buttonIcon: Icons.add_circle_outline,onPressed: () async {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return AddAppointmentPage(user: widget.user);
               }));
-            },
-          ),
+            },),
           Expanded(
             child: FutureBuilder<List<AppointmentView>>(
               future: futureData,
@@ -143,12 +118,11 @@ class _MyAppState extends State<AppointmentPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     verticalDirection: VerticalDirection.down,
                     children: <Widget>[
-                      const Text("Your Appointments"),
                       Expanded(
                         child: FittedBox(
                             alignment: Alignment.topCenter,
                             child:
-                                dataBody(data, widget.user.value['usertype'])),
+                                dataBody(data, widget.user.value['usertype']),),
                       )
                     ],
                   );
@@ -167,34 +141,37 @@ class _MyAppState extends State<AppointmentPage> {
 }
 
 SingleChildScrollView dataBody(List<AppointmentView> data, String usertype) {
+  double textSize = 30;
+
+
   return SingleChildScrollView(
     scrollDirection: Axis.vertical,
-    child: DataTable(
+    child: DataTable(dataRowHeight:150,
       sortColumnIndex: 0,
       showCheckboxColumn: false,
       columns: [
         DataColumn(
-          label: Text("Date"),
+          label: Text("Date", style: TextStyle(fontSize: textSize),),
         ),
         DataColumn(
-          label: Text("Start Time"),
+          label: Text("Start Time",style: TextStyle(fontSize: textSize),),
         ),
         DataColumn(
-          label: Text("End Time"),
+          label: Text("End Time",style: TextStyle(fontSize: textSize),),
         ),
         DataColumn(
-          label: Text(usertype == "patient" ? "Doctor Name" : "Patient Name"),
+          label: Text(usertype == "patient" ? "Doctor Name" : "Patient Name",style: TextStyle(fontSize: textSize),),
         ),
       ],
       rows: data
           .map(
-            (appointmentView) => DataRow(cells: [
-              DataCell(Text(appointmentView.date)),
-              DataCell(Text(appointmentView.startTime)),
-              DataCell(Text(appointmentView.endTime)),
-              DataCell(Text(usertype == "patient"
-                  ? appointmentView.doctorName
-                  : appointmentView.patientName)),
+            (appointmentView) => DataRow(
+                cells: [
+              DataCell(Text(appointmentView.date,style: TextStyle(fontSize: textSize),)),
+              DataCell(Text(appointmentView.startTime,style: TextStyle(fontSize: textSize),)),
+              DataCell(Text(appointmentView.endTime,style: TextStyle(fontSize: textSize),)),
+              usertype == "patient" ? DataCell(Text(appointmentView.doctorName.split(" ").join("\n"),style: TextStyle(fontSize: textSize)))
+              : DataCell(Text(appointmentView.patientName.split(" ").join("\n"),style: TextStyle(fontSize: textSize)))
             ]),
           )
           .toList(),

@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Backend/SEPT_Backend/src/test/java/com/sept_group6/sept_backend/controllers/DoctorControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/SEPT_Backend/src/test/java/com/sept_group6/sept_backend/controllers/PatientControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9191363f-8629-4b79-96a3-89bf2a497666.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9191363f-8629-4b79-96a3-89bf2a497666.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +48,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="2DhQhqmuRU73ek2m4tMKV5vymoI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -63,6 +68,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Backend" />
       <recent name="$PROJECT_DIR$/Backend/SEPT_Backend/src/test/java/com/sept_group6/sept_backend/controllers" />
       <recent name="$PROJECT_DIR$/Frontend" />
     </key>
@@ -72,9 +78,9 @@
       <option name="filePath" value="$PROJECT_DIR$/frontend/frontend/lib/main.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" nameIsGenerated="true">
       <option name="additionalArgs" value="--no-sound-null-safety" />
-      <option name="filePath" value="$PROJECT_DIR$/frontend/lib/main.dart" />
+      <option name="filePath" value="$PROJECT_DIR$/Frontend/lib/main.dart" />
       <method v="2" />
     </configuration>
     <configuration name="DoctorControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -107,6 +113,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="AdminApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="Admin" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.admin.AdminApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SeptBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="SEPT_Backend" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.sept_group6.sept_backend.SeptBackendApplication" />
@@ -123,6 +136,7 @@
     <list>
       <item itemvalue="JUnit.PatientControllerTest" />
       <item itemvalue="JUnit.DoctorControllerTest" />
+      <item itemvalue="Spring Boot.AdminApplication" />
       <item itemvalue="Spring Boot.SeptBackendApplication" />
     </list>
     <recent_temporary>
@@ -147,6 +161,9 @@
       <workItem from="1661153151778" duration="102000" />
       <workItem from="1663152542164" duration="2112000" />
       <workItem from="1663655047558" duration="942000" />
+      <workItem from="1664934576790" duration="6227000" />
+      <workItem from="1665463156287" duration="1640000" />
+      <workItem from="1665509454202" duration="331000" />
     </task>
     <servers />
   </component>

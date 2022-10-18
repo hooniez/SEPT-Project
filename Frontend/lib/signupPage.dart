@@ -6,19 +6,29 @@ import 'package:flutter/material.dart';
 import 'package:frontend/scrollercontroller.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
+import 'urls.dart';
 
 enum UserType { doctor, patient }
 
 class SignupPage extends StatefulWidget {
-  final Function setUser;
-  const SignupPage({Key? key, required this.setUser}) : super(key: key);
+  final Function setUserWithoutToken;
+  final bool forDoctor;
+  const SignupPage({Key? key, required this.setUserWithoutToken, this
+      .forDoctor=false})
+      : super(key: key);
 
   @override
   State<SignupPage> createState() => _SignupPageState();
 }
 
 class _SignupPageState extends State<SignupPage> {
-  UserType? _userType = UserType.patient;
+  UserType? _userType;
+  @override
+  // SignupPage has two fronts: one for doctor and the other for patient
+  void initState() {
+    _userType = widget.forDoctor ? UserType.doctor : UserType.patient;
+    super.initState();
+  }
 
   final _formKey = GlobalKey<FormState>();
 
@@ -76,50 +86,23 @@ class _SignupPageState extends State<SignupPage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Padding(
+                           Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: 24, horizontal: 6),
-                            child: Text(
+                            child:
+                            widget.forDoctor ?
+                            const Text(
+                              'Register a Doctor',
+                              style: TextStyle(color: Colors.black, fontSize:
+                              30.0)
+                            ) :
+                            Text(
                               'Register',
                               style: TextStyle(
-                                  color: Colors.black, fontSize: 36.0),
+                                  color: Colors.black, fontSize: 30.0),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(children: [
-                                Radio<UserType>(
-                                  value: UserType.patient,
-                                  groupValue: _userType,
-                                  onChanged: (UserType? value) {
-                                    setState(() {
-                                      _userType = value;
-                                    });
-                                  },
-                                ),
-                                const Text(
-                                  "Patient",
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                              ]),
-                              Row(children: [
-                                Radio<UserType>(
-                                  value: UserType.doctor,
-                                  groupValue: _userType,
-                                  onChanged: (UserType? value) {
-                                    setState(() {
-                                      _userType = value;
-                                    });
-                                  },
-                                ),
-                                const Text(
-                                  "Doctor",
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                              ]),
-                            ],
-                          ),
+
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
@@ -393,8 +376,9 @@ class _SignupPageState extends State<SignupPage> {
                                       customController.text,
                                       type,
                                     );
-                                    if (res.body.isNotEmpty) {
-                                      widget.setUser(res.body, type);
+                                    if (res.statusCode == 202) {
+                                      // widget.setUserWithoutToken(
+                                      //     res.body, type);
                                       Navigator.pushNamed(
                                           context, '/frontPage');
                                     } else {
@@ -429,9 +413,9 @@ Future<Response> createUser(
     String mobileNumber,
     String customInfo,
     String type) async {
-  String API_HOST = "http://10.0.2.2:8080";
 
-  final url = Uri.parse(API_HOST + "/" + type + "/signup");
+
+  final url = Uri.parse('$api:$sept_backend_port' + "/" + type + "/signup");
   print(url);
   String body;
   if (type == 'patient') {
@@ -457,7 +441,7 @@ Future<Response> createUser(
     });
   }
 
-  Response res = await put(url,
+  Response res = await post(url,
       headers: {
         'Accept': 'application/json',
         'content-type': 'application/json',

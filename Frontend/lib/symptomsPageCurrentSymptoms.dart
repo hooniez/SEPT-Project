@@ -7,6 +7,8 @@ import 'package:frontend/scrollercontroller.dart';
 import 'symptomsPageAddSymptoms.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
+import 'support_pages/customButtons.dart';
+import 'urls.dart';
 
 class SymptomsPageCurrentSymptoms extends StatefulWidget {
   final getUser;
@@ -30,44 +32,30 @@ class _SymptomsPageCurrentSymptomsState
 
   @override
   Widget build(BuildContext context) {
+    // if this page is in its first local running (that is, hasnt been refreshed and has come from another page)
+    // then that means we are at the start running, so we take data from the page that was come from and use that
+    // until the page is refreshed by deleting a symptom
     if (startOfProgram) {
       updatedSymptoms = widget.getSymptoms;
       allSymptoms = json.decode(widget.getSymptoms.body);
       allEnables = List.filled(allSymptoms.length, false);
+      // if a symptom is deleted, we now take the updatedsymptoms instead
     } else {
       allSymptoms = json.decode(updatedSymptoms.body);
     }
     // allEnables will not fill false again so will save edit states
     // will also save state of symptoms after deletion/edit
     startOfProgram = false;
+    // standard materialApp procedures with comments on unclear aspects
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: AppBar(
-                backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-                title: const Text("Neighbourhood Doctors"),
-                leading: InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    )),
-                actions: <Widget>[
-                  Padding(
-                      padding: EdgeInsets.only(right: 20.0),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/frontPage');
-                        },
-                        child: Icon(
-                          Icons.home,
-                          size: 26.0,
-                        ),
-                      )),
-                ]),
+            appBar: DefaultAppbar(
+                appbarText: "Symptoms",
+                onPressed: () async {
+                  Navigator.pop(context);
+                }),
             body: SingleChildScrollView(
                 controller: AdjustableScrollController(100),
                 child: Container(
@@ -82,58 +70,38 @@ class _SymptomsPageCurrentSymptomsState
                             child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(24.0),
-                                    child: SizedBox(
-                                      width: 300.0, // <-- match_parent
-                                      height: 50.0, // <-- match-parent
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 221, 150, 17), // background
-                                          onPrimary: Colors.white, // foreground
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SymptomsButton(
+                                          itemColor: Colors.green,
+                                          buttonWidth: 160,
+                                          iconSize: 30,
+                                          onPressed: () async {},
+                                          buttonText: "Current Symptoms",
+                                          buttonIcon: Icons.sick_rounded,
+                                          fontSize: 16,
                                         ),
-                                        child: const Text(
-                                          'Current Symptoms',
-                                          style: TextStyle(color: Colors.white),
+                                        SymptomsButton(
+                                          buttonWidth: 150,
+                                          iconSize: 30,
+                                          onPressed: () async {
+                                            Navigator.push(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                              return SymptomsPageAddSymptoms(
+                                                  getUser: widget.getUser,
+                                                  getSymptoms: updatedSymptoms);
+                                            }));
+                                          },
+                                          buttonText: "Add Symptom",
+                                          fontSize: 16,
+                                          buttonIcon: Icons.add_circle_rounded,
                                         ),
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(24.0),
-                                    child: SizedBox(
-                                      width: 300.0, // <-- match_parent
-                                      height: 50.0, // <-- match-parent
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 144, 119, 151), // background
-                                          onPrimary: Colors.white, // foreground
-                                        ),
-                                        child: const Text(
-                                          'Add Symptom',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        onPressed: () async {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return SymptomsPageAddSymptoms(
-                                                getUser: widget.getUser,
-                                                getSymptoms: updatedSymptoms);
-                                          }));
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                      'Symptoms for ${widget.getUser.value['firstname']}:',
-                                      style: TextStyle(
-                                          fontSize: 24,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold)),
+                                      ]),
+                                  // display all the items if they exist, otherwise display another message letting the user know
+                                  // they have to add symptoms
                                   allSymptoms.isNotEmpty
                                       ? ListView.separated(
                                           shrinkWrap: true,
@@ -141,6 +109,7 @@ class _SymptomsPageCurrentSymptomsState
                                           itemCount: allSymptoms.length,
                                           itemBuilder: (BuildContext context,
                                               int index) {
+                                            // iterate over all the symptom items and display them
                                             return Row(children: <Widget>[
                                               Flexible(
                                                 child: Container(
@@ -150,6 +119,10 @@ class _SymptomsPageCurrentSymptomsState
                                                         child: TextFormField(
                                                       enabled:
                                                           allEnables[index],
+                                                      // key that allows updating of initialvalue when it is changed via setState
+                                                      key: Key(allSymptoms[
+                                                              index][
+                                                          'symptomdescription']),
                                                       initialValue: allSymptoms[
                                                               index][
                                                           'symptomdescription'],
@@ -171,15 +144,20 @@ class _SymptomsPageCurrentSymptomsState
                                                       ),
                                                     ))),
                                               ),
+                                              // an iconbutton to display an icon to be pressed, and when pressed delete that item and refresh page
                                               IconButton(
                                                   icon: Icon(Icons.delete),
                                                   onPressed: () async {
                                                     await deleteSymptom(
                                                         allSymptoms[index]
-                                                            ['id']);
+                                                            ['id'],
+                                                        widget.getUser.value[
+                                                            "Authorization"]);
                                                     var res = await getSymptom(
                                                         widget.getUser
-                                                            .value["email"]);
+                                                            .value["email"],
+                                                        widget.getUser.value[
+                                                            "Authorization"]);
                                                     setState(() {
                                                       updatedSymptoms = res;
                                                     });
@@ -209,21 +187,36 @@ class _SymptomsPageCurrentSymptomsState
   }
 }
 
-Future<Response> getSymptom(String patientemail) async {
-  String API_HOST = "10.0.2.2:8085";
+// getSymptom response to get all the symptoms after deletion (or in general)
+Future<Response> getSymptom(String patientemail, String token) async {
   final queryParameters = {'email': patientemail};
-  final uri = Uri.http(API_HOST, "/getsymptom", queryParameters);
+
+  final uri = Uri.parse("$api:$symptom_port/getsymptom/?email"
+      "=$patientemail");
   print(uri);
 
-  Response res = await get(uri);
+  Map<String, String> header = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': token
+  };
+
+  Response res = await get(uri, headers: header);
   return res;
 }
 
-Future<Response> deleteSymptom(int id) async {
+// deleteSymptom response to successfully delete a particular symptom
+Future<Response> deleteSymptom(int id, String token) async {
   String stringId = id.toString();
-  String API_HOST = "10.0.2.2:8085";
-  final uri = Uri.http(API_HOST, "/deletesymptom", {'id': stringId});
+
+  final uri = Uri.parse("$api:$symptom_port/deletesymptom?id=$stringId");
   print(uri);
-  Response res = await delete(uri);
+
+  Map<String, String> header = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': token
+  };
+  Response res = await delete(uri, headers: header);
   return res;
 }

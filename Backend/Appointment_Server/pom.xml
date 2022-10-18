@@ -63,11 +63,21 @@
             <version>2.18.0</version>
         </dependency>
 
-        <!-- may be handy -->
-        <!-- <dependency>
+        <!-- security -->
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency> -->
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+         <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.0</version>
+        </dependency>
 	    
         <dependency> 
             <groupId>org.springframework.boot</groupId> 
@@ -99,7 +109,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <!-- add resource path for java project-->
-             <plugin>
+             <!-- <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <version>3.3.0</version>
@@ -112,12 +122,12 @@
                     </goals>
                     <configuration>
                     <sources>
-                        <source>Backend/SEPT_Backend/src</source>
+                        <source>Backend/Appointment_server/src</source>
                     </sources>
                     </configuration>
                 </execution>
                 </executions>
-            </plugin>
+            </plugin> -->
         </plugins>
     </build>
 
