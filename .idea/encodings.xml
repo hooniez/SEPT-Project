@@ -2,8 +2,12 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/Backend/Admin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Backend/Appointment_Server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Backend/Appointment_Server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Backend/SEPT_Backend/Backend/SEPT_Backend/src" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Backend/SEPT_Backend/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Backend/SEPT_Backend/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Backend/chat_service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Backend/chat_service/src/main/resources" charset="UTF-8" />
   </component>
 </project>

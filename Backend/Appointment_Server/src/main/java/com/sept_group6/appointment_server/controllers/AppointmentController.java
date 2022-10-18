@@ -7,10 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.sept_group6.appointment_server.dao.*;
+import com.sept_group6.appointment_server.exception.WrongAppoinementException;
 import com.sept_group6.appointment_server.model.*;
 import com.sept_group6.appointment_server.security.CustomAuthenticationToken;
 
 import java.util.Optional;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,7 +47,43 @@ public class AppointmentController {
         } else {
             return ResponseEntity.badRequest().build();
         }
+    }
 
+    // gets the uid of the patient and doctor involved in the appointment
+    // used for the chat
+    // get get 400 if the requester is not involoved in the appointment
+    @PostMapping(path = "")
+    public ResponseEntity<?> getUIDs(@RequestBody Long apointmentID, CustomAuthenticationToken authentication) {
+        try {
+            String email = authentication.getName();
+            String usertype = authentication.getUserType();
+            Optional<Appointment> appointment = appointmentRepository.findById(apointmentID);
+            logger.info(appointment);
+            logger.info(email);
+            if (!appointment.isPresent()) {
+                throw new WrongAppoinementException();
+            } else {
+                if (usertype.equals("patient")) {
+                    if (!email.equals(appointment.get().getPatient().getEmail())) {
+                        throw new WrongAppoinementException();
+                    }
+                } else {
+                    if (!email.equals(appointment.get().getDoctor().getEmail())) {
+                        throw new WrongAppoinementException();
+                    }
+                }
+
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("patient", appointment.get().getPatient().getEmail());
+                map.put("doctor", appointment.get().getDoctor().getEmail());
+                logger.info(map);
+                return ResponseEntity.accepted().body(map);
+
+            }
+
+        } catch (WrongAppoinementException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     // better to refactor this part to make it more readable.

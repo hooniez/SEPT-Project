@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/.m2/copy_reference_file.log" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/.m2/copy_reference_file.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +28,14 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
@@ -61,12 +69,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "node.js.selected.package.tslint": "(autodetect)"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="dart.analysis.tool.window.visible" value="false" />
+  </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Backend/chat_service" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Backend" />
       <recent name="$PROJECT_DIR$/Backend/SEPT_Backend/src/test/java/com/sept_group6/sept_backend/controllers" />
@@ -120,6 +129,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="AppointmentServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="Appointment_Server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.sept_group6.appointment_server.AppointmentServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ChatServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="ChatService" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ChatService.ChatServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SeptBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="SEPT_Backend" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.sept_group6.sept_backend.SeptBackendApplication" />
@@ -137,6 +160,8 @@
       <item itemvalue="JUnit.PatientControllerTest" />
       <item itemvalue="JUnit.DoctorControllerTest" />
       <item itemvalue="Spring Boot.AdminApplication" />
+      <item itemvalue="Spring Boot.AppointmentServerApplication" />
+      <item itemvalue="Spring Boot.ChatServiceApplication" />
       <item itemvalue="Spring Boot.SeptBackendApplication" />
     </list>
     <recent_temporary>
@@ -164,6 +189,7 @@
       <workItem from="1664934576790" duration="6227000" />
       <workItem from="1665463156287" duration="1640000" />
       <workItem from="1665509454202" duration="331000" />
+      <workItem from="1666090388263" duration="561000" />
     </task>
     <servers />
   </component>

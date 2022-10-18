@@ -92,7 +92,6 @@ class _MyAppState extends State<AddAppointmentPage> {
   }
 
   void addAppointment(AppointmentView appointmentView) async {
-
     String APPOINTMENT_PATH = "/appointment";
 
     Map<String, String> header = {
@@ -101,7 +100,7 @@ class _MyAppState extends State<AddAppointmentPage> {
       'Authorization': widget.user.value["Authorization"]
     };
 
-    final url = Uri.parse('$api:6869$APPOINTMENT_PATH');
+    final url = Uri.parse('$api:$appointment_port$APPOINTMENT_PATH');
 
     final body = {
       'id': appointmentView.id,
