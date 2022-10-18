@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
 import 'urls.dart';
+import 'support_pages/customButtons.dart';
 
 // import 'dart:html';
 
@@ -163,30 +164,7 @@ class _MyAppState extends State<AddAppointmentPage> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          appBar: AppBar(
-              backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-              title: const Center(child: Text("Neighbourhood Doctors")),
-              leading: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                  )),
-              actions: <Widget>[
-                Padding(
-                    padding: EdgeInsets.only(right: 20.0),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/frontPage');
-                      },
-                      child: Icon(
-                        Icons.home,
-                        size: 26.0,
-                      ),
-                    )),
-              ]),
+          appBar: DefaultAppbar(appbarText: "Appointments",onPressed: () async {Navigator.pop(context);}),
           body: Center(
               child: Column(
             children: [
