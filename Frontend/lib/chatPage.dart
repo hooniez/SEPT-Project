@@ -3,21 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
 // import 'dart:html';
-import "support_pages/customButtons.dart";
 
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
-import 'addAppointmentPage.dart';
 import 'urls.dart';
 
-class AppointmentPage extends StatefulWidget {
+class ChatPage extends StatefulWidget {
   final user;
 
-  AppointmentPage({required this.user});
+  ChatPage({required this.user});
 
   @override
-  State<AppointmentPage> createState() => _MyAppState();
+  State<ChatPage> createState() => _MyAppState();
 }
 
 class AppointmentView {
@@ -55,10 +53,10 @@ Future<List<AppointmentView>> getAppointment(user) async {
   // construct the request
   String APPOINTMENT_PATH = "/appointment";
 
-  final queryParameters = {
-    'email': user.value['email'],
-    'usertype': user.value['usertype']
-  };
+  // final queryParameters = {
+  //   'email': user.value['email'],
+  //   'usertype': user.value['usertype']
+  // };
 
   Map<String, String> header = {
     'Content-type': 'application/json',
@@ -84,7 +82,7 @@ Future<List<AppointmentView>> getAppointment(user) async {
   }
 }
 
-class _MyAppState extends State<AppointmentPage> {
+class _MyAppState extends State<ChatPage> {
   late Future<List<AppointmentView>> futureData;
 
   @override
@@ -98,15 +96,48 @@ class _MyAppState extends State<AppointmentPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: DefaultAppbar(),
+        appBar: AppBar(
+            backgroundColor: const Color.fromARGB(255, 223, 28, 93),
+            title: const Center(child: Text("Neighbourhood Doctors")),
+            leading: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.white,
+                )),
+            actions: <Widget>[
+              Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/frontPage');
+                    },
+                    child: Icon(
+                      Icons.home,
+                      size: 26.0,
+                    ),
+                  )),
+            ]),
         body: Center(
             child: Column(children: [
           if (widget.user.value['usertype'] == "patient")
-            AppointmentsButton(itemColor: Colors.green,iconSize: 30, buttonWidth:300,buttonText: "Make Appointment", buttonIcon: Icons.add_circle_outline,onPressed: () async {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return AddAppointmentPage(user: widget.user);
-              }));
-            },),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Color.fromARGB(255, 144, 119, 151), // background
+                onPrimary: Colors.white, // foreground
+              ),
+              child: const Text(
+                'Make appointment',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () async {
+                // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                //   return chatPage(user: widget.user);
+                // }));
+              },
+            ),
           Expanded(
             child: FutureBuilder<List<AppointmentView>>(
               future: futureData,
@@ -118,7 +149,7 @@ class _MyAppState extends State<AppointmentPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     verticalDirection: VerticalDirection.down,
                     children: <Widget>[
-                      const Text("Your Appointments"),
+                      const Text("Tap to chat to a doctor."),
                       Expanded(
                         child: FittedBox(
                             alignment: Alignment.topCenter,
@@ -148,15 +179,15 @@ SingleChildScrollView dataBody(List<AppointmentView> data, String usertype) {
       sortColumnIndex: 0,
       showCheckboxColumn: false,
       columns: [
-        DataColumn(
-          label: Text("Date"),
-        ),
-        DataColumn(
-          label: Text("Start Time"),
-        ),
-        DataColumn(
-          label: Text("End Time"),
-        ),
+        // DataColumn(
+        //   label: Text("Date"),
+        // ),
+        // DataColumn(
+        //   label: Text("Start Time"),
+        // ),
+        // DataColumn(
+        //   label: Text("End Time"),
+        // ),
         DataColumn(
           label: Text(usertype == "patient" ? "Doctor Name" : "Patient Name"),
         ),
@@ -164,9 +195,9 @@ SingleChildScrollView dataBody(List<AppointmentView> data, String usertype) {
       rows: data
           .map(
             (appointmentView) => DataRow(cells: [
-              DataCell(Text(appointmentView.date)),
-              DataCell(Text(appointmentView.startTime)),
-              DataCell(Text(appointmentView.endTime)),
+              // DataCell(Text(appointmentView.date)),
+              // DataCell(Text(appointmentView.startTime)),
+              // DataCell(Text(appointmentView.endTime)),
               DataCell(Text(usertype == "patient"
                   ? appointmentView.doctorName
                   : appointmentView.patientName)),
