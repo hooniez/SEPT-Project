@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9191363f-8629-4b79-96a3-89bf2a497666.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9191363f-8629-4b79-96a3-89bf2a497666.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/chat_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat_service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/chat_service/src/main/java/com/ChatService/dao/AppointmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat_service/src/main/java/com/ChatService/dao/AppointmentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/chat_service/src/main/java/com/ChatService/dao/DoctorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat_service/src/main/java/com/ChatService/dao/DoctorRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/chat_service/src/main/java/com/ChatService/dao/PatientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat_service/src/main/java/com/ChatService/dao/PatientRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +79,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "node.js.selected.package.tslint": "(autodetect)"
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "spring.configuration.checksum": "5740729fd9bd7a260479663bcf04cc1a"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -81,7 +96,7 @@
       <recent name="$PROJECT_DIR$/Frontend" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PatientControllerTest">
+  <component name="RunManager" selected="Spring Boot.ChatServiceApplication">
     <configuration name="main.dart (1)" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/frontend/frontend/lib/main.dart" />
       <method v="2" />
@@ -128,6 +143,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ChatServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="ChatService" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ChatService.ChatServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SeptBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="SEPT_Backend" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.sept_group6.sept_backend.SeptBackendApplication" />
@@ -145,6 +167,7 @@
       <item itemvalue="JUnit.PatientControllerTest" />
       <item itemvalue="JUnit.DoctorControllerTest" />
       <item itemvalue="Spring Boot.AdminApplication" />
+      <item itemvalue="Spring Boot.ChatServiceApplication" />
       <item itemvalue="Spring Boot.SeptBackendApplication" />
     </list>
     <recent_temporary>
@@ -172,6 +195,7 @@
       <workItem from="1664934576790" duration="6227000" />
       <workItem from="1665463156287" duration="1640000" />
       <workItem from="1665509454202" duration="331000" />
+      <workItem from="1666090388263" duration="190000" />
     </task>
     <servers />
   </component>

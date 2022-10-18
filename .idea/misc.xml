@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/Backend/Admin/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/SEPT_Backend/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/chat_service/pom.xml" />
       </list>
     </option>
   </component>

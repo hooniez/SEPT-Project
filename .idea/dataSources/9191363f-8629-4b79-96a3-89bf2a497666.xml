@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="SEPT_Backend/Hibernate">
   <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.39">
-    <root id="1">
-      <DefaultCasing>mixed/mixed</DefaultCasing>
-      <DefaultEngine>InnoDB</DefaultEngine>
-      <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
-      <Grants>sept_db|schema||root||ALTER|G
-sept_db|schema||root||ALTER ROUTINE|G
-sept_db|schema||root||CREATE|G
-sept_db|schema||root||CREATE ROUTINE|G
-sept_db|schema||root||CREATE TEMPORARY TABLES|G
-sept_db|schema||root||CREATE VIEW|G
-sept_db|schema||root||DELETE|G
-sept_db|schema||root||DROP|G
-sept_db|schema||root||EVENT|G
-sept_db|schema||root||EXECUTE|G
-sept_db|schema||root||INDEX|G
-sept_db|schema||root||INSERT|G
-sept_db|schema||root||LOCK TABLES|G
-sept_db|schema||root||REFERENCES|G
-sept_db|schema||root||SELECT|G
-sept_db|schema||root||SHOW VIEW|G
-sept_db|schema||root||TRIGGER|G
-sept_db|schema||root||UPDATE|G</Grants>
-      <ServerVersion>8.0.30</ServerVersion>
-    </root>
+    <root id="1"/>
     <collation id="2" parent="1" name="armscii8_general_ci">
       <Charset>armscii8</Charset>
       <DefaultForCharset>1</DefaultForCharset>

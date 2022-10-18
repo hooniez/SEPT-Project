@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Backend/Admin/Admin.iml" filepath="$PROJECT_DIR$/Backend/Admin/Admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Backend/chat_service/ChatService.iml" filepath="$PROJECT_DIR$/Backend/chat_service/ChatService.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/SEPT-Project.iml" filepath="$PROJECT_DIR$/.idea/SEPT-Project.iml" />
       <module fileurl="file://$PROJECT_DIR$/Backend/SEPT_Backend/SEPT_Backend.iml" filepath="$PROJECT_DIR$/Backend/SEPT_Backend/SEPT_Backend.iml" />
     </modules>

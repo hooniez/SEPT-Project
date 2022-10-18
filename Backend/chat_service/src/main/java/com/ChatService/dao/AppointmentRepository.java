@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 import java.util.List;
 
-import com.ChatService.Appointment;
+import com.ChatService.model.Appointment;
 
 public interface AppointmentRepository extends CrudRepository<Appointment, Long> {
     Optional<List<Appointment>> findByPatientEmail(String patientEmail);

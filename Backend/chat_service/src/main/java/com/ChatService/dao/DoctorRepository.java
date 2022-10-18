@@ -1,6 +1,6 @@
 package com.ChatService.dao;
 
-import com.ChatService.Doctor;
+import com.ChatService.model.Doctor;
 
 import java.util.Optional;
 
