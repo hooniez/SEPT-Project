@@ -114,7 +114,6 @@ class _MyAppState extends State<PatientProfile> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
-
         appBar: DefaultAppbar(appbarText: "Profile"),
         body: SingleChildScrollView (
             controller: AdjustableScrollController(100),
