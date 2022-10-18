@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
 import 'addAppointmentPage.dart';
-import 'api_key.dart';
+import 'urls.dart';
 
 class AppointmentPage extends StatefulWidget {
   final user;
@@ -65,7 +65,7 @@ Future<List<AppointmentView>> getAppointment(user) async {
     'Authorization': user.value["Authorization"]
   };
 
-  final url = Uri.http('$api:6869', APPOINTMENT_PATH, queryParameters);
+  final url = Uri.parse('$api:$appointment_port$APPOINTMENT_PATH');
 
   print(url);
   final Response res = await get(url, headers: header);

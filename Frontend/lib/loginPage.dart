@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
 // import 'dart:html';
-import 'api_key.dart';
+import 'urls.dart';
 
 enum UserType { doctor, patient, admin }
 
@@ -18,13 +18,13 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   UserType? _userType;
-  String? API_HOST;
+  String? api_host;
 
   // Login page two fronts: one for admin and the other for patient
   @override
   void initState() {
     _userType = widget.forAdmin ? UserType.admin : UserType.patient;
-    API_HOST = widget.forAdmin ? "$api:6868" : "$api:6871";
+    api_host = widget.forAdmin ? "$api:$admin_port" : "$api:$sept_backend_port";
   }
 
 
@@ -50,7 +50,7 @@ class _LoginState extends State<Login> {
       'userType': type
     };
 
-    final uri = Uri.parse("${API_HOST!}/$type/signin");
+    final uri = Uri.parse("${api_host!}/$type/signin");
     print(uri);
     print("hello");
     print(body);
