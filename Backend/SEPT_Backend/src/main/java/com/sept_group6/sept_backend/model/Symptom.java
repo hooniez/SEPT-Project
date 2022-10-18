@@ -10,9 +10,7 @@ public class Symptom {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
-    private Integer patientid;
-    private String symptomnumber;
+    private String email;
     private String symptomdescription;
 
     public Integer getId() {
@@ -20,12 +18,8 @@ public class Symptom {
         return id;
     }
 
-    public Integer getPatientid() {
-        return patientid;
-    }
-
-    public String getSymptomnumber() {
-        return symptomnumber;
+    public String getEmail() {
+        return email;
     }
 
     public String getSymptomdescription() {
@@ -36,12 +30,8 @@ public class Symptom {
         this.id = id;
     }
 
-    public void setPatientid(Integer patientid) {
-        this.patientid = patientid;
-    }
-
-    public void setSymptomnumber(String symptomnumber) {
-        this.symptomnumber = symptomnumber;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setSymptomdescription(String symptomdescription) {

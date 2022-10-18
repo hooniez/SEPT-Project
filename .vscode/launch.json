@@ -2,10 +2,38 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch ChatServiceApplication",
+            "name": "Launch ProfileApplication",
             "request": "launch",
-            "mainClass": "com.ChatService.ChatServiceApplication",
-            "projectName": "ChatService"
+            "mainClass": "com.sept_group6.profile.ProfileApplication",
+            "projectName": "Profile"
+        },
+        {
+            "type": "java",
+            "name": "Launch SymptomApplication",
+            "request": "launch",
+            "mainClass": "com.sept_group6.symptom.SymptomApplication",
+            "projectName": "Symptom"
+        },
+        {
+            "type": "java",
+            "name": "Launch SymptomApplication",
+            "request": "launch",
+            "mainClass": "com.sept_group6.symptom.SymptomApplication",
+            "projectName": "symptom"
+        },
+        {
+            "type": "java",
+            "name": "Launch AppointmentServerApplication",
+            "request": "launch",
+            "mainClass": "com.sept_group6.appointment_server.AppointmentServerApplication",
+            "projectName": "Appointment_Server"
+        },
+        {
+            "type": "java",
+            "name": "Launch appointmentServerApplication",
+            "request": "launch",
+            "mainClass": "com.sept_group6.appointment_server.appointmentServerApplication",
+            "projectName": "Appointment_Server"
         },
         {
             "type": "java",
