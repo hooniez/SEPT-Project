@@ -114,7 +114,7 @@ class _MyAppState extends State<addAvailabilityPage> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: DefaultAppbar(appbarText: "Avalibilities",onPressed: () async {Navigator.pop(context);}),
+            appBar: DefaultAppbar(appbarText: "Availabilities",onPressed: () async {Navigator.pop(context);}),
             body: SingleChildScrollView(
                 controller: AdjustableScrollController(100),
                 child: Container(

@@ -118,12 +118,11 @@ class _MyAppState extends State<AppointmentPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     verticalDirection: VerticalDirection.down,
                     children: <Widget>[
-                      const Text("Your Appointments"),
                       Expanded(
                         child: FittedBox(
                             alignment: Alignment.topCenter,
                             child:
-                                dataBody(data, widget.user.value['usertype'])),
+                                dataBody(data, widget.user.value['usertype']),),
                       )
                     ],
                   );
@@ -142,34 +141,37 @@ class _MyAppState extends State<AppointmentPage> {
 }
 
 SingleChildScrollView dataBody(List<AppointmentView> data, String usertype) {
+  double textSize = 30;
+
+
   return SingleChildScrollView(
     scrollDirection: Axis.vertical,
-    child: DataTable(
+    child: DataTable(dataRowHeight:150,
       sortColumnIndex: 0,
       showCheckboxColumn: false,
       columns: [
         DataColumn(
-          label: Text("Date"),
+          label: Text("Date", style: TextStyle(fontSize: textSize),),
         ),
         DataColumn(
-          label: Text("Start Time"),
+          label: Text("Start Time",style: TextStyle(fontSize: textSize),),
         ),
         DataColumn(
-          label: Text("End Time"),
+          label: Text("End Time",style: TextStyle(fontSize: textSize),),
         ),
         DataColumn(
-          label: Text(usertype == "patient" ? "Doctor Name" : "Patient Name"),
+          label: Text(usertype == "patient" ? "Doctor Name" : "Patient Name",style: TextStyle(fontSize: textSize),),
         ),
       ],
       rows: data
           .map(
-            (appointmentView) => DataRow(cells: [
-              DataCell(Text(appointmentView.date)),
-              DataCell(Text(appointmentView.startTime)),
-              DataCell(Text(appointmentView.endTime)),
-              DataCell(Text(usertype == "patient"
-                  ? appointmentView.doctorName
-                  : appointmentView.patientName)),
+            (appointmentView) => DataRow(
+                cells: [
+              DataCell(Text(appointmentView.date,style: TextStyle(fontSize: textSize),)),
+              DataCell(Text(appointmentView.startTime,style: TextStyle(fontSize: textSize),)),
+              DataCell(Text(appointmentView.endTime,style: TextStyle(fontSize: textSize),)),
+              usertype == "patient" ? DataCell(Text(appointmentView.doctorName.split(" ").join("\n"),style: TextStyle(fontSize: textSize)))
+              : DataCell(Text(appointmentView.patientName.split(" ").join("\n"),style: TextStyle(fontSize: textSize)))
             ]),
           )
           .toList(),
