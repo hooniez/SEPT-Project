@@ -191,9 +191,7 @@ class FrontPage extends StatelessWidget {
                                   },
                                   child: const Text("Chat",
                                       style: TextStyle(
-                                          fontSize: 18.0,
-                                          decoration:
-                                              TextDecoration.lineThrough)),
+                                          fontSize: 18.0,)),
                                 ),
                               ),
                             ),
