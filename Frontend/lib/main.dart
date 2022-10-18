@@ -36,6 +36,11 @@ class MyApp extends HookWidget {
       user.value = {};
     }
 
+    void _updateName(String firstName) {
+        user.value['firstname'] = firstName;
+        print("updated");
+    }
+
     return MaterialApp(
         title: 'Navigation Demo',
         theme: ThemeData(
@@ -47,13 +52,15 @@ class MyApp extends HookWidget {
             user: user,
             setUser: _setUser,
             setUserWithoutToken: _setUserWithoutToken,
-            logoutUser: _logoutUser),
+            logoutUser: _logoutUser,
+            updateName: _updateName),
         routes: {
           '/frontPage': (context) => FrontPage(
               user: user,
               setUser: _setUser,
               setUserWithoutToken: _setUserWithoutToken,
-              logoutUser: _logoutUser),
+              logoutUser: _logoutUser,
+              updateName: _updateName),
         });
   }
 }

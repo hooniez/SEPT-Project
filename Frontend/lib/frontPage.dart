@@ -11,20 +11,31 @@ import 'appointmentPage.dart';
 import 'availabilityPage.dart';
 import 'symptomsPageCurrentSymptoms.dart';
 import 'package:http/http.dart';
+import 'support_pages/customButtons.dart';
 import 'dart:convert';
 import 'chatSelectPage.dart';
 
-class FrontPage extends StatelessWidget {
+class FrontPage extends StatefulWidget {
   final user;
   final Function setUser;
   final Function setUserWithoutToken;
   final Function logoutUser;
+  final Function updateName;
+
   FrontPage(
       {required this.user,
       required this.setUser,
       required this.setUserWithoutToken,
-      required this.logoutUser});
+      required this.logoutUser,
+      required this.updateName});
 
+  @override
+  State<FrontPage> createState() => _FrontPageState();
+}
+
+class _FrontPageState extends State<FrontPage> {
+  final double pageTextSize = 30.0;
+  final double pageInset = 8.0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,67 +49,63 @@ class FrontPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                user.value.isEmpty
-                    ? const Padding(
-                        padding: EdgeInsets.all(8.0),
+                widget.user.value.isEmpty
+                    ? Padding(
+                        padding: EdgeInsets.all(pageInset),
                         child: Text(
                           'Welcome',
-                          style: TextStyle(color: Colors.black, fontSize: 24.0),
+                          style: TextStyle(
+                              color: Colors.black, fontSize: pageTextSize),
                         ),
                       )
                     : Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: user.value['usertype'] == 'admin'
+                        padding: EdgeInsets.all(pageInset),
+                        child: widget.user.value['usertype'] == 'admin'
                             ? Text(
                                 'Admin Page',
-                                style: const TextStyle(
-                                    color: Colors.black, fontSize: 24.0),
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: pageTextSize),
                               )
                             : Text(
-                                'Welcome ${user.value['firstname']}!',
-                                style: const TextStyle(
-                                    color: Colors.black, fontSize: 24.0),
+                                'Welcome ${widget.user.value['firstname']}!',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: pageTextSize),
                               ),
                       ),
-                user.value.isEmpty
+                widget.user.value.isEmpty
                     ? Column(
                         children: [
                           MenuButton(
-                              buttonHeight: 50,
-                              buttonWidth: 200,
                               buttonIcon: Icons.face_outlined,
                               buttonText: "Login",
                               onPressed: () async {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return Login(setUser: setUser);
+                                  return Login(setUser: widget.setUser);
                                 }));
                               }),
                           MenuButton(
-                              fontSize: 18,
-                              buttonHeight: 50,
-                              buttonWidth: 200,
                               buttonIcon: Icons.pages_sharp,
                               buttonText: "Register",
                               onPressed: () async {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                   return SignupPage(
-                                      setUserWithoutToken: setUserWithoutToken);
+                                      setUserWithoutToken:
+                                          widget.setUserWithoutToken);
                                 }));
                               }),
                           MenuButton(
                               itemColor: Colors.grey,
-                              fontSize: 18,
-                              buttonHeight: 50,
-                              buttonWidth: 200,
                               buttonIcon: Icons.pages_sharp,
                               buttonText: "Admin Login",
                               onPressed: () async {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                   return Login(
-                                    setUser: setUser,
+                                    setUser: widget.setUser,
                                     forAdmin: true,
                                   );
                                 }));
@@ -107,104 +114,85 @@ class FrontPage extends StatelessWidget {
                       )
                     : Column(
                         children: [
-                          if (user.value['usertype'] == "admin")
+                          if (widget.user.value['usertype'] == "admin")
                             MenuButton(
-                                buttonHeight: 50,
-                                buttonWidth: 200,
                                 buttonIcon: Icons.face_outlined,
                                 buttonText: "Register Doctor",
                                 onPressed: () async {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
                                     return SignupPage(
-                                      setUserWithoutToken: setUserWithoutToken,
+                                      setUserWithoutToken:
+                                          widget.setUserWithoutToken,
                                       forDoctor: true,
                                     );
                                   }));
                                 }),
-                          if (user.value['usertype'] != "admin")
+                          if (widget.user.value['usertype'] != "admin")
                             MenuButton(
-                                fontSize: 18,
-                                buttonHeight: 50,
-                                buttonWidth: 200,
                                 buttonIcon: Icons.face_outlined,
                                 buttonText: "Profile",
                                 onPressed: () async {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return PatientProfile(user: user);
+                                    return PatientProfile(
+                                        user: widget.user,
+                                        updateName: widget.updateName);
                                   }));
                                 }),
-                          if (user.value['usertype'] == "patient")
+
+                          if (widget.user.value['usertype'] == "patient")
                             MenuButton(
-                                fontSize: 18,
-                                buttonHeight: 50,
-                                buttonWidth: 200,
                                 buttonIcon: Icons.sick_outlined,
                                 buttonText: "Symptoms",
                                 onPressed: () async {
-                                  var res = await getSymptom(user);
+                                  var res = await getSymptom(widget.user);
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
+                                    print(widget.user.value['firstname']);
                                     return SymptomsPageCurrentSymptoms(
-                                        getUser: user, getSymptoms: res);
+                                        getUser: widget.user, getSymptoms: res);
                                   }));
                                 }),
-                          if (user.value['usertype'] == "patient")
+
+
+                          if (widget.user.value['usertype'] == "patient")
                             MenuButton(
-                                fontSize: 18,
-                                buttonHeight: 60,
-                                buttonWidth: 200,
                                 buttonIcon: Icons.calendar_month_rounded,
                                 buttonText: "Appointments",
                                 onPressed: () async {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return AppointmentPage(user: user);
+                                    return AppointmentPage(user: widget.user);
                                   }));
                                 }),
-                          if (user.value['usertype'] == "doctor")
+                          if (widget.user.value['usertype'] == "doctor")
                             MenuButton(
-                                fontSize: 18,
-                                buttonHeight: 60,
-                                buttonWidth: 200,
                                 buttonIcon: Icons.calendar_month_rounded,
                                 buttonText: "Availabilities",
                                 onPressed: () async {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return AvailabilityPage(user: user);
+                                    return AvailabilityPage(user: widget.user);
                                   }));
                                 }),
-                          if (user.value['usertype'] != "admin")
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                width: 200,
-                                height: 50,
-                                child: OutlinedButton(
-                                  onPressed: () async {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return ChatSelectPage(user: user);
-                                    }));
-                                  },
-                                  child: const Text("Chat",
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                      )),
-                                ),
-                              ),
-                            ),
+                          if (widget.user.value['usertype'] != "admin")
+                            MenuButton(
+                                itemColor: Colors.grey,
+                                buttonIcon: Icons.chat_bubble_outline_rounded,
+                                buttonText: "Chat",
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return ChatSelectPage(user: user);
+                                  }));
+                                }),
                           MenuButton(
                               itemColor: Colors.red,
-                              fontSize: 18,
-                              buttonHeight: 60,
-                              buttonWidth: 200,
                               buttonIcon: Icons.exit_to_app_rounded,
                               buttonText: "Logout",
                               onPressed: () async {
-                                logoutUser();
+                                widget.logoutUser();
                               }),
                         ],
                       )
@@ -230,50 +218,4 @@ Future<Response> getSymptom(user) async {
     headers: header,
   );
   return res;
-}
-
-class MenuButton extends StatelessWidget {
-  MenuButton({
-    this.buttonWidth = 100,
-    this.buttonHeight = 50,
-    this.itemColor = Colors.blue,
-    this.itemTitleFontSize = 12,
-    this.buttonText = '',
-    this.fontSize = 20,
-    this.buttonIcon = Icons.access_alarm,
-    this.iconSize = 40,
-    required this.onPressed,
-  });
-
-  final Function onPressed;
-  final double iconSize;
-  final IconData buttonIcon;
-  final double fontSize;
-  final String buttonText;
-  final double buttonWidth;
-  final double buttonHeight;
-  final Color itemColor;
-  final double itemTitleFontSize;
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: SizedBox(
-        width: buttonWidth,
-        height: buttonHeight,
-        child: OutlinedButton.icon(
-          label: Align(
-              alignment: Alignment.center,
-              child: Text(
-                buttonText,
-                style: TextStyle(fontSize: fontSize, color: itemColor),
-                textAlign: TextAlign.center,
-              )),
-          icon: Icon(buttonIcon, size: 38, color: itemColor),
-          onPressed: () {
-            onPressed();
-          },
-        ),
-      ),
-    );
-  }
 }
