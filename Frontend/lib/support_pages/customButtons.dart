@@ -98,11 +98,12 @@ class DefaultAppbar extends StatelessWidget with PreferredSizeWidget {
   @override
   DefaultAppbar({
     this.appbarText = '',
+    required this.onPressed,
   });
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
-
+  final Function onPressed;
   final String appbarText;
 
   Widget build(BuildContext context) {
@@ -111,7 +112,7 @@ class DefaultAppbar extends StatelessWidget with PreferredSizeWidget {
         title: Center(child: Text(appbarText)),
         leading: InkWell(
             onTap: () {
-              Navigator.pop(context);
+              onPressed();
             },
             child: Icon(
               Icons.arrow_back_ios,

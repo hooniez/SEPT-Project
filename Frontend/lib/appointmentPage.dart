@@ -98,7 +98,7 @@ class _MyAppState extends State<AppointmentPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: DefaultAppbar(),
+        appBar: DefaultAppbar(appbarText: "Appointments",onPressed: () async {Navigator.pop(context);}),
         body: Center(
             child: Column(children: [
           if (widget.user.value['usertype'] == "patient")
