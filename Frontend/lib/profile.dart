@@ -26,7 +26,6 @@ class _MyAppState extends State<PatientProfile> {
   late String _mobile = "";
   late String _medhist = "";
   late String _password = "";
-  late String _userType = "";
   late String _cert = "";
   late String _token = "";
   late String _passworddupe = _password;
@@ -45,7 +44,6 @@ class _MyAppState extends State<PatientProfile> {
       _dob = json.decode(value)['dob'];
       _mobile = json.decode(value)['mobilenumber'];
       _medhist = json.decode(value)['medicalhistory'];
-      _userType = json.decode(value)['usertype'];
       _cert = json.decode(value)['certificate'];
       _token = widget.user.value['Authorization'];
       textControllers['firstname']!.text = _firstname;
@@ -56,7 +54,6 @@ class _MyAppState extends State<PatientProfile> {
       textControllers['dob']!.text = _dob;
       textControllers['mobile']!.text = _mobile;
       textControllers['medhist']!.text = _medhist;
-      textControllers['usertype']!.text = _userType;
       textControllers['certificate']!.text = _cert;
     });
   }
@@ -232,7 +229,7 @@ class _MyAppState extends State<PatientProfile> {
                         const Icon(Icons.newspaper_outlined),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(6, 4, 4, 4),
-                          child: _userType == "doctor"
+                          child: widget.user.value['usertype'] == "doctor"
                               ? Text(
                             'Doctor Certificates',
                             style: TextStyle(
@@ -253,7 +250,7 @@ class _MyAppState extends State<PatientProfile> {
                       child: Container(
                           width: double.infinity,
                           color: textBoxBackgrounds,
-                          child: _userType == "doctor"
+                          child: widget.user.value['usertype'] == "doctor"
                               ? TextFormField(
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -364,6 +361,7 @@ class _MyAppState extends State<PatientProfile> {
                               onPressed: () {
                                 setState(() {
                                   enabledStatus = !enabledStatus;
+                                  print("User Type is: "+widget.user.value['usertype']);
                                   if (enabledStatus) {
                                     textBoxBackgrounds = textBoxSelectedColor;
                                     // do nothing
@@ -371,16 +369,17 @@ class _MyAppState extends State<PatientProfile> {
                                     textBoxBackgrounds = textBoxNotSelectedColor;
                                     print("Has the token," +_token.toString());
                                     if (_formKey.currentState!.validate()) {
-                                      Future response = putPatientData(
-                                          textControllers, _userType, _token);
+                                      Future response = putProfileData(textControllers, widget.user.value['usertype'], _token);
+                                      widget.user.value['firstname'] = textControllers['firstname'];
                                     } else {
                                       print("The duplicated password is: "+_passworddupe.toString());
                                       textControllers['password']!.text =
                                           _passworddupe;
-                                      Future response = putPatientData(
-                                          textControllers, _userType, _token);
+                                      Future response = putProfileData(
+                                          textControllers, widget.user.value['usertype'], _token);
                                       textControllers['password']!.text = '';
                                       textControllers['password']!.text = textControllers['password']!.text;
+                                      widget.user.value['firstname'] = textControllers['firstname'];
                                     }
                                   }
                                 });
@@ -398,7 +397,7 @@ class _MyAppState extends State<PatientProfile> {
   }
 }
 
-Future<Response> putPatientData(
+Future<Response> putProfileData(
     Map<String, TextEditingController> textControlDict, userType, token) async {
   Response response;
 
