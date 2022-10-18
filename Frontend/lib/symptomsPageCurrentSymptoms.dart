@@ -51,7 +51,11 @@ class _SymptomsPageCurrentSymptomsState
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: DefaultAppbar(appbarText: "Appointments",),
+            appBar: DefaultAppbar(
+                appbarText: "Appointments",
+                onPressed: () async {
+                  Navigator.pop(context);
+                }),
             body: SingleChildScrollView(
                 controller: AdjustableScrollController(100),
                 child: Container(
@@ -71,7 +75,7 @@ class _SymptomsPageCurrentSymptomsState
                                           MainAxisAlignment.center,
                                       children: [
                                         SymptomsButton(
-                                          itemColor:Colors.green,
+                                          itemColor: Colors.green,
                                           buttonWidth: 160,
                                           iconSize: 30,
                                           onPressed: () async {},
@@ -204,7 +208,6 @@ Future<Response> getSymptom(String patientemail, String token) async {
 // deleteSymptom response to successfully delete a particular symptom
 Future<Response> deleteSymptom(int id, String token) async {
   String stringId = id.toString();
-
 
   final uri = Uri.parse("$api:$symptom_port/deletesymptom?id=$stringId");
   print(uri);

@@ -32,30 +32,11 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: AppBar(
-                backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-                title: const Text("Neighbourhood Doctors"),
-                leading: InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    )),
-                actions: <Widget>[
-                  Padding(
-                      padding: EdgeInsets.only(right: 20.0),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/frontPage');
-                        },
-                        child: Icon(
-                          Icons.home,
-                          size: 26.0,
-                        ),
-                      )),
-                ]),
+            appBar: DefaultAppbar(
+                appbarText: "Appointments",
+                onPressed: () async {
+                  Navigator.pop(context);
+                }),
             body: SingleChildScrollView(
                 controller: AdjustableScrollController(100),
                 child: Container(
@@ -72,10 +53,10 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                                 children: [
                                   Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                       children: [
                                         SymptomsButton(
-                                          itemColor:Colors.green,
+                                          itemColor: Colors.green,
                                           buttonWidth: 160,
                                           iconSize: 30,
                                           onPressed: () async {
@@ -86,10 +67,10 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
                                             Navigator.push(context,
                                                 MaterialPageRoute(
                                                     builder: (context) {
-                                                      return SymptomsPageCurrentSymptoms(
-                                                          getUser: widget.getUser,
-                                                          getSymptoms: getRes);
-                                                    }));
+                                              return SymptomsPageCurrentSymptoms(
+                                                  getUser: widget.getUser,
+                                                  getSymptoms: getRes);
+                                            }));
                                           },
                                           buttonText: "Current Symptoms",
                                           buttonIcon: Icons.sick_rounded,
@@ -186,7 +167,6 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
 }
 
 Future<Response> getSymptom(String patientemail, String token) async {
-
   final uri = Uri.parse("$api:$symptom_port/getsymptom/?email=$patientemail");
   print(uri);
 
@@ -201,9 +181,6 @@ Future<Response> getSymptom(String patientemail, String token) async {
 
 Future<Response> addSymptom(
     String symptomdescription, String patientemail, String token) async {
-
-
-
   final url = Uri.parse("$api:$symptom_port/addsymptom");
   print(url);
   String body;
