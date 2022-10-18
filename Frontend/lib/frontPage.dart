@@ -135,7 +135,7 @@ class FrontPage extends StatelessWidget {
                                     return PatientProfile(user: user);
                                   }));
                                 }),
-                          if (user.value['usertype'] != "admin")
+                          if (user.value['usertype'] == "patient")
                             MenuButton(
                                 fontSize: 18,
                                 buttonHeight: 50,
@@ -150,7 +150,7 @@ class FrontPage extends StatelessWidget {
                                         getUser: user, getSymptoms: res);
                                   }));
                                 }),
-                          if (user.value['usertype'] != "admin")
+                          if (user.value['usertype'] == "patient")
                             MenuButton(
                                 fontSize: 18,
                                 buttonHeight: 60,
