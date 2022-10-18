@@ -114,7 +114,7 @@ class _MyAppState extends State<PatientProfile> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: DefaultAppbar(appbarText: "Profile"),
+        appBar: DefaultAppbar(appbarText: "Profile",onPressed: () async {Navigator.pop(context);}),
         body: SingleChildScrollView (
             controller: AdjustableScrollController(100),
             child: Padding(
