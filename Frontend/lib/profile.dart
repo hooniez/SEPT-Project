@@ -105,6 +105,7 @@ class _MyAppState extends State<PatientProfile> {
   double textBoxWidth = 200;
   int passwordMaxLength = 255;
   int passwordMinLength = 7;
+  double mainEdgeInset = 16.0;
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +117,7 @@ class _MyAppState extends State<PatientProfile> {
         body: SingleChildScrollView (
             controller: AdjustableScrollController(100),
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(mainEdgeInset),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -450,62 +451,6 @@ Future<Response> putProfileData(
 }
 
 // Adds
-class ProfileLabel extends StatelessWidget {
-
-  ProfileLabel({this.text = '',this.itemColor=Colors.black, this.itemTitleFontSize=12});
-
-  final String text;
-  final Color itemColor;
-  final double itemTitleFontSize;
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.fromLTRB(6, 4, 4, 4),
-        child: Text(
-          text,
-          style: TextStyle(
-              color: itemColor, fontSize: itemTitleFontSize),
-        ),
-      );
-  }
-}
-
-class ProfileInput extends StatelessWidget {
-
-  ProfileInput({
-    required this.textInset,
-    this.textBoxWidth=10,
-    this.textBoxBackgrounds=Colors.blueGrey,
-    required this.textController,
-    required this.enabledStatus});
-
-  final bool enabledStatus;
-  final TextEditingController textController;
-  final EdgeInsetsGeometry textInset;
-  final double textBoxWidth;
-  final Color textBoxBackgrounds;
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: textInset,
-      child: SizedBox(
-        width: textBoxWidth,
-        height: 45,
-        child: TextFormField(
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-            filled: true,
-            fillColor: textBoxBackgrounds,
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10)
-            ),
-          ),
-          controller: textController,
-          enabled: enabledStatus,
-        ),
-      ),
-    );
-  }
-}
-
 
 Future<String> getUserData(user) async {
   // construct the request
