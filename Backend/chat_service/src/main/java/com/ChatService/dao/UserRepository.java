@@ -2,7 +2,7 @@ package com.ChatService.dao;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
-import com.sept_group6.appointment_server.model.User;
+import com.ChatService.model.User;
 
 import java.util.Optional;
 
