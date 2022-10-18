@@ -123,7 +123,6 @@ class _MyAppState extends State<ChatSelectPage> {
             ]),
         body: Center(
             child: Column(children: [
-          if (widget.user.value['usertype'] == "patient")
             Expanded(
               child: FutureBuilder<List<AppointmentView>>(
                 future: futureData,
@@ -135,7 +134,7 @@ class _MyAppState extends State<ChatSelectPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       verticalDirection: VerticalDirection.down,
                       children: <Widget>[
-                        const Text("Tap to chat to a doctor."),
+                        const Text("Tap to start chatting."),
                         Expanded(
                           child: dataBody(data),
                         )
@@ -168,7 +167,7 @@ class _MyAppState extends State<ChatSelectPage> {
     print(res.statusCode);
     print(res.body.toString());
     if (res.body.isNotEmpty) {
-      Map<String, String> jsonResponse = json.decode(res.body);
+      Map<String, dynamic> jsonResponse = json.decode(res.body);
       String receiver = widget.user.value['usertype'] == 'patient'
           ? jsonResponse['doctor']!
           : jsonResponse['patient']!;
