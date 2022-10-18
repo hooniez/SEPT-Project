@@ -51,30 +51,7 @@ class _SymptomsPageCurrentSymptomsState
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: AppBar(
-                backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-                title: const Text("Symptoms"),
-                leading: InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    )),
-                actions: <Widget>[
-                  Padding(
-                      padding: EdgeInsets.only(right: 20.0),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/frontPage');
-                        },
-                        child: Icon(
-                          Icons.home,
-                          size: 26.0,
-                        ),
-                      )),
-                ]),
+            appBar: DefaultAppbar(appbarText: "Appointments",),
             body: SingleChildScrollView(
                 controller: AdjustableScrollController(100),
                 child: Container(
