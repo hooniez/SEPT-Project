@@ -184,7 +184,7 @@ class _FrontPageState extends State<FrontPage> {
                                 onPressed: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return ChatSelectPage(user: user);
+                                    return ChatSelectPage(user: widget.user);
                                   }));
                                 }),
                           MenuButton(
