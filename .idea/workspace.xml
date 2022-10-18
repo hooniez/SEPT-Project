@@ -6,15 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="1420a774-2f6c-46c7-9ef9-229b5873a3b6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9191363f-8629-4b79-96a3-89bf2a497666.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9191363f-8629-4b79-96a3-89bf2a497666.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/chat_service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat_service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/chat_service/src/main/java/com/ChatService/dao/AppointmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat_service/src/main/java/com/ChatService/dao/AppointmentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/chat_service/src/main/java/com/ChatService/dao/DoctorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat_service/src/main/java/com/ChatService/dao/DoctorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/chat_service/src/main/java/com/ChatService/dao/PatientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat_service/src/main/java/com/ChatService/dao/PatientRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/.m2/copy_reference_file.log" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/.m2/copy_reference_file.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/chat_service/src/test/java/com/ChatService/ChatServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat_service/src/test/java/com/ChatService/ChatServiceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/lib/frontPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/lib/frontPage.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,26 +77,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "spring.configuration.checksum": "5740729fd9bd7a260479663bcf04cc1a"
-  }
-}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Backend/chat_service" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Backend" />
       <recent name="$PROJECT_DIR$/Backend/SEPT_Backend/src/test/java/com/sept_group6/sept_backend/controllers" />
       <recent name="$PROJECT_DIR$/Frontend" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.ChatServiceApplication">
+  <component name="RunManager" selected="JUnit.PatientControllerTest">
     <configuration name="main.dart (1)" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/frontend/frontend/lib/main.dart" />
       <method v="2" />
@@ -143,6 +134,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="AppointmentServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="Appointment_Server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.sept_group6.appointment_server.AppointmentServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ChatServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="ChatService" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.ChatService.ChatServiceApplication" />
@@ -164,11 +162,10 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Flutter.main.dart" />
+      <item itemvalue="Flutter.main.dart (1)" />
       <item itemvalue="JUnit.PatientControllerTest" />
       <item itemvalue="JUnit.DoctorControllerTest" />
-      <item itemvalue="Spring Boot.AdminApplication" />
-      <item itemvalue="Spring Boot.ChatServiceApplication" />
-      <item itemvalue="Spring Boot.SeptBackendApplication" />
     </list>
     <recent_temporary>
       <list>
@@ -195,7 +192,7 @@
       <workItem from="1664934576790" duration="6227000" />
       <workItem from="1665463156287" duration="1640000" />
       <workItem from="1665509454202" duration="331000" />
-      <workItem from="1666090388263" duration="190000" />
+      <workItem from="1666090388263" duration="561000" />
     </task>
     <servers />
   </component>
