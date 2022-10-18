@@ -361,7 +361,6 @@ class _MyAppState extends State<PatientProfile> {
                               onPressed: () {
                                 setState(() {
                                   enabledStatus = !enabledStatus;
-                                  print("User Type is: "+widget.user.value['usertype']);
                                   if (enabledStatus) {
                                     textBoxBackgrounds = textBoxSelectedColor;
                                     // do nothing
@@ -370,7 +369,7 @@ class _MyAppState extends State<PatientProfile> {
                                     print("Has the token," +_token.toString());
                                     if (_formKey.currentState!.validate()) {
                                       Future response = putProfileData(textControllers, widget.user.value['usertype'], _token);
-                                      widget.user.value['firstname'] = textControllers['firstname'];
+                                      widget.user.value['firstname'] = textControllers['firstname']!.text;
                                     } else {
                                       print("The duplicated password is: "+_passworddupe.toString());
                                       textControllers['password']!.text =
@@ -379,7 +378,7 @@ class _MyAppState extends State<PatientProfile> {
                                           textControllers, widget.user.value['usertype'], _token);
                                       textControllers['password']!.text = '';
                                       textControllers['password']!.text = textControllers['password']!.text;
-                                      widget.user.value['firstname'] = textControllers['firstname'];
+                                      widget.user.value['firstname'] = textControllers['firstname']!.text;
                                     }
                                   }
                                 });
