@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:frontend/scrollercontroller.dart';
 // import 'dart:html';
+import "support_pages/customButtons.dart";
 
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
@@ -97,48 +98,15 @@ class _MyAppState extends State<AppointmentPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-            backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-            title: const Center(child: Text("Neighbourhood Doctors")),
-            leading: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.white,
-                )),
-            actions: <Widget>[
-              Padding(
-                  padding: EdgeInsets.only(right: 20.0),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/frontPage');
-                    },
-                    child: Icon(
-                      Icons.home,
-                      size: 26.0,
-                    ),
-                  )),
-            ]),
+        appBar: DefaultAppbar(),
         body: Center(
             child: Column(children: [
           if (widget.user.value['usertype'] == "patient")
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(255, 144, 119, 151), // background
-                onPrimary: Colors.white, // foreground
-              ),
-              child: const Text(
-                'Make appointment',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () async {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return AddAppointmentPage(user: widget.user);
-                }));
-              },
-            ),
+            AppointmentsButton(itemColor: Colors.green,iconSize: 30, buttonWidth:300,buttonText: "Make Appointment", buttonIcon: Icons.add_circle_outline,onPressed: () async {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return AddAppointmentPage(user: widget.user);
+              }));
+            },),
           Expanded(
             child: FutureBuilder<List<AppointmentView>>(
               future: futureData,
