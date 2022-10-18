@@ -12,7 +12,8 @@ import 'support_pages/customButtons.dart';
 
 class PatientProfile extends StatefulWidget {
   final user;
-  const PatientProfile({Key? key, this.user}) : super(key: key);
+  final Function updateName;
+  const PatientProfile({Key? key, this.user,required this.updateName}) : super(key: key);
   @override
   State<PatientProfile> createState() => _MyAppState();
 }
@@ -370,7 +371,6 @@ class _MyAppState extends State<PatientProfile> {
                                     print("Has the token," +_token.toString());
                                     if (_formKey.currentState!.validate()) {
                                       Future response = putProfileData(textControllers, widget.user.value['usertype'], _token);
-                                      widget.user.value['firstname'] = textControllers['firstname'];
                                     } else {
                                       print("The duplicated password is: "+_passworddupe.toString());
                                       textControllers['password']!.text =
@@ -379,8 +379,8 @@ class _MyAppState extends State<PatientProfile> {
                                           textControllers, widget.user.value['usertype'], _token);
                                       textControllers['password']!.text = '';
                                       textControllers['password']!.text = textControllers['password']!.text;
-                                      widget.user.value['firstname'] = textControllers['firstname'];
                                     }
+                                    widget.updateName(textControllers['firstname']!.text);
                                   }
                                 });
                               },
