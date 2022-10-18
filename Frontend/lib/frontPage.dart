@@ -140,6 +140,7 @@ class _FrontPageState extends State<FrontPage> {
                                         updateName: widget.updateName);
                                   }));
                                 }),
+
                           if (widget.user.value['usertype'] == "patient")
                             MenuButton(
                                 buttonIcon: Icons.sick_outlined,
@@ -153,6 +154,8 @@ class _FrontPageState extends State<FrontPage> {
                                         getUser: widget.user, getSymptoms: res);
                                   }));
                                 }),
+
+
                           if (widget.user.value['usertype'] == "patient")
                             MenuButton(
                                 buttonIcon: Icons.calendar_month_rounded,
@@ -181,7 +184,7 @@ class _FrontPageState extends State<FrontPage> {
                                 onPressed: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return ChatSelectPage(user: user);
+                                    return ChatSelectPage(user: widget.user);
                                   }));
                                 }),
                           MenuButton(

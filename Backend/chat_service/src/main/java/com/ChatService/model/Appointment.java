@@ -13,7 +13,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import com.sept_group6.appointment_server.model.AppointmentView;
+import com.ChatService.model.AppointmentView;
 
 @Entity
 @Getter

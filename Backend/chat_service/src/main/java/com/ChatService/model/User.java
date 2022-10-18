@@ -1,4 +1,4 @@
-package com.sept_group6.appointment_server.model;
+package com.ChatService.model;
 
 import lombok.AllArgsConstructor;
 import lombok.experimental.SuperBuilder;

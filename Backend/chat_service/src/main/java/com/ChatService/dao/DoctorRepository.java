@@ -1,6 +1,6 @@
 package com.ChatService.dao;
 
-import com.sept_group6.appointment_server.model.Doctor;
+import com.ChatService.model.Doctor;
 
 import java.util.Optional;
 
