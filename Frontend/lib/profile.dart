@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'scrollercontroller.dart';
+import 'support_pages/customButtons.dart';
 
 class PatientProfile extends StatefulWidget {
   final user;
@@ -113,17 +114,7 @@ class _MyAppState extends State<PatientProfile> {
       home: Scaffold(
         resizeToAvoidBottomInset: false,
 
-        appBar: AppBar(
-            backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-            title: const Text("Profile"),
-            leading: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.white,
-                ))),
+        appBar: DefaultAppbar(appbarText: "Profile"),
         body: SingleChildScrollView (
             controller: AdjustableScrollController(100),
             child: Padding(
