@@ -52,7 +52,7 @@ class _SymptomsPageCurrentSymptomsState
         home: Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: DefaultAppbar(
-                appbarText: "Appointments",
+                appbarText: "Symptoms",
                 onPressed: () async {
                   Navigator.pop(context);
                 }),

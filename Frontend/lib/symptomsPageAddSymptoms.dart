@@ -33,7 +33,7 @@ class _SymptomsPageAddSymptomsState extends State<SymptomsPageAddSymptoms> {
         home: Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: DefaultAppbar(
-                appbarText: "Appointments",
+                appbarText: "Symptoms",
                 onPressed: () async {
                   Navigator.pop(context);
                 }),
