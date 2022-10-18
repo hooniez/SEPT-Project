@@ -123,49 +123,31 @@ class _MyAppState extends State<ChatPage> {
         body: Center(
             child: Column(children: [
           if (widget.user.value['usertype'] == "patient")
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(255, 144, 119, 151), // background
-                onPrimary: Colors.white, // foreground
+            Expanded(
+              child: FutureBuilder<List<AppointmentView>>(
+                future: futureData,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<AppointmentView> data = snapshot.data!;
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      verticalDirection: VerticalDirection.down,
+                      children: <Widget>[
+                        const Text("Tap to chat to a doctor."),
+                        Expanded(
+                          child: dataBody(data, widget.user.value['usertype']),
+                        )
+                      ],
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
+                  }
+                  // By default show a loading spinner.
+                  return CircularProgressIndicator();
+                },
               ),
-              child: const Text(
-                'Make appointment',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () async {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) {
-                //   return chatPage(user: widget.user);
-                // }));
-              },
             ),
-          Expanded(
-            child: FutureBuilder<List<AppointmentView>>(
-              future: futureData,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  List<AppointmentView> data = snapshot.data!;
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    verticalDirection: VerticalDirection.down,
-                    children: <Widget>[
-                      const Text("Tap to chat to a doctor."),
-                      Expanded(
-                        child: FittedBox(
-                            alignment: Alignment.topCenter,
-                            child:
-                                dataBody(data, widget.user.value['usertype'])),
-                      )
-                    ],
-                  );
-                } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
-                }
-                // By default show a loading spinner.
-                return CircularProgressIndicator();
-              },
-            ),
-          ),
         ])),
       ),
     );
