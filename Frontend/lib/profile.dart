@@ -29,20 +29,6 @@ class _MyAppState extends State<PatientProfile> {
   late String _token = "";
   late String _passworddupe = _password;
 
-
-  // @override
-  // void initState() {
-  //   _firstname = widget.user.value['firstname'];
-  //   _lastname = widget.user.value['lastname'];
-  //   _email = widget.user.value['email'];
-  //   _dob = widget.user.value['dob'];
-  //   _mobile = widget.user.value['mobilenumber'];
-  //   _medhist = widget.user.value['medicalhistory'];
-  //   _password = widget.user.value['password'];
-  //   _userType = widget.user.value['usertype'];
-  //   _cert = widget.user.value['certificate'];
-  //   _token = widget.user.value['Authorization'];
-  // }
   @override
   void initState() {
     print("state started");
@@ -97,7 +83,7 @@ class _MyAppState extends State<PatientProfile> {
     'firstname': const EdgeInsets.fromLTRB(30, 4, 4, 4),
     'lastname': const EdgeInsets.fromLTRB(31, 4, 4, 4),
     'password': const EdgeInsets.fromLTRB(70, 4, 4, 4),
-    'confirmPassword': const EdgeInsets.fromLTRB(10, 4, 4, 4),
+    'confirmPassword': const EdgeInsets.fromLTRB(10, 4, 4, 0),
     'email': const EdgeInsets.fromLTRB(69, 4, 4, 4),
     'dob': const EdgeInsets.fromLTRB(17, 4, 4, 4),
     'mobile': const EdgeInsets.fromLTRB(31, 4, 4, 4),
@@ -112,7 +98,7 @@ class _MyAppState extends State<PatientProfile> {
   Color textBoxNotSelectedColor = Color.fromRGBO(224, 224, 224, 1);
   Color textBoxBackgrounds = Color.fromRGBO(224, 224, 224, 1);
 
-  final double editButtonPadding = 4.0;
+  final double editButtonPadding = 2.0;
   Color itemColor = Colors.black;
   double itemTitleFontSize = 16;
   double itemFontSize = 18;
@@ -306,9 +292,11 @@ class _MyAppState extends State<PatientProfile> {
                         Padding(
                           padding: textInset['password']!,
                           child: SizedBox(
-                            width: textBoxWidth,
+                            height:65,
+                            width: 180,
                             child: TextFormField(
                                 decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                                   filled: true,
                                   fillColor: textBoxBackgrounds,
                                   border: OutlineInputBorder(
@@ -340,9 +328,11 @@ class _MyAppState extends State<PatientProfile> {
                         Padding(
                           padding: textInset['confirmPassword']!,
                           child: SizedBox(
-                            width: textBoxWidth,
+                            height:65,
+                            width: 180,
                             child: TextFormField(
                                 decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                                   filled: true,
                                   fillColor: textBoxBackgrounds,
                                   border: OutlineInputBorder(
@@ -374,7 +364,8 @@ class _MyAppState extends State<PatientProfile> {
                         editButtonDetails['height'], // <-- match-parent
                         child: SizedBox(
                             child:IconButton(
-                              iconSize: 30,
+                              padding: EdgeInsets.all(0),
+                              iconSize: 40,
                               icon: enabledStatus
                                   ? const Icon(Icons.save_outlined)
                                   : const Icon(Icons.create_outlined),
@@ -507,8 +498,10 @@ class ProfileInput extends StatelessWidget {
       padding: textInset,
       child: SizedBox(
         width: textBoxWidth,
+        height: 45,
         child: TextFormField(
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
             filled: true,
             fillColor: textBoxBackgrounds,
             border: OutlineInputBorder(
