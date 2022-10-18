@@ -8,6 +8,7 @@ import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'availabilityPage.dart';
 import 'urls.dart';
+import 'support_pages/customButtons.dart';
 
 class addAvailabilityPage extends StatefulWidget {
   final user;
@@ -113,30 +114,7 @@ class _MyAppState extends State<addAvailabilityPage> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: AppBar(
-                backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-                title: const Text("Neighbourhood Doctors"),
-                leading: InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    )),
-                actions: <Widget>[
-                  Padding(
-                      padding: EdgeInsets.only(right: 20.0),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/frontPage');
-                        },
-                        child: Icon(
-                          Icons.home,
-                          size: 26.0,
-                        ),
-                      )),
-                ]),
+            appBar: DefaultAppbar(appbarText: "Availabilities",onPressed: () async {Navigator.pop(context);}),
             body: SingleChildScrollView(
                 controller: AdjustableScrollController(100),
                 child: Container(

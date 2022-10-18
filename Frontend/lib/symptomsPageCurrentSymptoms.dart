@@ -51,30 +51,11 @@ class _SymptomsPageCurrentSymptomsState
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: AppBar(
-                backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-                title: const Text("Symptoms"),
-                leading: InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    )),
-                actions: <Widget>[
-                  Padding(
-                      padding: EdgeInsets.only(right: 20.0),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/frontPage');
-                        },
-                        child: Icon(
-                          Icons.home,
-                          size: 26.0,
-                        ),
-                      )),
-                ]),
+            appBar: DefaultAppbar(
+                appbarText: "Symptoms",
+                onPressed: () async {
+                  Navigator.pop(context);
+                }),
             body: SingleChildScrollView(
                 controller: AdjustableScrollController(100),
                 child: Container(
@@ -94,7 +75,7 @@ class _SymptomsPageCurrentSymptomsState
                                           MainAxisAlignment.center,
                                       children: [
                                         SymptomsButton(
-                                          itemColor:Colors.green,
+                                          itemColor: Colors.green,
                                           buttonWidth: 160,
                                           iconSize: 30,
                                           onPressed: () async {},
@@ -227,7 +208,6 @@ Future<Response> getSymptom(String patientemail, String token) async {
 // deleteSymptom response to successfully delete a particular symptom
 Future<Response> deleteSymptom(int id, String token) async {
   String stringId = id.toString();
-
 
   final uri = Uri.parse("$api:$symptom_port/deletesymptom?id=$stringId");
   print(uri);

@@ -8,10 +8,12 @@ import 'package:frontend/urls.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'scrollercontroller.dart';
+import 'support_pages/customButtons.dart';
 
 class PatientProfile extends StatefulWidget {
   final user;
-  const PatientProfile({Key? key, this.user}) : super(key: key);
+  final Function updateName;
+  const PatientProfile({Key? key, this.user,required this.updateName}) : super(key: key);
   @override
   State<PatientProfile> createState() => _MyAppState();
 }
@@ -25,25 +27,10 @@ class _MyAppState extends State<PatientProfile> {
   late String _mobile = "";
   late String _medhist = "";
   late String _password = "";
-  late String _userType = "";
   late String _cert = "";
   late String _token = "";
   late String _passworddupe = _password;
 
-
-  // @override
-  // void initState() {
-  //   _firstname = widget.user.value['firstname'];
-  //   _lastname = widget.user.value['lastname'];
-  //   _email = widget.user.value['email'];
-  //   _dob = widget.user.value['dob'];
-  //   _mobile = widget.user.value['mobilenumber'];
-  //   _medhist = widget.user.value['medicalhistory'];
-  //   _password = widget.user.value['password'];
-  //   _userType = widget.user.value['usertype'];
-  //   _cert = widget.user.value['certificate'];
-  //   _token = widget.user.value['Authorization'];
-  // }
   @override
   void initState() {
     print("state started");
@@ -58,7 +45,6 @@ class _MyAppState extends State<PatientProfile> {
       _dob = json.decode(value)['dob'];
       _mobile = json.decode(value)['mobilenumber'];
       _medhist = json.decode(value)['medicalhistory'];
-      _userType = json.decode(value)['usertype'];
       _cert = json.decode(value)['certificate'];
       _token = widget.user.value['Authorization'];
       textControllers['firstname']!.text = _firstname;
@@ -69,7 +55,6 @@ class _MyAppState extends State<PatientProfile> {
       textControllers['dob']!.text = _dob;
       textControllers['mobile']!.text = _mobile;
       textControllers['medhist']!.text = _medhist;
-      textControllers['usertype']!.text = _userType;
       textControllers['certificate']!.text = _cert;
     });
   }
@@ -98,7 +83,7 @@ class _MyAppState extends State<PatientProfile> {
     'firstname': const EdgeInsets.fromLTRB(30, 4, 4, 4),
     'lastname': const EdgeInsets.fromLTRB(31, 4, 4, 4),
     'password': const EdgeInsets.fromLTRB(70, 4, 4, 4),
-    'confirmPassword': const EdgeInsets.fromLTRB(10, 4, 4, 4),
+    'confirmPassword': const EdgeInsets.fromLTRB(10, 4, 4, 0),
     'email': const EdgeInsets.fromLTRB(69, 4, 4, 4),
     'dob': const EdgeInsets.fromLTRB(17, 4, 4, 4),
     'mobile': const EdgeInsets.fromLTRB(31, 4, 4, 4),
@@ -113,7 +98,7 @@ class _MyAppState extends State<PatientProfile> {
   Color textBoxNotSelectedColor = Color.fromRGBO(224, 224, 224, 1);
   Color textBoxBackgrounds = Color.fromRGBO(224, 224, 224, 1);
 
-  final double editButtonPadding = 4.0;
+  final double editButtonPadding = 2.0;
   Color itemColor = Colors.black;
   double itemTitleFontSize = 16;
   double itemFontSize = 18;
@@ -127,18 +112,7 @@ class _MyAppState extends State<PatientProfile> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
-
-        appBar: AppBar(
-            backgroundColor: const Color.fromARGB(255, 223, 28, 93),
-            title: const Text("Profile"),
-            leading: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.white,
-                ))),
+        appBar: DefaultAppbar(appbarText: "Profile",onPressed: () async {Navigator.pop(context);}),
         body: SingleChildScrollView (
             controller: AdjustableScrollController(100),
             child: Padding(
@@ -256,7 +230,7 @@ class _MyAppState extends State<PatientProfile> {
                         const Icon(Icons.newspaper_outlined),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(6, 4, 4, 4),
-                          child: _userType == "doctor"
+                          child: widget.user.value['usertype'] == "doctor"
                               ? Text(
                             'Doctor Certificates',
                             style: TextStyle(
@@ -277,7 +251,7 @@ class _MyAppState extends State<PatientProfile> {
                       child: Container(
                           width: double.infinity,
                           color: textBoxBackgrounds,
-                          child: _userType == "doctor"
+                          child: widget.user.value['usertype'] == "doctor"
                               ? TextFormField(
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -307,9 +281,11 @@ class _MyAppState extends State<PatientProfile> {
                         Padding(
                           padding: textInset['password']!,
                           child: SizedBox(
-                            width: textBoxWidth,
+                            height:65,
+                            width: 180,
                             child: TextFormField(
                                 decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                                   filled: true,
                                   fillColor: textBoxBackgrounds,
                                   border: OutlineInputBorder(
@@ -341,9 +317,11 @@ class _MyAppState extends State<PatientProfile> {
                         Padding(
                           padding: textInset['confirmPassword']!,
                           child: SizedBox(
-                            width: textBoxWidth,
+                            height:65,
+                            width: 180,
                             child: TextFormField(
                                 decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                                   filled: true,
                                   fillColor: textBoxBackgrounds,
                                   border: OutlineInputBorder(
@@ -375,7 +353,8 @@ class _MyAppState extends State<PatientProfile> {
                         editButtonDetails['height'], // <-- match-parent
                         child: SizedBox(
                             child:IconButton(
-                              iconSize: 30,
+                              padding: EdgeInsets.all(0),
+                              iconSize: 40,
                               icon: enabledStatus
                                   ? const Icon(Icons.save_outlined)
                                   : const Icon(Icons.create_outlined),
@@ -383,6 +362,7 @@ class _MyAppState extends State<PatientProfile> {
                               onPressed: () {
                                 setState(() {
                                   enabledStatus = !enabledStatus;
+                                  print("User Type is: "+widget.user.value['usertype']);
                                   if (enabledStatus) {
                                     textBoxBackgrounds = textBoxSelectedColor;
                                     // do nothing
@@ -390,17 +370,17 @@ class _MyAppState extends State<PatientProfile> {
                                     textBoxBackgrounds = textBoxNotSelectedColor;
                                     print("Has the token," +_token.toString());
                                     if (_formKey.currentState!.validate()) {
-                                      Future response = putPatientData(
-                                          textControllers, _userType, _token);
+                                      Future response = putProfileData(textControllers, widget.user.value['usertype'], _token);
                                     } else {
                                       print("The duplicated password is: "+_passworddupe.toString());
                                       textControllers['password']!.text =
                                           _passworddupe;
-                                      Future response = putPatientData(
-                                          textControllers, _userType, _token);
+                                      Future response = putProfileData(
+                                          textControllers, widget.user.value['usertype'], _token);
                                       textControllers['password']!.text = '';
                                       textControllers['password']!.text = textControllers['password']!.text;
                                     }
+                                    widget.updateName(textControllers['firstname']!.text);
                                   }
                                 });
                               },
@@ -417,7 +397,7 @@ class _MyAppState extends State<PatientProfile> {
   }
 }
 
-Future<Response> putPatientData(
+Future<Response> putProfileData(
     Map<String, TextEditingController> textControlDict, userType, token) async {
   Response response;
 
@@ -508,8 +488,10 @@ class ProfileInput extends StatelessWidget {
       padding: textInset,
       child: SizedBox(
         width: textBoxWidth,
+        height: 45,
         child: TextFormField(
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
             filled: true,
             fillColor: textBoxBackgrounds,
             border: OutlineInputBorder(
