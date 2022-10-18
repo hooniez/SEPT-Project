@@ -7,6 +7,7 @@ import 'package:frontend/scrollercontroller.dart';
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'signupPage.dart';
+import 'chat.dart';
 import 'urls.dart';
 
 class ChatPage extends StatefulWidget {
@@ -136,7 +137,7 @@ class _MyAppState extends State<ChatPage> {
                       children: <Widget>[
                         const Text("Tap to chat to a doctor."),
                         Expanded(
-                          child: dataBody(data, widget.user.value['usertype']),
+                          child: dataBody(data, widget.user),
                         )
                       ],
                     );
@@ -154,7 +155,8 @@ class _MyAppState extends State<ChatPage> {
   }
 }
 
-SingleChildScrollView dataBody(List<AppointmentView> data, String usertype) {
+SingleChildScrollView dataBody(List<AppointmentView> data, dynamic user) {
+  String usertype = user.value['usertype'];
   return SingleChildScrollView(
     scrollDirection: Axis.vertical,
     child: DataTable(
@@ -176,14 +178,19 @@ SingleChildScrollView dataBody(List<AppointmentView> data, String usertype) {
       ],
       rows: data
           .map(
-            (appointmentView) => DataRow(cells: [
-              // DataCell(Text(appointmentView.date)),
-              // DataCell(Text(appointmentView.startTime)),
-              // DataCell(Text(appointmentView.endTime)),
-              DataCell(Text(usertype == "patient"
-                  ? appointmentView.doctorName
-                  : appointmentView.patientName)),
-            ]),
+            (appointmentView) => DataRow(
+                onSelectChanged: (selected) {
+                  ChatPage(user, appointmentView);
+                },
+                cells: [
+                  // DataCell(Text(appointmentView.date)),
+                  // DataCell(Text(appointmentView.startTime)),
+                  // DataCell(Text(appointmentView.endTime)),
+
+                  DataCell(Text(usertype == "patient"
+                      ? appointmentView.doctorName
+                      : appointmentView.patientName)),
+                ]),
           )
           .toList(),
     ),

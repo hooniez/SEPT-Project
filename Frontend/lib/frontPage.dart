@@ -12,7 +12,7 @@ import 'availabilityPage.dart';
 import 'symptomsPageCurrentSymptoms.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
-import 'chatPage.dart';
+import 'chatSelectPage.dart';
 
 class FrontPage extends StatelessWidget {
   final user;
@@ -191,7 +191,8 @@ class FrontPage extends StatelessWidget {
                                   },
                                   child: const Text("Chat",
                                       style: TextStyle(
-                                          fontSize: 18.0,)),
+                                        fontSize: 18.0,
+                                      )),
                                 ),
                               ),
                             ),
