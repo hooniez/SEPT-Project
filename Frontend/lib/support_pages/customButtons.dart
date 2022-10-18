@@ -180,3 +180,59 @@ class AppointmentsButton extends StatelessWidget {
     );
   }
 }
+
+class ProfileLabel extends StatelessWidget {
+
+  ProfileLabel({this.text = '',this.itemColor=Colors.black, this.itemTitleFontSize=12});
+
+  final String text;
+  final Color itemColor;
+  final double itemTitleFontSize;
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(6, 4, 4, 4),
+      child: Text(
+        text,
+        style: TextStyle(
+            color: itemColor, fontSize: itemTitleFontSize),
+      ),
+    );
+  }
+}
+
+class ProfileInput extends StatelessWidget {
+
+  ProfileInput({
+    required this.textInset,
+    this.textBoxWidth=10,
+    this.textBoxBackgrounds=Colors.blueGrey,
+    required this.textController,
+    required this.enabledStatus});
+
+  final bool enabledStatus;
+  final TextEditingController textController;
+  final EdgeInsetsGeometry textInset;
+  final double textBoxWidth;
+  final Color textBoxBackgrounds;
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: textInset,
+      child: SizedBox(
+        width: textBoxWidth,
+        height: 45,
+        child: TextFormField(
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            filled: true,
+            fillColor: textBoxBackgrounds,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10)
+            ),
+          ),
+          controller: textController,
+          enabled: enabledStatus,
+        ),
+      ),
+    );
+  }
+}

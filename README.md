@@ -10,7 +10,10 @@ This is the repository for Group 6 (Thursday 4:30 class) for Software Engineerin
 * s3759362 - Yongjie Shi
 
 ## Records
-* Github repository :https://github.com/LightZipper/SEPT-Project/tree/Develop* jira Board : https://hoonz.atlassian.net/jira/software/projects/SEPT/boards/1## Code documentation - Release 1.0.0 - date
+* Github repository :https://github.com/hooniez/SEPT-Project/tree/Develop
+* jira Board : https://hoonz.atlassian.net/jira/software/projects/SEPT/boards/1
+
+## Code documentation - Release 1.0.0 - date
 * Profile
 * Appointments
 * Login/Register
@@ -20,8 +23,8 @@ This is the repository for Group 6 (Thursday 4:30 class) for Software Engineerin
 To run the application locally :
 1) cd into each and every microservice (SEPT_Backend, Profile, Appointment_Server, symptoms,chat) and run :
 2) navigate to src/main/java/ and run relevent application file.
-4) create sept_db database in mysql
-3) cd into Frontend/lib and run main.dart
+3) create sept_db database in mysql
+4) cd into Frontend/lib and run main.dart
 
 Navigate to Backend folder:
     Type in console: docker–compose up 
@@ -37,3 +40,4 @@ Database query
         - Doctors are stored in the doctor table of the database.
         - Patients are stored in the patient table database.
         - Symptoms are stored in the symptoms database.
+
